@@ -1,0 +1,257 @@
+/*
+	COLUMNS
+*/
+.md-typeset .col2,
+.md-typeset .col3,
+.md-typeset .col4 {
+	margin-bottom: 1rem;
+}
+
+.md-typeset .admonition .col2,
+.md-typeset .admonition .col3,
+.md-typeset .admonition .col4,
+.md-typeset details .col2,
+.md-typeset details .col3,
+.md-typeset details .col4 {
+	margin: 0.8rem 1.4rem;
+}
+
+.md-typeset .col2 ul {
+	columns: 2 14rem;
+}
+
+.md-typeset .col3 ul {
+	columns: 3 10rem;
+}
+
+.md-typeset .col4 ul {
+	columns: 4 7rem;
+}
+
+.md-typeset .admonition .col2 ul,
+.md-typeset details .col2 ul {
+	columns: 2 12rem;
+}
+
+.md-typeset .admonition .col3 ul,
+.md-typeset details .col3 ul {
+	columns: 3 7rem;
+}
+
+.md-typeset .admonition .col4 ul,
+.md-typeset details .col4 ul {
+	columns: 4 6rem;
+}
+
+.md-typeset .col2 ul,
+.md-typeset .col3 ul,
+.md-typeset .col4 ul {
+	margin-top: 0;
+	list-style: none;
+	padding: 0;
+	margin-left: 0;
+}
+
+.md-typeset .col2 ul li,
+.md-typeset .col3 ul li,
+.md-typeset .col4 ul li {
+	margin-left: 0;
+}
+
+/*
+	HEADERS
+*/
+h2 {
+	border-bottom: 3px solid #f6f6f6;
+}
+
+h3 {
+	border-bottom: 1px solid #f6f6f6;
+}
+
+/*
+	Lists
+*/
+.md-typeset dd {
+	margin: 0.4em 0 1.2em 1.875em;
+}
+
+.md-nav__list .md-nav__list .md-nav__list {
+	font-size: 94%;
+}
+
+/*
+	Links with CODE
+*/
+.md-typeset pre {
+	margin: 0;
+}
+
+.md-typeset code {
+	word-break: initial;
+}
+
+/*
+	NAV
+*/
+.md-nav__title {
+	font-size: 130%;
+}
+
+.md-tabs__link {
+	opacity: 0.85;
+}
+
+/* Google button */
+.gsc-search-button-v2 svg {
+	fill: #ffffff;
+	min-width: 13px;
+	min-height: 13px;
+}
+
+/* MDN examples */
+.interactive {
+	box-sizing: border-box;
+	background-color: #f5f9fa;
+	color: #333;
+	padding: 10px;
+	border: 1px solid #eaf2f4;
+	height: 390px;
+	width: 100%;
+}
+
+.layout {
+	display: grid;
+	align-items: flex-start;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 2rem;
+}
+@media (min-width: 60rem) {
+	.layout4 {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
+	.layout2 {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+.layout .cell {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	grid-column-gap: 2rem;
+}
+.layout .cell h3 {
+	margin: 0;
+}
+.layout .cell h3 .headerlink {
+	display: none;
+}
+
+.md-tabs__list li:last-child {
+	position: absolute;
+	right: 0;
+}
+.md-tabs__list li:last-child a {
+	font-weight: 700;
+	padding-left: 24px;
+	background: url('/heart.svg') left center / 16px 16px
+		no-repeat;
+}
+
+/* mkdocs cards*/
+.md-typeset .grid {
+	grid-gap: 0.8rem;
+	display: grid;
+	grid-template-columns: repeat(
+		auto-fit,
+		minmax(16rem, 1fr)
+	);
+	margin: 1em 0;
+}
+.md-typeset .grid.cards > ol,
+.md-typeset .grid.cards > ul {
+	display: contents;
+}
+.md-typeset .grid.cards > ol > li,
+.md-typeset .grid.cards > ul > li,
+.md-typeset .grid > .card {
+	border: 0.05rem solid
+		var(--md-default-fg-color--lightest);
+	border-radius: 0.1rem;
+	display: block;
+	margin: 0;
+	padding: 0.8rem;
+	transition: border 0.25s, box-shadow 0.25s;
+	box-shadow: var(--md-shadow-z1);
+}
+.md-typeset .grid.cards > ol > li:focus-within,
+.md-typeset .grid.cards > ol > li:hover,
+.md-typeset .grid.cards > ul > li:focus-within,
+.md-typeset .grid.cards > ul > li:hover,
+.md-typeset .grid > .card:focus-within,
+.md-typeset .grid > .card:hover {
+	border-color: #0000;
+	box-shadow: var(--md-shadow-z2);
+}
+.md-typeset .grid.cards > ol > li > hr,
+.md-typeset .grid.cards > ul > li > hr,
+.md-typeset .grid > .card > hr {
+	margin-bottom: 1em;
+	margin-top: 1em;
+}
+.md-typeset .grid.cards > ol > li > :first-child,
+.md-typeset .grid.cards > ul > li > :first-child,
+.md-typeset .grid > .card > :first-child {
+	margin-top: 0;
+}
+.md-typeset .grid.cards > ol > li > :last-child,
+.md-typeset .grid.cards > ul > li > :last-child,
+.md-typeset .grid > .card > :last-child {
+	margin-bottom: 0;
+}
+.md-typeset .grid > *,
+.md-typeset .grid > .admonition,
+.md-typeset .grid > .highlight > *,
+.md-typeset .grid > .highlighttable,
+.md-typeset .grid > .md-typeset details,
+.md-typeset .grid > details,
+.md-typeset .grid > pre {
+	margin-bottom: 0;
+	margin-top: 0;
+}
+.md-typeset .grid > .highlight > pre:only-child,
+.md-typeset .grid > .highlight > pre > code,
+.md-typeset .grid > .highlighttable,
+.md-typeset .grid > .highlighttable > tbody,
+.md-typeset .grid > .highlighttable > tbody > tr,
+.md-typeset .grid > .highlighttable > tbody > tr > .code,
+.md-typeset
+	.grid
+	> .highlighttable
+	> tbody
+	> tr
+	> .code
+	> .highlight,
+.md-typeset
+	.grid
+	> .highlighttable
+	> tbody
+	> tr
+	> .code
+	> .highlight
+	> pre,
+.md-typeset
+	.grid
+	> .highlighttable
+	> tbody
+	> tr
+	> .code
+	> .highlight
+	> pre
+	> code {
+	height: 100%;
+}
+.md-typeset .grid > .tabbed-set {
+	margin-bottom: 0;
+	margin-top: 0;
+}

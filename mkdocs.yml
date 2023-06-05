@@ -1,0 +1,108 @@
+site_name: Справочник React Native
+site_url: https://reactnativedev.ru/
+site_description: Справочник React Native разработчика
+site_author: reactnativedev.ru
+copyright: (C) 2021-2023, Справочник React Native разработчика
+
+repo_name: 'Справочник на Github'
+repo_url: 'https://github.com/xsltdev/reactnativedev.ru'
+
+theme:
+    name: material
+    custom_dir: overrides
+    palette:
+        - media: '(prefers-color-scheme: light)'
+          scheme: default
+          primary: cyan
+          accent: cyan
+          toggle:
+              icon: material/toggle-switch-off-outline
+              name: Тёмная тема
+        - media: '(prefers-color-scheme: dark)'
+          scheme: slate
+          primary: cyan
+          accent: cyan
+          toggle:
+              icon: material/toggle-switch
+              name: Светлая тема
+    language: ru
+    features:
+        - navigation.tabs
+        - navigation.tracking
+        - navigation.top
+        - navigation.footer
+        - navigation.indexes
+        - content.action.edit
+        - content.code.copy
+    favicon: react.svg
+    logo: react-white.svg
+
+extra:
+    generator: false
+    social:
+        - icon: fontawesome/brands/html5
+          link: 'https://hcdev.ru/'
+          name: HTML and CSS docs
+        - icon: fontawesome/brands/js
+          link: 'https://scriptdev.ru/'
+          name: Javascript
+        - icon: fontawesome/brands/angular
+          link: 'https://angdev.ru/'
+          name: Angular docs
+        - icon: fontawesome/brands/react
+          link: 'https://reactdev.ru/'
+          name: React docs
+        - icon: fontawesome/brands/react
+          link: 'https://reactnativedev.ru/'
+          name: React Native docs
+        - icon: fontawesome/brands/node-js
+          link: 'https://nodejsdev.ru/'
+          name: Node.js docs
+        - icon: fontawesome/brands/python
+          link: 'https://py3dev.ru/'
+          name: Python 3 docs
+        - icon: fontawesome/solid/code
+          link: 'https://xsltdev.ru/'
+          name: XSLT docs
+
+markdown_extensions:
+    - admonition
+    - toc:
+          permalink: true
+    - pymdownx.extra
+    - pymdownx.critic
+    - pymdownx.caret
+    - pymdownx.keys
+    - pymdownx.mark
+    - pymdownx.tilde
+    - pymdownx.details
+    - pymdownx.emoji:
+          emoji_index: !!python/name:materialx.emoji.twemoji
+          emoji_generator: !!python/name:materialx.emoji.to_svg
+    - pymdownx.tabbed:
+          alternate_style: true
+    - pymdownx.highlight:
+          pygments_lang_class: true
+          linenums: true
+    - pymdownx.inlinehilite
+    - pymdownx.snippets
+    - pymdownx.superfences
+    - pymdownx.arithmatex:
+          generic: true
+    - pymdownx.smartsymbols
+
+plugins:
+    - search:
+          lang:
+              - ru
+              - en
+    - awesome-pages
+#    - social
+
+extra_css:
+    - '/assets/stylesheets/styles.css?5'
+
+extra_javascript:
+    - '/assets/javascripts/mathjax.js'
+    - https://polyfill.io/v3/polyfill.min.js?features=es6
+    - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
