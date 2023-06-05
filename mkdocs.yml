@@ -13,15 +13,15 @@ theme:
     palette:
         - media: '(prefers-color-scheme: light)'
           scheme: default
-          primary: cyan
-          accent: cyan
+          primary: blue grey
+          accent: blue grey
           toggle:
               icon: material/toggle-switch-off-outline
               name: Тёмная тема
         - media: '(prefers-color-scheme: dark)'
           scheme: slate
-          primary: cyan
-          accent: cyan
+          primary: blue grey
+          accent: blue grey
           toggle:
               icon: material/toggle-switch
               name: Светлая тема
@@ -106,3 +106,4 @@ extra_javascript:
     - '/assets/javascripts/mathjax.js'
     - https://polyfill.io/v3/polyfill.min.js?features=es6
     - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    - https://snack.expo.dev/embed.js

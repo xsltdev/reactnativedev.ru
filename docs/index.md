@@ -6,7 +6,7 @@ hide:
     - navigation
 ---
 
-# ![React](react.svg){: style="height:42px;width:42px;vertical-align:middle;"} Справочник React Native
+# ![React](react.svg){: style="height:42px;width:42px;vertical-align:middle;"} Справочник React Native — это фреймворк с открытым исходным кодом для создания приложений для Android и iOS с использованием [React](https://reactdev.ru/).
 
 [**React Native** :octicons-link-external-16:](https://reactnative.dev/) &mdash;
 
@@ -18,7 +18,7 @@ hide:
 
     Перевод официальной документации
 
-    [:octicons-arrow-right-24: Гайды](guides/index.md)
+    [:octicons-arrow-right-24: Гайды](guides/introduction.md)
 
     [:octicons-arrow-right-24: Компоненты](components/index.md)
 

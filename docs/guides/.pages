@@ -1,4 +1,17 @@
 title: Гайды
 nav:
-    - index.md
+    # - index.md
+    - Основы:
+        - introduction.md
+        - intro-react-native-components.md
+        - intro-react.md
+        - handling-text-input.md
+        - using-a-scrollview.md
+        - using-a-listview.md
+        - troubleshooting.md
+        - platform-specific-code.md
+    - Настройка среды:
+        - getting-started.md
+        - integration-with-existing-apps.md
+        - integration-with-android-fragment.md
     - ...
