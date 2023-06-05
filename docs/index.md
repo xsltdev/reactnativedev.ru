@@ -6,13 +6,13 @@ hide:
     - navigation
 ---
 
-# ![React](react.svg){: style="height:42px;width:42px;vertical-align:middle;"} Справочник React Native — это фреймворк с открытым исходным кодом для создания приложений для Android и iOS с использованием [React](https://reactdev.ru/).
+# ![React](react.svg){: style="height:42px;width:42px;vertical-align:middle;"} Справочник React Native
 
-[**React Native** :octicons-link-external-16:](https://reactnative.dev/) &mdash;
+[**React Native** :octicons-link-external-16:](https://reactnative.dev/) — это фреймворк с открытым исходным кодом для создания приложений для Android и iOS с использованием [React](https://reactdev.ru/).
 
 <div class="grid cards" style="margin-top: 1.6em" markdown>
 
--   :simple-react:{ .lg .middle } **React Native**
+-   :simple-react:{ .lg .middle } **React Native** <small>0.72</small>
 
     ***
 

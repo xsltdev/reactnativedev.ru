@@ -14,4 +14,7 @@ nav:
         - getting-started.md
         - integration-with-existing-apps.md
         - integration-with-android-fragment.md
+        - building-for-tv.md
+    - Рабочий процесс:
+        - running-on-device.md
     - ...
