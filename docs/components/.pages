@@ -1,4 +1,9 @@
 title: Компоненты
 nav:
-    - index.md
+    - Основные компоненты:
+        - components-and-apis.md
+        - image.md
+        - text.md
+        - textinput.md
+        - view.md
     - ...

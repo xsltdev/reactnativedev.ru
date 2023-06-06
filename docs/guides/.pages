@@ -1,6 +1,5 @@
 title: Гайды
 nav:
-    # - index.md
     - Основы:
         - introduction.md
         - intro-react-native-components.md
