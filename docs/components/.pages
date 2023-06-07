@@ -2,8 +2,20 @@ title: Компоненты
 nav:
     - Основные компоненты:
         - components-and-apis.md
+        - activityindicator.md
+        - button.md
+        - flatlist.md
         - image.md
+        - keyboardavoidingview.md
+        - modal.md
+        - refreshcontrol.md
+        - scrollview.md
+        - sectionlist.md
+        - statusbar.md
+        - switch.md
         - text.md
         - textinput.md
         - view.md
+    - Android компоненты:
+        - drawerlayoutandroid.md
     - ...

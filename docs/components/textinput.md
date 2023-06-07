@@ -4,87 +4,17 @@
 
 Самый простой вариант использования - поместить `TextInput` и подписаться на события `onChangeText` для чтения пользовательского ввода. Существуют и другие события, такие как `onSubmitEditing` и `onFocus`, на которые можно подписаться. Минимальный пример:
 
-```SnackPlayer name=TextInput
-import React from 'react';
-import {SafeAreaView, StyleSheet, TextInput} from 'react-native';
-
-const TextInputExample = () => {
-  const [text, onChangeText] = React.useState('Useless Text');
-  const [number, onChangeNumber] = React.useState('');
-
-  return (
-    <SafeAreaView>
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeText}
-        value={text}
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeNumber}
-        value={number}
-        placeholder="useless placeholder"
-        keyboardType="numeric"
-      />
-    </SafeAreaView>
-  );
-};
-
-const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-});
-
-export default TextInputExample;
-```
+<div data-snack-id="@bndby/textinput-example-1" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
 Два метода, открытые через родной элемент, это .focus() и .blur(), которые программно фокусируют или размывают TextInput.
 
 Обратите внимание, что некоторые реквизиты доступны только при `multiline={true/false}`. Кроме того, стили границ, которые применяются только к одной стороне элемента (например, `borderBottomColor`, `borderLeftWidth` и т.д.) не будут применяться, если `multiline=true`. Чтобы достичь того же эффекта, вы можете обернуть ваш `TextInput` в `View`:
 
-```SnackPlayer name=TextInput
-import React from 'react';
-import {View, TextInput} from 'react-native';
-
-const MultilineTextInputExample = () => {
-  const [value, onChangeText] = React.useState('Useless Multiline Placeholder');
-
-  // If you type something in the text box that is a color, the background will change to that
-  // color.
-  return (
-    <View
-      style={{
-        backgroundColor: value,
-        borderBottomColor: '#000000',
-        borderBottomWidth: 1,
-      }}>
-      <TextInput
-        editable
-        multiline
-        numberOfLines={4}
-        maxLength={40}
-        onChangeText={text => onChangeText(text)}
-        value={value}
-        style={{padding: 10}}
-      />
-    </View>
-  );
-};
-
-export default MultilineTextInputExample;
-```
+<div data-snack-id="@bndby/textinput-example-2" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
 По умолчанию `TextInput` имеет границу в нижней части своего представления. Эта граница имеет отступ, заданный фоновым изображением, предоставляемым системой, и его нельзя изменить. Чтобы избежать этого, можно либо не задавать высоту явно, в этом случае система позаботится об отображении границы в правильном положении, либо не отображать границу, установив `underlineColorAndroid` в прозрачный.
 
-Обратите внимание, что на Android выделение текста во вводе может изменить параметр активности приложения `windowSoftInputMode` на `adjustResize`. Это может вызвать проблемы с компонентами, имеющими position: 'absolute' при активной клавиатуре. Чтобы избежать такого поведения, либо укажите `windowSoftInputMode` в AndroidManifest.xml ( https://developer.android.com/guide/topics/manifest/activity-element.html ), либо управляйте этим параметром программно с помощью нативного кода.
-
----
-
-# Reference
+Обратите внимание, что на Android выделение текста во вводе может изменить параметр активности приложения `windowSoftInputMode` на `adjustResize`. Это может вызвать проблемы с компонентами, имеющими position: 'absolute' при активной клавиатуре. Чтобы избежать такого поведения, либо укажите `windowSoftInputMode` в [`AndroidManifest.xml`](https://developer.android.com/guide/topics/manifest/activity-element.html), либо управляйте этим параметром программно с помощью нативного кода.
 
 ## Реквизиты
 
@@ -92,9 +22,7 @@ export default MultilineTextInputExample;
 
 Наследует [View Props](view.md#props).
 
----
-
-### `allowFontScaling`.
+### `allowFontScaling`
 
 Определяет, должны ли шрифты масштабироваться с учетом настроек доступности Text Size. По умолчанию используется значение `true`.
 
@@ -102,149 +30,91 @@ export default MultilineTextInputExample;
 | ---- |
 | bool |
 
----
-
-### `автокапитализация`
+### `autoCapitalize`
 
 Указывает `TextInput` автоматически набирать определенные символы заглавными буквами. Это свойство не поддерживается некоторыми типами клавиатур, такими как `name-phone-pad`.
 
--   `символы`: все символы.
-
--   `слова`: первая буква каждого слова.
-
--   `предложения`: первая буква каждого предложения (_по умолчанию_).
-
+-   `characters`: все символы.
+-   `words`: первая буква каждого слова.
+-   `sentences`: первая буква каждого предложения (_по умолчанию_).
 -   `none`: ничего автоматически не капитализировать.
 
 | Type                                             |
 | ------------------------------------------------ |
 | enum('none', 'sentences', 'words', 'characters') |
 
----
-
-### `автозавершение`
+### `autoComplete`
 
 Определяет подсказки автозаполнения для системы, чтобы она могла обеспечить автозаполнение. На Android система всегда будет пытаться предложить автозаполнение, используя эвристику для определения типа содержимого. Чтобы отключить автозаполнение, установите `autoComplete` в `off`.
 
 Следующие значения работают на разных платформах:
 
--   `дополнительное имя`
-
--   `адресная строка1`
-
--   `адресная строка2`
-
--   `cc-номер`
-
--   `страна`
-
--   `текущий пароль`
-
+-   `additional-name`
+-   `address-line1`
+-   `address-line2`
+-   `cc-number`
+-   `country`
+-   `current-password`
 -   `email`
-
--   `фамилия-имя`
-
--   `дарованное имя`
-
+-   `family-name`
+-   `given-name`
 -   `honorific-prefix`
-
--   `посвящение-суффикс`
-
--   `имя`
-
--   `новый пароль`
-
+-   `honorific-suffix`
+-   `name`
+-   `new-password`
 -   `off`
-
 -   `one-time-code`
+-   `postal-code`
+-   `street-address`
+-   `tel`
+-   `username`
 
--   почтовый индекс
-
--   `улица-адрес`
-
--   телефон
-
--   имя пользователя
-
-<div class="label basic ios">iOS</div>
+:simple-ios:
 
 Следующие значения работают только на iOS:
 
--   `прозвище`
-
--   `организация`
-
--   `организация-заголовок`
-
+-   `nickname`
+-   `organization`
+-   `organization-title`
 -   `url`
 
-<div class="label basic android">Android</div>
+:simple-android:
 
 Следующие значения работают только на Android:
 
--   `дата рождения-день`
-
--   `дата рождения-полная`
-
--   `дата рождения-месяц`
-
--   `дата рождения-год`
-
+-   `birthdate-day`
+-   `birthdate-full`
+-   `birthdate-month`
+-   `birthdate-year`
 -   `cc-csc`
-
 -   `cc-exp`
-
--   `cc-exp-день`
-
--   `cc-exp-месяц`
-
--   `cc-exp-год`
-
--   пол
-
--   `имя-семья`
-
--   `имя-данное`
-
--   `имя-середина`
-
--   `имя-среднего-инициала`
-
+-   `cc-exp-day`
+-   `cc-exp-month`
+-   `cc-exp-year`
+-   `gender`
+-   `name-family`
+-   `name-given`
+-   `name-middle`
+-   `name-middle-initial`
 -   `name-prefix`
-
 -   `name-suffix`
-
--   `пароль`
-
--   `пароль-новый`
-
--   `почтовый адрес`
-
--   `почтовый адрес-страна`
-
--   `почтовый-адрес-расширенный`
-
--   `почтовый-адрес-расширенный-почтовый-код`
-
--   `почтовый-адрес-местность`
-
--   `постал-адрес-регион`
-
--   `sms-otp
-
--   `тел-код страны`
-
+-   `password`
+-   `password-new`
+-   `postal-address`
+-   `postal-address-country`
+-   `postal-address-extended`
+-   `postal-address-extended-postal-code`
+-   `postal-address-locality`
+-   `postal-address-region`
+-   `sms-otp`
+-   `tel-country-code`
 -   `tel-national`
-
 -   `tel-device`
-
--   `имя пользователя-новый`
+-   `username-new`
 
 | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | enum('additional-name', 'address-line1', 'address-line2', 'birthdate-day', 'birthdate-full', 'birthdate-month', 'birthdate-year', 'cc-csc', 'cc-exp', 'cc-exp-day', 'cc-exp-month', 'cc-exp-year', 'cc-number', 'country', 'current-password', 'email', 'family-name', 'gender', 'given-name', 'honorific-prefix', 'honorific-suffix', 'name', 'name-family', 'name-given', 'name-middle', 'name-middle-initial', 'name-prefix', 'name-suffix', 'new-password', 'nickname', 'one-time-code', 'organization', 'organization-title', 'password', 'password-new', 'postal-address', 'postal-address-country', 'postal-address-extended', 'postal-address-extended-postal-code', 'postal-address-locality', 'postal-address-region', 'postal-code', 'street-address', 'sms-otp', 'tel', 'tel-country-code', 'tel-national', 'tel-device', 'url', 'username', 'username-new', 'off') |
-
----
 
 ### `autoCorrect`
 
@@ -254,9 +124,7 @@ export default MultilineTextInputExample;
 | ---- |
 | bool |
 
----
-
-### `автофокус`
+### `autoFocus`
 
 Если `true`, фокусирует ввод на `componentDidMount` или `useEffect`. Значение по умолчанию - `false`.
 
@@ -264,17 +132,13 @@ export default MultilineTextInputExample;
 | ---- |
 | bool |
 
----
-
-### `blurOnSubmit`.
+### `blurOnSubmit`
 
 Если `true`, текстовое поле будет размываться при отправке. Значение по умолчанию равно true для однострочных полей и false для многострочных. Обратите внимание, что для многострочных полей установка `blurOnSubmit` в `true` означает, что нажатие клавиши return размывает поле и вызывает событие `onSubmitEditing` вместо вставки новой строки в поле.
 
 | Type |
 | ---- |
 | bool |
-
----
 
 ### `caretHidden`
 
@@ -284,9 +148,7 @@ export default MultilineTextInputExample;
 | ---- |
 | bool |
 
----
-
-### `clearButtonMode` <div class="label ios">iOS</div>
+### `clearButtonMode` :simple-ios:
 
 Когда кнопка очистки должна появиться в правой части текстового представления. Это свойство поддерживается только для однострочного компонента TextInput. Значение по умолчанию - `никогда`.
 
@@ -294,17 +156,13 @@ export default MultilineTextInputExample;
 | ---------------------------------------------------------- |
 | enum('never', 'while-editing', 'unless-editing', 'always') |
 
----
-
-### `clearTextOnFocus` <div class="label ios">iOS</div>
+### `clearTextOnFocus` :simple-ios:
 
 Если `true`, то текстовое поле автоматически очищается, когда начинается редактирование.
 
 | Type |
 | ---- |
 | bool |
-
----
 
 ### `contextMenuHidden`
 
@@ -314,9 +172,7 @@ export default MultilineTextInputExample;
 | ---- |
 | bool |
 
----
-
-### `dataDetectorTypes` <div class="label ios">iOS</div>
+### `dataDetectorTypes` :simple-ios:
 
 Определяет типы данных, преобразуемых в кликабельные URL в текстовом вводе. Действует, только если `multiline={true}` и `editable={false}`. По умолчанию никакие типы данных не определяются.
 
@@ -324,23 +180,16 @@ export default MultilineTextInputExample;
 
 Возможными значениями для `dataDetectorTypes` являются:
 
--   `номер телефона`
-
--   `ссылка`
-
--   `адрес`
-
--   ` calendarEvent`
-
--   `нет`
-
--   `все`
+-   `'phoneNumber'`
+-   `'link'`
+-   `'address'`
+-   `'calendarEvent'`
+-   `'none'`
+-   `'all'`
 
 | Type                                                                                                                                                     |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | enum('phoneNumber', 'link', 'address', 'calendarEvent', 'none', 'all'), ,array of enum('phoneNumber', 'link', 'address', 'calendarEvent', 'none', 'all') |
-
----
 
 ### `defaultValue`
 
@@ -350,9 +199,7 @@ export default MultilineTextInputExample;
 | ------ |
 | string |
 
----
-
-### `cursorColor` <div class="label android">Android</div>
+### `cursorColor` :simple-android:
 
 При указании этого параметра устанавливается цвет курсора (или "каретки") в компоненте. В отличие от поведения `selectionColor`, цвет курсора будет установлен независимо от цвета поля выбора текста.
 
@@ -360,17 +207,13 @@ export default MultilineTextInputExample;
 | ------------------ |
 | [color](colors.md) |
 
----
-
-### `disableFullscreenUI` <div class="label android">Android</div>
+### `disableFullscreenUI` :simple-android:
 
 При `false`, если вокруг текстового ввода имеется небольшое пространство (например, при альбомной ориентации телефона), ОС может выбрать режим редактирования текста внутри полноэкранного текстового ввода. Когда `true`, эта функция отключена, и пользователи всегда будут редактировать текст непосредственно внутри текстового ввода. По умолчанию установлено значение `false`.
 
 | Type |
 | ---- |
 | bool |
-
----
 
 ### `editable`
 
@@ -380,9 +223,7 @@ export default MultilineTextInputExample;
 | ---- |
 | bool |
 
----
-
-### `enablesReturnKeyAutomatically` <div class="label ios">iOS</div>
+### `enablesReturnKeyAutomatically` :simple-ios:
 
 Если `true`, клавиатура отключает клавишу возврата при отсутствии текста и автоматически включает ее при появлении текста. Значение по умолчанию - `false`.
 
@@ -390,73 +231,55 @@ export default MultilineTextInputExample;
 | ---- |
 | bool |
 
----
-
 ### `enterKeyHint`
 
 Определяет, какой текст должен быть показан для возвращаемого ключа. Имеет приоритет перед реквизитом `returnKeyType`.
 
 Следующие значения работают на разных платформах:
 
--   `входить`
-
--   `сделано`
-
--   `следующий`
-
--   `поиск`
-
--   отправка
+-   `enter`
+-   `done`
+-   `next`
+-   `search`
+-   `send`
 
 Только для Android
 
 Следующие значения работают только на Android:
 
--   `предыдущий`
+-   `previous`
 
 | Type                                                        |
 | ----------------------------------------------------------- |
 | enum('enter', 'done', 'next', 'previous', 'search', 'send') |
 
----
-
-### `importantForAutofill` <div class="label android">Android</div>
+### `importantForAutofill` :simple-android:
 
 Указывает операционной системе, следует ли включать отдельные поля вашего приложения в структуру представления для целей автозаполнения на Android API Level 26+. Возможные значения: `auto`, `no`, `noExcludeDescendants`, `yes` и `yesExcludeDescendants`. По умолчанию используется значение `auto`.
 
 -   `auto`: Позволяет системе Android использовать свою эвристику, чтобы определить, важно ли представление для автозаполнения.
-
--   `нет`: Это представление не важно для автозаполнения.
-
+-   `no`: Это представление не важно для автозаполнения.
 -   `noExcludeDescendants`: Это представление и его дочерние элементы не важны для автозаполнения.
-
--   `да`: Это представление важно для автозаполнения.
-
+-   `yes`: Это представление важно для автозаполнения.
 -   `yesExcludeDescendants`: Это представление важно для автозаполнения, но его дочерние элементы не важны для автозаполнения.
 
 | Type                                                                       |
 | -------------------------------------------------------------------------- |
 | enum('auto', 'no', 'noExcludeDescendants', 'yes', 'yesExcludeDescendants') |
 
----
-
-### `inlineImageLeft` <div class="label android">Android</div>
+### `inlineImageLeft` :simple-android:
 
 Если определено, то предоставленный ресурс изображения будет отображаться слева. Ресурс изображения должен находиться внутри `/android/app/src/main/res/drawable` и ссылаться как
 
-```
-<TextInput
- inlineImageLeft='search_icon'
-/>
+```js
+<TextInput inlineImageLeft="search_icon" />
 ```
 
 | Type   |
 | ------ |
 | string |
 
----
-
-### `inlineImagePadding` <div class="label android">Android</div>
+### `inlineImagePadding` :simple-android:
 
 Расстояние между встроенным изображением, если оно есть, и самим вводимым текстом.
 
@@ -464,17 +287,13 @@ export default MultilineTextInputExample;
 | ------ |
 | number |
 
----
+### `inputAccessoryViewID` :simple-ios:
 
-### `inputAccessoryViewID` <div class="label ios">iOS</div>
-
-Необязательный идентификатор, который связывает пользовательский [InputAccessoryView](inputaccessoryview.md) с этим текстовым вводом. InputAccessoryView отображается над клавиатурой, когда этот текстовый ввод сфокусирован.
+Необязательный идентификатор, который связывает пользовательский [InputAccessoryView](inputaccessoryview.md) с этим текстовым вводом. `InputAccessoryView` отображается над клавиатурой, когда этот текстовый ввод сфокусирован.
 
 | Type   |
 | ------ |
 | string |
-
----
 
 ### `inputMode`
 
@@ -482,29 +301,20 @@ export default MultilineTextInputExample;
 
 Поддерживает следующие значения:
 
--   `нет`
-
--   `текст`
-
--   `десятичный`
-
--   `числовой`
-
--   телефон
-
--   `поиск`
-
+-   `none`
+-   `text`
+-   `decimal`
+-   `numeric`
+-   `tel`
+-   `search`
 -   `email`
-
 -   `url`
 
 | Type                                                                        |
 | --------------------------------------------------------------------------- |
 | enum('decimal', 'email', 'none', 'numeric', 'search', 'tel', 'text', 'url') |
 
----
-
-### `keyboardAppearance` <div class="label ios">iOS</div>
+### `keyboardAppearance` :simple-ios:
 
 Определяет цвет клавиатуры.
 
@@ -512,28 +322,20 @@ export default MultilineTextInputExample;
 | -------------------------------- |
 | enum('default', 'light', 'dark') |
 
----
-
 ### `keyboardType`
 
 Определяет, какую клавиатуру открывать, например, `numeric`.
 
-Смотрите скриншоты всех типов [здесь] (http://lefkowitz.me/2018/04/30/visual-guide-to-react-native-textinput-keyboardtype-options/).
+Смотрите скриншоты всех типов [здесь](http://lefkowitz.me/2018/04/30/visual-guide-to-react-native-textinput-keyboardtype-options/).
 
 Следующие значения работают на разных платформах:
 
--   `по умолчанию`
-
--   `числовой блокнот`
-
--   `десятичный блокнот`
-
--   `числовой`
-
+-   `default`
+-   `number-pad`
+-   `decimal-pad`
+-   `numeric`
 -   `email-address`
-
--   `телефонная панель`
-
+-   `phone-pad`
 -   `url`
 
 Только для iOS
@@ -541,26 +343,20 @@ export default MultilineTextInputExample;
 Следующие значения работают только на iOS:
 
 -   `ascii-capable`
-
--   `цифры и пунктуация`
-
--   `именной телефонный блокнот`
-
+-   `numbers-and-punctuation`
+-   `name-phone-pad`
 -   `twitter`
-
--   веб-поиск
+-   `web-search`
 
 Только для Android
 
 Следующие значения работают только на Android:
 
--   `видимый-пароль`
+-   `visible-password`
 
 | Type                                                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | enum('default', 'email-address', 'numeric', 'phone-pad', 'ascii-capable', 'numbers-and-punctuation', 'url', 'number-pad', 'name-phone-pad', 'decimal-pad', 'twitter', 'web-search', 'visible-password') |
-
----
 
 ### `maxFontSizeMultiplier`
 
@@ -570,8 +366,6 @@ export default MultilineTextInputExample;
 | ------ |
 | number |
 
----
-
 ### `maxLength`
 
 Ограничивает максимальное количество символов, которые можно ввести. Используйте это вместо реализации логики в JS, чтобы избежать мерцания.
@@ -580,45 +374,37 @@ export default MultilineTextInputExample;
 | ------ |
 | number |
 
----
-
 ### `multiline`
 
 Если `true`, текстовый ввод может состоять из нескольких строк. Значение по умолчанию - `false`.
 
-:::note
+!!!note ""
 
-Важно отметить, что это выравнивает текст по верху на iOS, и центрирует его на Android. Используйте с `textAlignVertical`, установленным на `top`, для одинакового поведения на обеих платформах.
-
-:::
+    Важно отметить, что это выравнивает текст по верху на iOS, и центрирует его на Android. Используйте с `textAlignVertical`, установленным на `top`, для одинакового поведения на обеих платформах.
 
 | Type |
 | ---- |
 | bool |
 
----
+### `numberOfLines` :simple-android:
 
-### `numberOfLines` <div class="label android">Android</div>
-
-Устанавливает количество строк для `TextInput`. Используйте его с параметром multiline, установленным в `true`, чтобы иметь возможность заполнять строки.
+Устанавливает количество строк для `TextInput`. Используйте его с параметром `multiline`, установленным в `true`, чтобы иметь возможность заполнять строки.
 
 | Type   |
 | ------ |
 | number |
 
----
-
 ### `onBlur`
 
 Обратный вызов, который вызывается при размытии вводимого текста.
 
-> Примечание: Если вы пытаетесь получить доступ к значению `text` из `nativeEvent`, имейте в виду, что полученное значение может быть `неопределенным`, что может привести к непреднамеренным ошибкам. Если вы пытаетесь найти последнее значение TextInput, вы можете использовать событие [`onEndEditing`](textinput#onendediting), которое срабатывает по завершении редактирования.
+!!!warning ""
+
+    Примечание: Если вы пытаетесь получить доступ к значению `text` из `nativeEvent`, имейте в виду, что полученное значение может быть `undefined`, что может привести к непреднамеренным ошибкам. Если вы пытаетесь найти последнее значение `TextInput`, вы можете использовать событие [`onEndEditing`](textinput.md#onendediting), которое срабатывает по завершении редактирования.
 
 | Type     |
 | -------- |
 | function |
-
----
 
 ### `onChange`
 
@@ -628,8 +414,6 @@ export default MultilineTextInputExample;
 | ----------------------------------------------------- |
 | (`{nativeEvent: {eventCount, target, text}}`) => void |
 
----
-
 ### `onChangeText`
 
 Обратный вызов, который вызывается при изменении текста текстового ввода. Измененный текст передается как единственный строковый аргумент обработчику обратного вызова.
@@ -637,8 +421,6 @@ export default MultilineTextInputExample;
 | Type     |
 | -------- |
 | function |
-
----
 
 ### `onContentSizeChange`
 
@@ -650,8 +432,6 @@ export default MultilineTextInputExample;
 | ---------------------------------------------------------- |
 | (`{nativeEvent: {contentSize: {width, height} }}`) => void |
 
----
-
 ### `onEndEditing`
 
 Обратный вызов, который вызывается по окончании ввода текста.
@@ -660,37 +440,29 @@ export default MultilineTextInputExample;
 | -------- |
 | function |
 
----
-
 ### `onPressIn`
 
 Обратный вызов, который вызывается при задействовании касания.
 
-| Type                                              |
-| ------------------------------------------------- |
-| ({nativeEvent: [PressEvent](pressevent)}) => void |
-
----
+| Type                                                 |
+| ---------------------------------------------------- |
+| ({nativeEvent: [PressEvent](pressevent.md)}) => void |
 
 ### `onPressOut`
 
 Обратный вызов, который вызывается, когда прикосновение отпускается.
 
-| Type                                              |
-| ------------------------------------------------- |
-| ({nativeEvent: [PressEvent](pressevent)}) => void |
-
----
+| Type                                                 |
+| ---------------------------------------------------- |
+| ({nativeEvent: [PressEvent](pressevent.md)}) => void |
 
 ### `onFocus`
 
 Обратный вызов, который вызывается, когда текстовый ввод сфокусирован.
 
-| Type                                                |
-| --------------------------------------------------- |
-| ({nativeEvent: [LayoutEvent](layoutevent)}) => void |
-
----
+| Type                                                   |
+| ------------------------------------------------------ |
+| ({nativeEvent: [LayoutEvent](layoutevent.md)}) => void |
 
 ### `onKeyPress`
 
@@ -700,17 +472,13 @@ export default MultilineTextInputExample;
 | ------------------------------------------- |
 | (`{nativeEvent: {key: keyValue} }`) => void |
 
----
-
 ### `onLayout`
 
 Вызывается при монтировании и при смене раскладки.
 
-| Type                                                |
-| --------------------------------------------------- |
-| ({nativeEvent: [LayoutEvent](layoutevent)}) => void |
-
----
+| Type                                                   |
+| ------------------------------------------------------ |
+| ({nativeEvent: [LayoutEvent](layoutevent.md)}) => void |
 
 ### `onScroll`
 
@@ -720,8 +488,6 @@ export default MultilineTextInputExample;
 | --------------------------------------------------- |
 | (`{nativeEvent: {contentOffset: {x, y} }}`) => void |
 
----
-
 ### `onSelectionChange`
 
 Обратный вызов, который вызывается при изменении выбора ввода текста.
@@ -729,8 +495,6 @@ export default MultilineTextInputExample;
 | Type                                                  |
 | ----------------------------------------------------- |
 | (`{nativeEvent: {selection: {start, end} }}`) => void |
-
----
 
 ### `onSubmitEditing`
 
@@ -742,8 +506,6 @@ export default MultilineTextInputExample;
 
 Обратите внимание, что на iOS этот метод не вызывается при использовании `keyboardType="phone-pad"`.
 
----
-
 ### `placeholder`
 
 Строка, которая будет выведена перед вводом текста.
@@ -751,8 +513,6 @@ export default MultilineTextInputExample;
 | Type   |
 | ------ |
 | string |
-
----
 
 ### `placeholderTextColor`
 
@@ -762,8 +522,6 @@ export default MultilineTextInputExample;
 | ------------------ |
 | [color](colors.md) |
 
----
-
 ### `readOnly`
 
 Если `true`, текст не редактируется. Значение по умолчанию - `false`.
@@ -772,9 +530,7 @@ export default MultilineTextInputExample;
 | ---- |
 | bool |
 
----
-
-### `returnKeyLabel` <div class="label android">Android</div>
+### `returnKeyLabel` :simple-android:
 
 Устанавливает ключ возврата для метки. Используйте его вместо `returnKeyType`.
 
@@ -782,9 +538,7 @@ export default MultilineTextInputExample;
 | ------ |
 | string |
 
----
-
-### `returnKeyType`.
+### `returnKeyType`
 
 Определяет, как должен выглядеть ключ возврата. В Android вы также можете использовать `returnKeyLabel`.
 
@@ -792,81 +546,63 @@ _Кросс-платформа_
 
 Следующие значения работают на разных платформах:
 
--   `сделано`
-
+-   `done`
 -   `go`
-
--   `следующий`
-
--   `поиск`
-
--   `отправить`
+-   `next`
+-   `search`
+-   `send`
 
 Только для Android
 
 Следующие значения работают только на Android:
 
--   `нет`
-
--   `предыдущий`
+-   `none`
+-   `previous`
 
 Только для iOS
 
 Следующие значения работают только на iOS:
 
--   по умолчанию
-
--   `экстренный вызов`
-
+-   `default`
+-   `emergency-call`
 -   `google`
-
--   `присоединиться`
-
--   `маршрут`
-
+-   `join`
+-   `route`
 -   `yahoo`
 
 | Type                                                                                                                              |
 | --------------------------------------------------------------------------------------------------------------------------------- |
 | enum('done', 'go', 'next', 'search', 'send', 'none', 'previous', 'default', 'emergency-call', 'google', 'join', 'route', 'yahoo') |
 
-### `rejectResponderTermination` <div class="label ios">iOS</div>
+### `rejectResponderTermination` :simple-ios:
 
-Если `true`, позволяет TextInput передавать события касания родительскому компоненту. Это позволяет таким компонентам, как SwipeableListView, быть пролистываемыми из TextInput на iOS, как это происходит по умолчанию на Android. Если `false`, TextInput всегда просит обработать ввод (кроме случаев, когда он отключен). Значение по умолчанию - `true`.
+Если `true`, позволяет `TextInput` передавать события касания родительскому компоненту. Это позволяет таким компонентам, как `SwipeableListView`, быть пролистываемыми из `TextInput` на iOS, как это происходит по умолчанию на Android. Если `false`, `TextInput` всегда просит обработать ввод (кроме случаев, когда он отключен). Значение по умолчанию - `true`.
 
 | Type |
 | ---- |
 | bool |
 
----
+### `rows` :simple-android:
 
-### `rows` <div class="label android">Android</div>
-
-Устанавливает количество строк для `TextInput`. Используйте его с параметром multiline, установленным в `true`, чтобы иметь возможность заполнять строки.
+Устанавливает количество строк для `TextInput`. Используйте его с параметром `multiline`, установленным в `true`, чтобы иметь возможность заполнять строки.
 
 | Type   |
 | ------ |
 | number |
 
----
-
-### `scrollEnabled` <div class="label ios">iOS</div>
+### `scrollEnabled` :simple-ios:
 
 | Type |
 | ---- |
 | bool |
 
----
-
-### `secureTextEntry`.
+### `secureTextEntry`
 
 Если `true`, текстовый ввод скрывает вводимый текст, что позволяет сохранить конфиденциальный текст, например, пароли. Значение по умолчанию - `false`. Не работает с `multiline={true}`.
 
 | Type |
 | ---- |
 | bool |
-
----
 
 ### `selection`
 
@@ -876,8 +612,6 @@ _Кросс-платформа_
 | ----------------------------------- |
 | object: {start: number,end: number} |
 
----
-
 ### `selectionColor`
 
 Цвет выделения и курсора при вводе текста.
@@ -885,8 +619,6 @@ _Кросс-платформа_
 | Type               |
 | ------------------ |
 | [color](colors.md) |
-
----
 
 ### `selectTextOnFocus`
 
@@ -896,8 +628,6 @@ _Кросс-платформа_
 | ---- |
 | bool |
 
----
-
 ### `showSoftInputOnFocus`
 
 Если значение `false`, оно предотвращает отображение мягкой клавиатуры, когда поле сфокусировано. Значение по умолчанию - `true`.
@@ -906,9 +636,7 @@ _Кросс-платформа_
 | ---- |
 | bool |
 
----
-
-### `spellCheck` <div class="label ios">iOS</div>
+### `spellCheck` :simple-ios:
 
 Если `false`, отключает стиль проверки орфографии (т.е. красные подчеркивания). Значение по умолчанию наследуется от `autoCorrect`.
 
@@ -916,37 +644,29 @@ _Кросс-платформа_
 | ---- |
 | bool |
 
----
-
 ### `textAlign`
 
 Выравнивание вводимого текста по левой, центральной или правой стороне поля ввода.
 
 Возможными значениями для `textAlign` являются:
 
--   `слева`
-
--   `центр`
-
--   `правый`
+-   `left`
+-   `center`
+-   `right`
 
 | Type                            |
 | ------------------------------- |
 | enum('left', 'center', 'right') |
 
----
-
-### `textContentType` <div class="label ios">iOS</div>
+### `textContentType` :simple-ios:
 
 Предоставить клавиатуре и системе информацию об ожидаемом семантическом значении контента, который вводят пользователи.
 
-:::note
+!!!note ""
 
-[`autoComplete`](#autocomplete), обеспечивает ту же функциональность и доступен для всех платформ. Вы можете использовать [`Platform.select`](/docs/next/platform#select) для различных вариантов поведения платформы.
+    `autoComplete`, обеспечивает ту же функциональность и доступен для всех платформ. Вы можете использовать [`Platform.select`](platform.md#select) для различных вариантов поведения платформы.
 
-Избегайте использования одновременно `textContentType` и `autoComplete`. Для обратной совместимости, `textContentType` имеет приоритет, когда оба свойства установлены.
-
-:::
+    Избегайте использования одновременно `textContentType` и `autoComplete`. Для обратной совместимости, `textContentType` имеет приоритет, когда оба свойства установлены.
 
 Для iOS 11+ вы можете установить `textContentType` в `username` или `password`, чтобы включить автозаполнение регистрационных данных из связки ключей устройства.
 
@@ -957,103 +677,64 @@ _Кросс-платформа_
 Возможными значениями для `textContentType` являются:
 
 -   `none`
-
 -   `URL`
-
--   `адресГорода`
-
+-   `addressCity`
 -   `addressCityAndState`
-
 -   `addressState`
-
 -   `countryName`
-
 -   `creditCardNumber`
-
 -   `emailAddress`
-
 -   `familyName`
-
--   `полный адрес улицы`
-
+-   `fullStreetAddress`
 -   `givenName`
-
 -   `jobTitle`
-
--   `местонахождение`
-
+-   `location`
 -   `middleName`
-
--   `имя`
-
+-   `name`
 -   `namePrefix`
-
 -   `nameSuffix`
-
--   `прозвище`
-
--   `имя организации`
-
--   `почтовый индекс`
-
+-   `nickname`
+-   `organizationName`
+-   `postalCode`
 -   `streetAddressLine1`
-
 -   `streetAddressLine2`
-
--   месторасположение
-
--   `телефонный номер`
-
--   `имя пользователя`
-
--   `пароль`
-
--   `новый пароль`
-
+-   `sublocality`
+-   `telephoneNumber`
+-   `username`
+-   `password`
+-   `newPassword`
 -   `oneTimeCode`
 
 | Type                                                                                                                                                                                                                                                                                                                                                                                                       |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | enum('none', 'URL', 'addressCity', 'addressCityAndState', 'addressState', 'countryName', 'creditCardNumber', 'emailAddress', 'familyName', 'fullStreetAddress', 'givenName', 'jobTitle', 'location', 'middleName', 'name', 'namePrefix', 'nameSuffix', 'nickname', 'organizationName', 'postalCode', 'streetAddressLine1', 'streetAddressLine2', 'sublocality', 'telephoneNumber', 'username', 'password') |
 
----
-
-### `passwordRules` <div class="label ios">iOS</div>
+### `passwordRules` :simple-ios:
 
 При использовании `textContentType` в качестве `newPassword` на iOS мы можем сообщить ОС минимальные требования к паролю, чтобы она могла сгенерировать тот, который будет им соответствовать. Чтобы создать допустимую строку для `PasswordRules`, загляните в [Apple Docs](https://developer.apple.com/password-rules/).
 
-> Если диалог генерации паролей не появляется, убедитесь, что:
+!!!warning ""
 
->
+    Если диалог генерации паролей не появляется, убедитесь, что:
 
-> -   Автозаполнение включено: **Настройки** → **Пароли и учетные записи** → установите флажок "Вкл" на **Автозаполнение паролей**,
-
-> -   Используется связка ключей iCloud: **Настройки** → **Apple ID** → **iCloud** → **Keychain** → переключить "Вкл" **iCloud Keychain**.
+    -   Автозаполнение включено: **Настройки** → **Пароли и учетные записи** → установите флажок "Вкл" на **Автозаполнение паролей**,
+    -   Используется связка ключей iCloud: **Настройки** → **Apple ID** → **iCloud** → **Keychain** → переключить "Вкл" **iCloud Keychain**.
 
 | Type   |
 | ------ |
 | string |
 
----
-
 ### `style`
 
 Обратите внимание, что поддерживаются не все стили текста, неполный список того, что не поддерживается, включает:
 
--   `ширина границы слева`
-
--   `ширина границы сверху`
-
+-   `borderLeftWidth`
+-   `borderTopWidth`
 -   `borderRightWidth`
-
 -   `borderBottomWidth`
-
--   `границаТопЛевыйРадиус`
-
--   `границаТопПравыйРадиус`
-
+-   `borderTopLeftRadius`
+-   `borderTopRightRadius`
 -   `borderBottomRightRadius`
-
 -   `borderBottomLeftRadius`
 
 более подробно см. в [Issue#7070](https://github.com/facebook/react-native/issues/7070).
@@ -1062,9 +743,7 @@ _Кросс-платформа_
 | --------------------- |
 | [Text](text.md#style) |
 
----
-
-### `textBreakStrategy` <div class="label android">Android</div>
+### `textBreakStrategy` :simple-android:
 
 Установка стратегии разбиения текста на Android API Level 23+, возможные значения `simple`, `highQuality`, `balanced` Значение по умолчанию `simple`.
 
@@ -1072,9 +751,7 @@ _Кросс-платформа_
 | ----------------------------------------- |
 | enum('simple', 'highQuality', 'balanced') |
 
----
-
-### `underlineColorAndroid` <div class="label android">Android</div>
+### `underlineColorAndroid` :simple-android:
 
 Цвет подчеркивания `TextInput`.
 
@@ -1082,9 +759,7 @@ _Кросс-платформа_
 | ------------------ |
 | [color](colors.md) |
 
----
-
-### `значение`
+### `value`
 
 Значение, которое будет отображаться для ввода текста. `TextInput` является контролируемым компонентом, что означает, что собственное значение будет принудительно соответствовать этому значению prop, если оно предоставлено. Для большинства случаев это работает отлично, но в некоторых случаях это может вызвать мерцание - одной из распространенных причин является предотвращение редактирования путем сохранения одинакового значения. В дополнение к установке одинакового значения, либо установите `editable={false}`, либо установите/обновите `maxLength`, чтобы предотвратить нежелательное редактирование без мерцания.
 
@@ -1092,9 +767,7 @@ _Кросс-платформа_
 | ------ |
 | string |
 
----
-
-### `lineBreakStrategyIOS` <div class="label ios">iOS</div>
+### `lineBreakStrategyIOS` :simple-ios:
 
 Установка стратегии перевода строки на iOS 14+. Возможные значения: `none`, `standard`, `hangul-word` и `push-out`.
 
@@ -1128,8 +801,6 @@ clear();
 
 Удаляет весь текст из `TextInput`.
 
----
-
 ### `isFocused()`
 
 ```tsx
@@ -1138,10 +809,8 @@ isFocused(): boolean;
 
 Возвращает `true`, если вход в данный момент сфокусирован; `false` в противном случае.
 
-# Известные проблемы
+## Известные проблемы
 
 -   [react-native#19096](https://github.com/facebook/react-native/issues/19096): Не поддерживает `onKeyPreIme` в Android.
-
--   [react-native#19366](https://github.com/facebook/react-native/issues/19366): Вызов .focus() после закрытия клавиатуры Android с помощью кнопки "Назад" не вызывает клавиатуру снова.
-
--   [react-native#26799](https://github.com/facebook/react-native/issues/26799): Не поддерживается `secureTextEntry в Android, когда `keyboardType="email-address"`или`keyboardType="phone-pad"`.
+-   [react-native#19366](https://github.com/facebook/react-native/issues/19366): Вызов `.focus()` после закрытия клавиатуры Android с помощью кнопки "Назад" не вызывает клавиатуру снова.
+-   [react-native#26799](https://github.com/facebook/react-native/issues/26799): Не поддерживается `secureTextEntry` в Android, когда `keyboardType="email-address` или `keyboardType="phone-pad"`.

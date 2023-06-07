@@ -1,4 +1,16 @@
 title: API
 nav:
-    - index.md
+    - API:
+        - alert.md
+        - animated.md
+        - dimensions.md
+        - linking.md
+        - pixelratio.md
+        - stylesheet.md
+    - Android API:
+        - backhandler.md
+        - permissionsandroid.md
+        - toastandroid.md
+    - iOS API:
+        - actionsheetios.md
     - ...

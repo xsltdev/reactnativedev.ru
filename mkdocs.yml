@@ -52,7 +52,7 @@ extra:
         - icon: fontawesome/brands/react
           link: 'https://reactdev.ru/'
           name: React docs
-        - icon: fontawesome/brands/react
+        - icon: fontawesome/solid/mobile-screen
           link: 'https://reactnativedev.ru/'
           name: React Native docs
         - icon: fontawesome/brands/node-js
@@ -97,7 +97,7 @@ plugins:
               - ru
               - en
     - awesome-pages
-#    - social
+    - social
 
 extra_css:
     - '/assets/stylesheets/styles.css?5'
