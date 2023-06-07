@@ -1,4 +1,12 @@
 title: Архитектура
 nav:
-    - index.md
-    - ...
+    - architecture-overview.md
+    - Рендеринг:
+        - fabric-renderer.md
+        - render-pipeline.md
+        - xplat-implementation.md
+        - view-flattening.md
+        - threading-model.md
+    - Инструменты сборки:
+        - bundled-hermes.md
+    - architecture-glossary.md
