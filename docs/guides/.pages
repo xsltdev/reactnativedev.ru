@@ -16,4 +16,14 @@ nav:
         - building-for-tv.md
     - Рабочий процесс:
         - running-on-device.md
+        - fast-refresh.md
+        - debugging.md
+        - react-devtools.md
+        - native-debugging.md
+        - symbolication.md
+        - sourcemaps.md
+        - testing-overview.md
+        - libraries.md
+        - typescript.md
+        - upgrading.md
     - ...
