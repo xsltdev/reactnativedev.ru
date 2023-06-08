@@ -15,7 +15,7 @@
     -   [Render, Commit, and Mount](render-pipeline.md)
     -   [Кроссплатформенная реализация](xplat-implementation.md)
     -   [View Flattening](view-flattening.md)
-    -   [Threading Model](threading-model.md)
+    -   [Модель потоков](threading-model.md)
 -   Инструменты сборки
     -   [Bundled Hermes](bundled-hermes.md)
 -   [Глоссарий](architecture-glossary.md)

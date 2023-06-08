@@ -24,7 +24,7 @@ hide:
 
     [:octicons-arrow-right-24: API](api/index.md)
 
-    [:octicons-arrow-right-24: Архитектура](architecture/index.md)
+    [:octicons-arrow-right-24: Архитектура](architecture/architecture-overview)
 
 </div>
 
