@@ -32,4 +32,11 @@ nav:
         - style.md
         - height-and-width.md
         - flexbox.md
+        - images.md
+        - colors.md
+        - handling-touches.md
+        - navigation.md
+        - animations.md
+        - gesture-responder-system.md
+        - accessibility.md
     - ...
