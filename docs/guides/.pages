@@ -26,4 +26,6 @@ nav:
         - libraries.md
         - typescript.md
         - upgrading.md
+        - network.md
+        - security.md
     - ...
