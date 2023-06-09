@@ -28,4 +28,8 @@ nav:
         - upgrading.md
         - network.md
         - security.md
+    - Дизайн:
+        - style.md
+        - height-and-width.md
+        - flexbox.md
     - ...
