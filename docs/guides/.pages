@@ -39,4 +39,58 @@ nav:
         - animations.md
         - gesture-responder-system.md
         - accessibility.md
+    - Производительность:
+        - performance.md
+        - build-speed.md
+        - speeding-ci-builds.md
+        - optimizing-flatlist-configuration.md
+        - ram-bundles-inline-requires.md
+        - profiling.md
+        - profile-hermes.md
+    - Выполнение JavaScript:
+        - javascript-environment.md
+        - timers.md
+        - hermes.md
+    - Нативные модули:
+        - native-modules-intro.md
+        - native-modules-android.md
+        - native-modules-ios.md
+        - native-modules-setup.md
+    - Нативные компоненты:
+        - native-components-android.md
+        - native-components-ios.md
+        - direct-manipulation.md
+    - Новая архитектура:
+        - the-new-architecture-landing-page.md
+        - the-new-architecture-why.md
+        - the-new-architecture-use-app-template.md
+        - the-new-architecture-pillars.md
+        - the-new-architecture-pillars-turbomodules.md
+        - the-new-architecture-pillars-fabric-components.md
+        - the-new-architecture-pillars-codegen.md
+        - the-new-architecture-cxx-cxxturbomodules.md
+        - the-new-architecture-cxx-custom-types.md
+        - the-new-architecture-backward-compatibility.md
+        - the-new-architecture-backward-compatibility-turbomodules.md
+        - the-new-architecture-backward-compatibility-fabric-components.md
+    - Переход на новую архитектуру:
+        - new-architecture-intro.md
+        - new-architecture-library-intro.md
+        - new-architecture-library-android.md
+        - new-architecture-library-ios.md
+        - new-architecture-app-intro.md
+        - react-18-and-react-native.md
+        - new-architecture-troubleshooting.md
+        - new-architecture-appendix.md
+    - Android:
+        - headless-js-android.md
+        - signed-apk-android.md
+        - communication-android.md
+        - react-native-gradle-plugin.md
+    - iOS:
+        - linking-libraries-ios.md
+        - running-on-simulator-ios.md
+        - communication-ios.md
+        - app-extensions.md
+        - publishing-to-app-store.md
     - ...
