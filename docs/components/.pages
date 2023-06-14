@@ -6,8 +6,10 @@ nav:
         - button.md
         - flatlist.md
         - image.md
+        - imagebackground.md
         - keyboardavoidingview.md
         - modal.md
+        - pressable.md
         - refreshcontrol.md
         - scrollview.md
         - sectionlist.md
@@ -15,7 +17,27 @@ nav:
         - switch.md
         - text.md
         - textinput.md
+        - touchablehighlight.md
+        - touchableopacity.md
+        - touchablewithoutfeedback.md
         - view.md
+        - virtualizedlist.md
     - Android компоненты:
         - drawerlayoutandroid.md
+        - touchablenativefeedback.md
+    - iOS компоненты:
+        - inputaccessoryview.md
+        - safeareaview.md
+    - Props:
+        - image-style-props.md
+        - layout-props.md
+        - shadow-props.md
+        - text-style-props.md
+        - view-style-props.md
+    - Типы объектов:
+        - layoutevent.md
+        - pressevent.md
+        - react-node.md
+        - rect.md
+        - viewtoken.md
     - ...
