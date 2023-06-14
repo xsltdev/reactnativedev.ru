@@ -12,7 +12,7 @@
 
 ## iOS
 
-На iOS вы можете указать любое количество кнопок. Каждая кнопка по желанию может задавать стиль или быть подчеркнутой, доступные опции представлены перечислением [AlertButtonStyle](#alertbuttonstyle-ios) и полем `isPreferred` в [AlertButton](alert#alertbutton).
+На iOS вы можете указать любое количество кнопок. Каждая кнопка по желанию может задавать стиль или быть подчеркнутой, доступные опции представлены перечислением `AlertButtonStyle` и полем `isPreferred` в `AlertButton`.
 
 ## Android
 
@@ -45,12 +45,12 @@ static alert (
 
 **Параметры:**
 
-| Name             | Type                                  | Description                                                             |
-| ---------------- | ------------------------------------- | ----------------------------------------------------------------------- |
-| title (Required) | string                                | The dialog's title. Passing `null` or empty string will hide the title. |
-| message          | string                                | An optional message that appears below the dialog's title.              |
-| buttons          | [AlertButton](alert.md#alertbutton)[] | An optional array containing buttons configuration.                     |
-| options          | [Options](alert.md#options)           | An optional Alert configuration.                                        |
+| Name             | Type          | Description                                                             |
+| ---------------- | ------------- | ----------------------------------------------------------------------- |
+| title (Required) | string        | The dialog's title. Passing `null` or empty string will hide the title. |
+| message          | string        | An optional message that appears below the dialog's title.              |
+| buttons          | `AlertButton` | An optional array containing buttons configuration.                     |
+| options          | `Options`     | An optional Alert configuration.                                        |
 
 ### `prompt()` :simple-ios:
 
@@ -69,15 +69,15 @@ static prompt: (
 
 **Параметры:**
 
-| Name              | Type                                               | Description                                                                                                                                                                                           |
-| ----------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| title (Required)  | string                                             | The dialog's title.                                                                                                                                                                                   |
-| message           | string                                             | An optional message that appears above the text input.                                                                                                                                                |
-| callbackOrButtons | function<hr/>[AlertButton](alert.md#alertButton)[] | If passed a function, it will be called with the prompt's value<br/>`(text: string) => void`, when the user taps 'OK'.<hr/>If passed an array, buttons will be configured based on the array content. |
-| type              | [AlertType](alert.md#alerttype-ios)                | This configures the text input.                                                                                                                                                                       |
-| defaultValue      | string                                             | The default text in text input.                                                                                                                                                                       |
-| keyboardType      | string                                             | The keyboard type of first text field (if exists). One of TextInput [keyboardTypes](textinput.md#keyboardtype).                                                                                       |
-| options           | [Options](alert.md#options)                        | An optional Alert configuration.                                                                                                                                                                      |
+| Name              | Type                       | Description                                                                                                                                                                                           |
+| ----------------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| title (Required)  | string                     | The dialog's title.                                                                                                                                                                                   |
+| message           | string                     | An optional message that appears above the text input.                                                                                                                                                |
+| callbackOrButtons | function<hr/>`AlertButton` | If passed a function, it will be called with the prompt's value<br/>`(text: string) => void`, when the user taps 'OK'.<hr/>If passed an array, buttons will be configured based on the array content. |
+| type              | `AlertType`                | This configures the text input.                                                                                                                                                                       |
+| defaultValue      | string                     | The default text in text input.                                                                                                                                                                       |
+| keyboardType      | string                     | The keyboard type of first text field (if exists). One of TextInput [`keyboardTypes`](../components/textinput.md#keyboardtype).                                                                       |
+| options           | `Options`                  | An optional Alert configuration.                                                                                                                                                                      |
 
 ## Определения типа
 
@@ -124,12 +124,12 @@ static prompt: (
 
 **Свойства объектов:**
 
-| Name                     | Type                                              | Description                                                                    |
-| ------------------------ | ------------------------------------------------- | ------------------------------------------------------------------------------ |
-| text                     | string                                            | Button label.                                                                  |
-| onPress                  | function                                          | Callback function when button is pressed.                                      |
-| style :simple-ios:       | [AlertButtonStyle](alert.md#alertbuttonstyle-ios) | Button style, on Android this property will be ignored.                        |
-| isPreferred :simple-ios: | boolean                                           | Whether button should be emphasized, on Android this property will be ignored. |
+| Name                     | Type               | Description                                                                    |
+| ------------------------ | ------------------ | ------------------------------------------------------------------------------ |
+| text                     | string             | Button label.                                                                  |
+| onPress                  | function           | Callback function when button is pressed.                                      |
+| style :simple-ios:       | `AlertButtonStyle` | Button style, on Android this property will be ignored.                        |
+| isPreferred :simple-ios: | boolean            | Whether button should be emphasized, on Android this property will be ignored. |
 
 ### AlertOptions
 

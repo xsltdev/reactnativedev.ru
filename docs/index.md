@@ -20,11 +20,11 @@ hide:
 
     [:octicons-arrow-right-24: Гайды](guides/introduction.md)
 
-    [:octicons-arrow-right-24: Компоненты](components/index.md)
+    [:octicons-arrow-right-24: Компоненты](components-and-apis.md)
 
-    [:octicons-arrow-right-24: API](api/index.md)
+    [:octicons-arrow-right-24: API](api/accessibilityinfo.md)
 
-    [:octicons-arrow-right-24: Архитектура](architecture/architecture-overview)
+    [:octicons-arrow-right-24: Архитектура](architecture/architecture-overview.md)
 
 </div>
 
