@@ -34,8 +34,8 @@ theme:
         - navigation.indexes
         - content.action.edit
         - content.code.copy
-    favicon: react.svg
-    logo: react-white.svg
+    favicon: rn.svg
+    logo: rn.svg
 
 extra:
     generator: false
