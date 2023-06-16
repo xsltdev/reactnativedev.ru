@@ -1,7 +1,4 @@
----
-id: stylesheet
-title: StyleSheet
----
+# StyleSheet
 
 **`StyleSheet`** - это абстракция, аналогичная таблицам стилей CSS.
 
