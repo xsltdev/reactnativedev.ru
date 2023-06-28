@@ -44,7 +44,7 @@ npx react-native@latest init AwesomeProject
 
 ### Включите Hermes
 
-Hermes - это движок JavaScript с открытым исходным кодом, оптимизированный для React Native. [Hermes станет движком по умолчанию в будущем](https://github.com/reactwg/react-native-new-architecture/discussions/4), и мы настоятельно рекомендуем вам использовать его.
+Hermes — это движок JavaScript с открытым исходным кодом, оптимизированный для React Native. [Hermes станет движком по умолчанию в будущем](https://github.com/reactwg/react-native-new-architecture/discussions/4), и мы настоятельно рекомендуем вам использовать его.
 
 Пожалуйста, [следуйте инструкциям на сайте React Native](hermes.md), чтобы включить Hermes в вашем приложении.
 

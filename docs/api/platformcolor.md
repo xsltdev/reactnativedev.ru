@@ -6,7 +6,7 @@ PlatformColor(color1, [color2, ...colorN]);
 
 Вы можете использовать функцию `PlatformColor` для доступа к родным цветам на целевой платформе, предоставив соответствующее строковое значение родного цвета. Вы передаете строку в функцию `PlatformColor` и, если она существует на данной платформе, она возвращает соответствующий родной цвет, который вы можете применить в любой части вашего приложения.
 
-Если вы передадите функции `PlatformColor` более одного строкового значения, она будет рассматривать первое значение как значение по умолчанию, а остальные - как запасные.
+Если вы передадите функции `PlatformColor` более одного строкового значения, она будет рассматривать первое значение как значение по умолчанию, а остальные — как запасные.
 
 ```js
 PlatformColor('bogusName', 'linkColor');
@@ -19,8 +19,8 @@ PlatformColor('bogusName', 'linkColor');
 Полный список типов поддерживаемых системных цветов см:
 
 -   Android:
-    -   [R.attr](https://developer.android.com/reference/android/R.attr) - префикс `?attr`.
-    -   [R.color](https://developer.android.com/reference/android/R.color) - префикс `@android:color`.
+    -   [R.attr](https://developer.android.com/reference/android/R.attr) — префикс `?attr`.
+    -   [R.color](https://developer.android.com/reference/android/R.color) — префикс `@android:color`.
 -   iOS (нотации Objective-C и Swift):
     -   [UIColor Standard Colors](https://developer.apple.com/documentation/uikit/uicolor/standard_colors)
     -   [UIColor UI Element Colors](https://developer.apple.com/documentation/uikit/uicolor/ui_element_colors)

@@ -82,7 +82,7 @@ dependencies {
 -   Установите [cmake](https://community.chocolatey.org/packages/cmake) с помощью Chocolatey.
 -   Установите либо:
     -   [Build Tools for Visual Studio 2022](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022).
-    -   [Visual Studio 22 Community Edition](https://visualstudio.microsoft.com/vs/community/) - Достаточно выбрать только десктопную разработку на C++.
+    -   [Visual Studio 22 Community Edition](https://visualstudio.microsoft.com/vs/community/) — Достаточно выбрать только десктопную разработку на C++.
 -   Убедитесь, что [Visual Studio Command Prompt](https://docs.microsoft.com/en-us/visualstudio/ide/reference/command-prompt-powershell?view=vs-2022) настроен правильно. Это необходимо для того, чтобы в командной строке была настроена соответствующая переменная окружения компилятора C++.
 -   Запустите приложение с помощью `npx react-native run-android` внутри Visual Studio Command Prompt.
 

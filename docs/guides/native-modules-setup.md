@@ -2,7 +2,7 @@
 
 !!!info ""
 
-    Native Module и Native Components - это наши стабильные технологии, используемые в унаследованной архитектуре. Они будут устаревшими в будущем, когда новая архитектура станет стабильной. Новая архитектура использует [Turbo Native Module](the-new-architecture-pillars-turbomodules.md) и [Fabric Native Components](the-new-architecture-pillars-fabric-components.md) для достижения аналогичных результатов.
+    Native Module и Native Components — это наши стабильные технологии, используемые в унаследованной архитектуре. Они будут устаревшими в будущем, когда новая архитектура станет стабильной. Новая архитектура использует [Turbo Native Module](the-new-architecture-pillars-turbomodules.md) и [Fabric Native Components](the-new-architecture-pillars-fabric-components.md) для достижения аналогичных результатов.
 
 Нативные модули обычно распространяются как пакеты npm, за исключением того, что поверх обычного JavaScript они будут включать некоторый нативный код для каждой платформы. Чтобы узнать больше о пакетах npm, вам может быть полезно [это руководство](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry).
 
@@ -12,7 +12,7 @@
 npx create-react-native-library@latest react-native-awesome-module
 ```
 
-Где `react-native-awesome-module` - имя, которое вы хотите дать новому модулю. После этого перейдите в папку `react-native-awesome-module` и загрузите проект примера, выполнив:
+Где `react-native-awesome-module` — имя, которое вы хотите дать новому модулю. После этого перейдите в папку `react-native-awesome-module` и загрузите проект примера, выполнив:
 
 ```shell
 yarn

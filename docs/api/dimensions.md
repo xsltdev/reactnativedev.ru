@@ -2,7 +2,7 @@
 
 !!!warning ""
 
-    [`useWindowDimensions`](usewindowdimensions.md) - это предпочтительный API для компонентов React. В отличие от `Dimensions`, он обновляется по мере обновления размеров окна. Это хорошо сочетается с парадигмой React.
+    [`useWindowDimensions`](usewindowdimensions.md) — это предпочтительный API для компонентов React. В отличие от `Dimensions`, он обновляется по мере обновления размеров окна. Это хорошо сочетается с парадигмой React.
 
 ```tsx
 import { Dimensions } from 'react-native';

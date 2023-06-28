@@ -14,9 +14,9 @@
 
 ## Пример: Int64
 
-C++ Turbo Native Modules пока не поддерживает числа `int64_t` - потому что JavaScript не поддерживает числа больше `2^53`.
+C++ Turbo Native Modules пока не поддерживает числа `int64_t` — потому что JavaScript не поддерживает числа больше `2^53`.
 
-Мы не можем представлять числа > `2^53` как JavaScript `числа` - но мы можем представлять их как JavaScript `строки` и автоматически преобразовывать (aka `bridge`) их в C++ `int64_t`, создав пользовательский заголовочный файл Bridging под названием `Int64.h` в папке `tm`:
+Мы не можем представлять числа > `2^53` как JavaScript `числа` — но мы можем представлять их как JavaScript `строки` и автоматически преобразовывать (aka `bridge`) их в C++ `int64_t`, создав пользовательский заголовочный файл Bridging под названием `Int64.h` в папке `tm`:
 
 ```cpp title="Int64.h"
 #pragma once
@@ -262,7 +262,7 @@ struct Bridging<CustomType>
 
 #### Базовый класс
 
-`NativeSampleModuleBaseCustomType` - это автогенерируемый шаблон в вашем `AppSpecsJSI.h`, имя которого генерируется:
+`NativeSampleModuleBaseCustomType` — это автогенерируемый шаблон в вашем `AppSpecsJSI.h`, имя которого генерируется:
 
 -   `NativeSampleModule` (имя нативного модуля C++ Turbo в спецификации JavaScript) +
 -   `Base` (константа) +

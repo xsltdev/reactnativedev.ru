@@ -200,7 +200,7 @@ blurRadius: радиус размытия фильтра размытия, до�
 
 ### `progressiveRenderingEnabled` :simple-android:
 
-Если `true`, включает прогрессивную потоковую передачу jpeg - https://frescolib.org/docs/progressive-jpegs.
+Если `true`, включает прогрессивную потоковую передачу jpeg — https://frescolib.org/docs/progressive-jpegs.
 
 | Type | Default |
 | ---- | ------- |
@@ -483,4 +483,4 @@ static resolveAssetSource(source: ImageSourcePropType): {
 
 **При передаче числа:**
 
--   `number` - непрозрачный тип, возвращаемый чем-то вроде `require('./image.jpg')`.
+-   `number` — непрозрачный тип, возвращаемый чем-то вроде `require('./image.jpg')`.

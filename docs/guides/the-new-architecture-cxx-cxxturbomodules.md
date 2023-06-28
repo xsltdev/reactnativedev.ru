@@ -132,7 +132,7 @@ CxxTurboModulesGuide
 
 ### iOS: Создайте файл `podspec`.
 
-Для iOS вам потребуется создать файл `AppTurboModules.podspec` в папке `tm` - он будет выглядеть следующим образом:
+Для iOS вам потребуется создать файл `AppTurboModules.podspec` в папке `tm` — он будет выглядеть следующим образом:
 
 ```ruby title="AppTurboModules.podspec"
 require "json"
@@ -167,7 +167,7 @@ end
 
 ### Android: `build.gradle`, `CMakeLists.txt`, `Onload.cpp`.
 
-Для Android вам нужно будет создать файл `CMakeLists.txt` в папке `tm` - он будет выглядеть следующим образом:
+Для Android вам нужно будет создать файл `CMakeLists.txt` в папке `tm` — он будет выглядеть следующим образом:
 
 ```cmake
 cmake_minimum_required(VERSION 3.13)
@@ -330,7 +330,7 @@ yarn android
 virtual jsi::String reverseString(jsi::Runtime &rt, jsi::String input) = 0;
 ```
 
-Вы можете напрямую работать с типами нижнего уровня `jsi::` - но для удобства нативные модули C++ Turbo автоматически "перемыкают" типы в `std::`.
+Вы можете напрямую работать с типами нижнего уровня `jsi::` — но для удобства нативные модули C++ Turbo автоматически "перемыкают" типы в `std::`.
 
 ### Реализация
 
@@ -363,7 +363,7 @@ class NativeSampleModule : public NativeSampleModuleCxxSpec<NativeSampleModule> 
 } // namespace facebook::react
 ```
 
-В этом случае вы можете использовать любой тип C++, который `мостит` к `jsi::String` - по умолчанию или [пользовательский тип](the-new-architecture-cxx-custom-types.md). Вы не можете указать несовместимый тип, такой как `bool`, `float` или `std::vector<>`, так как он не `переходит` к `jsi::String` и, следовательно, приводит к ошибке компиляции.
+В этом случае вы можете использовать любой тип C++, который `мостит` к `jsi::String` — по умолчанию или [пользовательский тип](the-new-architecture-cxx-custom-types.md). Вы не можете указать несовместимый тип, такой как `bool`, `float` или `std::vector<>`, так как он не `переходит` к `jsi::String` и, следовательно, приводит к ошибке компиляции.
 
 Теперь добавьте файл `NativeSampleModule.cpp` с реализацией для него:
 

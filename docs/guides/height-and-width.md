@@ -4,7 +4,7 @@
 
 ## Фиксированные размеры
 
-Общий способ задать размеры компонента - это добавить фиксированные `width` и `height` к стилю. Все размеры в React Native не имеют единицы измерения и представляют собой пиксели, не зависящие от плотности.
+Общий способ задать размеры компонента — это добавить фиксированные `width` и `height` к стилю. Все размеры в React Native не имеют единицы измерения и представляют собой пиксели, не зависящие от плотности.
 
 <div data-snack-id="@bndby/height-and-width-1" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 

@@ -3,7 +3,7 @@
 API `ToastAndroid` в React Native раскрывает модуль `ToastAndroid` платформы Android как JS-модуль. Он предоставляет метод `show(message, duration)`, который принимает следующие параметры:
 
 -   _message_ Строка с текстом тоста.
--   _duration_ Продолжительность тоста - либо `ToastAndroid.SHORT`, либо `ToastAndroid.LONG`.
+-   _duration_ Продолжительность тоста — либо `ToastAndroid.SHORT`, либо `ToastAndroid.LONG`.
 
 Вы можете использовать `showWithGravity(message, duration, gravity)`, чтобы указать место появления тоста в макете экрана. Это может быть `ToastAndroid.TOP`, `ToastAndroid.BOTTOM` или `ToastAndroid.CENTER`.
 

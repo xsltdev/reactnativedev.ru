@@ -28,8 +28,8 @@ static share(content: ShareContent, options?: ShareOptions);
 
 | Name                  | Type   | Description                                                                                                                                                                                                                                                      |
 | --------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| content (обязательно) | object | `message` - a message to share<br/>`url` - a URL to share :simple-ios:<br/>`title` - title of the message :simple-android:<hr/>At least one of `url` and `message` is required.                                                                                  |
-| options               | object | `dialogTitle` :simple-android:<br/>`excludedActivityTypes` :simple-ios:<br/>`subject` - a subject to share via email :simple-ios:<br/>`tintColor` :simple-ios:<br/>`anchor` - the node to which the action sheet should be anchored (used for iPad) :simple-ios: |
+| content (обязательно) | object | `message` — a message to share<br/>`url` — a URL to share :simple-ios:<br/>`title` — title of the message :simple-android:<hr/>At least one of `url` and `message` is required.                                                                                  |
+| options               | object | `dialogTitle` :simple-android:<br/>`excludedActivityTypes` :simple-ios:<br/>`subject` — a subject to share via email :simple-ios:<br/>`tintColor` :simple-ios:<br/>`anchor` — the node to which the action sheet should be anchored (used for iPad) :simple-ios: |
 
 ## Свойства
 
