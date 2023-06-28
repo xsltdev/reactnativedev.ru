@@ -20,7 +20,7 @@ hide:
 
     [:octicons-arrow-right-24: Гайды](guides/introduction.md)
 
-    [:octicons-arrow-right-24: Компоненты](components-and-apis.md)
+    [:octicons-arrow-right-24: Компоненты](components/components-and-apis.md)
 
     [:octicons-arrow-right-24: API](api/accessibilityinfo.md)
 
