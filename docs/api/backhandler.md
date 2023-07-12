@@ -13,7 +13,7 @@ API Backhandler обнаруживает нажатия аппаратных к�
 
 ## Паттерн
 
-```tsx
+```ts
 BackHandler.addEventListener(
     'hardwareBackPress',
     function () {
@@ -61,7 +61,7 @@ BackHandler.addEventListener(
 
 ### `addEventListener()`
 
-```tsx
+```ts
 static addEventListener(
   eventName: BackPressEventName,
   handler: () => boolean | null | undefined,
@@ -70,13 +70,13 @@ static addEventListener(
 
 ### `exitApp()`
 
-```tsx
+```ts
 static exitApp();
 ```
 
 ### `removeEventListener()`
 
-```tsx
+```ts
 static removeEventListener(
   eventName: BackPressEventName,
   handler: () => boolean | null | undefined,

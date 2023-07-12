@@ -15,7 +15,7 @@ React Native предоставляет модуль, который опред�
 
 <!-- 0001.part.md -->
 
-```tsx
+```ts
 import { Platform, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 
 <!-- 0003.part.md -->
 
-```tsx
+```ts
 import { Platform, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 
 <!-- 0005.part.md -->
 
-```tsx
+```ts
 const Component = Platform.select({
     ios: () => require('ComponentIOS'),
     android: () => require('ComponentAndroid'),
@@ -74,7 +74,7 @@ const Component = Platform.select({
 
 <!-- 0007.part.md -->
 
-```tsx
+```ts
 const Component = Platform.select({
     native: () => require('ComponentForNative'),
     default: () => require('ComponentForWeb'),
@@ -91,7 +91,7 @@ const Component = Platform.select({
 
 <!-- 0009.part.md -->
 
-```tsx
+```ts
 import { Platform } from 'react-native';
 
 if (Platform.Version === 25) {
@@ -109,7 +109,7 @@ if (Platform.Version === 25) {
 
 <!-- 0011.part.md -->
 
-```tsx
+```ts
 import { Platform } from 'react-native';
 
 const majorVersionIOS = parseInt(Platform.Version, 10);
@@ -139,7 +139,7 @@ BigButton.android.js
 
 <!-- 0015.part.md -->
 
-```tsx
+```ts
 import BigButton from './BigButton';
 ```
 
@@ -166,7 +166,7 @@ Container.native.js # picked up by the React Native bundler for both Android and
 
 <!-- 0019.part.md -->
 
-```tsx
+```ts
 import Container from './Container';
 ```
 

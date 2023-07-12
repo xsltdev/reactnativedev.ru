@@ -32,7 +32,7 @@ React Native предоставляет меню разработчика вну
 
     Игнорировать журналы в крайнем случае и создать задачу для исправления всех игнорируемых журналов.
 
-```tsx
+```ts
 import { LogBox } from 'react-native';
 
 // Ignore log notification by message:

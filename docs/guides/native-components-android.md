@@ -158,7 +158,7 @@
 
 Самый последний шаг - создание модуля JavaScript, который определяет интерфейсный слой между Java/Kotlin и JavaScript для пользователей вашего нового представления. Рекомендуется документировать интерфейс компонента в этом модуле (например, используя TypeScript, Flow или обычные комментарии).
 
-```tsx title="ImageView.tsx"
+```ts title="ImageView.tsx"
 import { requireNativeComponent } from 'react-native';
 
 /**
@@ -248,7 +248,7 @@ module.exports = requireNativeComponent('RCTImageView');
 
 Этот обратный вызов вызывается с необработанным событием, которое мы обычно обрабатываем в компоненте-обертке, чтобы упростить API:
 
-```tsx title="MyCustomView.tsx"
+```ts title="MyCustomView.tsx"
 class MyCustomView extends React.Component {
   constructor(props) {
     super(props);
@@ -756,7 +756,7 @@ const RCTMyCustomView = requireNativeComponent(`RCTMyCustomView`);
 
 I. Начните с пользовательского менеджера представлений:
 
-```tsx title="MyViewManager.tsx"
+```ts title="MyViewManager.tsx"
 import { requireNativeComponent } from 'react-native';
 
 export const MyViewManager = requireNativeComponent(
@@ -766,7 +766,7 @@ export const MyViewManager = requireNativeComponent(
 
 II. Затем реализуйте пользовательский View, вызывая метод `create`:
 
-```tsx title="MyView.tsx"
+```ts title="MyView.tsx"
 import React, { useEffect, useRef } from 'react';
 import {
     PixelRatio,

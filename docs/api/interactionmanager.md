@@ -4,7 +4,7 @@
 
 Приложения могут планировать выполнение задач после завершения взаимодействий с помощью следующего:
 
-```tsx
+```ts
 InteractionManager.runAfterInteractions(() => {
     // ...long-running synchronous task...
 });
@@ -20,7 +20,7 @@ InteractionManager.runAfterInteractions(() => {
 
 `InteractionManager` также позволяет приложениям регистрировать анимации, создавая "хэндл" взаимодействия при запуске анимации и очищая его по завершении:
 
-```tsx
+```ts
 const handle = InteractionManager.createInteractionHandle();
 // run animation... (`runAfterInteractions` tasks are queued)
 // later, on animation completion:
@@ -62,7 +62,7 @@ InteractionManager.clearInteractionHandle(handle);
 
 ### `runAfterInteractions()`
 
-```tsx
+```ts
 static runAfterInteractions(task?: (() => any) | SimpleTask | PromiseTask);
 ```
 
@@ -70,7 +70,7 @@ static runAfterInteractions(task?: (() => any) | SimpleTask | PromiseTask);
 
 ### `createInteractionHandle()`
 
-```tsx
+```ts
 static createInteractionHandle(): Handle;
 ```
 
@@ -78,7 +78,7 @@ static createInteractionHandle(): Handle;
 
 ### `clearInteractionHandle()`
 
-```tsx
+```ts
 static clearInteractionHandle(handle: Handle);
 ```
 
@@ -86,7 +86,7 @@ static clearInteractionHandle(handle: Handle);
 
 ### `setDeadline()`
 
-```tsx
+```ts
 static setDeadline(deadline: number);
 ```
 

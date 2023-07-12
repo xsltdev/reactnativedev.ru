@@ -45,7 +45,7 @@ AppState часто используется для определения на�
 
 ### `addEventListener()`
 
-```tsx
+```ts
 static addEventListener(
   type: AppStateEvent,
   listener: (state: AppStateStatus) => void,
@@ -58,6 +58,6 @@ static addEventListener(
 
 ### `currentState`
 
-```tsx
+```ts
 static currentState: AppStateStatus;
 ```

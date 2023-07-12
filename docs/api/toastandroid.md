@@ -15,19 +15,19 @@ API `ToastAndroid` в React Native раскрывает модуль `ToastAndro
 
 ### `show()`
 
-```tsx
+```ts
 static show(message: string, duration: number);
 ```
 
 ### `showWithGravity()`
 
-```tsx
+```ts
 static showWithGravity(message: string, duration: number, gravity: number);
 ```
 
 ### `showWithGravityAndOffset()`
 
-```tsx
+```ts
 static showWithGravityAndOffset(
   message: string,
   duration: number,
@@ -43,7 +43,7 @@ static showWithGravityAndOffset(
 
 Указывает продолжительность на экране.
 
-```tsx
+```ts
 static SHORT: number;
 ```
 
@@ -51,7 +51,7 @@ static SHORT: number;
 
 Указывает продолжительность на экране.
 
-```tsx
+```ts
 static LONG: number;
 ```
 
@@ -59,7 +59,7 @@ static LONG: number;
 
 Указывает положение на экране.
 
-```tsx
+```ts
 static TOP: number;
 ```
 
@@ -67,7 +67,7 @@ static TOP: number;
 
 Указывает положение на экране.
 
-```tsx
+```ts
 static BOTTOM: number;
 ```
 
@@ -75,6 +75,6 @@ static BOTTOM: number;
 
 Указывает положение на экране.
 
-```tsx
+```ts
 static CENTER: number;
 ```

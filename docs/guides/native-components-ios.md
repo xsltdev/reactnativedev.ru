@@ -58,14 +58,14 @@ RCT_EXPORT_MODULE(RNTMap)
 
 Затем вам понадобится немного JavaScript, чтобы сделать этот компонент пригодным для использования в React:
 
-```tsx title="MapView.tsx"
+```ts title="MapView.tsx"
 import { requireNativeComponent } from 'react-native';
 
 // requireNativeComponent automatically resolves 'RNTMap' to 'RNTMapManager'
 module.exports = requireNativeComponent('RNTMap');
 ```
 
-```tsx title="MyApp.tsx"
+```ts title="MyApp.tsx"
 import MapView from './MapView.js';
 
 // ...
@@ -81,7 +81,7 @@ render() {
 
     При рендеринге не забудьте растянуть представление, иначе вы будете смотреть на пустой экран.
 
-```tsx
+```ts
 render() {
     return <MapView style={{flex: 1}} />;
 }
@@ -101,13 +101,13 @@ RCT_EXPORT_VIEW_PROPERTY(zoomEnabled, BOOL)
 
 Теперь, чтобы фактически отключить масштабирование, мы устанавливаем свойство в JS:
 
-```tsx title="MyApp.tsx"
+```ts title="MyApp.tsx"
 <MapView zoomEnabled={false} style={{ flex: 1 }} />
 ```
 
 Чтобы документировать свойства (и какие значения они принимают) нашего компонента MapView, мы добавим компонент-обертку и задокументируем интерфейс с помощью React `PropTypes`:
 
-```tsx title="MapView.tsx"
+```ts title="MapView.tsx"
 import PropTypes from 'prop-types';
 import React from 'react';
 import { requireNativeComponent } from 'react-native';
@@ -189,7 +189,7 @@ RCT_CUSTOM_VIEW_PROPERTY(region, MKCoordinateRegion, MKMapView)
 
 Чтобы завершить поддержку реквизита `region`, нам нужно задокументировать его в `propTypes`:
 
-```tsx title="MapView.tsx"
+```ts title="MapView.tsx"
 MapView.propTypes = {
     /**
      * A Boolean value that determines whether the user may use pinch
@@ -220,7 +220,7 @@ MapView.propTypes = {
 };
 ```
 
-```tsx title="MyApp.tsx"
+```ts title="MyApp.tsx"
 render() {
   var region = {
     latitude: 37.48,
@@ -320,7 +320,7 @@ RCT_CUSTOM_VIEW_PROPERTY(region, MKCoordinateRegion, MKMapView)
 
 В методе делегата `-mapView:regionDidChangeAnimated:` вызывается блок обработчика события на соответствующем представлении с данными региона. Вызов блока обработчика события `onRegionChange` приводит к вызову того же самого реквизита обратного вызова в JavaScript. Этот обратный вызов вызывается с необработанным событием, которое мы обычно обрабатываем в компоненте-обертке для упрощения API:
 
-```tsx title="MapView.tsx"
+```ts title="MapView.tsx"
 class MapView extends React.Component {
   _onRegionChange = event => {
     if (!this.props.onRegionChange) {
@@ -348,7 +348,7 @@ MapView.propTypes = {
 };
 ```
 
-```tsx title="MyApp.tsx"
+```ts title="MyApp.tsx"
 class MyApp extends React.Component {
     onRegionChange(event) {
         // Do stuff with event.region.latitude, etc.
@@ -376,7 +376,7 @@ class MyApp extends React.Component {
 
 Представление React Native может иметь более одного дочернего представления в дереве представлений, например.
 
-```tsx
+```ts
 <View>
     <MyNativeView />
     <MyNativeView />
@@ -388,7 +388,7 @@ class MyApp extends React.Component {
 
 Когда пользователь взаимодействует с компонентом, например, нажимает на кнопку, `backgroundColor` `MyNativeView` меняется. В этом случае `UIManager` не будет знать, какой `MyNativeView` должен быть обработан и какой из них должен изменить `backgroundColor`. Ниже вы найдете решение этой проблемы:
 
-```tsx
+```ts
 <View>
     <MyNativeView ref={this.myNativeReference} />
     <MyNativeView ref={this.myNativeReference2} />
@@ -402,7 +402,7 @@ class MyApp extends React.Component {
 
 Теперь вышеуказанный компонент имеет ссылку на определенный `MyNativeView`, что позволяет нам использовать конкретный экземпляр `MyNativeView`. Теперь кнопка может контролировать, какой `MyNativeView` должен изменить свой `backgroundColor`. В этом примере предположим, что `callNativeMethod` изменяет `backgroundColor`.
 
-```tsx title="MyNativeView.ios.tsx"
+```ts title="MyNativeView.ios.tsx"
 class MyNativeView extends React.Component {
     callNativeMethod = () => {
         UIManager.dispatchViewManagerCommand(
@@ -452,7 +452,7 @@ RCT_EXPORT_METHOD(callNativeMethod:(nonnull NSNumber*) reactTag) {
 
 Поскольку все наши родные представления react являются подклассами `UIView`, большинство атрибутов стиля будут работать так, как вы ожидаете. Однако некоторые компоненты будут иметь стиль по умолчанию, например, `UIDatePicker`, который имеет фиксированный размер. Этот стиль по умолчанию важен для того, чтобы алгоритм компоновки работал так, как ожидается, но мы также хотим иметь возможность переопределять стиль по умолчанию при использовании компонента. `DatePickerIOS` делает это, оборачивая родной компонент в дополнительное представление, которое имеет гибкую стилизацию, и используя фиксированный стиль (который генерируется с помощью констант, передаваемых из родного компонента) для внутреннего родного компонента:
 
-```tsx title="DatePickerIOS.ios.tsx"
+```ts title="DatePickerIOS.ios.tsx"
 import {UIManager} from 'react-native';
 var RCTDatePickerIOSConsts = UIManager.RCTDatePicker.Constants;
 // ...

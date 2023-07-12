@@ -2,7 +2,7 @@
 
 Функция **`DynamicColorIOS`** - это тип цвета платформы, специфичный для iOS.
 
-```tsx
+```ts
 DynamicColorIOS({
     light: color,
     dark: color,
@@ -27,7 +27,7 @@ DynamicColorIOS({
 
 ## Пример
 
-```tsx
+```ts
 import { DynamicColorIOS } from 'react-native';
 
 const customDynamicTextColor = DynamicColorIOS({

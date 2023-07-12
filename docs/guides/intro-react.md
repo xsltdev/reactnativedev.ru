@@ -19,14 +19,14 @@ React Native работает на базе [React](https://reactdev.ru/), по�
 
 Вот как это делается: Чтобы определить свой компонент `Cat`, сначала используйте JavaScript [`import`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import) для импорта React и React Native [`Text`](..components/text.md) Core Component:
 
-```tsx
+```ts
 import React from 'react';
 import { Text } from 'react-native';
 ```
 
 Ваш компонент начинается как функция:
 
-```tsx
+```ts
 const Cat = () => {};
 ```
 
@@ -34,7 +34,7 @@ const Cat = () => {};
 
 Здесь компонент `Cat` отображает элемент `<Text>`:
 
-```tsx
+```ts
 const Cat = () => {
     return <Text>Здравствуйте, я ваш кот!</Text>;
 };
@@ -42,7 +42,7 @@ const Cat = () => {
 
 Вы можете экспортировать свой компонент функции с помощью JavaScript [`export default`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export) для использования в вашем приложении следующим образом:
 
-```tsx
+```ts
 const Cat = () => {
     return <Text>Здравствуйте, я ваш кот!</Text>;
 };
@@ -152,7 +152,7 @@ React и React Native используют **JSX,** синтаксис, кото
 
 <!-- 0025.part.md -->
 
-```tsx
+```ts
 import React, { useState } from 'react';
 ```
 
@@ -162,7 +162,7 @@ import React, { useState } from 'react';
 
 <!-- 0027.part.md -->
 
-```tsx
+```ts
 const Cat = (props: CatProps) => {
     const [isHungry, setIsHungry] = useState(true);
     // ...
@@ -186,7 +186,7 @@ const Cat = (props: CatProps) => {
 
 <!-- 0029.part.md -->
 
-```tsx
+```ts
 <Button
     onPress={() => {
         setIsHungry(false);
@@ -201,7 +201,7 @@ const Cat = (props: CatProps) => {
 
 <!-- 0031.part.md -->
 
-```tsx
+```ts
 <Button
     //..
     disabled={!isHungry}
@@ -223,7 +223,7 @@ const Cat = (props: CatProps) => {
 
 <!-- 0033.part.md -->
 
-```tsx
+```ts
 const Cafe = () => {
     return (
         <>

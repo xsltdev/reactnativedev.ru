@@ -6,7 +6,7 @@
 
 ### `addMenuItem()`
 
-```tsx
+```ts
 static addMenuItem(title: string, handler: () => any);
 ```
 
@@ -21,7 +21,7 @@ static addMenuItem(title: string, handler: () => any);
 
 **Пример:**
 
-```tsx
+```ts
 DevSettings.addMenuItem('Show Secret Dev Screen', () => {
     Alert.alert('Showing secret dev screen!');
 });
@@ -29,7 +29,7 @@ DevSettings.addMenuItem('Show Secret Dev Screen', () => {
 
 ### `reload()`
 
-```tsx
+```ts
 static reload(reason?: string): void;
 ```
 
@@ -37,7 +37,7 @@ static reload(reason?: string): void;
 
 **Пример:**
 
-```tsx
+```ts
 <Button
     title="Reload"
     onPress={() => DevSettings.reload()}

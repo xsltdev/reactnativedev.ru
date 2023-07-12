@@ -16,7 +16,7 @@
 
 [TouchableOpacity](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Components/Touchable/TouchableOpacity.js) использует `setNativeProps` для обновления непрозрачности своего дочернего компонента:
 
-```tsx
+```ts
 const viewRef = useRef<View>();
 const setOpacityTo = useCallback((value) => {
     // Redacted: animation related code
@@ -28,7 +28,7 @@ const setOpacityTo = useCallback((value) => {
 
 Это позволяет нам написать следующий код и знать, что непрозрачность дочернего объекта будет обновляться в ответ на касания, при этом сам объект не будет знать об этом факте и не потребует изменений в своей реализации:
 
-```tsx
+```ts
 <TouchableOpacity onPress={handlePress}>
     <View>
         <Text>Press me!</Text>
@@ -38,7 +38,7 @@ const setOpacityTo = useCallback((value) => {
 
 Представим, что функция `setNativeProps` недоступна. Один из способов, который мы могли бы реализовать с таким ограничением - хранить значение непрозрачности в состоянии, а затем обновлять это значение при каждом срабатывании `onPress`:
 
-```tsx
+```ts
 const [buttonOpacity, setButtonOpacity] = useState(1);
 return (
     <TouchableOpacity

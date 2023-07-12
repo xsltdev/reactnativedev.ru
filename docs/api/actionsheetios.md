@@ -10,7 +10,7 @@
 
 ### `showActionSheetWithOptions()`
 
-```tsx
+```ts
 static showActionSheetWithOptions: (
   options: ActionSheetIOSOptions,
   callback: (buttonIndex: number) => void,
@@ -34,7 +34,7 @@ static showActionSheetWithOptions: (
 
 Минимальный пример:
 
-```tsx
+```ts
 ActionSheetIOS.showActionSheetWithOptions(
     {
         options: ['Cancel', 'Remove'],
@@ -51,7 +51,7 @@ ActionSheetIOS.showActionSheetWithOptions(
 
 ### `dismissActionSheet()`
 
-```tsx
+```ts
 static dismissActionSheet();
 ```
 
@@ -59,7 +59,7 @@ static dismissActionSheet();
 
 ### `showShareActionSheetWithOptions()`
 
-```tsx
+```ts
 static showShareActionSheetWithOptions: (
   options: ShareActionSheetIOSOptions,
   failureCallback: (error: Error) => void,

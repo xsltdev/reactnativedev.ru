@@ -314,7 +314,7 @@ blurRadius: радиус размытия фильтра размытия, до�
 
 ### `abortPrefetch()` :simple-android:
 
-```tsx
+```ts
 static abortPrefetch(requestId: number);
 ```
 
@@ -350,7 +350,7 @@ static getSize(
 
 ### `getSizeWithHeaders()`
 
-```tsx
+```ts
 static getSizeWithHeaders(
   uri: string,
   headers: {[index: string]: string},
@@ -374,7 +374,7 @@ static getSizeWithHeaders(
 
 ### `prefetch()`
 
-```tsx
+```ts
 await Image.prefetch(url);
 ```
 
@@ -389,7 +389,7 @@ await Image.prefetch(url);
 
 ### `queryCache()`
 
-```tsx
+```ts
 static queryCache(
   urls: string[],
 ): Promise<Record<string, 'memory' | 'disk' | 'disk/memory'>>;
@@ -405,7 +405,7 @@ static queryCache(
 
 ### `resolveAssetSource()`
 
-```tsx
+```ts
 static resolveAssetSource(source: ImageSourcePropType): {
   height: number;
   width: number;

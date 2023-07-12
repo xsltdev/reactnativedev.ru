@@ -53,7 +53,7 @@ Animated.timing(this.state.xPosition, {
 
 Например, следующая анимация останавливается, а затем возвращается назад, параллельно вращаясь:
 
-```tsx
+```ts
 Animated.sequence([
     // decay, then spring to start and twirl
     Animated.decay(position, {
@@ -90,7 +90,7 @@ Animated.sequence([
 
 Бывают случаи, когда анимированное значение должно инвертировать другое анимированное значение для расчета. Примером может служить инвертирование шкалы (2x --> 0,5x):
 
-```tsx
+```ts
 const a = new Animated.Value(1);
 const b = Animated.divide(1, a);
 
@@ -106,7 +106,7 @@ Animated.spring(a, {
 
 Основное отображение для преобразования диапазона 0-1 в диапазон 0-100 будет таким:
 
-```tsx
+```ts
 value.interpolate({
     inputRange: [0, 1],
     outputRange: [0, 100],
@@ -115,7 +115,7 @@ value.interpolate({
 
 Например, вы можете считать, что ваше `Animated.Value` изменяется от `0` до `1`, но анимировать позицию от `150px` до `0px` и непрозрачность от `0` до `1`. Это можно сделать, изменив `style` из примера выше следующим образом:
 
-```tsx
+```ts
   style={{
     opacity: this.state.fadeAnim, // Binds directly
     transform: [{
@@ -129,7 +129,7 @@ value.interpolate({
 
 [`interpolate()`](animated.md#interpolate) также поддерживает несколько сегментов диапазона, что удобно для определения мертвых зон и других удобных трюков. Например, чтобы получить отношение отрицания при `-300`, которое переходит в `0` при `-100`, затем возвращается к `1` при `0`, а затем снова опускается до нуля при `100`, после чего следует мертвая зона, которая остается на `0` для всего, что находится за пределами этого диапазона, вы можете сделать следующее:
 
-```tsx
+```ts
 value.interpolate({
     inputRange: [-300, -100, 0, 100, 101],
     outputRange: [300, 0, 1, 0, 0],
@@ -155,7 +155,7 @@ Input | Output
 
 `interpolate()` также поддерживает отображение на строки, позволяя вам анимировать цвета, а также значения с единицами измерения. Например, если вы хотите анимировать вращение, вы можете сделать следующее:
 
-```tsx
+```ts
 value.interpolate({
     inputRange: [0, 360],
     outputRange: ['0deg', '360deg'],
@@ -168,7 +168,7 @@ value.interpolate({
 
 Анимированные значения также могут отслеживать другие значения путем установки `toValue` анимации на другое анимированное значение вместо простого числа. Например, анимация "Chat Heads", как в Messenger на Android, может быть реализована с помощью `spring()`, привязанной к другому анимированному значению, или с помощью `timing()` и `duration`, равной `0`, для жесткого отслеживания. Они также могут быть составлены с помощью интерполяций:
 
-```tsx
+```ts
 Animated.spring(follower, { toValue: leader }).start();
 Animated.timing(opacity, {
     toValue: pan.x.interpolate({
@@ -187,7 +187,7 @@ Animated.timing(opacity, {
 
 Например, при работе с жестами горизонтальной прокрутки вы должны сделать следующее, чтобы сопоставить `event.nativeEvent.contentOffset.x` с `scrollX` (`Animated.Value`):
 
-```tsx
+```ts
  onScroll={Animated.event(
    // scrollX = e.nativeEvent.contentOffset.x
    [{nativeEvent: {
@@ -207,7 +207,7 @@ Animated.timing(opacity, {
 
 При использовании `PanResponder` вы можете использовать следующий код для извлечения позиций x и y из `gestureState.dx` и `gestureState.dy`. Мы используем `null` в первой позиции массива, поскольку нас интересует только второй аргумент, переданный обработчику `PanResponder`, которым является `gestureState`.
 
-```tsx
+```ts
 onPanResponderMove={Animated.event(
   [null, // ignore the native event
   // extract dx and dy from gestureState
@@ -235,7 +235,7 @@ API `Animated` разработан так, чтобы быть сериализ
 
 Использовать родной драйвер для обычных анимаций можно, установив `useNativeDriver: true` в конфигурации анимации при ее запуске. Анимации без свойства `useNativeDriver` по умолчанию будут иметь значение `false` по унаследованным причинам, но будут выдавать предупреждение (и ошибку проверки типов в TypeScript).
 
-```tsx
+```ts
 Animated.timing(this.state.animatedValue, {
     toValue: 1,
     duration: 500,
@@ -247,7 +247,7 @@ Animated.timing(this.state.animatedValue, {
 
 Нативный драйвер также работает с `Animated.event`. Это особенно полезно для анимации, которая следует за положением прокрутки, поскольку без нативного драйвера анимация всегда будет выполняться на кадр позже жеста из-за асинхронной природы React Native.
 
-```tsx
+```ts
 <Animated.ScrollView // <-- Use the Animated ScrollView wrapper
     scrollEventThrottle={1} // <-- Use 1 here to make sure no events are ever missed
     onScroll={Animated.event(
@@ -279,7 +279,7 @@ Animated.timing(this.state.animatedValue, {
 
 При использовании стилей трансформации, таких как `rotateY`, `rotateX` и других, убедитесь, что стиль трансформации `perspective` установлен. В настоящее время некоторые анимации могут не отображаться на Android без него. Пример ниже.
 
-```tsx
+```ts
 <Animated.View
     style={{
         transform: [
@@ -306,7 +306,7 @@ Animated.timing(this.state.animatedValue, {
 
 Обратите внимание, что для того, чтобы это работало на **Android**, необходимо установить следующие флаги через `UIManager`:
 
-```tsx
+```ts
 UIManager.setLayoutAnimationEnabledExperimental(true);
 ```
 

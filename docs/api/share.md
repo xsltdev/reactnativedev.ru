@@ -14,7 +14,7 @@
 
 ### `share()`
 
-```tsx
+```ts
 static share(content: ShareContent, options?: ShareOptions);
 ```
 
@@ -35,7 +35,7 @@ static share(content: ShareContent, options?: ShareOptions);
 
 ### `sharedAction`
 
-```tsx
+```ts
 static sharedAction: 'sharedAction';
 ```
 
@@ -43,7 +43,7 @@ static sharedAction: 'sharedAction';
 
 ### `dismissedAction` :simple-ios:
 
-```tsx
+```ts
 static dismissedAction: 'dismissedAction';
 ```
 

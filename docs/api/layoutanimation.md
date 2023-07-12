@@ -24,7 +24,7 @@ if (Platform.OS === 'android') {
 
 ### `configureNext()`
 
-```tsx
+```ts
 static configureNext(
   config: LayoutAnimationConfig,
   onAnimationDidEnd?: () => void,
@@ -60,7 +60,7 @@ static configureNext(
 
 ### `create()`
 
-```tsx
+```ts
 static create(duration, type, creationProp)
 ```
 

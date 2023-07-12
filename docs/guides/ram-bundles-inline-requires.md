@@ -10,7 +10,7 @@
 
 Inline require откладывает требование модуля или файла до тех пор, пока этот файл действительно не понадобится. Базовый пример выглядит следующим образом:
 
-```tsx title="VeryExpensive.tsx"
+```ts title="VeryExpensive.tsx"
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 // ... import some very expensive modules
@@ -26,7 +26,7 @@ export default class VeryExpensive extends Component {
 }
 ```
 
-```tsx title="Optimized.tsx"
+```ts title="Optimized.tsx"
 import React, { Component } from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 

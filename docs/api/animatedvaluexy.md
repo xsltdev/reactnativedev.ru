@@ -10,7 +10,7 @@
 
 ### `setValue()`
 
-```tsx
+```ts
 setValue(value: {x: number; y: number});
 ```
 
@@ -24,7 +24,7 @@ setValue(value: {x: number; y: number});
 
 ### `setOffset()`
 
-```tsx
+```ts
 setOffset(offset: {x: number; y: number});
 ```
 
@@ -38,7 +38,7 @@ setOffset(offset: {x: number; y: number});
 
 ### `flattenOffset()`
 
-```tsx
+```ts
 flattenOffset();
 ```
 
@@ -46,7 +46,7 @@ flattenOffset();
 
 ### `extractOffset()`
 
-```tsx
+```ts
 extractOffset();
 ```
 
@@ -54,7 +54,7 @@ extractOffset();
 
 ### `addListener()`
 
-```tsx
+```ts
 addListener(callback: (value: {x: number; y: number}) => void);
 ```
 
@@ -70,7 +70,7 @@ addListener(callback: (value: {x: number; y: number}) => void);
 
 ### `removeListener()`
 
-```tsx
+```ts
 removeListener(id: string);
 ```
 
@@ -84,7 +84,7 @@ removeListener(id: string);
 
 ### `removeAllListeners()`
 
-```tsx
+```ts
 removeAllListeners();
 ```
 
@@ -92,7 +92,7 @@ removeAllListeners();
 
 ### `stopAnimation()`
 
-```tsx
+```ts
 stopAnimation(callback?: (value: {x: number; y: number}) => void);
 ```
 
@@ -106,7 +106,7 @@ stopAnimation(callback?: (value: {x: number; y: number}) => void);
 
 ### `resetAnimation()`
 
-```tsx
+```ts
 resetAnimation(callback?: (value: {x: number; y: number}) => void);
 ```
 
@@ -120,19 +120,19 @@ resetAnimation(callback?: (value: {x: number; y: number}) => void);
 
 ### `getLayout()`
 
-```tsx
+```ts
 getLayout(): {left: Animated.Value, top: Animated.Value};
 ```
 
 Преобразует `{x, y}` в `{left, top}` для использования в стиле, например.
 
-```tsx
+```ts
 style={this.state.anim.getLayout()}
 ```
 
 ### `getTranslateTransform()`
 
-```tsx
+```ts
 getTranslateTransform(): [
   {translateX: Animated.Value},
   {translateY: Animated.Value},
@@ -141,7 +141,7 @@ getTranslateTransform(): [
 
 Преобразует `{x, y}` в пригодное для использования преобразование перевода, например
 
-```tsx
+```ts
 style={{
   transform: this.state.anim.getTranslateTransform()
 }}

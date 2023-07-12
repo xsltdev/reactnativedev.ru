@@ -779,7 +779,7 @@ _Кросс-платформа_
 
 ### `.focus()`
 
-```tsx
+```ts
 focus();
 ```
 
@@ -787,7 +787,7 @@ focus();
 
 ### `.blur()`
 
-```tsx
+```ts
 blur();
 ```
 
@@ -795,7 +795,7 @@ blur();
 
 ### `clear()`
 
-```tsx
+```ts
 clear();
 ```
 
@@ -803,7 +803,7 @@ clear();
 
 ### `isFocused()`
 
-```tsx
+```ts
 isFocused(): boolean;
 ```
 

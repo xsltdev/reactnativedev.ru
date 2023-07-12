@@ -13,7 +13,7 @@
 
 ### `compose()`
 
-```tsx
+```ts
 static compose(style1: Object, style2: Object): Object | Object[];
 ```
 
@@ -23,7 +23,7 @@ static compose(style1: Object, style2: Object): Object | Object[];
 
 ### `create()`
 
-```tsx
+```ts
 static create(styles: Object): Object;
 ```
 
@@ -31,7 +31,7 @@ static create(styles: Object): Object;
 
 ### `flatten()`
 
-```tsx
+```ts
 static flatten(style: Object[]): Object;
 ```
 

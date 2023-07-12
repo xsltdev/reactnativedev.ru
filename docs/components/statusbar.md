@@ -88,7 +88,7 @@
 
 ### `popStackEntry()`
 
-```tsx
+```ts
 static popStackEntry(entry: StatusBarProps);
 ```
 
@@ -102,7 +102,7 @@ static popStackEntry(entry: StatusBarProps);
 
 ### `pushStackEntry()`
 
-```tsx
+```ts
 static pushStackEntry(props: StatusBarProps): StatusBarProps;
 ```
 
@@ -116,7 +116,7 @@ static pushStackEntry(props: StatusBarProps): StatusBarProps;
 
 ### `replaceStackEntry()`
 
-```tsx
+```ts
 static replaceStackEntry(
   entry: StatusBarProps,
   props: StatusBarProps
@@ -134,7 +134,7 @@ static replaceStackEntry(
 
 ### `setBackgroundColor()` :simple-android:
 
-```tsx
+```ts
 static setBackgroundColor(color: ColorValue, animated?: boolean);
 ```
 
@@ -149,7 +149,7 @@ static setBackgroundColor(color: ColorValue, animated?: boolean);
 
 ### `setBarStyle()`
 
-```tsx
+```ts
 static setBarStyle(style: StatusBarStyle, animated?: boolean);
 ```
 
@@ -164,7 +164,7 @@ static setBarStyle(style: StatusBarStyle, animated?: boolean);
 
 ### `setHidden()`
 
-```tsx
+```ts
 static setHidden(hidden: boolean, animation?: StatusBarAnimation);
 ```
 
@@ -179,7 +179,7 @@ static setHidden(hidden: boolean, animation?: StatusBarAnimation);
 
 ### `setNetworkActivityIndicatorVisible()` :simple-ios:
 
-```tsx
+```ts
 static setNetworkActivityIndicatorVisible(visible: boolean);
 ```
 
@@ -193,7 +193,7 @@ static setNetworkActivityIndicatorVisible(visible: boolean);
 
 ### `setTranslucent()` :simple-android:
 
-```tsx
+```ts
 static setTranslucent(translucent: boolean);
 ```
 

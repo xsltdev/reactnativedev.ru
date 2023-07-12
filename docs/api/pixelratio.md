@@ -6,7 +6,7 @@
 
 Вы должны получить изображение с более высоким разрешением, если используете устройство с высокой плотностью пикселей. Хорошее эмпирическое правило - умножить размер отображаемого изображения на соотношение пикселей.
 
-```tsx
+```ts
 const image = getImage({
     width: PixelRatio.getPixelSizeForLayoutSize(200),
     height: PixelRatio.getPixelSizeForLayoutSize(100),
@@ -35,7 +35,7 @@ const image = getImage({
 
 ### `get()`
 
-```tsx
+```ts
 static get(): number;
 ```
 
@@ -63,7 +63,7 @@ static get(): number;
 
 ### `getFontScale()`
 
-```tsx
+```ts
 static getFontScale(): number;
 ```
 
@@ -76,7 +76,7 @@ static getFontScale(): number;
 
 ### `getPixelSizeForLayoutSize()`
 
-```tsx
+```ts
 static getPixelSizeForLayoutSize(layoutSize: number): number;
 ```
 
@@ -86,7 +86,7 @@ static getPixelSizeForLayoutSize(layoutSize: number): number;
 
 ### `roundToNearestPixel()`
 
-```tsx
+```ts
 static roundToNearestPixel(layoutSize: number): number;
 ```
 

@@ -1,6 +1,6 @@
 # Appearance
 
-```tsx
+```ts
 import { Appearance } from 'react-native';
 ```
 
@@ -24,7 +24,7 @@ import { Appearance } from 'react-native';
 
 Вы можете использовать модуль `Appearance`, чтобы определить, предпочитает ли пользователь темную цветовую схему:
 
-```tsx
+```ts
 const colorScheme = Appearance.getColorScheme();
 if (colorScheme === 'dark') {
     // Use dark color scheme
@@ -37,7 +37,7 @@ if (colorScheme === 'dark') {
 
 ### `getColorScheme()`
 
-```tsx
+```ts
 static getColorScheme(): 'light' | 'dark' | null;
 ```
 
@@ -57,7 +57,7 @@ static getColorScheme(): 'light' | 'dark' | null;
 
 ### `setColorScheme()`
 
-```tsx
+```ts
 static setColorScheme('light' | 'dark' | null): void;
 ```
 
@@ -75,7 +75,7 @@ static setColorScheme('light' | 'dark' | null): void;
 
 ### `addChangeListener()`
 
-```tsx
+```ts
 static addChangeListener(
   listener: (preferences: {colorScheme: 'light' | 'dark' | null}) => void,
 ): NativeEventSubscription;

@@ -8,7 +8,7 @@
 
 ### `constants`
 
-```tsx
+```ts
 static constants: PlatformConstants;
 ```
 
@@ -30,7 +30,7 @@ static constants: PlatformConstants;
 
 ### `isPad` :simple-ios:
 
-```tsx
+```ts
 static isPad: boolean;
 ```
 
@@ -42,7 +42,7 @@ static isPad: boolean;
 
 ### `isTV`
 
-```tsx
+```ts
 static isTV: boolean;
 ```
 
@@ -54,7 +54,7 @@ static isTV: boolean;
 
 ### `isTesting`
 
-```tsx
+```ts
 static isTesting: boolean;
 ```
 
@@ -66,7 +66,7 @@ static isTesting: boolean;
 
 ### `OS`
 
-```tsx
+```ts
 static OS: 'android' | 'ios';
 ```
 
@@ -78,7 +78,7 @@ static OS: 'android' | 'ios';
 
 ### `Version`
 
-```tsx
+```ts
 static Version: 'number' | 'string';
 ```
 
@@ -92,7 +92,7 @@ Returns the version of the OS.
 
 ### `select()`
 
-```tsx
+```ts
 static select(config: Record<string, T>): T;
 ```
 
@@ -115,7 +115,7 @@ static select(config: Record<string, T>): T;
 
 **Пример использования:**
 
-```tsx
+```ts
 import { Platform, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
 
 Поскольку значение соответствующего ключа платформы может быть типа `any`, метод [`select`](platform.md#select) также может быть использован для возврата специфичных для платформы компонентов, как показано ниже:
 
-```tsx
+```ts
 const Component = Platform.select({
     ios: () => require('ComponentIOS'),
     android: () => require('ComponentAndroid'),
@@ -150,7 +150,7 @@ const Component = Platform.select({
 <Component />;
 ```
 
-```tsx
+```ts
 const Component = Platform.select({
     native: () => require('ComponentForNative'),
     default: () => require('ComponentForWeb'),

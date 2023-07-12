@@ -572,7 +572,7 @@ const styles = StyleSheet.create({
 
 ### `flashScrollIndicators()`
 
-```tsx
+```ts
 flashScrollIndicators();
 ```
 
@@ -602,7 +602,7 @@ scrollTo({ x: 0, y: 0, animated: true });
 
 ### `scrollToEnd()`
 
-```tsx
+```ts
 scrollToEnd(options?: {animated?: boolean});
 ```
 

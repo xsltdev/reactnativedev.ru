@@ -6,7 +6,7 @@
 
 Задача - это асинхронная функция, которую вы регистрируете в `AppRegistry`, аналогично регистрации приложений React:
 
-```tsx
+```ts
 import { AppRegistry } from 'react-native';
 AppRegistry.registerHeadlessTask('SomeTaskName', () =>
     require('SomeTaskName')
@@ -15,7 +15,7 @@ AppRegistry.registerHeadlessTask('SomeTaskName', () =>
 
 Затем, в `SomeTaskName.js`:
 
-```tsx
+```ts
 module.exports = async (taskData) => {
     // do stuff
 };
@@ -157,7 +157,7 @@ module.exports = async (taskData) => {
 
 Пример:
 
-```tsx
+```ts
 import {HeadlessJsTaskError} from 'HeadlessJsTask';
 
 module.exports = async taskData => {

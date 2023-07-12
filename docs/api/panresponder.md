@@ -27,7 +27,7 @@ onPanResponderMove: (event, gestureState) => {};
 
 ## Шаблон использования
 
-```tsx
+```ts
 const ExampleComponent = () => {
     const panResponder = React.useRef(
         PanResponder.create({
@@ -101,7 +101,7 @@ const ExampleComponent = () => {
 
 ### `create()`
 
-```tsx
+```ts
 static create(config: PanResponderCallbacks): PanResponderInstance;
 ```
 

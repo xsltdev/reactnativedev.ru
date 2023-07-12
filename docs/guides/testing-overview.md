@@ -144,7 +144,7 @@ Jest предлагает функцию [`describe`](https://jestjs.io/docs/ru/
 
 Помимо отображения пользовательского интерфейса, ваши компоненты обрабатывают такие события, как `onChangeText` для `TextInput` или `onPress` для `Button`. Они также могут содержать другие функции и обратные вызовы событий. Рассмотрим следующий пример:
 
-```tsx
+```ts
 function GroceryShoppingList() {
     const [groceryItem, setGroceryItem] = useState('');
     const [items, setItems] = useState<string[]>([]);
@@ -194,7 +194,7 @@ function GroceryShoppingList() {
 
 Библиотеки тестирования компонентов, такие как [React Native Testing Library](https://callstack.github.io/react-native-testing-library/), облегчают написание тестов, ориентированных на пользователя, благодаря тщательному выбору предоставляемых API. В следующем примере используются методы `fireEvent` `changeText` и `press`, которые имитируют взаимодействие пользователя с компонентом, и функция запроса `getAllByText`, которая находит совпадающие узлы `Text` в выводимых данных.
 
-```tsx
+```ts
 test('given empty GroceryShoppingList, user can add an item to it', () => {
     const {
         getByPlaceholderText,
@@ -221,7 +221,7 @@ test('given empty GroceryShoppingList, user can add an item to it', () => {
 
 "Снимок компонента" - это JSX-подобная строка, созданная пользовательским сериализатором React, встроенным в Jest. Этот сериализатор позволяет Jest переводить деревья компонентов React в строку, удобную для чтения человеком. Другими словами: снимок компонента - это текстовое представление вывода рендеринга вашего компонента, _сгенерированное_ во время выполнения теста. Он может выглядеть следующим образом:
 
-```tsx
+```ts
 <Text
   style={
     Object {

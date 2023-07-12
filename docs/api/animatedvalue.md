@@ -8,7 +8,7 @@
 
 ### `setValue()`
 
-```tsx
+```ts
 setValue(value: number);
 ```
 
@@ -22,7 +22,7 @@ setValue(value: number);
 
 ### `setOffset()`
 
-```tsx
+```ts
 setOffset(offset: number);
 ```
 
@@ -36,7 +36,7 @@ setOffset(offset: number);
 
 ### `flattenOffset()`
 
-```tsx
+```ts
 flattenOffset();
 ```
 
@@ -44,7 +44,7 @@ flattenOffset();
 
 ### `extractOffset()`
 
-```tsx
+```ts
 extractOffset();
 ```
 
@@ -52,7 +52,7 @@ extractOffset();
 
 ### `addListener()`
 
-```tsx
+```ts
 addListener(callback: (state: {value: number}) => void): string;
 ```
 
@@ -68,7 +68,7 @@ addListener(callback: (state: {value: number}) => void): string;
 
 ### `removeListener()`
 
-```tsx
+```ts
 removeListener(id: string);
 ```
 
@@ -82,7 +82,7 @@ removeListener(id: string);
 
 ### `removeAllListeners()`
 
-```tsx
+```ts
 removeAllListeners();
 ```
 
@@ -90,7 +90,7 @@ removeAllListeners();
 
 ### `stopAnimation()`
 
-```tsx
+```ts
 stopAnimation(callback?: (value: number) => void);
 ```
 
@@ -104,7 +104,7 @@ stopAnimation(callback?: (value: number) => void);
 
 ### `resetAnimation()`
 
-```tsx
+```ts
 resetAnimation(callback?: (value: number) => void);
 ```
 
@@ -120,7 +120,7 @@ resetAnimation(callback?: (value: number) => void);
 
 ### `interpolate()`
 
-```tsx
+```ts
 interpolate(config: InterpolationConfigType);
 ```
 
@@ -145,7 +145,7 @@ interpolate(config: InterpolationConfigType);
 
 ### `animate()`
 
-```tsx
+```ts
 animate(animation, callback);
 ```
 

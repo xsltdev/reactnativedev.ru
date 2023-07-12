@@ -12,7 +12,7 @@
 
 ### `addListener()`
 
-```tsx
+```ts
 static addListener: (
   eventType: KeyboardEventName,
   listener: KeyboardEventListener,
@@ -47,7 +47,7 @@ static addListener: (
 
 ### `dismiss()`
 
-```tsx
+```ts
 static dismiss();
 ```
 
@@ -55,7 +55,7 @@ static dismiss();
 
 ### `scheduleLayoutAnimation`
 
-```tsx
+```ts
 static scheduleLayoutAnimation(event: KeyboardEvent);
 ```
 
@@ -63,7 +63,7 @@ static scheduleLayoutAnimation(event: KeyboardEvent);
 
 ### `isVisible()`
 
-```tsx
+```ts
 static isVisible(): boolean;
 ```
 
@@ -71,7 +71,7 @@ static isVisible(): boolean;
 
 ### `metrics()`
 
-```tsx
+```ts
 static metrics(): KeyboardMetrics | undefined;
 ```
 

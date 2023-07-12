@@ -54,7 +54,7 @@ React Native вдохновлен React, поэтому основная иде�
     }
     ```
 
-```tsx title="ImageBrowserApp.tsx"
+```ts title="ImageBrowserApp.tsx"
 import React from 'react';
 import { View, Image } from 'react-native';
 

@@ -10,7 +10,7 @@
 
 ### `clearWatch()`
 
-```tsx
+```ts
 static clearWatch(watchId: number);
 ```
 
@@ -18,7 +18,7 @@ static clearWatch(watchId: number);
 
 ### `get()`
 
-```tsx
+```ts
 static get(key: string): any;
 ```
 
@@ -26,7 +26,7 @@ static get(key: string): any;
 
 ### `set()`
 
-```tsx
+```ts
 static set(settings: Record<string, any>);
 ```
 
@@ -34,7 +34,7 @@ static set(settings: Record<string, any>);
 
 ### `watchKeys()`
 
-```tsx
+```ts
 static watchKeys(keys: string | array<string>, callback: () => void): number;
 ```
 

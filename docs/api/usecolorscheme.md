@@ -1,6 +1,6 @@
 # useColorScheme
 
-```tsx
+```ts
 import { useColorScheme } from 'react-native';
 ```
 

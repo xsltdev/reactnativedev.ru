@@ -215,7 +215,7 @@
 
 Определяет элемент, который маркирует элемент, к которому он применяется. Значение `aria-labelledby` должно соответствовать [`nativeID`](view.md#nativeid) связанного элемента:
 
-```tsx
+```ts
 <View>
     <Text nativeID="formLabel">Label for Input Field</Text>
     <TextInput

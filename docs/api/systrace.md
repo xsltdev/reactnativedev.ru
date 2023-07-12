@@ -12,13 +12,13 @@
 
 ### `isEnabled()`
 
-```tsx
+```ts
 static isEnabled(): boolean;
 ```
 
 ### `beginEvent()`
 
-```tsx
+```ts
 static beginEvent(eventName: string | (() => string), args?: EventArgs);
 ```
 
@@ -26,13 +26,13 @@ static beginEvent(eventName: string | (() => string), args?: EventArgs);
 
 ### `endEvent()`
 
-```tsx
+```ts
 static endEvent(args?: EventArgs);
 ```
 
 ### `beginAsyncEvent()`
 
-```tsx
+```ts
 static beginAsyncEvent(
   eventName: string | (() => string),
   args?: EventArgs,
@@ -43,7 +43,7 @@ static beginAsyncEvent(
 
 ### `endAsyncEvent()`
 
-```tsx
+```ts
 static endAsyncEvent(
   eventName: EventName,
   cookie: number,
@@ -53,7 +53,7 @@ static endAsyncEvent(
 
 ### `counterEvent()`
 
-```tsx
+```ts
 static counterEvent(eventName: string | (() => string), value: number);
 ```
 

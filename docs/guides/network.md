@@ -53,7 +53,7 @@ const getMoviesFromApi = () => {
 
 Вы также можете использовать синтаксис `async` / `await` в приложении React Native:
 
-```tsx
+```ts
 const getMoviesFromApiAsync = async () => {
     try {
         const response = await fetch(

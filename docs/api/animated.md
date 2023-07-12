@@ -39,7 +39,7 @@
 
 Анимация запускается вызовом `start()` для вашей анимации. `start()` принимает обратный вызов завершения, который будет вызван, когда анимация завершится. Если анимация завершилась нормально, то обратный вызов завершения будет вызван с `{finished: true}`. Если анимация завершена, потому что `stop()` был вызван до того, как она успела закончиться (например, потому что она была прервана жестом или другой анимацией), то она получит `{finished: false}`.
 
-```tsx
+```ts
 Animated.timing({}).start(({ finished }) => {
     /* completion callback */
 });
@@ -105,7 +105,7 @@ Animated.timing({}).start(({ finished }) => {
 
 Например, при работе с жестами горизонтальной прокрутки вы должны сделать следующее, чтобы сопоставить `event.nativeEvent.contentOffset.x` с `scrollX` (`Animated.Value`):
 
-```tsx
+```ts
  onScroll={Animated.event(
    // scrollX = e.nativeEvent.contentOffset.x
    [{nativeEvent: {
@@ -123,7 +123,7 @@ Animated.timing({}).start(({ finished }) => {
 
 ### `decay()`
 
-```tsx
+```ts
 static decay(value, config): CompositeAnimation;
 ```
 
@@ -138,7 +138,7 @@ static decay(value, config): CompositeAnimation;
 
 ### `timing()`
 
-```tsx
+```ts
 static timing(value, config): CompositeAnimation;
 ```
 
@@ -154,7 +154,7 @@ static timing(value, config): CompositeAnimation;
 
 ### `spring()`
 
-```tsx
+```ts
 static spring(value, config): CompositeAnimation;
 ```
 
@@ -189,7 +189,7 @@ static spring(value, config): CompositeAnimation;
 
 ### `add()`
 
-```tsx
+```ts
 static add(a: Animated, b: Animated): AnimatedAddition;
 ```
 
@@ -197,7 +197,7 @@ static add(a: Animated, b: Animated): AnimatedAddition;
 
 ### `subtract()`
 
-```tsx
+```ts
 static subtract(a: Animated, b: Animated): AnimatedSubtraction;
 ```
 
@@ -205,7 +205,7 @@ static subtract(a: Animated, b: Animated): AnimatedSubtraction;
 
 ### `divide()`
 
-```tsx
+```ts
 static divide(a: Animated, b: Animated): AnimatedDivision;
 ```
 
@@ -213,7 +213,7 @@ static divide(a: Animated, b: Animated): AnimatedDivision;
 
 ### `multiply()`
 
-```tsx
+```ts
 static multiply(a: Animated, b: Animated): AnimatedMultiplication;
 ```
 
@@ -221,7 +221,7 @@ static multiply(a: Animated, b: Animated): AnimatedMultiplication;
 
 ### `modulo()`
 
-```tsx
+```ts
 static modulo(a: Animated, modulus: number): AnimatedModulo;
 ```
 
@@ -229,7 +229,7 @@ static modulo(a: Animated, modulus: number): AnimatedModulo;
 
 ### `diffClamp()`
 
-```tsx
+```ts
 static diffClamp(a: Animated, min: number, max: number): AnimatedDiffClamp;
 ```
 
@@ -239,7 +239,7 @@ static diffClamp(a: Animated, min: number, max: number): AnimatedDiffClamp;
 
 ### `delay()`
 
-```tsx
+```ts
 static delay(time: number): CompositeAnimation;
 ```
 
@@ -247,7 +247,7 @@ static delay(time: number): CompositeAnimation;
 
 ### `sequence()`
 
-```tsx
+```ts
 static sequence(animations: CompositeAnimation[]): CompositeAnimation;
 ```
 
@@ -255,7 +255,7 @@ static sequence(animations: CompositeAnimation[]): CompositeAnimation;
 
 ### `parallel()`
 
-```tsx
+```ts
 static parallel(
   animations: CompositeAnimation[],
   config?: ParallelConfig
@@ -266,7 +266,7 @@ static parallel(
 
 ### `stagger()`
 
-```tsx
+```ts
 static stagger(
   time: number,
   animations: CompositeAnimation[]
@@ -277,7 +277,7 @@ static stagger(
 
 ### `loop()`
 
-```tsx
+```ts
 static loop(
   animation: CompositeAnimation[],
   config?: LoopAnimationConfig
@@ -292,7 +292,7 @@ static loop(
 
 ### `event()`
 
-```tsx
+```ts
 static event(
   argMapping: Mapping[],
   config?: EventConfig
@@ -301,7 +301,7 @@ static event(
 
 Принимает массив отображений и извлекает значения из каждого arg соответственно, затем вызывает `setValue` для отображенных выходов. например.
 
-```tsx
+```ts
 onScroll={Animated.event(
   [{nativeEvent: {contentOffset: {x: this._scrollX}}}],
   {listener: (event: ScrollEvent) => console.log(event)}, // Optional async listener
@@ -342,7 +342,7 @@ static unforkEvent(event: AnimatedEvent, listener: Function);
 
 ### `start()`
 
-```tsx
+```ts
 static start(callback?: (result: {finished: boolean}) => void);
 ```
 
@@ -356,7 +356,7 @@ static start(callback?: (result: {finished: boolean}) => void);
 
 Запустите пример с обратным вызовом:
 
-```tsx
+```ts
 Animated.timing({}).start(({ finished }) => {
     /* completion callback */
 });
@@ -364,7 +364,7 @@ Animated.timing({}).start(({ finished }) => {
 
 ### `stop()`
 
-```tsx
+```ts
 static stop();
 ```
 
@@ -372,7 +372,7 @@ static stop();
 
 ### `reset()`
 
-```tsx
+```ts
 static reset();
 ```
 

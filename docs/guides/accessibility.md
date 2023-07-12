@@ -14,7 +14,7 @@
 
 На Android свойство `accessible={true}` для react-native View будет переведено в нативное `focusable={true}`.
 
-```tsx
+```ts
 <View accessible={true}>
     <Text>text one</Text>
     <Text>text two</Text>
@@ -29,7 +29,7 @@
 
 Для использования установите свойство `accessibilityLabel` в пользовательскую строку на вашем `View`, `Text` или `Touchable`:
 
-```tsx
+```ts
 <TouchableOpacity
     accessible={true}
     accessibilityLabel="Tap me!"
@@ -48,7 +48,7 @@
 Ссылка на другой элемент [nativeID](view.md#nativeid), используемый для построения сложных форм.
 Значение `accessibilityLabelledBy` должно соответствовать `nativeID` связанного элемента:
 
-```tsx
+```ts
 <View>
     <Text nativeID="formLabel">Label for Input Field</Text>
     <TextInput
@@ -66,7 +66,7 @@
 
 Для использования установите свойство `accessibilityHint` в пользовательскую строку на вашем `View`, `Text` или `Touchable`:
 
-```tsx
+```ts
 <TouchableOpacity
     accessible={true}
     accessibilityLabel="Go back"
@@ -91,7 +91,7 @@
 
 Используя свойство `accessibilityLanguage`, программа чтения с экрана будет понимать, какой язык использовать при чтении **label**, **value** и **hint** элемента. Предоставляемое строковое значение должно соответствовать [спецификации BCP 47](https://www.rfc-editor.org/info/bcp47).
 
-```tsx
+```ts
 <View
     accessible={true}
     accessibilityLabel="Pizza"
@@ -113,7 +113,7 @@
 -   **polite** Службы обеспечения доступности должны объявлять об изменениях в этом представлении.
 -   **assertive** Службы обеспечения доступности должны прерывать текущую речь, чтобы немедленно объявить об изменениях в этом представлении.
 
-```tsx
+```ts
 <TouchableWithoutFeedback onPress={addOne}>
   <View style={styles.embedded}>
     <Text>Click me</Text>
@@ -273,7 +273,7 @@
 
 Определяет элемент, который маркирует элемент, к которому он применяется. Значение `aria-labelledby` должно соответствовать [`nativeID`](view.md#nativeid) связанного элемента:
 
-```tsx
+```ts
 <View>
     <Text nativeID="formLabel">Label for Input Field</Text>
     <TextInput
@@ -321,7 +321,7 @@
 
 В случае двух перекрывающихся компонентов пользовательского интерфейса с одним и тем же родителем фокус доступности по умолчанию может иметь непредсказуемое поведение. Свойство `importantForAccessibility` решает эту проблему, контролируя, будет ли представление вызывать события доступности и сообщать ли о них службам доступности. Оно может быть установлено в `auto`, `yes`, `no` и `no-hide-descendants` (последнее значение заставит службы доступности игнорировать компонент и все его дочерние элементы).
 
-```tsx
+```ts
 <View style={styles.container}>
     <View
         style={[
@@ -421,7 +421,7 @@
 
 Для обработки запросов на выполнение действия компонент должен реализовать функцию `onAccessibilityAction`. Единственным аргументом этой функции является событие, содержащее имя действия, которое необходимо выполнить. Приведенный ниже пример из RNTester показывает, как создать компонент, который определяет и обрабатывает несколько пользовательских действий.
 
-```tsx
+```ts
 <View
     accessible={true}
     accessibilityActions={[
@@ -456,7 +456,7 @@ API `AccessibilityInfo` позволяет определить, активен 
 
 Иногда бывает полезно вызвать событие доступности на компоненте пользовательского интерфейса (например, когда пользовательское представление появляется на экране или устанавливается фокус доступности на представление). Нативный модуль `UIManager` предоставляет для этой цели метод `'sendAccessibilityEvent'`. Он принимает два аргумента: тег представления и тип события. Поддерживаемые типы событий: `typeWindowStateChanged`, `typeViewFocused` и `typeViewClicked`.
 
-```tsx
+```ts
 import {
     Platform,
     UIManager,

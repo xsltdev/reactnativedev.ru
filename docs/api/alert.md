@@ -34,7 +34,7 @@
 
 ### `alert()`
 
-```tsx
+```ts
 static alert (
   title: string,
   message?: string,
@@ -54,7 +54,7 @@ static alert (
 
 ### `prompt()` :simple-ios:
 
-```tsx
+```ts
 static prompt: (
   title: string,
   message?: string,

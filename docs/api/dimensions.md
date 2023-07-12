@@ -4,13 +4,13 @@
 
     [`useWindowDimensions`](usewindowdimensions.md) - это предпочтительный API для компонентов React. В отличие от `Dimensions`, он обновляется по мере обновления размеров окна. Это хорошо сочетается с парадигмой React.
 
-```tsx
+```ts
 import { Dimensions } from 'react-native';
 ```
 
 Вы можете получить ширину и высоту окна приложения с помощью следующего кода:
 
-```tsx
+```ts
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 ```
@@ -29,7 +29,7 @@ const windowHeight = Dimensions.get('window').height;
 
 ### `addEventListener()`
 
-```tsx
+```ts
 static addEventListener(
   type: 'change',
   handler: ({
@@ -45,7 +45,7 @@ static addEventListener(
 
 ### `get()`
 
-```tsx
+```ts
 static get(dim: 'window' | 'screen'): ScaledSize;
 ```
 

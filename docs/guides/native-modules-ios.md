@@ -70,7 +70,7 @@ RCT_EXPORT_MODULE(CalendarModuleFoo);
 
 Затем к нативному модулю можно получить доступ в JS следующим образом:
 
-```tsx
+```ts
 const { CalendarModuleFoo } = ReactNative.NativeModules;
 ```
 
@@ -85,7 +85,7 @@ RCT_EXPORT_MODULE();
 
 Затем к нативному модулю можно получить доступ в JS следующим образом:
 
-```tsx
+```ts
 const { CalendarModule } = ReactNative.NativeModules;
 ```
 
@@ -132,7 +132,7 @@ return [[UIDevice currentDevice] name];
 
 Найдите место в вашем приложении, где вы хотели бы добавить вызов метода `createCalendarEvent()` родного модуля. Ниже приведен пример компонента `NewModuleButton`, который вы можете добавить в свое приложение. Вы можете вызвать нативный модуль внутри функции `NewModuleButton` `onPress()`.
 
-```tsx
+```ts
 import React from 'react';
 import { NativeModules, Button } from 'react-native';
 
@@ -157,19 +157,19 @@ export default NewModuleButton;
 
 Чтобы получить доступ к нативному модулю из JavaScript, сначала нужно импортировать `NativeModules` из React Native:
 
-```tsx
+```ts
 import { NativeModules } from 'react-native';
 ```
 
 Затем вы можете получить доступ к нативному модулю `CalendarModule` из `NativeModules`.
 
-```tsx
+```ts
 const { CalendarModule } = NativeModules;
 ```
 
 Теперь, когда у вас есть нативный модуль CalendarModule, вы можете вызвать нативный метод `createCalendarEvent()`. Ниже он добавлен в метод `onPress()` в `NewModuleButton`:
 
-```tsx
+```ts
 const onPress = () => {
     CalendarModule.createCalendarEvent(
         'testName',
@@ -207,7 +207,7 @@ npx react-native run-ios
 
 Чтобы избавить потребителей вашего нативного модуля от необходимости делать это каждый раз, когда они хотят получить доступ к вашему нативному модулю, вы можете создать JavaScript-обертку для модуля. Создайте новый файл JavaScript с именем `NativeCalendarModule.js` со следующим содержимым:
 
-```tsx
+```ts
 /**
 * This exposes the native CalendarModule module as a JS module. This has a
 * function 'createCalendarEvent' which takes the following parameters:
@@ -222,7 +222,7 @@ export default CalendarModule;
 
 Этот файл JavaScript также становится хорошим местом для добавления любой функциональности на стороне JavaScript. Например, если вы используете систему типов, такую как TypeScript, вы можете добавить сюда аннотации типов для вашего нативного модуля. Хотя React Native еще не поддерживает безопасность типов Native to JS, с этими аннотациями типов весь ваш JS-код будет безопасен для типов. Эти аннотации также облегчат вам переход на безопасные для типов нативные модули в будущем. Ниже приведен пример добавления безопасности типов в модуль `Calendar`:
 
-```tsx
+```ts
 /**
  * This exposes the native CalendarModule module as a JS module. This has a
  * function 'createCalendarEvent' which takes the following parameters:
@@ -243,7 +243,7 @@ export default CalendarModule as CalendarInterface;
 
 В других файлах JavaScript вы можете обратиться к родному модулю и вызвать его метод следующим образом:
 
-```tsx
+```ts
 import NativeCalendarModule from './NativeCalendarModule';
 NativeCalendarModule.createCalendarEvent('foo', 'bar');
 ```
@@ -293,7 +293,7 @@ NativeCalendarModule.createCalendarEvent('foo', 'bar');
 
 Затем к константе можно получить доступ, вызвав `getConstants()` на родном модуле в JS следующим образом:
 
-```tsx
+```ts
 const {
     DEFAULT_EVENT_NAME,
 } = CalendarModule.getConstants();
@@ -340,7 +340,7 @@ RCT_EXPORT_METHOD(createCalendarEvent:(NSString *)title location:(NSString *)loc
 
 Затем к этому методу можно получить доступ в JavaScript, используя следующее:
 
-```tsx
+```ts
 const onSubmit = () => {
     CalendarModule.createCalendarEvent(
         'Party',
@@ -368,7 +368,7 @@ RCT_EXPORT_METHOD(createCalendarEventCallback:(NSString *)title location:(NSStri
 
 В JavaScript вы можете проверить первый аргумент, чтобы узнать, была ли передана ошибка:
 
-```tsx
+```ts
 const onPress = () => {
     CalendarModule.createCalendarEventCallback(
         'testName',
@@ -404,7 +404,7 @@ RCT_EXPORT_METHOD(createCalendarEventCallback:(NSString *)title
 
 Затем в JavaScript вы можете добавить отдельный обратный вызов для ответов об ошибке и успехе:
 
-```tsx
+```ts
 const onPress = () => {
     CalendarModule.createCalendarEventCallback(
         'testName',
@@ -445,7 +445,7 @@ RCT_EXPORT_METHOD(createCalendarEvent:(NSString *)title
 
 JavaScript-аналог этого метода возвращает Promise. Это означает, что вы можете использовать ключевое слово `await` в асинхронной функции для вызова этого метода и ожидания его результата:
 
-```tsx
+```ts
 const onSubmit = async () => {
     try {
         const eventId = await CalendarModule.createCalendarEvent(

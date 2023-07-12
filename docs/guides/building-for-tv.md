@@ -52,7 +52,7 @@
 
     <!-- 0005.part.md -->
 
-    ```tsx
+    ```ts
     var TVEventHandler = require('TVEventHandler');
 
     class Game2048 extends React.Component {
@@ -136,7 +136,7 @@
 
     <!-- 0007.part.md -->
 
-    ```tsx
+    ```ts
     var Platform = require('Platform');
     var running_on_tv = Platform.isTV;
 
@@ -165,7 +165,7 @@
 
     <!-- 0009.part.md -->
 
-    ```tsx
+    ```ts
     var TVEventHandler = require('TVEventHandler');
 
     class Game2048 extends React.Component {

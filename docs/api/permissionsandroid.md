@@ -76,7 +76,7 @@
 
 ### `check()`
 
-```tsx
+```ts
 static check(permission: Permission): Promise<boolean>;
 ```
 
@@ -90,7 +90,7 @@ static check(permission: Permission): Promise<boolean>;
 
 ### `request()`
 
-```tsx
+```ts
 static request(
   permission: Permission,
   rationale?: Rationale,
@@ -120,7 +120,7 @@ static request(
 
 ### `requestMultiple()`
 
-```tsx
+```ts
 static requestMultiple(
   permissions: Permission[],
 ): Promise<{[key in Permission]: PermissionStatus}>;

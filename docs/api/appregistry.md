@@ -6,7 +6,7 @@
 
 `AppRegistry` - это точка входа JS для запуска всех приложений React Native. Корневые компоненты приложения должны зарегистрировать себя с помощью `AppRegistry.registerComponent`, после чего нативная система может загрузить пакет для приложения и затем фактически запустить приложение, когда оно будет готово, вызвав `AppRegistry.runApplication`.
 
-```tsx
+```ts
 import { Text, AppRegistry } from 'react-native';
 
 const App = () => (
@@ -26,7 +26,7 @@ AppRegistry.registerComponent('Appname', () => App);
 
 ### `getAppKeys()`
 
-```tsx
+```ts
 static getAppKeys(): string[];
 ```
 
@@ -34,7 +34,7 @@ static getAppKeys(): string[];
 
 ### `getRegistry()`
 
-```tsx
+```ts
 static getRegistry(): {sections: string[]; runnables: Runnable[]};
 ```
 
@@ -42,7 +42,7 @@ static getRegistry(): {sections: string[]; runnables: Runnable[]};
 
 ### `getRunnable()`
 
-```tsx
+```ts
 static getRunnable(appKey: string): : Runnable | undefined;
 ```
 
@@ -56,7 +56,7 @@ static getRunnable(appKey: string): : Runnable | undefined;
 
 ### `getSectionKeys()`
 
-```tsx
+```ts
 static getSectionKeys(): string[];
 ```
 
@@ -64,7 +64,7 @@ static getSectionKeys(): string[];
 
 ### `getSections()`
 
-```tsx
+```ts
 static getSections(): Record<string, Runnable>;
 ```
 
@@ -72,7 +72,7 @@ static getSections(): Record<string, Runnable>;
 
 ### `registerCancellableHeadlessTask()`
 
-```tsx
+```ts
 static registerCancellableHeadlessTask(
   taskKey: string,
   taskProvider: TaskProvider,
@@ -92,7 +92,7 @@ static registerCancellableHeadlessTask(
 
 ### `registerComponent()`
 
-```tsx
+```ts
 static registerComponent(
   appKey: string,
   getComponentFunc: ComponentProvider,
@@ -110,7 +110,7 @@ static registerComponent(
 
 ### `registerConfig()`
 
-```tsx
+```ts
 static registerConfig(config: AppConfig[]);
 ```
 
@@ -122,7 +122,7 @@ static registerConfig(config: AppConfig[]);
 
 ### `registerHeadlessTask()`
 
-```tsx
+```ts
 static registerHeadlessTask(
   taskKey: string,
   taskProvider: TaskProvider,
@@ -142,7 +142,7 @@ static registerHeadlessTask(
 
 ### `registerRunnable()`
 
-```tsx
+```ts
 static registerRunnable(appKey: string, func: Runnable): string;
 ```
 
@@ -155,7 +155,7 @@ static registerRunnable(appKey: string, func: Runnable): string;
 
 ### `registerSection()`
 
-```tsx
+```ts
 static registerSection(
   appKey: string,
   component: ComponentProvider,
@@ -171,7 +171,7 @@ static registerSection(
 
 ### `runApplication()`
 
-```tsx
+```ts
 static runApplication(appKey: string, appParameters: any): void;
 ```
 
@@ -186,7 +186,7 @@ static runApplication(appKey: string, appParameters: any): void;
 
 ### `setComponentProviderInstrumentationHook()`
 
-```tsx
+```ts
 static setComponentProviderInstrumentationHook(
   hook: ComponentProviderInstrumentationHook,
 );
@@ -209,7 +209,7 @@ static setComponentProviderInstrumentationHook(
 
 ### `setWrapperComponentProvider()`
 
-```tsx
+```ts
 static setWrapperComponentProvider(
   provider: WrapperComponentProvider,
 );
@@ -223,7 +223,7 @@ static setWrapperComponentProvider(
 
 ### `startHeadlessTask()`
 
-```tsx
+```ts
 static startHeadlessTask(
   taskId: number,
   taskKey: string,
@@ -243,7 +243,7 @@ static startHeadlessTask(
 
 ### `unmountApplicationComponentAtRootTag()`
 
-```tsx
+```ts
 static unmountApplicationComponentAtRootTag(rootTag: number);
 ```
 

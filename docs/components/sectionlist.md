@@ -212,7 +212,7 @@
 
 ### `flashScrollIndicators()` :simple-ios:
 
-```tsx
+```ts
 flashScrollIndicators();
 ```
 
@@ -220,7 +220,7 @@ flashScrollIndicators();
 
 ### `recordInteraction()`
 
-```tsx
+```ts
 recordInteraction();
 ```
 
@@ -228,7 +228,7 @@ recordInteraction();
 
 ### `scrollToLocation()`
 
-```tsx
+```ts
 scrollToLocation(params: SectionListScrollParams);
 ```
 

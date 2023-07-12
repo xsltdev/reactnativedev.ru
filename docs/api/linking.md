@@ -135,7 +135,7 @@
 
 ### `addEventListener()`
 
-```tsx
+```ts
 static addEventListener(
   type: 'url',
   handler: (event: {url: string}) => void,
@@ -146,7 +146,7 @@ static addEventListener(
 
 ### `canOpenURL()`
 
-```tsx
+```ts
 static canOpenURL(url: string): Promise<boolean>;
 ```
 
@@ -195,7 +195,7 @@ static canOpenURL(url: string): Promise<boolean>;
 
 ### `getInitialURL()`
 
-```tsx
+```ts
 static getInitialURL(): Promise<string | null>;
 ```
 
@@ -211,7 +211,7 @@ static getInitialURL(): Promise<string | null>;
 
 ### `openSettings()`
 
-```tsx
+```ts
 static openSettings(): Promise<void>;
 ```
 
@@ -219,7 +219,7 @@ static openSettings(): Promise<void>;
 
 ### `openURL()`
 
-```tsx
+```ts
 static openURL(url: string): Promise<any>;
 ```
 
@@ -249,7 +249,7 @@ static openURL(url: string): Promise<any>;
 
 ### `sendIntent()` :simple-android:
 
-```tsx
+```ts
 static sendIntent(
   action: string,
   extras?: Array<{key: string; value: string | number | boolean}>,

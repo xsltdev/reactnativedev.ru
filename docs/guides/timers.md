@@ -21,7 +21,7 @@
 
 Приложения могут планировать выполнение задач после взаимодействия с помощью следующего:
 
-```tsx
+```ts
 InteractionManager.runAfterInteractions(() => {
     // ...long-running synchronous task...
 });
@@ -37,7 +37,7 @@ InteractionManager.runAfterInteractions(() => {
 
 `InteractionManager` также позволяет приложениям регистрировать анимации, создавая "хэндл" взаимодействия при запуске анимации и очищая его по завершении:
 
-```tsx
+```ts
 const handle = InteractionManager.createInteractionHandle();
 // run animation... (`runAfterInteractions` tasks are queued)
 // later, on animation completion:

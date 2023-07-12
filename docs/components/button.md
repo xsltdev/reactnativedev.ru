@@ -4,7 +4,7 @@
 
 Если эта кнопка не подходит для вашего приложения, вы можете создать свою собственную кнопку, используя [Pressable](pressable.md). Для вдохновения посмотрите [исходный код компонента Button](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Components/Button.js).
 
-```tsx
+```ts
 <Button
     onPress={onPressLearnMore}
     title="Learn More"

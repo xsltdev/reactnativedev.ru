@@ -88,7 +88,7 @@ renderItem({
 
 Пример использования:
 
-```tsx
+```ts
 <FlatList
     ItemSeparatorComponent={
         Platform.OS !== 'android' &&
@@ -191,13 +191,13 @@ renderItem({
 
 ### `getItemLayout`
 
-```tsx
+```ts
 (data, index) => {length: number, offset: number, index: number}
 ```
 
 `getItemLayout` - это дополнительная оптимизация, которая позволяет пропустить измерение динамического содержимого, если вы заранее знаете размер (высоту или ширину) элементов. `getItemLayout` эффективен, если у вас есть элементы фиксированного размера, например:
 
-```tsx
+```ts
   getItemLayout={(data, index) => (
     {length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index}
   )}
@@ -243,7 +243,7 @@ renderItem({
 
 ### `keyExtractor`
 
-```tsx
+```ts
 (item: ItemT, index: number) => string;
 ```
 
@@ -263,7 +263,7 @@ renderItem({
 
 ### `onEndReached`
 
-```tsx
+```ts
 (info: {distanceFromEnd: number}) => void;
 ```
 
@@ -283,7 +283,7 @@ renderItem({
 
 ### `onRefresh`
 
-```tsx
+```ts
 () => void;
 ```
 
@@ -352,7 +352,7 @@ renderItem({
   Error: Changing viewabilityConfig on the fly is not supported
 ```
 
-```tsx
+```ts
 constructor (props) {
   super(props)
 
@@ -363,7 +363,7 @@ constructor (props) {
 }
 ```
 
-```tsx
+```ts
 <FlatList
     viewabilityConfig={this.viewabilityConfig}
   ...
@@ -397,7 +397,7 @@ constructor (props) {
 
 ### `flashScrollIndicators()`
 
-```tsx
+```ts
 flashScrollIndicators();
 ```
 
@@ -405,7 +405,7 @@ flashScrollIndicators();
 
 ### `getNativeScrollRef()`
 
-```tsx
+```ts
 getNativeScrollRef(): React.ElementRef<typeof ScrollViewComponent>;
 ```
 
@@ -413,7 +413,7 @@ getNativeScrollRef(): React.ElementRef<typeof ScrollViewComponent>;
 
 ### `getScrollResponder()`
 
-```tsx
+```ts
 getScrollResponder(): ScrollResponderMixin;
 ```
 
@@ -421,7 +421,7 @@ getScrollResponder(): ScrollResponderMixin;
 
 ### `getScrollableNode()`
 
-```tsx
+```ts
 getScrollableNode(): any;
 ```
 
@@ -429,7 +429,7 @@ getScrollableNode(): any;
 
 ### `scrollToEnd()`
 
-```tsx
+```ts
 scrollToEnd(params?: {animated?: boolean});
 ```
 
@@ -447,7 +447,7 @@ scrollToEnd(params?: {animated?: boolean});
 
 ### `scrollToIndex()`
 
-```tsx
+```ts
 scrollToIndex: (params: {
   index: number;
   animated?: boolean;
@@ -477,7 +477,7 @@ scrollToIndex: (params: {
 
 ### `scrollToItem()`
 
-```tsx
+```ts
 scrollToItem(params: {
   animated?: ?boolean,
   item: Item,
@@ -505,7 +505,7 @@ scrollToItem(params: {
 
 ### `scrollToOffset()`
 
-```tsx
+```ts
 scrollToOffset(params: {
   offset: number;
   animated?: boolean;

@@ -22,7 +22,7 @@
 
 Определяет цвет фона ящика. Значение по умолчанию - `white`. Если вы хотите задать непрозрачность ящика, используйте rgba. Пример:
 
-```tsx
+```ts
 return (
     <DrawerLayoutAndroid drawerBackgroundColor="rgba(0,0,0,0.5)" />
 );
@@ -127,7 +127,7 @@ return (
 
 ### `closeDrawer()`
 
-```tsx
+```ts
 closeDrawer();
 ```
 
@@ -135,7 +135,7 @@ closeDrawer();
 
 ### `openDrawer()`
 
-```tsx
+```ts
 openDrawer();
 ```
 

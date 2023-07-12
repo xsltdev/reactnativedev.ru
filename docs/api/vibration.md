@@ -18,7 +18,7 @@
 
 ### `cancel()`
 
-```tsx
+```ts
 static cancel();
 ```
 
@@ -26,7 +26,7 @@ static cancel();
 
 ### `vibrate()`
 
-```tsx
+```ts
 static vibrate(
   pattern?: number | number[],
   repeat?: boolean

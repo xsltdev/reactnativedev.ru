@@ -1,12 +1,12 @@
 # useWindowDimensions
 
-```tsx
+```ts
 import { useWindowDimensions } from 'react-native';
 ```
 
 `useWindowDimensions` автоматически обновляет все свои значения при изменении размера экрана или масштаба шрифта. Вы можете получить ширину и высоту окна вашего приложения следующим образом:
 
-```tsx
+```ts
 const { height, width } = useWindowDimensions();
 ```
 
@@ -21,7 +21,7 @@ const { height, width } = useWindowDimensions();
 
 ### `fontScale`
 
-```tsx
+```ts
 useWindowDimensions().fontScale;
 ```
 
@@ -29,7 +29,7 @@ useWindowDimensions().fontScale;
 
 ### `height`
 
-```tsx
+```ts
 useWindowDimensions().height;
 ```
 
@@ -37,7 +37,7 @@ useWindowDimensions().height;
 
 ### `scale`
 
-```tsx
+```ts
 useWindowDimensions().scale;
 ```
 
@@ -48,7 +48,7 @@ useWindowDimensions().scale;
 
 ### `width`
 
-```tsx
+```ts
 useWindowDimensions().width;
 ```
 

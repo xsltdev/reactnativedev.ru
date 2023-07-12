@@ -48,7 +48,7 @@
 
 === "TypeScript"
 
-    ```tsx
+    ```ts
     import type { TurboModule } from 'react-native';
     import { TurboModuleRegistry } from 'react-native';
 
@@ -91,7 +91,7 @@
 
 === "TypeScript"
 
-    ```tsx
+    ```ts
     import type { ViewProps } from 'ViewPropTypes';
     import type { HostComponent } from 'react-native';
     import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
@@ -209,7 +209,7 @@ Android также требует, чтобы в вашем приложении
 
 В новой архитектуре большинство методов `UIManager` станут доступны как методы экземпляра для нативных экземпляров компонентов, полученных через `ref`:
 
-```tsx
+```ts
 function MyComponent(props: Props) {
   const viewRef = useRef(null);
 
@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
 
 Результирующий компонент может быть представлен следующим образом:
 
-```tsx
+```ts
 <View
     accessibility={true}
     onPress={this._onSubmit}
@@ -296,7 +296,7 @@ const styles = StyleSheet.create({
 
 Обратите внимание, что все значения реквизитов, установленные в функции рендеринга, остаются неизменными, даже если `setNativeProps` не передал эти реквизиты. Кроме того, `style` теперь является объединенным значением своего значения до `_onSubmit` и `styles.submittedView`. Это важный момент: в нашем текущем мире, предшествующем миру Fabric, **компонентные реквизиты сохраняются.** Представление платформы кэширует значения реквизитов, переданные ему со стороны JS. Если бы это было не так, то после вызова setNativeProps React Native отобразил бы компонент следующим образом:
 
-```tsx
+```ts
 <View accessibility={true} style={styles.submittedView} />
 ```
 
@@ -306,7 +306,7 @@ const styles = StyleSheet.create({
 
 Принимая во внимание вышеуказанные предостережения, правильный перенос будет выглядеть следующим образом:
 
-```tsx
+```ts
 class MyComponent extends React.Component<Props> {
   state = {
     hasSubmitted: false,
@@ -416,7 +416,7 @@ export default require('./RNTMyNativeViewNativeComponent')
 
 **До**
 
-```tsx
+```ts
 class MyComponent extends React.Component<Props> {
   _moveToRegion: (region: Region, duration: number) => {
     UIManager.dispatchViewManagerCommand(

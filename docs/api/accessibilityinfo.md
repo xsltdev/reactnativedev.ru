@@ -10,7 +10,7 @@
 
 ### `addEventListener()`
 
-```tsx
+```ts
 static addEventListener(
   eventName: AccessibilityChangeEventName | AccessibilityAnnouncementEventName,
   handler: (
@@ -34,7 +34,7 @@ static addEventListener(
 
 ### `announceForAccessibility()`.
 
-```tsx
+```ts
 static announceForAccessibility(announcement: string);
 ```
 
@@ -42,7 +42,7 @@ static announceForAccessibility(announcement: string);
 
 ### `announceForAccessibilityWithOptions()`.
 
-```tsx
+```ts
 static announceForAccessibilityWithOptions(
   announcement: string,
   options: options: {queue?: boolean},
@@ -60,7 +60,7 @@ static announceForAccessibilityWithOptions(
 
 ### `getRecommendedTimeoutMillis()` :simple-android:
 
-```tsx
+```ts
 static getRecommendedTimeoutMillis(originalTimeout: number): Promise<number>;
 ```
 
@@ -75,7 +75,7 @@ static getRecommendedTimeoutMillis(originalTimeout: number): Promise<number>;
 
 ### `isAccessibilityServiceEnabled()` :simple-android:
 
-```tsx
+```ts
 static isAccessibilityServiceEnabled(): Promise<boolean>;
 ```
 
@@ -87,7 +87,7 @@ static isAccessibilityServiceEnabled(): Promise<boolean>;
 
 ### `isBoldTextEnabled()` :simple-ios:
 
-```tsx
+```ts
 static isBoldTextEnabled(): Promise<boolean>:
 ```
 
@@ -95,7 +95,7 @@ static isBoldTextEnabled(): Promise<boolean>:
 
 ### `isGrayscaleEnabled()` :simple-ios:
 
-```tsx
+```ts
 static isGrayscaleEnabled(): Promise<boolean>;
 ```
 
@@ -103,7 +103,7 @@ static isGrayscaleEnabled(): Promise<boolean>;
 
 ### `isInvertColorsEnabled()` :simple-ios:
 
-```tsx
+```ts
 static isInvertColorsEnabled(): Promise<boolean>;
 ```
 
@@ -111,7 +111,7 @@ static isInvertColorsEnabled(): Promise<boolean>;
 
 ### `isReduceMotionEnabled()`
 
-```tsx
+```ts
 static isReduceMotionEnabled(): Promise<boolean>;
 ```
 
@@ -119,7 +119,7 @@ static isReduceMotionEnabled(): Promise<boolean>;
 
 ### `isReduceTransparencyEnabled()` :simple-ios:
 
-```tsx
+```ts
 static isReduceTransparencyEnabled(): Promise<boolean>;
 ```
 
@@ -127,7 +127,7 @@ Query whether reduce transparency is currently enabled. Returns a promise which 
 
 ### `isScreenReaderEnabled()`.
 
-```tsx
+```ts
 static isScreenReaderEnabled(): Promise<boolean>;
 ```
 
@@ -135,7 +135,7 @@ static isScreenReaderEnabled(): Promise<boolean>;
 
 ### `prefersCrossFadeTransitions()` :simple-ios:
 
-```tsx
+```ts
 static prefersCrossFadeTransitions(): Promise<boolean>;
 ```
 
@@ -143,7 +143,7 @@ static prefersCrossFadeTransitions(): Promise<boolean>;
 
 ### `setAccessibilityFocus()`.
 
-```tsx
+```ts
 static setAccessibilityFocus(reactTag: number);
 ```
 

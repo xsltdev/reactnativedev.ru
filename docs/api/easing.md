@@ -52,7 +52,7 @@
 
 ### `step0()`
 
-```tsx
+```ts
 static step0(n: number);
 ```
 
@@ -60,7 +60,7 @@ static step0(n: number);
 
 ### `step1()`
 
-```tsx
+```ts
 static step1(n: number);
 ```
 
@@ -68,7 +68,7 @@ static step1(n: number);
 
 ### `linear()`
 
-```tsx
+```ts
 static linear(t: number);
 ```
 
@@ -78,7 +78,7 @@ static linear(t: number);
 
 ### `ease()`
 
-```tsx
+```ts
 static ease(t: number);
 ```
 
@@ -88,7 +88,7 @@ static ease(t: number);
 
 ### `quad()`
 
-```tsx
+```ts
 static quad(t: number);
 ```
 
@@ -98,7 +98,7 @@ static quad(t: number);
 
 ### `cubic()`
 
-```tsx
+```ts
 static cubic(t: number);
 ```
 
@@ -108,7 +108,7 @@ static cubic(t: number);
 
 ### `poly()`
 
-```tsx
+```ts
 static poly(n: number);
 ```
 
@@ -118,7 +118,7 @@ n = 4: [https://easings.net/#easeInQuart](https://easings.net/#easeInQuart) n = 
 
 ### `sin()`
 
-```tsx
+```ts
 static sin(t: number);
 ```
 
@@ -128,7 +128,7 @@ static sin(t: number);
 
 ### `circle()`
 
-```tsx
+```ts
 static circle(t: number);
 ```
 
@@ -138,7 +138,7 @@ static circle(t: number);
 
 ### `exp()`
 
-```tsx
+```ts
 static exp(t: number);
 ```
 
@@ -148,7 +148,7 @@ static exp(t: number);
 
 ### `elastic()`
 
-```tsx
+```ts
 static elastic(bounciness: number);
 ```
 
@@ -160,7 +160,7 @@ static elastic(bounciness: number);
 
 ### `back()`
 
-```tsx
+```ts
 static back(s)
 ```
 
@@ -168,7 +168,7 @@ static back(s)
 
 ### `bounce()`
 
-```tsx
+```ts
 static bounce(t: number);
 ```
 
@@ -178,7 +178,7 @@ static bounce(t: number);
 
 ### `bezier()`
 
-```tsx
+```ts
 static bezier(x1: number, y1: number, x2: number, y2: number);
 ```
 
@@ -188,7 +188,7 @@ static bezier(x1: number, y1: number, x2: number, y2: number);
 
 ### `in()`
 
-```tsx
+```ts
 static in(easing: number);
 ```
 
@@ -196,7 +196,7 @@ static in(easing: number);
 
 ### `out()`
 
-```tsx
+```ts
 static out(easing: number);
 ```
 
@@ -204,7 +204,7 @@ static out(easing: number);
 
 ### `inOut()`
 
-```tsx
+```ts
 static inOut(easing: number);
 ```
 
