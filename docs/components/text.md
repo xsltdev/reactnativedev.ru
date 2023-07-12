@@ -163,11 +163,11 @@ class MyAppHeaderText extends Component {
 
 Указывает программе чтения экрана рассматривать текущий элемент, на котором сосредоточено внимание, как имеющий определенную роль.
 
-В iOS эти роли отображаются на соответствующие черты доступности. Кнопка изображения имеет ту же функциональность, что и в случае, когда для трейта установлены значения 'image' и 'button'. Дополнительную информацию см. в [Руководстве по доступности](accessibility.md#accessibilitytraits-ios).
+В iOS эти роли отображаются на соответствующие черты доступности. Кнопка изображения имеет ту же функциональность, что и в случае, когда для трейта установлены значения 'image' и 'button'. Дополнительную информацию см. в [Руководстве по доступности](../guides/accessibility.md#accessibilitytraits-ios).
 
-| Type                                                 |
-| ---------------------------------------------------- |
-| [AccessibilityRole](accessibility#accessibilityrole) |
+| Type                                                              |
+| ----------------------------------------------------------------- |
+| [AccessibilityRole](../guides/accessibility.md#accessibilityrole) |
 
 ### `accessibilityState`
 
@@ -175,15 +175,15 @@ class MyAppHeaderText extends Component {
 
 Вы можете указать одно состояние, отсутствие состояния или несколько состояний. Состояния должны быть переданы через объект. Например: `{выбран: true, отключен: true}`.
 
-| Type                                                   |
-| ------------------------------------------------------ |
-| [AccessibilityState](accessibility#accessibilitystate) |
+| Type                                                                |
+| ------------------------------------------------------------------- |
+| [AccessibilityState](../guides/accessibility.md#accessibilitystate) |
 
 ### `accessibilityActions`
 
 Действия доступности позволяют ассистивной технологии программно вызывать действия компонента. Свойство `accessibilityActions` должно содержать список объектов действий. Каждый объект действия должен содержать имя поля и метку.
 
-Дополнительную информацию см. в [Руководстве по доступности](accessibility.md#accessibility-actions).
+Дополнительную информацию см. в [Руководстве по доступности](../guides/accessibility.md#accessibility-actions).
 
 | Type  | Required |
 | ----- | -------- |
@@ -193,7 +193,7 @@ class MyAppHeaderText extends Component {
 
 Вызывается, когда пользователь выполняет действия по обеспечению доступности. Единственным аргументом этой функции является событие, содержащее имя выполняемого действия.
 
-Дополнительную информацию см. в [Руководстве по доступности](accessibility.md#accessibility-actions).
+Дополнительную информацию см. в [Руководстве по доступности](../guides/accessibility.md#accessibility-actions).
 
 | Type     | Required |
 | -------- | -------- |
@@ -203,7 +203,7 @@ class MyAppHeaderText extends Component {
 
 Если установлено значение `true`, указывает, что представление является элементом доступности.
 
-Дополнительную информацию см. в [Руководстве по доступности](accessibility#accessible-ios-android).
+Дополнительную информацию см. в [Руководстве по доступности](../guides/accessibility.md#accessible-ios-android).
 
 | Type    | Default |
 | ------- | ------- |
@@ -486,9 +486,9 @@ class MyAppHeaderText extends Component {
 
 `role` передает назначение компонента пользователю вспомогательной технологии. Имеет приоритет над реквизитом [`accessibilityRole`](text.md#accessibilityrole).
 
-| Type                          |
-| ----------------------------- |
-| [Role](accessibility.md#role) |
+| Type                                    |
+| --------------------------------------- |
+| [Role](../guides/accessibility.md#role) |
 
 ### `selectable`
 
@@ -502,9 +502,9 @@ class MyAppHeaderText extends Component {
 
 Цвет выделения текста.
 
-| Type               |
-| ------------------ |
-| [color](colors.md) |
+| Type                         |
+| ---------------------------- |
+| [color](../guides/colors.md) |
 
 ### `style`
 

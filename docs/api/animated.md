@@ -14,7 +14,7 @@
 
 <div data-snack-id="@bndby/animated" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-Обратитесь к руководству [Animations](animations.md#animated-api), чтобы увидеть дополнительные примеры `Animated` в действии.
+Обратитесь к руководству [Animations](../guides/animations.md#animated-api), чтобы увидеть дополнительные примеры `Animated` в действии.
 
 ## Обзор
 
@@ -49,7 +49,7 @@ Animated.timing({}).start(({ finished }) => {
 
 Используя нативный драйвер, мы отправляем все данные об анимации в нативный поток до начала анимации, что позволяет нативному коду выполнять анимацию в потоке UI без необходимости проходить через мост на каждом кадре. После запуска анимации поток JS может быть заблокирован без ущерба для анимации.
 
-Вы можете использовать родной драйвер, указав `useNativeDriver: true` в конфигурации анимации. Подробнее см. в руководстве [Animations](animations.md#using-the-native-driver).
+Вы можете использовать родной драйвер, указав `useNativeDriver: true` в конфигурации анимации. Подробнее см. в руководстве [Animations](../guides/animations.md#using-the-native-driver).
 
 ### Анимируемые компоненты
 
@@ -75,7 +75,7 @@ Animated.timing({}).start(({ finished }) => {
 -   [`Animated.sequence()`](animated.md#sequence) запускает анимации по порядку, ожидая завершения каждой перед запуском следующей.
 -   [`Animated.stagger()`](animated.md#stagger) запускает анимации по порядку и параллельно, но с последовательными задержками.
 
-Анимации также можно объединять в цепочки, задавая `toValue` одной анимации как `Animated.Value` другой. См. раздел [Отслеживание динамических значений](animations.md#tracking-dynamic-values) в руководстве по анимации.
+Анимации также можно объединять в цепочки, задавая `toValue` одной анимации как `Animated.Value` другой. См. раздел [Отслеживание динамических значений](../guides/animations.md#tracking-dynamic-values) в руководстве по анимации.
 
 По умолчанию, если одна анимация остановлена или прервана, то все остальные анимации в группе также останавливаются.
 
@@ -350,9 +350,9 @@ static start(callback?: (result: {finished: boolean}) => void);
 
 **Параметры:**
 
-| Name     | Type                                  | Required | Description                                                                                                                                                     |
-| -------- | ------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| callback | (result: {finished: boolean}) => void | No       | Function that will be called after the animation finished running normally or when the animation is done because stop() was called on it before it could finish |
+| Name     | Type                                  | Required | Description                                                                                                                                                        |
+| -------- | ------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| callback | (result: {finished: boolean}) => void | No       | Функция, которая будет вызвана после нормального завершения анимации или когда анимация закончилась, потому что перед ее завершением была вызвана функция `stop()` |
 
 Запустите пример с обратным вызовом:
 

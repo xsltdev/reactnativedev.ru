@@ -124,9 +124,9 @@ const styles = StyleSheet.create({
 });
 ```
 
-| Type                           |
-| ------------------------------ |
-| [View Style](view-style-props) |
+| Type                              |
+| --------------------------------- |
+| [View Style](view-style-props.md) |
 
 ### `contentInset` :simple-ios:
 
@@ -191,9 +191,9 @@ const styles = StyleSheet.create({
 
 Иногда просмотр прокрутки занимает больше места, чем заполняет его содержимое. В таком случае этот реквизит заполнит оставшуюся часть прокрутки цветом, чтобы избежать установки фона и создания ненужной перерисовки. Это расширенная оптимизация, которая не нужна в общем случае.
 
-| Type               |
-| ------------------ |
-| [color](colors.md) |
+| Type                         |
+| ---------------------------- |
+| [color](../guides/colors.md) |
 
 ### `fadingEdgeLength` :simple-android:
 
@@ -244,9 +244,9 @@ const styles = StyleSheet.create({
 
 -   `interactive`, клавиатура отбрасывается интерактивно при перетаскивании и перемещается синхронно с касанием, перетаскивание вверх отменяет отбрасывание. На Android это не поддерживается и будет иметь то же поведение, что и `'none'`.
 
-| Type                                                                                                                                                            | Default  |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| enum(`'none'`, `'on-drag'`) <div className="label android">Android</div><hr />enum(`'none'`, `'on-drag'`, `'interactive'`) <div className="label ios">iOS</div> | `'none'` |
+| Type                                                                                                        | Default  |
+| ----------------------------------------------------------------------------------------------------------- | -------- |
+| enum(`'none'`, `'on-drag'`) :simple-android:<hr />enum(`'none'`, `'on-drag'`, `'interactive'`) :simple-ios: | `'none'` |
 
 ### `keyboardShouldPersistTaps`
 

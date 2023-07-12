@@ -30,9 +30,9 @@
 
 ### `backgroundColor`
 
-| Тип                |
-| ------------------ |
-| [color](colors.md) |
+| Тип                          |
+| ---------------------------- |
+| [color](../guides/colors.md) |
 
 ### `borderBottomLeftRadius`
 
@@ -48,9 +48,9 @@
 
 ### `borderColor`
 
-| Тип                |
-| ------------------ |
-| [color](colors.md) |
+| Тип                          |
+| ---------------------------- |
+| [color](../guides/colors.md) |
 
 ### `borderRadius`
 
@@ -133,6 +133,6 @@
 
 Изменяет цвет всех непрозрачных пикселей на `tintColor`.
 
-| Тип                |
-| ------------------ |
-| [color](colors.md) |
+| Тип                          |
+| ---------------------------- |
+| [color](../guides/colors.md) |

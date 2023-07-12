@@ -24,9 +24,9 @@
 
 Цвет переднего плана волчка.
 
-| Type               | Default                                                                              |
-| ------------------ | ------------------------------------------------------------------------------------ |
-| [color](colors.md) | `null` (system accent default color) :simple-android: <hr/> `'#999999'` :simple-ios: |
+| Type                         | Default                                                                              |
+| ---------------------------- | ------------------------------------------------------------------------------------ |
+| [color](../guides/colors.md) | `null` (system accent default color) :simple-android: <hr/> `'#999999'` :simple-ios: |
 
 ### `hidesWhenStopped` :simple-ios:
 
