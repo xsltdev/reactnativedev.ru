@@ -4,7 +4,7 @@
 
     Если вы используете управляемый рабочий процесс Expo, то только один входной компонент, зарегистрированный в `AppRegistry`, и он обрабатывается автоматически (или через [registerRootComponent](https://docs.expo.dev/versions/latest/sdk/register-root-component/)). Вам не нужно использовать этот API.
 
-`AppRegistry` - это точка входа JS для запуска всех приложений React Native. Корневые компоненты приложения должны зарегистрировать себя с помощью `AppRegistry.registerComponent`, после чего нативная система может загрузить пакет для приложения и затем фактически запустить приложение, когда оно будет готово, вызвав `AppRegistry.runApplication`.
+`AppRegistry` — это точка входа JS для запуска всех приложений React Native. Корневые компоненты приложения должны зарегистрировать себя с помощью `AppRegistry.registerComponent`, после чего нативная система может загрузить пакет для приложения и затем фактически запустить приложение, когда оно будет готово, вызвав `AppRegistry.runApplication`.
 
 ```ts
 import { Text, AppRegistry } from 'react-native';
@@ -80,7 +80,7 @@ static registerCancellableHeadlessTask(
 );
 ```
 
-Зарегистрируйте безголовую задачу, которую можно отменить. Безголовая задача - это часть кода, которая выполняется без пользовательского интерфейса.
+Зарегистрируйте безголовую задачу, которую можно отменить. Безголовая задача — это часть кода, которая выполняется без пользовательского интерфейса.
 
 **Параметры:**
 
@@ -129,7 +129,7 @@ static registerHeadlessTask(
 );
 ```
 
-Зарегистрируйте безголовое задание. Безголовая задача - это часть кода, которая выполняется без пользовательского интерфейса.
+Зарегистрируйте безголовое задание. Безголовая задача — это часть кода, которая выполняется без пользовательского интерфейса.
 
 Это способ запуска задач на JavaScript, пока ваше приложение находится в фоновом режиме. Его можно использовать, например, для синхронизации свежих данных, обработки push-уведомлений или воспроизведения музыки.
 
@@ -314,7 +314,7 @@ static unmountApplicationComponentAtRootTag(rootTag: number);
 
 ### Task
 
-`Task` - это функция, которая принимает любые данные в качестве аргумента и возвращает `Promise`, который разрешается в `undefined`.
+`Task` — это функция, которая принимает любые данные в качестве аргумента и возвращает `Promise`, который разрешается в `undefined`.
 
 | Тип     |
 | ------- |
@@ -322,7 +322,7 @@ static unmountApplicationComponentAtRootTag(rootTag: number);
 
 ### TaskCanceller
 
-Функция `TaskCanceller` - это функция, которая не принимает никаких аргументов и возвращает `void`.
+Функция `TaskCanceller` — это функция, которая не принимает никаких аргументов и возвращает `void`.
 
 | Type    |
 | ------- |
@@ -330,7 +330,7 @@ static unmountApplicationComponentAtRootTag(rootTag: number);
 
 ### TaskCancelProvider
 
-Правильный `TaskCancelProvider` - это функция, которая возвращает [`TaskCanceller`](appregistry.md#taskcanceller).
+Правильный `TaskCancelProvider` — это функция, которая возвращает [`TaskCanceller`](appregistry.md#taskcanceller).
 
 | Тип     |
 | ------- |
@@ -338,7 +338,7 @@ static unmountApplicationComponentAtRootTag(rootTag: number);
 
 ### TaskProvider
 
-Правильный `TaskProvider` - это функция, которая возвращает [`Task`](appregistry.md#task).
+Правильный `TaskProvider` — это функция, которая возвращает [`Task`](appregistry.md#task).
 
 | Type    |
 | ------- |

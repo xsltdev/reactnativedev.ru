@@ -1,13 +1,13 @@
 # StyleSheet
 
-**`StyleSheet`** - это абстракция, аналогичная таблицам стилей CSS.
+**`StyleSheet`** — это абстракция, аналогичная таблицам стилей CSS.
 
 <div data-snack-id="@bndby/stylesheet" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
 Советы по качеству кода:
 
 -   Перенося стили из функции рендеринга, вы облегчаете понимание кода.
--   Именование стилей - хороший способ придать смысл компонентам низкого уровня в функции рендеринга.
+-   Именование стилей — хороший способ придать смысл компонентам низкого уровня в функции рендеринга.
 
 ## Методы
 
@@ -70,7 +70,7 @@ static setStyleAttributePreprocessor(
 
 ### `absoluteFillObject`
 
-Иногда вам может понадобиться `absoluteFill`, но с некоторыми изменениями - `absoluteFillObject` можно использовать для создания настраиваемой записи в `StyleSheet`, например:
+Иногда вам может понадобиться `absoluteFill`, но с некоторыми изменениями — `absoluteFillObject` можно использовать для создания настраиваемой записи в `StyleSheet`, например:
 
 <div data-snack-id="@bndby/stylesheet-absolutefillobject" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 

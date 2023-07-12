@@ -1,6 +1,6 @@
 # DynamicColorIOS
 
-Функция **`DynamicColorIOS`** - это тип цвета платформы, специфичный для iOS.
+Функция **`DynamicColorIOS`** — это тип цвета платформы, специфичный для iOS.
 
 ```ts
 DynamicColorIOS({

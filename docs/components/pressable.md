@@ -12,36 +12,31 @@
 
 На элементе, обернутом `Pressable`:
 
--   [`onPressIn`](#onpressin) вызывается при активации жеста нажатия.
+-   [`onPressIn`](#onpressin) вызывается, когда активируется жест нажатия.
 -   [`onPressOut`](#onpressout) вызывается при деактивации жеста нажатия.
 
-После нажатия кнопки [`onPressIn`](#onpressin) произойдет одно из двух событий:
+После нажатия [`onPressIn`](#onpressin) произойдет одно из двух событий:
 
 1.  Человек убирает палец, вызывая [`onPressOut`](#onpressout), за которым следует [`onPress`](#onpress).
-
 2.  Если человек оставляет палец дольше, чем на 500 миллисекунд, то срабатывает [`onLongPress`](#onlongpress). ([`onPressOut`](#onpressout) все равно сработает, когда человек уберет палец).
 
-![Диаграмма последовательного отображения событий onPress.](d_pressable_pressing.svg)
+![Diagram of the onPress events in sequence.](d_pressable_pressing.svg)
 
-Пальцы - не самые точные инструменты, и часто пользователи могут случайно активировать не тот элемент или пропустить область активации. Чтобы помочь в этом, в `Pressable` есть дополнительный параметр `HitRect`, который можно использовать для определения расстояния, на котором регистрируется нажатие от обернутого элемента. Нажатия могут начинаться в любом месте `HitRect`.
+Пальцы — не самые точные инструменты, и часто пользователи могут случайно активировать не тот элемент или пропустить область активации. Чтобы помочь, `Pressable` имеет дополнительный параметр `HitRect`, который можно использовать для определения расстояния, на котором прикосновение может быть зарегистрировано от обернутого элемента. Нажатия могут начинаться в любом месте в пределах `HitRect`.
 
-`PressRect` позволяет нажатиям выходить за пределы элемента и его `HitRect`, сохраняя при этом активацию и право на "нажатие" - представьте, что вы медленно отводите палец от кнопки, на которую нажимаете.
+`PressRect` позволяет нажатиям выходить за пределы элемента и его `HitRect`, сохраняя активацию и право на "нажатие" — представьте, что вы медленно отводите палец от кнопки, на которую нажимаете.
 
 !!!note ""
 
-    Область касания никогда не выходит за границы родительского представления, а Z-индекс соседних представлений всегда имеет приоритет, если касание попадает на два пересекающихся представления.
+    Область касания никогда не выходит за границы родительского представления, а Z-индекс родственных представлений всегда имеет приоритет, если касание попадает на два пересекающихся представления.
 
-![Диаграмма HitRect и PressRect и принцип их работы.](d_pressable_anatomy.svg)
+    ![Diagram of HitRect and PressRect and how they work.](d_pressable_anatomy.svg)
 
-You can set `HitRect` with `hitSlop` and set `PressRect` with `pressRetentionOffset`.
-
-!!!warning ""
-
-    `Pressable` использует API `Pressability` от React Native. Для получения более подробной информации о потоке машины состояний Pressability и о том, как она работает, ознакомьтесь с реализацией для [Pressability](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Pressability/Pressability.js#L350).
+    `Pressable` использует API `Pressability` от React Native. Для получения дополнительной информации о том, как работает машина состояний Pressability, ознакомьтесь с реализацией для [Pressability](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Pressability/Pressability.js#L350).
 
 ## Пример
 
-<div data-snack-id="ank0FfgmW" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#fbfcfd;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
+<div data-snack-id="@bndby/pressable" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
 ## Пропсы
 
@@ -87,11 +82,11 @@ You can set `HitRect` with `hitSlop` and set `PressRect` with `pressRetentionOff
 
 ### `disabled`
 
-Отключено ли поведение пресса.
+Отключено ли поведение нажатия.
 
-| Type    | Default |
-| ------- | ------- |
-| boolean | `false` |
+| Тип     | По умолчанию |
+| ------- | ------------ |
+| boolean | `false`      |
 
 ### `hitSlop`
 
@@ -103,7 +98,7 @@ You can set `HitRect` with `hitSlop` and set `PressRect` with `pressRetentionOff
 
 ### `onHoverIn`
 
-Вызывается при активации наведения для обеспечения визуальной обратной связи.
+Вызывается при активации hover для обеспечения визуальной обратной связи.
 
 | Type                                                                                           |
 | ---------------------------------------------------------------------------------------------- |

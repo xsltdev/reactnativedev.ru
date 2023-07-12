@@ -2,7 +2,7 @@
 
 Автоматически анимирует представления в их новые позиции, когда происходит следующая компоновка.
 
-Обычный способ использования этого API - вызвать его перед обновлением хука состояния в функциональных компонентах и вызовом `setState` в компонентах класса.
+Обычный способ использования этого API — вызвать его перед обновлением хука состояния в функциональных компонентах и вызовом `setState` в компонентах класса.
 
 Обратите внимание, что для того, чтобы это работало на **Android**, необходимо установить следующие флаги через `UIManager`:
 
@@ -64,7 +64,7 @@ static configureNext(
 static create(duration, type, creationProp)
 ```
 
-Помощник, создающий объект (с полями `create`, `update` и `delete`) для передачи в [`configureNext`](layoutanimation.md#configurenext). Параметр `type` - это [тип анимации](layoutanimation.md#types), а параметр `creationProp` - это [свойство макета](layoutanimation.md#properties).
+Помощник, создающий объект (с полями `create`, `update` и `delete`) для передачи в [`configureNext`](layoutanimation.md#configurenext). Параметр `type` — это [тип анимации](layoutanimation.md#types), а параметр `creationProp` — это [свойство макета](layoutanimation.md#properties).
 
 **Пример:**
 

@@ -1,6 +1,6 @@
 # Профилирование с Hermes
 
-Вы можете визуализировать производительность JavaScript в приложении React Native с помощью [Hermes](https://github.com/facebook/hermes). **Hermes** - это небольшой и легкий движок JavaScript, оптимизированный для запуска React Native на Android (подробнее об использовании его с React Native можно прочитать [здесь](hermes.md). Hermes помогает повысить производительность приложений, а также предоставляет способы анализа производительности выполняемого JavaScript.
+Вы можете визуализировать производительность JavaScript в приложении React Native с помощью [Hermes](https://github.com/facebook/hermes). **Hermes** — это небольшой и легкий движок JavaScript, оптимизированный для запуска React Native на Android (подробнее об использовании его с React Native можно прочитать [здесь](hermes.md). Hermes помогает повысить производительность приложений, а также предоставляет способы анализа производительности выполняемого JavaScript.
 
 В этом разделе вы узнаете, как составить профиль вашего приложения React Native, работающего на Hermes, и как визуализировать профиль с помощью [вкладки Performance в Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)
 
@@ -72,7 +72,7 @@ npx react-native profile-hermes [destinationDir]
 
 ## Как работает трансформатор профиля Hermes?
 
-Профиль Hermes Sample Profile имеет формат `JSON object format`, в то время как формат, поддерживаемый Google's DevTools, - `JSON Array Format`. (Более подробную информацию о форматах можно найти в [Trace Event Format Document](https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/preview)).
+Профиль Hermes Sample Profile имеет формат `JSON object format`, в то время как формат, поддерживаемый Google's DevTools, — `JSON Array Format`. (Более подробную информацию о форматах можно найти в [Trace Event Format Document](https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/preview)).
 
 ```ts
 export interface HermesCPUProfile {
@@ -82,7 +82,7 @@ export interface HermesCPUProfile {
 }
 ```
 
-Профиль Hermes имеет большую часть информации, закодированной в свойствах `samples` и `stackFrames`. Каждый образец - это снимок стека вызовов функций в данный момент времени, поскольку каждый образец имеет свойство `sf`, которое соответствует вызову функции.
+Профиль Hermes имеет большую часть информации, закодированной в свойствах `samples` и `stackFrames`. Каждый образец — это снимок стека вызовов функций в данный момент времени, поскольку каждый образец имеет свойство `sf`, которое соответствует вызову функции.
 
 ```ts
 export interface HermesSample {

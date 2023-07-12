@@ -56,7 +56,7 @@ static announceForAccessibilityWithOptions(
 | Name                                                          | Type   | Description                                                          |
 | ------------------------------------------------------------- | ------ | -------------------------------------------------------------------- |
 | announcement <div class="label basic required">Required</div> | string | The string to be announced                                           |
-| options <div class="label basic required">Required</div>      | object | `queue` - queue the announcement behind existing speech :simple-ios: |
+| options <div class="label basic required">Required</div>      | object | `queue` — queue the announcement behind existing speech :simple-ios: |
 
 ### `getRecommendedTimeoutMillis()` :simple-android:
 

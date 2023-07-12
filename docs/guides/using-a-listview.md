@@ -14,4 +14,4 @@ React Native предоставляет набор компонентов для
 
 <div data-snack-id="@bndby/sectionlist-basics" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-Одно из самых распространенных применений представления списка - отображение данных, которые вы получаете с сервера. Для этого вам понадобится [узнать о сетевом взаимодействии в React Native](network.md).
+Одно из самых распространенных применений представления списка — отображение данных, которые вы получаете с сервера. Для этого вам понадобится [узнать о сетевом взаимодействии в React Native](network.md).

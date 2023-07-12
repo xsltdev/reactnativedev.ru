@@ -2,7 +2,7 @@
 
 !!!info ""
 
-    Native Module и Native Components - это наши стабильные технологии, используемые в унаследованной архитектуре. Они будут устаревшими в будущем, когда новая архитектура станет стабильной. Новая архитектура использует [Turbo Native Module](the-new-architecture-pillars-turbomodules.md) и [Fabric Native Components](the-new-architecture-pillars-fabric-components.md) для достижения аналогичных результатов.
+    Native Module и Native Components — это наши стабильные технологии, используемые в унаследованной архитектуре. Они будут устаревшими в будущем, когда новая архитектура станет стабильной. Новая архитектура использует [Turbo Native Module](the-new-architecture-pillars-turbomodules.md) и [Fabric Native Components](the-new-architecture-pillars-fabric-components.md) для достижения аналогичных результатов.
 
 Иногда приложению React Native требуется доступ к API нативной платформы, который по умолчанию недоступен в JavaScript, например, к нативным API для доступа к Apple или Google Pay. Возможно, вы хотите повторно использовать некоторые существующие библиотеки Objective-C, Swift, Java или C++ без необходимости повторной реализации на JavaScript, или написать высокопроизводительный многопоточный код для таких вещей, как обработка изображений.
 

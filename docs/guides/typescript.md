@@ -1,6 +1,6 @@
 # Использование TypeScript
 
-[TypeScript](https://www.typescriptlang.org/) - это язык, расширяющий JavaScript путем добавления определений типов. Новые проекты React Native по умолчанию используют TypeScript, но также поддерживают JavaScript и Flow.
+[TypeScript](https://www.typescriptlang.org/) — это язык, расширяющий JavaScript путем добавления определений типов. Новые проекты React Native по умолчанию используют TypeScript, но также поддерживают JavaScript и Flow.
 
 ## Начало работы с TypeScript
 
