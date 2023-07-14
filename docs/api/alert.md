@@ -1,12 +1,16 @@
+---
+description: Запускает диалоговое окно предупреждения с указанным заголовком и сообщением
+---
+
 # Alert
 
-Запускает диалоговое окно предупреждения с указанным заголовком и сообщением.
+Запускает **диалоговое окно** предупреждения с указанным заголовком и сообщением.
 
-Опционально предоставьте список кнопок. При нажатии на любую кнопку сработает соответствующий обратный вызов onPress и оповещение будет отключено. По умолчанию единственной кнопкой будет кнопка 'OK'.
+Опционально предоставьте список кнопок. При нажатии на любую кнопку сработает соответствующий обратный вызов `onPress` и оповещение будет отключено. По умолчанию единственной кнопкой будет кнопка 'OK'.
 
 Это API, который работает как на Android, так и на iOS и может показывать статические оповещения. Оповещения, предлагающие пользователю ввести некоторую информацию, доступны только на iOS.
 
-## Пример
+## Пример {: #example}
 
 <div data-snack-id="@bndby/alert-example" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
@@ -26,13 +30,13 @@
 
 Событие отмены может быть обработано путем предоставления свойства обратного вызова `onDismiss` внутри параметра `options`.
 
-### Пример :simple-android:
+### Пример :simple-android: {: #example-android}
 
 <div data-snack-id="@bndby/alert-android-dissmissable-example" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-## Методы
+## Методы {: #methods}
 
-### `alert()`
+### alert()
 
 ```ts
 static alert (
@@ -45,14 +49,14 @@ static alert (
 
 **Параметры:**
 
-| Name             | Type          | Description                                                             |
-| ---------------- | ------------- | ----------------------------------------------------------------------- |
-| title (Required) | string        | The dialog's title. Passing `null` or empty string will hide the title. |
-| message          | string        | An optional message that appears below the dialog's title.              |
-| buttons          | `AlertButton` | An optional array containing buttons configuration.                     |
-| options          | `Options`     | An optional Alert configuration.                                        |
+| Имя                   | Тип           | Описание                                                                             |
+| --------------------- | ------------- | ------------------------------------------------------------------------------------ |
+| `title` (обязательно) | string        | Заголовок диалога. Если передать `null` или пустую строку, то заголовок будет скрыт. |
+| `message`             | string        | Необязательное сообщение, которое отображается под заголовком диалога.               |
+| `buttons`             | `AlertButton` | Необязательный массив, содержащий конфигурацию кнопок.                               |
+| `options`             | `Options`     | Дополнительная конфигурация Alert.                                                   |
 
-### `prompt()` :simple-ios:
+### prompt() :simple-ios:
 
 ```ts
 static prompt: (
@@ -69,15 +73,15 @@ static prompt: (
 
 **Параметры:**
 
-| Name              | Type                       | Description                                                                                                                                                                                           |
-| ----------------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| title (Required)  | string                     | The dialog's title.                                                                                                                                                                                   |
-| message           | string                     | An optional message that appears above the text input.                                                                                                                                                |
-| callbackOrButtons | function<hr/>`AlertButton` | If passed a function, it will be called with the prompt's value<br/>`(text: string) => void`, when the user taps 'OK'.<hr/>If passed an array, buttons will be configured based on the array content. |
-| type              | `AlertType`                | This configures the text input.                                                                                                                                                                       |
-| defaultValue      | string                     | The default text in text input.                                                                                                                                                                       |
-| keyboardType      | string                     | The keyboard type of first text field (if exists). One of TextInput [`keyboardTypes`](../components/textinput.md#keyboardtype).                                                                       |
-| options           | `Options`                  | An optional Alert configuration.                                                                                                                                                                      |
+| Имя                   | Тип                        | Описание                                                                                                                                                                                                                          |
+| --------------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title` (обязательно) | string                     | Заголовок диалога.                                                                                                                                                                                                                |
+| `message`             | string                     | Необязательное сообщение, которое отображается над вводимым текстом.                                                                                                                                                              |
+| `callbackOrButtons`   | function<hr/>`AlertButton` | Если передать функцию, то она будет вызвана со значением подсказки<br/>`(text: string) => void`, когда пользователь нажмет кнопку 'OK'.<hr/>Если передать массив, то кнопки будут сконфигурированы на основе содержимого массива. |
+| `type`                | `AlertType`                | При этом настраивается ввод текста.                                                                                                                                                                                               |
+| `defaultValue`        | string                     | Текст по умолчанию в текстовом вводе.                                                                                                                                                                                             |
+| `keyboardType`        | string                     | Тип клавиатуры первого текстового поля (если оно существует). Один из TextInput [`keyboardTypes`](../components/textinput.md#keyboardtype).                                                                                       |
+| `options`             | `Options`                  | Дополнительная конфигурация Alert.                                                                                                                                                                                                |
 
 ## Определения типа
 
@@ -85,29 +89,29 @@ static prompt: (
 
 Стиль кнопки оповещения iOS.
 
-| Type |
+| Тип  |
 | ---- |
 | enum |
 
 **Константы:**
 
-| Value           | Description               |
-| --------------- | ------------------------- |
-| `'default'`     | Default button style.     |
-| `'cancel'`      | Cancel button style.      |
-| `'destructive'` | Destructive button style. |
+| Значение        | Описание                    |
+| --------------- | --------------------------- |
+| `'default'`     | Стиль кнопок по умолчанию.  |
+| `'cancel'`      | Стиль кнопки "Отмена".      |
+| `'destructive'` | Деструктивный стиль кнопок. |
 
 ### AlertType :simple-ios:
 
 Тип оповещения iOS.
 
-| Type |
+| Тип  |
 | ---- |
 | enum |
 
 **Константы:**
 
-| Value              | Description                  |
+| Значение           | Описание                     |
 | ------------------ | ---------------------------- |
 | `'default'`        | Default alert with no inputs |
 | `'plain-text'`     | Plain text input alert       |
@@ -118,29 +122,29 @@ static prompt: (
 
 Объект, описывающий конфигурацию кнопки в оповещении.
 
-| Type             |
+| Тип              |
 | ---------------- |
 | array of objects |
 
 **Свойства объектов:**
 
-| Name                     | Type               | Description                                                                    |
-| ------------------------ | ------------------ | ------------------------------------------------------------------------------ |
-| text                     | string             | Button label.                                                                  |
-| onPress                  | function           | Callback function when button is pressed.                                      |
-| style :simple-ios:       | `AlertButtonStyle` | Button style, on Android this property will be ignored.                        |
-| isPreferred :simple-ios: | boolean            | Whether button should be emphasized, on Android this property will be ignored. |
+| Имя                        | Тип                | Описание                                                          |
+| -------------------------- | ------------------ | ----------------------------------------------------------------- |
+| `text`                     | string             | Надпись на кнопке.                                                |
+| `onPress`                  | function           | Функция обратного вызова при нажатии кнопки.                      |
+| `style` :simple-ios:       | `AlertButtonStyle` | Стиль кнопки, на Android это свойство будет игнорироваться.       |
+| `isPreferred` :simple-ios: | boolean            | Следует ли выделять кнопку, на Android это свойство игнорируется. |
 
 ### AlertOptions
 
-| Type   |
+| Тип    |
 | ------ |
 | object |
 
 **Свойства:**
 
-| Name                            | Type     | Description                                                                                                               |
-| ------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
-| cancelable :simple-android:     | boolean  | Defines if alert can be dismissed by tapping outside of the alert box.                                                    |
-| userInterfaceStyle :simple-ios: | string   | The interface style used for the alert, can be set to `light` or `dark`, otherwise the default system style will be used. |
-| onDismiss :simple-android:      | function | Callback function fired when alert has been dismissed.                                                                    |
+| Имя                               | Тип      | Описание                                                                                                                                                         |
+| --------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cancelable` :simple-android:     | boolean  | Определяет, можно ли отключить предупреждение, нажав на него за пределами поля предупреждения.                                                                   |
+| `userInterfaceStyle` :simple-ios: | string   | Стиль интерфейса, используемый для оповещения, может быть установлен в `light` или `dark`, в противном случае будет использоваться системный стиль по умолчанию. |
+| `onDismiss` :simple-android:      | function | Функция обратного вызова, запускаемая при отклонении оповещения.                                                                                                 |

@@ -1,14 +1,18 @@
+---
+description: API AccessibilityInfo предназначен для запроса текущего состояния устройства чтения экрана, а также для регистрации, чтобы получать уведомления об изменении состояния устройства чтения экрана
+---
+
 # AccessibilityInfo
 
-Иногда полезно знать, есть ли на устройстве активное устройство для чтения с экрана. API `AccessibilityInfo` предназначен для этой цели. Вы можете использовать его для запроса текущего состояния устройства чтения экрана, а также для регистрации, чтобы получать уведомления об изменении состояния устройства чтения экрана.
+Иногда полезно знать, есть ли на устройстве активное устройство для чтения с экрана. API **`AccessibilityInfo`** предназначен для этой цели. Вы можете использовать его для запроса текущего состояния устройства чтения экрана, а также для регистрации, чтобы получать уведомления об изменении состояния устройства чтения экрана.
 
-## Пример
+## Пример {: #example}
 
 <div data-snack-id="@bndby/accessibilityinfo-example" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-## Методы
+## Методы {: #methods}
 
-### `addEventListener()`
+### addEventListener()
 
 ```ts
 static addEventListener(
@@ -21,18 +25,18 @@ static addEventListener(
 
 Добавьте обработчик события. Поддерживаемые события:
 
-| Событие                                                                              | Описание                                                                                                                                                                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `accessibilityServiceChanged`<br/><div class="label two-lines android">Android</div> | Срабатывает при включении некоторых служб, таких как TalkBack, других вспомогательных технологий Android и служб доступности сторонних производителей. Аргументом обработчика события является булево значение. Это булево значение равно `true`, если некоторые службы доступности включены, и `false` в противном случае. |
-| `announcementFinished`<br/><div class="label two-lines ios">iOS</div>                | Срабатывает, когда устройство чтения с экрана закончило делать объявление. Аргументом обработчика события является словарь с такими ключами:<ul><li>`announcement`: Строка, объявленная устройством чтения с экрана.</li><li>`success`: Булево значение, указывающее, было ли объявление успешно сделано.</li></ul>         |
-| `boldTextChanged`<br/><div class="label two-lines ios">iOS</div>                     | Срабатывает при изменении состояния переключателя полужирного текста. Аргументом обработчика события является булево значение. Булево равно `true`, если полужирный текст включен, и `false` в противном случае.                                                                                                            |
-| `grayscaleChanged`<br/><div class="label two-lines ios">iOS</div>                    | Срабатывает при изменении состояния переключателя шкалы серого. Аргументом обработчика события является булево значение. Булево равно `true`, если включена шкала серого, и `false` в противном случае.                                                                                                                     |
-| `invertColorsChanged`<br/><div class="label two-lines ios">iOS</div>                 | Срабатывает при изменении состояния переключателя инвертирования цветов. Аргументом обработчика события является булево значение. Булево равно `true`, если инвертирование цветов включено, и `false` в противном случае.                                                                                                   |
-| `reduceMotionChanged`                                                                | Срабатывает при изменении состояния переключателя уменьшения движения. Аргументом обработчика события является булево значение. Булево `true`, когда движение уменьшения включено (или когда "Transition Animation Scale" в "Developer options" имеет значение "Animation off") и `false` в противном случае.               |
-| `reduceTransparencyChanged`<br/><div class="label two-lines ios">iOS</div>           | Срабатывает при изменении состояния переключателя прозрачности уменьшения. Аргументом обработчика события является булево значение. Булево равно `true`, если прозрачность уменьшения включена, и `false` в противном случае.                                                                                               |
-| `screenReaderChanged`                                                                | Срабатывает при изменении состояния устройства чтения с экрана. Аргументом обработчика события является булево значение. Булево равно `true`, если устройство чтения с экрана включено, и `false` в противном случае.                                                                                                       |
+| Событие                                        | Описание                                                                                                                                                                                                                                                                                                                    |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `accessibilityServiceChanged` :simple-android: | Срабатывает при включении некоторых служб, таких как TalkBack, других вспомогательных технологий Android и служб доступности сторонних производителей. Аргументом обработчика события является булево значение. Это булево значение равно `true`, если некоторые службы доступности включены, и `false` в противном случае. |
+| `announcementFinished` :simple-ios:            | Срабатывает, когда устройство чтения с экрана закончило делать объявление. Аргументом обработчика события является словарь с такими ключами:<br />`announcement`: Строка, объявленная устройством чтения с экрана.<br />`success`: Булево значение, указывающее, было ли объявление успешно сделано.                        |
+| `boldTextChanged` :simple-ios:                 | Срабатывает при изменении состояния переключателя полужирного текста. Аргументом обработчика события является булево значение. Булево равно `true`, если полужирный текст включен, и `false` в противном случае.                                                                                                            |
+| `grayscaleChanged` :simple-ios:                | Срабатывает при изменении состояния переключателя шкалы серого. Аргументом обработчика события является булево значение. Булево равно `true`, если включена шкала серого, и `false` в противном случае.                                                                                                                     |
+| `invertColorsChanged` :simple-ios:             | Срабатывает при изменении состояния переключателя инвертирования цветов. Аргументом обработчика события является булево значение. Булево равно `true`, если инвертирование цветов включено, и `false` в противном случае.                                                                                                   |
+| `reduceMotionChanged`                          | Срабатывает при изменении состояния переключателя уменьшения движения. Аргументом обработчика события является булево значение. Булево `true`, когда движение уменьшения включено (или когда "Transition Animation Scale" в "Developer options" имеет значение "Animation off") и `false` в противном случае.               |
+| `reduceTransparencyChanged` :simple-ios:       | Срабатывает при изменении состояния переключателя прозрачности уменьшения. Аргументом обработчика события является булево значение. Булево равно `true`, если прозрачность уменьшения включена, и `false` в противном случае.                                                                                               |
+| `screenReaderChanged`                          | Срабатывает при изменении состояния устройства чтения с экрана. Аргументом обработчика события является булево значение. Булево равно `true`, если устройство чтения с экрана включено, и `false` в противном случае.                                                                                                       |
 
-### `announceForAccessibility()`.
+### announceForAccessibility()
 
 ```ts
 static announceForAccessibility(announcement: string);
@@ -40,7 +44,7 @@ static announceForAccessibility(announcement: string);
 
 Разместите строку, которая будет озвучена устройством чтения с экрана.
 
-### `announceForAccessibilityWithOptions()`.
+### announceForAccessibilityWithOptions()
 
 ```ts
 static announceForAccessibilityWithOptions(
@@ -53,15 +57,17 @@ static announceForAccessibilityWithOptions(
 
 **Параметры:**
 
-| Name                                                          | Type   | Description                                                          |
-| ------------------------------------------------------------- | ------ | -------------------------------------------------------------------- |
-| announcement <div class="label basic required">Required</div> | string | The string to be announced                                           |
-| options <div class="label basic required">Required</div>      | object | `queue` — queue the announcement behind existing speech :simple-ios: |
+| Имя                          | Тип    | Описание                                                                    |
+| ---------------------------- | ------ | --------------------------------------------------------------------------- |
+| `announcement` (обязательно) | string | Строка, которая будет объявлена                                             |
+| `options` (обязательно)      | object | `queue` — поставить в очередь объявление за существующей речью :simple-ios: |
 
-### `getRecommendedTimeoutMillis()` :simple-android:
+### getRecommendedTimeoutMillis() :simple-android:
 
 ```ts
-static getRecommendedTimeoutMillis(originalTimeout: number): Promise<number>;
+static getRecommendedTimeoutMillis(
+	originalTimeout: number
+): Promise<number>;
 ```
 
 Получает тайм-аут в миллисекундах, который необходим пользователю.
@@ -69,11 +75,11 @@ static getRecommendedTimeoutMillis(originalTimeout: number): Promise<number>;
 
 **Параметры:**
 
-| Name                                                             | Type   | Description                                                                           |
-| ---------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------- |
-| originalTimeout <div class="label basic required">Required</div> | number | The timeout to return if "Accessibility timeout" is not set. Specify in milliseconds. |
+| Имя                             | Тип    | Описание                                                                                                         |
+| ------------------------------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
+| `originalTimeout` (обязательно) | number | Таймаут, который возвращается, если параметр "Accessibility timeout" не установлен. Указывается в миллисекундах. |
 
-### `isAccessibilityServiceEnabled()` :simple-android:
+### isAccessibilityServiceEnabled() :simple-android:
 
 ```ts
 static isAccessibilityServiceEnabled(): Promise<boolean>;
@@ -85,7 +91,7 @@ static isAccessibilityServiceEnabled(): Promise<boolean>;
 
     Пожалуйста, используйте `isScreenReaderEnabled`, если вы хотите проверить только состояние TalkBack.
 
-### `isBoldTextEnabled()` :simple-ios:
+### isBoldTextEnabled() :simple-ios:
 
 ```ts
 static isBoldTextEnabled(): Promise<boolean>:
@@ -93,7 +99,7 @@ static isBoldTextEnabled(): Promise<boolean>:
 
 Запрос о том, включен ли в данный момент полужирный текст. Возвращает обещание, которое разрешается в булево число. Результат будет `true`, если полужирный текст включен, и `false` в противном случае.
 
-### `isGrayscaleEnabled()` :simple-ios:
+### isGrayscaleEnabled() :simple-ios:
 
 ```ts
 static isGrayscaleEnabled(): Promise<boolean>;
@@ -101,7 +107,7 @@ static isGrayscaleEnabled(): Promise<boolean>;
 
 Запрос о том, включена ли в данный момент шкала серого. Возвращает обещание, которое разрешается в булево число. Результат будет `true`, если шкала серого включена, и `false` в противном случае.
 
-### `isInvertColorsEnabled()` :simple-ios:
+### isInvertColorsEnabled() :simple-ios:
 
 ```ts
 static isInvertColorsEnabled(): Promise<boolean>;
@@ -109,7 +115,7 @@ static isInvertColorsEnabled(): Promise<boolean>;
 
 Запрос о том, включена ли в данный момент функция инвертирования цветов. Возвращает обещание, которое разрешается в булево число. Результат будет `true`, если инвертирование цветов включено, и `false` в противном случае.
 
-### `isReduceMotionEnabled()`
+### isReduceMotionEnabled()
 
 ```ts
 static isReduceMotionEnabled(): Promise<boolean>;
@@ -117,15 +123,15 @@ static isReduceMotionEnabled(): Promise<boolean>;
 
 Запрос о том, включено ли в данный момент уменьшение движения. Возвращает обещание, которое разрешается в булево число. Результат будет `true`, если движение уменьшения включено, и `false` в противном случае.
 
-### `isReduceTransparencyEnabled()` :simple-ios:
+### isReduceTransparencyEnabled() :simple-ios:
 
 ```ts
 static isReduceTransparencyEnabled(): Promise<boolean>;
 ```
 
-Query whether reduce transparency is currently enabled. Returns a promise which resolves to a boolean. The result is `true` when a reduce transparency is enabled and `false` otherwise.
+Запрашивает, включена ли в данный момент прозрачность уменьшения. Возвращает обещание, которое разрешается в логическое число. Результат будет `true`, если прозрачность уменьшения включена, и `false` в противном случае.
 
-### `isScreenReaderEnabled()`.
+### isScreenReaderEnabled()
 
 ```ts
 static isScreenReaderEnabled(): Promise<boolean>;
@@ -133,7 +139,7 @@ static isScreenReaderEnabled(): Promise<boolean>;
 
 Запрос о том, включено ли в данный момент устройство чтения с экрана. Возвращает обещание, которое разрешается в булево число. Результат будет `true`, если устройство чтения с экрана включено, и `false` в противном случае.
 
-### `prefersCrossFadeTransitions()` :simple-ios:
+### prefersCrossFadeTransitions() :simple-ios:
 
 ```ts
 static prefersCrossFadeTransitions(): Promise<boolean>;
@@ -141,7 +147,7 @@ static prefersCrossFadeTransitions(): Promise<boolean>;
 
 Запрос о том, включены ли в данный момент настройки уменьшения движения и предпочтения переходов кроссфейда. Возвращает обещание, которое разрешается в булево число. Результат будет `true`, если предпочтение переходов кроссфейда включено, и `false` в противном случае.
 
-### `setAccessibilityFocus()`.
+### setAccessibilityFocus()
 
 ```ts
 static setAccessibilityFocus(reactTag: number);
@@ -154,3 +160,7 @@ static setAccessibilityFocus(reactTag: number);
 !!!note "Примечание"
 
     Убедитесь, что любой `View`, который вы хотите получить фокус доступности, имеет `accessible={true}`.
+
+## Ссылки
+
+-   [https://reactnative.dev/docs/accessibilityinfo](https://reactnative.dev/docs/accessibilityinfo)

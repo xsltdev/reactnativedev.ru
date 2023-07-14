@@ -1,14 +1,18 @@
+---
+description: 2D-значение для управления 2D-анимацией, например, жестами панорамирования. Почти идентичный API обычному Animated.Value
+---
+
 # Animated.ValueXY
 
 2D-значение для управления 2D-анимацией, например, жестами панорамирования. Почти идентичный API обычному [`Animated.Value`](animatedvalue.md), но мультиплексированный. Содержит под капотом два обычных `Animated.Value`.
 
-## Пример
+## Пример {: #example}
 
 <div data-snack-id="@bndby/animated.valuexy" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-## Методы
+## Методы {: #methods}
 
-### `setValue()`
+### setValue()
 
 ```ts
 setValue(value: {x: number; y: number});
@@ -18,11 +22,11 @@ setValue(value: {x: number; y: number});
 
 **Параметры:**
 
-| Имя   | Тип                  | Требуемый | Описание |
-| ----- | -------------------- | --------- | -------- |
-| value | {x: число; y: число} | Да        | Значение |
+| Имя     | Тип                      | Требуемый | Описание |
+| ------- | ------------------------ | --------- | -------- |
+| `value` | `{x: number; y: number}` | Да        | Значение |
 
-### `setOffset()`
+### setOffset()
 
 ```ts
 setOffset(offset: {x: number; y: number});
@@ -32,11 +36,11 @@ setOffset(offset: {x: number; y: number});
 
 **Параметры:**
 
-| Имя      | Тип                  | Требуемый | Описание          |
-| -------- | -------------------- | --------- | ----------------- |
-| смещение | {x: число; y: число} | Да        | Значение смещения |
+| Имя      | Тип                      | Требуемый | Описание          |
+| -------- | ------------------------ | --------- | ----------------- |
+| `offset` | `{x: number; y: number}` | Да        | Значение смещения |
 
-### `flattenOffset()`
+### flattenOffset()
 
 ```ts
 flattenOffset();
@@ -44,7 +48,7 @@ flattenOffset();
 
 Объединяет значение смещения с базовым значением и сбрасывает смещение на ноль. Окончательный вывод значения не изменяется.
 
-### `extractOffset()`
+### extractOffset()
 
 ```ts
 extractOffset();
@@ -52,7 +56,7 @@ extractOffset();
 
 Устанавливает значение смещения на базовое значение и сбрасывает базовое значение на ноль. Окончательный вывод значения не изменяется.
 
-### `addListener()`
+### addListener()
 
 ```ts
 addListener(callback: (value: {x: number; y: number}) => void);
@@ -64,11 +68,11 @@ addListener(callback: (value: {x: number; y: number}) => void);
 
 **Параметры:**
 
-| Имя      | Тип      | Требуется | Описание                                                                                            |
-| -------- | -------- | --------- | --------------------------------------------------------------------------------------------------- |
-| callback | function | Yes       | Функция обратного вызова, которая получит объект с ключом `value`, установленным на новое значение. |
+| Имя        | Тип      | Требуется | Описание                                                                                            |
+| ---------- | -------- | --------- | --------------------------------------------------------------------------------------------------- |
+| `callback` | function | Да        | Функция обратного вызова, которая получит объект с ключом `value`, установленным на новое значение. |
 
-### `removeListener()`
+### removeListener()
 
 ```ts
 removeListener(id: string);
@@ -78,11 +82,11 @@ removeListener(id: string);
 
 **Параметры:**
 
-| Имя | Тип    | Требуется | Описание                     |
-| --- | ------ | --------- | ---------------------------- |
-| id  | string | Yes       | Id для удаляемого слушателя. |
+| Имя  | Тип    | Требуется | Описание                     |
+| ---- | ------ | --------- | ---------------------------- |
+| `id` | string | Да        | Id для удаляемого слушателя. |
 
-### `removeAllListeners()`
+### removeAllListeners()
 
 ```ts
 removeAllListeners();
@@ -90,7 +94,7 @@ removeAllListeners();
 
 Удалите всех зарегистрированных слушателей.
 
-### `stopAnimation()`
+### stopAnimation()
 
 ```ts
 stopAnimation(callback?: (value: {x: number; y: number}) => void);
@@ -100,11 +104,11 @@ stopAnimation(callback?: (value: {x: number; y: number}) => void);
 
 **Параметры:**
 
-| Имя      | Тип      | Требуемый | Описание                                           |
-| -------- | -------- | --------- | -------------------------------------------------- |
-| callback | function | No        | Функция, которая будет получать конечное значение. |
+| Имя        | Тип      | Требуемый | Описание                                           |
+| ---------- | -------- | --------- | -------------------------------------------------- |
+| `callback` | function | Нет       | Функция, которая будет получать конечное значение. |
 
-### `resetAnimation()`
+### resetAnimation()
 
 ```ts
 resetAnimation(callback?: (value: {x: number; y: number}) => void);
@@ -114,11 +118,11 @@ resetAnimation(callback?: (value: {x: number; y: number}) => void);
 
 **Параметры:**
 
-| Имя      | Тип      | Требуемый | Описание                                           |
-| -------- | -------- | --------- | -------------------------------------------------- |
-| callback | function | No        | Функция, которая будет получать исходное значение. |
+| Имя        | Тип      | Требуемый | Описание                                           |
+| ---------- | -------- | --------- | -------------------------------------------------- |
+| `callback` | function | Нет       | Функция, которая будет получать исходное значение. |
 
-### `getLayout()`
+### getLayout()
 
 ```ts
 getLayout(): {left: Animated.Value, top: Animated.Value};
@@ -130,7 +134,7 @@ getLayout(): {left: Animated.Value, top: Animated.Value};
 style={this.state.anim.getLayout()}
 ```
 
-### `getTranslateTransform()`
+### getTranslateTransform()
 
 ```ts
 getTranslateTransform(): [
@@ -146,3 +150,7 @@ style={{
   transform: this.state.anim.getTranslateTransform()
 }}
 ```
+
+## Ссылки
+
+-   [https://reactnative.dev/docs/animatedvaluexy](https://reactnative.dev/docs/animatedvaluexy)
