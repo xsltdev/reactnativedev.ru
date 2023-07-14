@@ -26,6 +26,14 @@ hide:
 
     [:octicons-arrow-right-24: Архитектура](architecture/architecture-overview.md)
 
+-   :material-comment-account-outline:{ .lg .middle } **React Native Community**
+
+    ***
+
+    Компоненты и API React Native от сообщества
+
+    [:octicons-arrow-right-24: Community](community/index.md)
+
 </div>
 
 ---
