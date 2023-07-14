@@ -8,7 +8,7 @@
 
 !!!info ""
 
-    Создание обратно совместимого Fabric Native Component требует знаний о том, как создать Legacy Native Component. Чтобы вспомнить эти понятия, ознакомьтесь с этим [руководством](pillars-fabric-components.md).
+    Создание обратно совместимого Fabric Native Component требует знаний о том, как создать Legacy Native Component. Чтобы вспомнить эти понятия, ознакомьтесь с этим [руководством](the-new-architecture-pillars-fabric-components.md).
 
     Fabric Native Components работают только при правильной настройке новой архитектуры. Если у вас уже есть библиотека, которую вы хотите перевести на новую архитектуру, ознакомьтесь также с [руководством по миграции](new-architecture-intro.md).
 
@@ -259,7 +259,7 @@ Class<RCTComponentViewProtocol> MyComponentViewCls(void)
 Таким образом, вам необходимо:
 
 1.  Создать Legacy Native Component по пути `src/oldarch`. Смотрите [это руководство](native-components-android.md), чтобы узнать, как создать Legacy Native Component.
-2.  Создайте нативный компонент Fabric по пути `src/newarch`. См. [это руководство](pillars-fabric-components.md), чтобы узнать, как создать Fabric Native Component.
+2.  Создайте нативный компонент Fabric по пути `src/newarch`. См. [это руководство](the-new-architecture-pillars-fabric-components.md), чтобы узнать, как создать Fabric Native Component.
 
 а затем поручите Gradle решить, какую реализацию выбрать.
 
