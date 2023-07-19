@@ -41,4 +41,4 @@ transform([{ skewX: '45deg' }]);
 
 !!!danger "Устарело"
 
-    Вместо этого используйте реквизит [`transform`](transforms.md#transform).
+    Вместо этого используйте пропс [`transform`](transforms.md#transform).

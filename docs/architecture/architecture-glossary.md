@@ -38,11 +38,11 @@ React Components с реализациями `render`, которые сводя
 
 ## React Element Tree (и React Element)
 
-Дерево _React Element Tree_ создается React на JavaScript и состоит из React Elements. Элемент _React Element_ — это обычный объект JavaScript, который описывает то, что должно появиться на экране. Он включает в себя реквизиты, стили и дочерние элементы. React Elements существуют только в JavaScript и могут представлять собой инстансы либо React Composite Components, либо React Host Components. [Подробнее о компонентах и элементах React читайте в этой статье блога](https://reactjs.org/blog/2015/12/18/react-components-elements-and-instances.html).
+Дерево _React Element Tree_ создается React на JavaScript и состоит из React Elements. Элемент _React Element_ — это обычный объект JavaScript, который описывает то, что должно появиться на экране. Он включает в себя пропсы, стили и дочерние элементы. React Elements существуют только в JavaScript и могут представлять собой инстансы либо React Composite Components, либо React Host Components. [Подробнее о компонентах и элементах React читайте в этой статье блога](https://reactjs.org/blog/2015/12/18/react-components-elements-and-instances.html).
 
 ## React Shadow Tree (и React Shadow Node)
 
-Дерево _React Shadow Tree_ создается рендерером Fabric и состоит из узлов React Shadow Nodes. Узел React Shadow Node — это объект, представляющий монтируемый компонент React Host, который содержит реквизиты, происходящие из JavaScript. Они также содержат информацию о компоновке (x, y, ширина, высота). В Fabric объекты React Shadow Node существуют в C++. До Fabric они существовали в куче среды выполнения мобильных приложений (например, Android JVM).
+Дерево _React Shadow Tree_ создается рендерером Fabric и состоит из узлов React Shadow Nodes. Узел React Shadow Node — это объект, представляющий монтируемый компонент React Host, который содержит пропсы, происходящие из JavaScript. Они также содержат информацию о компоновке (x, y, ширина, высота). В Fabric объекты React Shadow Node существуют в C++. До Fabric они существовали в куче среды выполнения мобильных приложений (например, Android JVM).
 
 ## Дерево йоги (и узел йоги)
 
