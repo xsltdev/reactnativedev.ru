@@ -6,7 +6,7 @@
 
 <div data-snack-id="@bndby/modal" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-## Реквизиты
+## пропсы
 
 ### [View Props](view.md#props)
 
@@ -16,7 +16,7 @@
 
 !!!danger "Устарело"
 
-    Вместо этого используйте реквизит [`animationType`](modal.md#animationtype).
+    Вместо этого используйте пропс [`animationType`](modal.md#animationtype).
 
 ### `animationType`
 
@@ -34,7 +34,7 @@
 
 ### `hardwareAccelerated` :simple-android:
 
-Реквизит `hardwareAccelerated` управляет тем, нужно ли принудительное аппаратное ускорение для базового окна.
+пропс `hardwareAccelerated` управляет тем, нужно ли принудительное аппаратное ускорение для базового окна.
 
 | Type | Default |
 | ---- | ------- |
@@ -42,7 +42,7 @@
 
 ### `onDismiss` :simple-ios:
 
-Реквизит `onDismiss` позволяет передать функцию, которая будет вызвана после того, как модальное окно будет закрыто.
+пропс `onDismiss` позволяет передать функцию, которая будет вызвана после того, как модальное окно будет закрыто.
 
 | Type     |
 | -------- |
@@ -58,7 +58,7 @@
 
 ### `onRequestClose`
 
-Обратный вызов `onRequestClose` вызывается, когда пользователь нажимает аппаратную кнопку "Назад" на Android или кнопку меню на Apple TV. Из-за этого необходимого реквизита имейте в виду, что события `BackHandler` не будут испускаться до тех пор, пока модал открыт.
+Обратный вызов `onRequestClose` вызывается, когда пользователь нажимает аппаратную кнопку "Назад" на Android или кнопку меню на Apple TV. Из-за этого необходимого пропса имейте в виду, что события `BackHandler` не будут испускаться до тех пор, пока модал открыт.
 
 На iOS этот обратный вызов вызывается, когда модальное окно закрывается с помощью жеста перетаскивания, когда `presentationStyle` имеет значение `pageSheet или formSheet`.
 
@@ -68,7 +68,7 @@
 
 ### `onShow`
 
-Реквизит `onShow` позволяет передать функцию, которая будет вызвана после показа модала.
+пропс `onShow` позволяет передать функцию, которая будет вызвана после показа модала.
 
 | Type     |
 | -------- |
@@ -76,7 +76,7 @@
 
 ### `presentationStyle` :simple-ios:
 
-Реквизит `presentationStyle` управляет тем, как отображается модальное окно (обычно на больших устройствах, таких как iPad или iPhone размера plus size). [Подробнее](https://developer.apple.com/reference/uikit/uimodalpresentationstyle).
+пропс `presentationStyle` управляет тем, как отображается модальное окно (обычно на больших устройствах, таких как iPad или iPhone размера plus size). [Подробнее](https://developer.apple.com/reference/uikit/uimodalpresentationstyle).
 
 Возможные значения:
 

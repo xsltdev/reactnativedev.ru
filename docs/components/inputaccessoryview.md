@@ -8,7 +8,7 @@
 
 Этот компонент также может быть использован для создания "липких" текстовых вводов (текстовых вводов, привязанных к верхней части клавиатуры). Для этого оберните `TextInput` компонентом `InputAccessoryView` и не задавайте `nativeID`. В качестве примера можно посмотреть [InputAccessoryViewExample.js](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/InputAccessoryView/InputAccessoryViewExample.js).
 
-## Реквизиты
+## пропсы
 
 ### `backgroundColor`
 

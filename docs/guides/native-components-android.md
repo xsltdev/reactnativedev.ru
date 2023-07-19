@@ -210,7 +210,7 @@ module.exports = requireNativeComponent('RCTImageView');
     }
     ```
 
-Чтобы сопоставить имя события `topChange` с реквизитом обратного вызова `onChange` в JavaScript, зарегистрируйте его, переопределив метод `getExportedCustomBubblingEventTypeConstants` в вашем `ViewManager`:
+Чтобы сопоставить имя события `topChange` с пропсом обратного вызова `onChange` в JavaScript, зарегистрируйте его, переопределив метод `getExportedCustomBubblingEventTypeConstants` в вашем `ViewManager`:
 
 === "Kotlin"
 

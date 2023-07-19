@@ -4,7 +4,7 @@
 
 <div data-snack-id="@bndby/viewstyleprops" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#fbfcfd;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-## Реквизиты
+## пропсы
 
 ### `backfaceVisibility`
 
