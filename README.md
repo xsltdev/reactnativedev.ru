@@ -16,6 +16,12 @@
 pip3 install -r ./requirements.txt
 ```
 
+Обновление пакетов:
+
+```
+pip3 install -r ./requirements.txt --upgrade
+```
+
 Сборка проекта:
 
 ```
