@@ -34,3 +34,10 @@ nav:
         - testing.md
         - typescript.md
         - redux-integration.md
+    - Навигаторы:
+        - stack-navigator.md
+        - native-stack-navigator.md
+        - drawer-navigator.md
+        - bottom-tab-navigator.md
+        - material-bottom-tab-navigator.md
+        - material-top-tab-navigator.md
