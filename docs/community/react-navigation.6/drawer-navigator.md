@@ -1,64 +1,60 @@
 ---
-id: drawer-navigator
-title: Drawer Navigator
-sidebar_label: Drawer
+description: Drawer Navigator отображает на боковой стороне экрана навигационный ящик, который можно открывать и закрывать с помощью жестов
 ---
 
-Drawer Navigator renders a navigation drawer on the side of the screen which can be opened and closed via gestures.
+# Drawer навигатор
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/drawer/drawer.mov" />
-  </video>
-</div>
+Drawer Navigator отображает на боковой стороне экрана навигационный ящик, который можно открывать и закрывать с помощью жестов.
 
-This wraps [`react-native-drawer-layout`](drawer-layout.md). If you want to use the tab view without React Navigation integration, use the library directly instead.
+![Drawer Navigator](drawer.apng)
 
-## Installation
+Это обертывание [`react-native-drawer-layout`](drawer-layout.md). Если вы хотите использовать представление вкладки без интеграции с React Navigation, используйте библиотеку напрямую.
 
-To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer):
+## Установка
 
-```bash npm2yarn
+Чтобы использовать этот навигатор, убедитесь, что у вас есть [`@react-navigation/native` и его зависимости (следуйте этому руководству)](getting-started.md), затем установите [`@react-navigation/drawer`](https://github.com/react-navigation/react-navigation/tree/main/packages/drawer):
+
+```bash
 npm install @react-navigation/drawer
 ```
 
-Then, you need to install and configure the libraries that are required by the drawer navigator:
+Затем необходимо установить и настроить библиотеки, необходимые для работы навигатора ящиков:
 
-1. First, install [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/).
+1.  Сначала установите [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) и [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/).
 
-   If you have a Expo managed project, in your project directory, run:
+    Если у вас есть проект, управляемый Expo, то в каталоге проекта выполните команду:
 
-   ```bash
-   npx expo install react-native-gesture-handler react-native-reanimated
-   ```
+    ```bash
+    npx expo install react-native-gesture-handler react-native-reanimated
+    ```
 
-   If you have a bare React Native project, in your project directory, run:
+    Если у вас есть "голый" проект React Native, в каталоге проекта выполните команду:
 
-   ```bash npm2yarn
-   npm install react-native-gesture-handler react-native-reanimated
-   ```
+    ```bash
+    npm install react-native-gesture-handler react-native-reanimated
+    ```
 
-   The Drawer Navigator supports both Reanimated 1 and Reanimated 2. If you want to use Reanimated 2, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
+    Навигатор Drawer Navigator поддерживает как Reanimated 1, так и Reanimated 2. Если вы хотите использовать Reanimated 2, то обязательно настройте его, следуя [руководству по установке](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
 
-2. To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+2.  Чтобы завершить установку `react-native-gesture-handler`, добавьте следующее в **верх** (убедитесь, что он находится в самом верху и перед ним нет ничего другого) вашего входного файла, например `index.js` или `App.js`:
 
-   ```js
-   import 'react-native-gesture-handler';
-   ```
+    ```js
+    import 'react-native-gesture-handler';
+    ```
 
-   > Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+    !!!note ""
 
-3. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
+        Если вы создаете приложение для Android или iOS, не пропускайте этот шаг, иначе оно может упасть в производстве, даже если в разработке оно работает нормально. Это не относится к другим платформам.
 
-```bash
-npx pod-install ios
-```
+3.  Если вы работаете на Mac и разрабатываете приложение для iOS, вам также необходимо установить капсулы (через [Cocoapods](https://cocoapods.org/)) для завершения связывания.
 
-## API Definition
+    ```bash
+    npx pod-install ios
+    ```
 
-To use this drawer navigator, import it from `@react-navigation/drawer`:
+## Определение API
 
-<samp id="simple-drawer" />
+Чтобы использовать этот навигатор, импортируйте его из `@react-navigation/drawer`:
 
 ```js
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -66,264 +62,273 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 const Drawer = createDrawerNavigator();
 
 function MyDrawer() {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Feed" component={Feed} />
-      <Drawer.Screen name="Article" component={Article} />
-    </Drawer.Navigator>
-  );
+    return (
+        <Drawer.Navigator>
+            <Drawer.Screen name="Feed" component={Feed} />
+            <Drawer.Screen
+                name="Article"
+                component={Article}
+            />
+        </Drawer.Navigator>
+    );
 }
 ```
 
-> For a complete usage guide please visit [Drawer Navigation](drawer-based-navigation.md).
+!!!note ""
 
-### Props
+    Полное руководство по использованию приведено на сайте [Drawer Navigation](drawer-based-navigation.md).
 
-The `Drawer.Navigator` component accepts following props:
+### Пропсы {#props}
+
+Компонент `Drawer.Navigator` принимает следующие параметры:
 
 #### `id`
 
-Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
+Необязательный уникальный идентификатор навигатора. Он может быть использован с помощью [`navigation.getParent`](navigation-prop.md#getparent) для ссылки на этот навигатор в дочернем навигаторе.
 
 #### `initialRouteName`
 
-The name of the route to render on the first load of the navigator.
+Имя маршрута, который должен отображаться при первой загрузке навигатора.
 
 #### `screenOptions`
 
-Default options to use for the screens in the navigator.
+Параметры по умолчанию, используемые для экранов в навигаторе.
 
 #### `backBehavior`
 
-This controls what happens when `goBack` is called in the navigator. This includes pressing the device's back button or back gesture on Android.
+Этот параметр управляет тем, что происходит при вызове `goBack` в навигаторе. Это включает в себя нажатие кнопки "назад" на устройстве или жест "назад" на Android.
 
-It supports the following values:
+Поддерживаются следующие значения:
 
-- `firstRoute` - return to the first screen defined in the navigator (default)
-- `initialRoute` - return to initial screen passed in `initialRouteName` prop, if not passed, defaults to the first screen
-- `order` - return to screen defined before the focused screen
-- `history` - return to last visited screen in the navigator; if the same screen is visited multiple times, the older entries are dropped from the history
-- `none` - do not handle back button
+-   `firstRoute` - возврат на первый экран, заданный в навигаторе (по умолчанию)
+-   `initialRoute` - возврат к начальному экрану, переданному в параметре `initialRouteName`, если значение не передано, то по умолчанию возвращается к первому экрану
+-   `order` - возврат к экрану, определенному перед сфокусированным экраном
+-   `history` - возврат к последнему посещенному экрану в навигаторе; если один и тот же экран посещается несколько раз, то старые записи удаляются из истории
+-   `none` - не обрабатывать кнопку "Назад
 
 #### `defaultStatus`
 
-The default status of the drawer - whether the drawer should stay `open` or `closed` by default.
+Статус ящика по умолчанию - должен ли ящик по умолчанию оставаться `open` или `closed`.
 
-When this is set to `open`, the drawer will be open from the initial render. It can be closed normally using gestures or programmatically. However, when going back, the drawer will re-open if it was closed. This is essentially the opposite of the default behavior of the drawer where it starts `closed`, and the back button closes an open drawer.
+Если установлено значение `open`, то ящик будет открыт с момента первоначального рендеринга. Он может быть закрыт обычным способом с помощью жестов или программно. Однако при возврате назад ящик снова откроется, если он был закрыт. Это, по сути, противоположно поведению ящика по умолчанию, когда он начинается с `closed`, а кнопка назад закрывает открытый ящик.
 
 #### `detachInactiveScreens`
 
-Boolean used to indicate whether inactive screens should be detached from the view hierarchy to save memory. This enables integration with [react-native-screens](https://github.com/software-mansion/react-native-screens). Defaults to `true`.
+Булево значение, используемое для указания того, следует ли отделять неактивные экраны от иерархии представлений для экономии памяти. Это обеспечивает интеграцию с [react-native-screens](https://github.com/software-mansion/react-native-screens). По умолчанию имеет значение `true`.
 
 #### `useLegacyImplementation`
 
-Whether to use the legacy implementation based on Reanimated 1. The new implementation based on Reanimated 2 will perform better, but you need additional configuration and need to use Hermes with Flipper to debug.
+Использовать ли старую реализацию, основанную на Reanimated 1. Новая реализация, основанная на Reanimated 2, будет работать лучше, но потребует дополнительной настройки и необходимости использования Hermes с Flipper для отладки.
 
-This defaults to `true` in the following cases:
+Это значение по умолчанию равно `true` в следующих случаях:
 
-- Reanimated 2 is not configured
-- App is connected to Chrome debugger (Reanimated 2 cannot be used with Chrome debugger)
-- App is running on Web
+-   Reanimated 2 не настроен
+-   Приложение подключено к отладчику Chrome (Reanimated 2 не может быть использован с отладчиком Chrome)
+-   Приложение запущено на Web
 
-Otherwise, it defaults to `false`
+В противном случае значение по умолчанию равно `false`.
 
 #### `drawerContent`
 
-Function that returns React element to render as the content of the drawer, for example, navigation items
+Функция, возвращающая React-элемент для отображения в качестве содержимого ящика, например, элементов навигации.
 
-The content component receives the following props by default:
+Компонент content по умолчанию получает следующие реквизиты:
 
-- `state` - The [navigation state](navigation-state.md) of the navigator.
-- `navigation` - The navigation object for the navigator.
-- `descriptors` - An descriptor object containing options for the drawer screens. The options can be accessed at `descriptors[route.key].options`.
+-   `state` - Состояние [навигации](navigation-state.md) навигатора.
+-   `navigation` - Объект навигации для навигатора.
+-   `descriptors` - Объект дескриптора, содержащий опции для экранов ящиков. Доступ к опциям можно получить по адресу `descriptors[route.key].options`.
 
-##### Providing a custom `drawerContent`
+##### Предоставление пользовательского `drawerContent`
 
-The default component for the drawer is scrollable and only contains links for the routes in the RouteConfig. You can easily override the default component to add a header, footer, or other content to the drawer. The default content component is exported as `DrawerContent`. It renders a `DrawerItemList` component inside a `ScrollView`.
+Компонент по умолчанию для ящика прокручивается и содержит только ссылки на маршруты в RouteConfig. Вы можете легко переопределить компонент по умолчанию, чтобы добавить в ящик верхний и нижний колонтитулы или другое содержимое. Компонент содержимого по умолчанию экспортируется как `DrawerContent`. Он отображает компонент `DrawerItemList` внутри `ScrollView`.
 
-By default, the drawer is scrollable and supports devices with notches. If you customize the content, you can use `DrawerContentScrollView` to handle this automatically:
+По умолчанию ящик имеет возможность прокрутки и поддерживает устройства с насечками. Если вы настраиваете содержимое, то можете использовать `DrawerContentScrollView` для автоматической прокрутки:
 
 ```js
 import {
-  DrawerContentScrollView,
-  DrawerItemList,
+    DrawerContentScrollView,
+    DrawerItemList,
 } from '@react-navigation/drawer';
 
 function CustomDrawerContent(props) {
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-    </DrawerContentScrollView>
-  );
+    return (
+        <DrawerContentScrollView {...props}>
+            <DrawerItemList {...props} />
+        </DrawerContentScrollView>
+    );
 }
 ```
 
-To add additional items in the drawer, you can use the `DrawerItem` component:
-
-<samp id="custom-drawer-content" />
+Для добавления дополнительных элементов в ящик можно использовать компонент `DrawerItem`:
 
 ```js
 function CustomDrawerContent(props) {
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-      <DrawerItem
-        label="Help"
-        onPress={() => Linking.openURL('https://mywebsite.com/help')}
-      />
-    </DrawerContentScrollView>
-  );
+    return (
+        <DrawerContentScrollView {...props}>
+            <DrawerItemList {...props} />
+            <DrawerItem
+                label="Help"
+                onPress={() =>
+                    Linking.openURL(
+                        'https://mywebsite.com/help'
+                    )
+                }
+            />
+        </DrawerContentScrollView>
+    );
 }
 ```
 
-The `DrawerItem` component accepts the following props:
+Компонент `DrawerItem` принимает следующие свойства:
 
-- `label` (required): The label text of the item. Can be string, or a function returning a react element. e.g. `({ focused, color }) => <Text style={{ color }}>{focused ? 'Focused text' : 'Unfocused text'}</Text>`.
-- `icon`: Icon to display for the item. Accepts a function returning a react element. e.g. `({ focused, color, size }) => <Icon color={color} size={size} name={focused ? 'heart' : 'heart-outline'} />`.
-- `focused`: Boolean indicating whether to highlight the drawer item as active.
-- `onPress` (required): Function to execute on press.
-- `activeTintColor`: Color for the icon and label when the item is active.
-- `inactiveTintColor`: Color for the icon and label when the item is inactive.
-- `activeBackgroundColor`: Background color for item when it's active.
-- `inactiveBackgroundColor`: Background color for item when it's inactive.
-- `labelStyle`: Style object for the label `Text`.
-- `style`: Style object for the wrapper `View`.
+-   `label` (required): Текст метки элемента. Может быть строкой или функцией, возвращающей элемент react. Например, `({ focused, color }) => <Text style={{ color }}>{focused ? 'Focused text' : 'Unfocused text'}</Text>`.
+-   `icon`: Иконка для отображения элемента. Принимает функцию, возвращающую элемент react. Например, `({ focused, color, size }) => <Icon color={color} size={size} name={focused ? 'heart' : 'heart-outline'} />`.
+-   `focused`: Булево значение, указывающее, следует ли выделять элемент ящика как активный.
+-   `onPress` (required): Функция, выполняемая при нажатии.
+-   `activeTintColor`: Цвет для пиктограммы и метки, когда элемент активен.
+-   `inactiveTintColor`: Цвет для пиктограммы и ярлыка, когда элемент неактивен.
+-   `activeBackgroundColor`: Цвет фона для активного элемента.
+-   `inactiveBackgroundColor`: Цвет фона для неактивного элемента.
+-   `labelStyle`: Объект стиля для метки `Text`.
+-   `style`: Объект стиля для обертки `View`.
 
-The `progress` object can be used to do interesting animations in your `drawerContent`, such as parallax motion of the drawer contents:
-
-<samp id="animated-drawer-content" />
+Объект `progress` может быть использован для создания интересной анимации в `drawerContent`, например, параллаксного движения содержимого ящика:
 
 ```js
 function CustomDrawerContent(props) {
-  const progress = useDrawerProgress();
+    const progress = useDrawerProgress();
 
-  // If you are on react-native-reanimated 1.x, use `Animated.interpolate` instead of `Animated.interpolateNode`
-  const translateX = Animated.interpolateNode(progress, {
-    inputRange: [0, 1],
-    outputRange: [-100, 0],
-  });
+    // If you are on react-native-reanimated 1.x, use `Animated.interpolate` instead of `Animated.interpolateNode`
+    const translateX = Animated.interpolateNode(progress, {
+        inputRange: [0, 1],
+        outputRange: [-100, 0],
+    });
 
-  return (
-    <Animated.View style={{ transform: [{ translateX }] }}>
-      {/* ... drawer contents */}
-    </Animated.View>
-  );
+    return (
+        <Animated.View
+            style={{ transform: [{ translateX }] }}
+        >
+            {/* ... drawer contents */}
+        </Animated.View>
+    );
 }
 ```
 
-The `progress` object is a Reanimated `Node` if you're using Reanimated 1 (see [`useLegacyImplementation`](#uselegacyimplementation)), otherwise a `SharedValue`. It represents the animated position of the drawer (0 is closed; 1 is open).
+Объект `progress` представляет собой Reanimated `Node`, если используется Reanimated 1 (см. [`useLegacyImplementation`](#uselegacyimplementation)), в противном случае - `SharedValue`. Оно представляет собой анимированное положение drawer (0 - закрыт, 1 - открыт).
 
-Note that you **cannot** use the `useNavigation` hook inside the `drawerContent` since `useNavigation` is only available inside screens. You get a `navigation` prop for your `drawerContent` which you can use instead:
+Обратите внимание, что вы **не можете** использовать хук `useNavigation` внутри `drawerContent`, поскольку `useNavigation` доступен только внутри экранов. Вы получаете свойство `navigation` для вашего `drawerContent`, которое можно использовать вместо него:
 
 ```js
 function CustomDrawerContent({ navigation }) {
-  return (
-    <Button
-      title="Go somewhere"
-      onPress={() => {
-        // Navigate using the `navigation` prop that you received
-        navigation.navigate('SomeScreen');
-      }}
-    />
-  );
+    return (
+        <Button
+            title="Go somewhere"
+            onPress={() => {
+                // Navigate using the `navigation` prop that you received
+                navigation.navigate('SomeScreen');
+            }}
+        />
+    );
 }
 ```
 
-To use the custom component, we need to pass it in the `drawerContent` prop:
-
-```js
-<Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
-  {/* screens */}
-</Drawer.Navigator>
-```
-
-### Options
-
-The following [options](screen-options.md) can be used to configure the screens in the navigator. These can be specified under `screenOptions` prop of `Drawer.navigator` or `options` prop of `Drawer.Screen`.
-
-#### `title`
-
-A generic title that can be used as a fallback for `headerTitle` and `drawerLabel`.
-
-#### `lazy`
-
-Whether this screen should render the first time it's accessed. Defaults to `true`. Set it to `false` if you want to render the screen on initial render.
-
-#### `drawerLabel`
-
-String or a function that given `{ focused: boolean, color: string }` returns a React.Node, to display in drawer sidebar. When undefined, scene `title` is used.
-
-#### `drawerIcon`
-
-Function, that given `{ focused: boolean, color: string, size: number }` returns a React.Node to display in drawer sidebar.
-
-#### `drawerActiveTintColor`
-
-Color for the icon and label in the active item in the drawer.
-
-#### `drawerActiveBackgroundColor`
-
-Background color for the active item in the drawer.
-
-#### `drawerInactiveTintColor`
-
-Color for the icon and label in the inactive items in the drawer.
-
-#### `drawerInactiveBackgroundColor`
-
-Background color for the inactive items in the drawer.
-
-#### `drawerItemStyle`
-
-Style object for the single item, which can contain an icon and/or a label.
-
-#### `drawerLabelStyle`
-
-Style object to apply to the `Text` style inside content section which renders a label.
-
-#### `drawerContentContainerStyle`
-
-Style object for the content section inside the `ScrollView`.
-
-#### `drawerContentStyle`
-
-Style object for the wrapper view.
-
-#### `drawerStyle`
-
-Style object for the drawer component. You can pass a custom background color for a drawer or a custom width here.
-
-<samp id="drawer-with-style" />
+Чтобы использовать пользовательский компонент, нам необходимо передать его в свойстве `drawerContent`:
 
 ```js
 <Drawer.Navigator
-  screenOptions={{
-    drawerStyle: {
-      backgroundColor: '#c6cbef',
-      width: 240,
-    },
-  }}
+    drawerContent={(props) => (
+        <CustomDrawerContent {...props} />
+    )}
 >
-  {/* screens */}
+    {/* screens */}
+</Drawer.Navigator>
+```
+
+### Свойства {#options}
+
+Для настройки экранов в навигаторе можно использовать следующие [options](screen-options.md). Они могут быть указаны в свойствах `screenOptions` свойства `Drawer.navigator` или `options` свойства `Drawer.Screen`.
+
+#### `title`
+
+Общий заголовок, который может использоваться в качестве запасного варианта для `headerTitle` и `drawerLabel`.
+
+#### `lazy`
+
+Должен ли этот экран отображаться при первом обращении к нему. По умолчанию имеет значение `true`. Установите значение `false`, если вы хотите, чтобы экран отображался при первом обращении.
+
+#### `drawerLabel`
+
+Строка или функция, которая по команде `{ focused: boolean, color: string }` возвращает узел React.Node для отображения в боковой панели drawer. Если значение не определено, используется сцена `title`.
+
+#### `drawerIcon`
+
+Функция, задающая `{ focused: boolean, color: string, size: number }`, возвращает React.Node для отображения в боковой панели drawer.
+
+#### `drawerActiveTintColor`
+
+Цвет для пиктограммы и метки активного элемента в drawer.
+
+#### `drawerActiveBackgroundColor`
+
+Цвет фона для активного элемента в drawer.
+
+#### `drawerInactiveTintColor`
+
+Цвет для пиктограммы и метки неактивных элементов в drawer.
+
+#### `drawerInactiveBackgroundColor`
+
+Цвет фона для неактивных элементов в drawer.
+
+#### `drawerItemStyle`
+
+Объект стиля для отдельного элемента, который может содержать иконку и/или метку.
+
+#### `drawerLabelStyle`
+
+Объект стиля для применения к стилю `Text` внутри секции content, в которой отображается метка.
+
+#### `drawerContentContainerStyle`
+
+Объект стиля для секции содержимого внутри `ScrollView`.
+
+#### `drawerContentStyle`
+
+Объект стиля для представления-обертки.
+
+#### `drawerStyle`
+
+Объект стиля для компонента drawer. Сюда можно передать пользовательский цвет фона drawer или его ширину.
+
+```js
+<Drawer.Navigator
+    screenOptions={{
+        drawerStyle: {
+            backgroundColor: '#c6cbef',
+            width: 240,
+        },
+    }}
+>
+    {/* screens */}
 </Drawer.Navigator>
 ```
 
 #### `drawerPosition`
 
-Options are `left` or `right`. Defaults to `left` for LTR languages and `right` for RTL languages.
+В качестве опций можно выбрать `left` или `right`. По умолчанию `left` для языков LTR и `right` для языков RTL.
 
 #### `drawerType`
 
-Type of the drawer. It determines how the drawer looks and animates.
+Тип ящика. Он определяет внешний вид и анимацию ящика.
 
-- `front`: Traditional drawer which covers the screen with an overlay behind it.
-- `back`: The drawer is revealed behind the screen on swipe.
-- `slide`: Both the screen and the drawer slide on swipe to reveal the drawer.
-- `permanent`: A permanent drawer is shown as a sidebar. Useful for having always visible drawer on larger screens.
+-   `front`: Традиционный ящик, закрывающий экран с накладкой за ним.
+-   `back`: Ящик открывается за экраном при пролистывании.
+-   `slide`: Экран и ящик сдвигаются при пролистывании, открывая ящик.
+-   `permanent`: Постоянный ящик отображается в виде боковой панели. Полезно для того, чтобы ящик всегда был виден на больших экранах.
 
-Defaults to `slide` on iOS and `front` on other platforms.
+По умолчанию используется значение `slide` на iOS и `front` на других платформах.
 
-You can conditionally specify the `drawerType` to show a permanent drawer on bigger screens and a traditional drawer drawer on small screens:
+Можно условно указать `drawerType` для отображения постоянного ящика на больших экранах и традиционного ящика на маленьких экранах:
 
 ```js
 import { useWindowDimensions } from 'react-native';
@@ -332,21 +337,24 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 const Drawer = createDrawerNavigator();
 
 function MyDrawer() {
-  const dimensions = useWindowDimensions();
+    const dimensions = useWindowDimensions();
 
-  return (
-    <Drawer.Navigator
-      screenOptions={{
-        drawerType: dimensions.width >= 768 ? 'permanent' : 'front',
-      }}
-    >
-      {/* Screens */}
-    </Drawer.Navigator>
-  );
+    return (
+        <Drawer.Navigator
+            screenOptions={{
+                drawerType:
+                    dimensions.width >= 768
+                        ? 'permanent'
+                        : 'front',
+            }}
+        >
+            {/* Screens */}
+        </Drawer.Navigator>
+    );
 }
 ```
 
-You can also specify other props such as `drawerStyle` based on screen size to customize the behavior. For example, you can combine it with `defaultStatus="open"` to achieve a master-detail layout:
+Для настройки поведения можно указать и другие реквизиты, например `drawerStyle`, в зависимости от размера экрана. Например, в сочетании с `defaultStatus="open"` можно получить макет "мастер-деталь":
 
 ```js
 import { useWindowDimensions } from 'react-native';
@@ -355,108 +363,113 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 const Drawer = createDrawerNavigator();
 
 function MyDrawer() {
-  const dimensions = useWindowDimensions();
+    const dimensions = useWindowDimensions();
 
-  const isLargeScreen = dimensions.width >= 768;
+    const isLargeScreen = dimensions.width >= 768;
 
-  return (
-    <Drawer.Navigator
-      defaultStatus="open"
-      screenOptions={{
-        drawerType: isLargeScreen ? 'permanent' : 'back',
-        drawerStyle: isLargeScreen ? null : { width: '100%' },
-        overlayColor: 'transparent',
-      }}
-    >
-      {/* Screens */}
-    </Drawer.Navigator>
-  );
+    return (
+        <Drawer.Navigator
+            defaultStatus="open"
+            screenOptions={{
+                drawerType: isLargeScreen
+                    ? 'permanent'
+                    : 'back',
+                drawerStyle: isLargeScreen
+                    ? null
+                    : { width: '100%' },
+                overlayColor: 'transparent',
+            }}
+        >
+            {/* Screens */}
+        </Drawer.Navigator>
+    );
 }
 ```
 
 #### `drawerHideStatusBarOnOpen`
 
-When set to `true`, Drawer will hide the OS status bar whenever the drawer is pulled or when it's in an "open" state.
+Если установить значение `true`, Drawer будет скрывать строку состояния ОС, когда ящик потянут или когда он находится в состоянии "открыт".
 
 #### `drawerStatusBarAnimation`
 
-Animation of the statusbar when hiding it. use in combination with `hideStatusBar`.
+Анимация статусбара при его скрытии. Используется в сочетании с `hideStatusBar`.
 
-Supported values:
+Поддерживаемые значения:
 
-- `slide`
-- `fade`
-- `none`
+-   `slide`
+-   `fade`
+-   `none`
 
-This is only supported on iOS. Defaults to `slide`.
+Это поддерживается только в iOS. По умолчанию используется значение `slide`.
 
 #### `overlayColor`
 
-Color overlay to be displayed on top of the content view when drawer gets open. The opacity is animated from `0` to `1` when the drawer opens.
+Цветное наложение, которое будет отображаться поверх представления содержимого при открытии ящика. Непрозрачность анимируется от `0` до `1` при открытии ящика.
 
 #### `sceneContainerStyle`
 
-Style object for the component wrapping the screen content.
+Объект стиля для компонента, оборачивающего содержимое экрана.
 
 #### `gestureHandlerProps`
 
-Props to pass to the underlying pan gesture handler.
+Свойства для передачи базовому обработчику жестов панорамирования.
 
-This is not supported on Web.
+Это не поддерживается в Web.
 
 #### `swipeEnabled`
 
-Whether you can use swipe gestures to open or close the drawer. Defaults to `true`.
+Можно ли использовать жесты пролистывания для открытия или закрытия ящика. По умолчанию имеет значение `true`.
 
-Swipe gesture is not supported on Web.
+Жест пролистывания не поддерживается в Web.
 
 #### `swipeEdgeWidth`
 
-Allows for defining how far from the edge of the content view the swipe gesture should activate.
+Позволяет определить, на каком расстоянии от края представления содержимого должен активироваться жест пролистывания.
 
-This is not supported on Web.
+В Web эта функция не поддерживается.
 
 #### `swipeMinDistance`
 
-Minimum swipe distance threshold that should activate opening the drawer.
+Минимальный порог расстояния между пальцами, при котором должно активироваться открытие ящика.
 
 #### `keyboardDismissMode`
 
-Whether the keyboard should be dismissed when the swipe gesture begins. Defaults to `'on-drag'`. Set to `'none'` to disable keyboard handling.
+Должна ли клавиатура отключаться, когда начинается жест пролистывания. По умолчанию имеет значение `'on-drag'`. Установите значение `'none'', чтобы отключить обработку клавиатуры.
 
 #### `unmountOnBlur`
 
-Whether this screen should be unmounted when navigating away from it. Unmounting a screen resets any local state in the screen as well as state of nested navigators in the screen. Defaults to `false`.
+Следует ли размонтировать этот экран при навигации от него. При размонтировании экрана сбрасываются все локальные состояния экрана, а также состояния вложенных в него навигаторов. По умолчанию имеет значение `false`.
 
-Normally, we don't recommend enabling this prop as users don't expect their navigation history to be lost when switching screens. If you enable this prop, please consider if this will actually provide a better experience for the user.
+Обычно мы не рекомендуем включать этот параметр, поскольку пользователи не ожидают, что их история навигации будет потеряна при переключении экранов. Если вы включаете этот параметр, пожалуйста, подумайте, действительно ли это обеспечит лучший опыт для пользователя.
 
 #### `freezeOnBlur`
 
-Boolean indicating whether to prevent inactive screens from re-rendering. Defaults to `false`.
-Defaults to `true` when `enableFreeze()` from `react-native-screens` package is run at the top of the application.
+Булево значение, указывающее, следует ли запретить повторное отображение неактивных экранов. По умолчанию имеет значение `false`.
 
-Requires `react-native-screens` version >=3.16.0.
+По умолчанию принимает значение `true`, если `enableFreeze()` из пакета `react-native-screens` запущен в верхней части приложения.
 
-Only supported on iOS and Android.
+Требуется версия `react-native-screens` >=3.16.0.
 
-### Header related options
+Поддерживается только на iOS и Android.
 
-You can find the list of header related options [here](elements.md#header). These [options](screen-options.md) can be specified under `screenOptions` prop of `Drawer.navigator` or `options` prop of `Drawer.Screen`. You don't have to be using `@react-navigation/elements` directly to use these options, they are just documented in that page.
+### Опции, связанные с заголовками
 
-In addition to those, the following options are also supported in drawer:
+Список опций, связанных с заголовками, можно найти [здесь](elements.md#header). Эти [опции](screen-options.md) могут быть указаны в свойствах `screenOptions` свойства `Drawer.navigator` или `options` свойства `Drawer.Screen`. Для использования этих опций не обязательно использовать непосредственно `@react-navigation/elements`, они просто документированы на этой странице.
+
+Кроме них, в drawer также поддерживаются следующие опции:
 
 #### `header`
 
-Custom header to use instead of the default header.
+Пользовательский заголовок, используемый вместо заголовка по умолчанию.
 
-This accepts a function that returns a React Element to display as a header. The function receives an object containing the following properties as the argument:
+Функция принимает функцию, возвращающую React-элемент для отображения в качестве заголовка. В качестве аргумента функция получает объект, содержащий следующие свойства:
 
-- `navigation` - The navigation object for the current screen.
-- `route` - The route object for the current screen.
-- `options` - The options for the current screen
-- `layout` - Dimensions of the screen, contains `height` and `width` properties.
+-   `navigation` - Объект навигации для текущего экрана.
+-   `route` - Объект маршрута для текущего экрана.
+-   `options` - Опции для текущего экрана.
+-   `layout` - Размеры экрана, содержит свойства `height` и `width`.
 
-Example:
+Пример:
 
 ```js
 import { getHeaderTitle } from '@react-navigation/elements';
@@ -464,19 +477,24 @@ import { getHeaderTitle } from '@react-navigation/elements';
 // ..
 
 header: ({ navigation, route, options }) => {
-  const title = getHeaderTitle(options, route.name);
+    const title = getHeaderTitle(options, route.name);
 
-  return <MyHeader title={title} style={options.headerStyle} />;
+    return (
+        <MyHeader
+            title={title}
+            style={options.headerStyle}
+        />
+    );
 };
 ```
 
-To set a custom header for all the screens in the navigator, you can specify this option in the `screenOptions` prop of the navigator.
+Чтобы задать пользовательский заголовок для всех экранов навигатора, можно указать эту опцию в свойстве `screenOptions` навигатора.
 
-##### Specify a `height` in `headerStyle`
+##### Укажите `height` в `headerStyle`
 
-If your custom header's height differs from the default header height, then you might notice glitches due to measurement being async. Explicitly specifying the height will avoid such glitches.
+Если высота пользовательского заголовка отличается от высоты заголовка по умолчанию, то могут наблюдаться глюки, связанные с несинхронностью измерений. Явное указание высоты позволит избежать таких глюков.
 
-Example:
+Пример:
 
 ```js
 headerStyle: {
@@ -484,50 +502,51 @@ headerStyle: {
 };
 ```
 
-Note that this style is not applied to the header by default since you control the styling of your custom header. If you also want to apply this style to your header, use `options.headerStyle` from the props.
+Обратите внимание, что по умолчанию этот стиль не применяется к заголовку, поскольку вы сами управляете стилем вашего пользовательского заголовка. Если вы также хотите применить этот стиль к заголовку, используйте `options.headerStyle` из реквизита.
 
 #### `headerShown`
 
-Whether to show or hide the header for the screen. The header is shown by default. Setting this to `false` hides the header.
+Показывать или скрывать заголовок экрана. По умолчанию заголовок отображается. Установка этого значения в `false` скрывает заголовок.
 
-### Events
+### События {#events}
 
-The navigator can [emit events](navigation-events.md) on certain actions. Supported events are:
+Навигатор может [выдавать события](navigation-events.md) на определенные действия. Поддерживаются следующие события:
 
 #### `drawerItemPress`
 
-This event is fired when the user presses the button for the screen in the drawer. By default a drawer item press does several things:
+Это событие возникает, когда пользователь нажимает кнопку для экрана в ящике. По умолчанию нажатие элемента ящика выполняет несколько действий:
 
-- If the screen is not focused, drawer item press will focus that screen
-- If the screen is already focused, then it'll close the drawer
+-   Если экран не сфокусирован, то нажатие элемента ящика сфокусирует этот экран.
+-   Если экран уже сфокусирован, то это приведет к закрытию ящика.
 
-To prevent the default behavior, you can call `event.preventDefault`:
+Чтобы предотвратить поведение по умолчанию, можно вызвать `event.preventDefault`:
 
 ```js
 React.useEffect(() => {
-  const unsubscribe = navigation.addListener('drawerItemPress', (e) => {
-    // Prevent default behavior
-    e.preventDefault();
+    const unsubscribe = navigation.addListener(
+        'drawerItemPress',
+        (e) => {
+            // Prevent default behavior
+            e.preventDefault();
 
-    // Do something manually
-    // ...
-  });
+            // Do something manually
+            // ...
+        }
+    );
 
-  return unsubscribe;
+    return unsubscribe;
 }, [navigation]);
 ```
 
-If you have custom drawer content, make sure to emit this event.
+Если у вас есть пользовательское содержимое ящика, обязательно вызовите это событие.
 
-### Helpers
+### Хелперы {#helpers}
 
-The drawer navigator adds the following methods to the navigation prop:
+Навигатор drawer добавляет в навигационный параметр следующие методы:
 
 #### `openDrawer`
 
-Opens the drawer pane.
-
-<samp id="drawer-open-close-toggle" />
+Открывает панель drawer.
 
 ```js
 navigation.openDrawer();
@@ -535,9 +554,7 @@ navigation.openDrawer();
 
 #### `closeDrawer`
 
-Closes the drawer pane.
-
-<samp id="drawer-open-close-toggle" />
+Закрывает панель drawer.
 
 ```js
 navigation.closeDrawer();
@@ -545,9 +562,7 @@ navigation.closeDrawer();
 
 #### `toggleDrawer`
 
-Opens the drawer pane if closed, closes the drawer pane if opened.
-
-<samp id="drawer-open-close-toggle" />
+Открывает панель drawer, если она закрыта, и закрывает панель drawer, если она открыта.
 
 ```js
 navigation.toggleDrawer();
@@ -555,20 +570,16 @@ navigation.toggleDrawer();
 
 #### `jumpTo`
 
-Navigates to an existing screen in the drawer navigator. The method accepts the following arguments:
+Осуществляет переход к существующему экрану в навигаторе ящика. Метод принимает следующие аргументы:
 
-- `name` - _string_ - Name of the route to jump to.
-- `params` - _object_ - Screen params to pass to the destination route.
-
-<samp id="drawer-jump-to" />
+-   `name` - _string_ - Имя маршрута, на который необходимо перейти.
+-   `params` - _object_ - Параметры экрана для передачи маршруту назначения.
 
 ```js
 navigation.jumpTo('Profile', { owner: 'Satya' });
 ```
 
-## Example
-
-<samp id="drawer-example" />
+## Пример {#example}
 
 ```js
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -576,31 +587,31 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 const Drawer = createDrawerNavigator();
 
 function MyDrawer() {
-  return (
-    <Drawer.Navigator initialRouteName="Feed">
-      <Drawer.Screen
-        name="Feed"
-        component={Feed}
-        options={{ drawerLabel: 'Home' }}
-      />
-      <Drawer.Screen
-        name="Notifications"
-        component={Notifications}
-        options={{ drawerLabel: 'Updates' }}
-      />
-      <Drawer.Screen
-        name="Profile"
-        component={Profile}
-        options={{ drawerLabel: 'Profile' }}
-      />
-    </Drawer.Navigator>
-  );
+    return (
+        <Drawer.Navigator initialRouteName="Feed">
+            <Drawer.Screen
+                name="Feed"
+                component={Feed}
+                options={{ drawerLabel: 'Home' }}
+            />
+            <Drawer.Screen
+                name="Notifications"
+                component={Notifications}
+                options={{ drawerLabel: 'Updates' }}
+            />
+            <Drawer.Screen
+                name="Profile"
+                component={Profile}
+                options={{ drawerLabel: 'Profile' }}
+            />
+        </Drawer.Navigator>
+    );
 }
 ```
 
-## Checking if the drawer is open
+## Проверка открытости drawer
 
-You can check if the drawer is open by using the `useDrawerStatus` hook.
+Проверить, открыт ли drawer, можно с помощью хука `useDrawerStatus`.
 
 ```js
 import { useDrawerStatus } from '@react-navigation/drawer';
@@ -610,39 +621,50 @@ import { useDrawerStatus } from '@react-navigation/drawer';
 const isDrawerOpen = useDrawerStatus() === 'open';
 ```
 
-If you can't use the hook, you can also use the `getDrawerStatusFromState` helper:
+Если нет возможности использовать хук, можно также воспользоваться хелпером `getDrawerStatusFromState`:
 
 ```js
 import { getDrawerStatusFromState } from '@react-navigation/drawer';
 
 // ...
 
-const isDrawerOpen = getDrawerStatusFromState(navigation.getState()) === 'open';
+const isDrawerOpen =
+    getDrawerStatusFromState(navigation.getState()) ===
+    'open';
 ```
 
-For class components, you can listen to the `state` event to check if drawer was opened or closed:
+Для компонентов класса можно прослушать событие `state`, чтобы проверить, был ли ящик открыт или закрыт:
 
 ```js
 class Profile extends React.Component {
-  componentDidMount() {
-    this._unsubscribe = navigation.addListener('state', () => {
-      const isDrawerOpen =
-        getDrawerStatusFromState(navigation.getState()) === 'open';
+    componentDidMount() {
+        this._unsubscribe = navigation.addListener(
+            'state',
+            () => {
+                const isDrawerOpen =
+                    getDrawerStatusFromState(
+                        navigation.getState()
+                    ) === 'open';
 
-      // do something
-    });
-  }
+                // do something
+            }
+        );
+    }
 
-  componentWillUnmount() {
-    this._unsubscribe();
-  }
+    componentWillUnmount() {
+        this._unsubscribe();
+    }
 
-  render() {
-    // Content of the component
-  }
+    render() {
+        // Content of the component
+    }
 }
 ```
 
-## Nesting drawer navigators inside others
+## Вложение навигаторов drawer в другие навигаторы
 
-If a drawer navigator is nested inside of another navigator that provides some UI, for example, a tab navigator or stack navigator, then the drawer will be rendered below the UI from those navigators. The drawer will appear below the tab bar and below the header of the stack. You will need to make the drawer navigator the parent of any navigator where the drawer should be rendered on top of its UI.
+Если навигатор drawer вложен в другой навигатор, предоставляющий некоторый пользовательский интерфейс, например, навигатор табов или навигатор стека, то drawer будет отображаться ниже пользовательского интерфейса этих навигаторов. Drawer будет отображаться под панелью табов и под заголовком стека. Необходимо сделать навигатор drawer родителем любого навигатора, в котором drawer должен отображаться поверх его пользовательского интерфейса.
+
+## Ссылки
+
+-   [Drawer Navigator](https://reactnavigation.org/docs/drawer-navigator/)

@@ -41,3 +41,8 @@ nav:
         - bottom-tab-navigator.md
         - material-bottom-tab-navigator.md
         - material-top-tab-navigator.md
+    - Библиотеки:
+        - devtools.md
+        - elements.md
+        - tab-view.md
+        - drawer-layout.md

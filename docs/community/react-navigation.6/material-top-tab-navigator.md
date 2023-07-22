@@ -1,52 +1,48 @@
 ---
-id: material-top-tab-navigator
-title: Material Top Tabs Navigator
-sidebar_label: Material Top Tabs
+description: Панель вкладок в верхней части экрана, оформленная в стиле Material Design, позволяет переключаться между различными маршрутами, касаясь вкладок или проводя пальцем по горизонтали
 ---
 
-A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the tabs or swiping horizontally. Transitions are animated by default. Screen components for each route are mounted immediately.
+# Навигатор верхних вкладок материала
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/tabs/material-top-tabs.mov" />
-  </video>
-</div>
+Панель вкладок в верхней части экрана, оформленная в стиле Material Design, позволяет переключаться между различными маршрутами, касаясь вкладок или проводя пальцем по горизонтали. Переходы по умолчанию анимированы. Компоненты экрана для каждого маршрута монтируются сразу.
 
-This wraps [`react-native-tab-view`](tab-view.md). If you want to use the tab view without React Navigation integration, use the library directly instead.
+<video playsInline autoPlay muted loop>
+<source src="/community/react-navigation.6/material-top-tabs.mov" />
+</video>
 
-## Installation
+Это обертывание [`react-native-tab-view`](tab-view.md). Если вы хотите использовать представление вкладок без интеграции с React Navigation, используйте библиотеку напрямую.
 
-To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/material-top-tabs):
+## Установка
 
-```bash npm2yarn
+Чтобы использовать этот навигатор, убедитесь, что у вас есть [`@react-navigation/native` и его зависимости (следуйте этому руководству)](getting-started.md), затем установите [`@react-navigation/material-top-tabs`](https://github.com/react-navigation/react-navigation/tree/main/packages/material-top-tabs):
+
+```bash
 npm install @react-navigation/material-top-tabs react-native-tab-view
 ```
 
-Then, you need to install [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view) which is required by the navigator.
+Затем необходимо установить [`react-native-pager-view`](https://github.com/callstack/react-native-pager-view), который требуется навигатору.
 
-If you have a Expo managed project, in your project directory, run:
+Если у вас есть Expo-управляемый проект, то в каталоге проекта выполните команду:
 
 ```bash
 npx expo install react-native-pager-view
 ```
 
-If you have a bare React Native project, in your project directory, run:
+Если у вас есть "голый" проект React Native, в каталоге проекта выполните команду:
 
-```bash npm2yarn
+```bash
 npm install react-native-pager-view
 ```
 
-If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
+Если вы работаете на Mac и разрабатываете под iOS, то для завершения связывания необходимо также установить капсулы (через [Cocoapods](https://cocoapods.org/)).
 
 ```bash
 npx pod-install ios
 ```
 
-## API Definition
+## Определение API
 
-To use this tab navigator, import it from `@react-navigation/material-top-tabs`:
-
-<samp id="material-top-tab-based-navigation-minimal" />
+Чтобы использовать этот навигатор вкладок, импортируйте его из `@react-navigation/material-top-tabs`:
 
 ```js
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -54,410 +50,439 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 const Tab = createMaterialTopTabNavigator();
 
 function MyTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-    </Tab.Navigator>
-  );
+    return (
+        <Tab.Navigator>
+            <Tab.Screen
+                name="Home"
+                component={HomeScreen}
+            />
+            <Tab.Screen
+                name="Settings"
+                component={SettingsScreen}
+            />
+        </Tab.Navigator>
+    );
 }
 ```
 
-> For a complete usage guide please visit [Tab Navigation](tab-based-navigation.md)
+!!!note ""
 
-### Props
+    Полное руководство по использованию приведено на сайте [Tab Navigation](tab-based-navigation.md)
 
-The `Tab.Navigator` component accepts following props:
+### Пропсы {#props}
+
+Компонент `Tab.Navigator` принимает следующие параметры:
 
 #### `id`
 
-Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
+Необязательный уникальный идентификатор навигатора. Он может быть использован с помощью [`navigation.getParent`](navigation-prop.md#getparent) для ссылки на этот навигатор в дочернем навигаторе.
 
 #### `initialRouteName`
 
-The name of the route to render on first load of the navigator.
+Имя маршрута, которое должно отображаться при первой загрузке навигатора.
 
 #### `screenOptions`
 
-Default options to use for the screens in the navigator.
+Параметры по умолчанию, используемые для экранов в навигаторе.
 
 #### `backBehavior`
 
-This controls what happens when `goBack` is called in the navigator. This includes pressing the device's back button or back gesture on Android.
+Этот параметр управляет тем, что происходит при вызове `goBack` в навигаторе. Это включает в себя нажатие кнопки "назад" на устройстве или жест "назад" на Android.
 
-It supports the following values:
+Поддерживаются следующие значения:
 
-- `firstRoute` - return to the first screen defined in the navigator (default)
-- `initialRoute` - return to initial screen passed in `initialRouteName` prop, if not passed, defaults to the first screen
-- `order` - return to screen defined before the focused screen
-- `history` - return to last visited screen in the navigator; if the same screen is visited multiple times, the older entries are dropped from the history
-- `none` - do not handle back button
+-   `firstRoute` - возврат на первый экран, заданный в навигаторе (по умолчанию)
+-   `initialRoute` - возврат к начальному экрану, переданному в параметре `initialRouteName`, если значение не передано, то по умолчанию возвращается к первому экрану
+-   `order` - возврат к экрану, определенному перед сфокусированным экраном
+-   `history` - возврат к последнему посещенному экрану в навигаторе; если один и тот же экран посещается несколько раз, то старые записи удаляются из истории
+-   `none` - не обрабатывать кнопку "Назад
 
 #### `tabBarPosition`
 
-Position of the tab bar in the tab view. Possible values are `'top'` and `'bottom'`. Defaults to `'top'`.
+Положение панели вкладок в представлении вкладок. Возможные значения: `top` и `bottom`. По умолчанию принимается значение `top`.
 
 #### `keyboardDismissMode`
 
-String indicating whether the keyboard gets dismissed in response to a drag gesture. Possible values are:
+Строка, указывающая, будет ли клавиатура отключаться в ответ на жест перетаскивания. Возможные значения:
 
-- `'auto'` (default): the keyboard is dismissed when the index changes.
-- `'on-drag'`: the keyboard is dismissed when a drag begins.
-- `'none'`: drags do not dismiss the keyboard.
+-   `'auto'` (по умолчанию): клавиатура отключается при изменении индекса.
+-   `'on-drag'`: клавиатура отключается, когда начинается перетаскивание.
+-   `'none'`: перетаскивание не приводит к отключению клавиатуры.
 
 #### `initialLayout`
 
-Object containing the initial height and width of the screens. Passing this will improve the initial rendering performance. For most apps, this is a good default:
+Объект, содержащий начальную высоту и ширину экранов. Передача этого параметра позволит повысить производительность начального рендеринга. Для большинства приложений это хорошее значение по умолчанию:
 
 ```js
 {
-  width: Dimensions.get('window').width;
+    width: Dimensions.get('window').width;
 }
 ```
 
 #### `sceneContainerStyle`
 
-Style to apply to the view wrapping each screen. You can pass this to override some default styles such as overflow clipping.
+Стиль, применяемый к представлению, оборачивающему каждый экран. Его можно передать, чтобы отменить некоторые стили по умолчанию, например, обрезание переполнения.
 
 #### `style`
 
-Style to apply to the tab view container.
+Стиль, применяемый к контейнеру представления вкладки.
 
 #### `tabBar`
 
-Function that returns a React element to display as the tab bar.
+Функция, возвращающая элемент React для отображения в качестве панели вкладок.
 
-Example:
-
-<samp id="material-top-tab-custom-tab-bar" />
+Пример:
 
 ```js
-import { Animated, View, TouchableOpacity } from 'react-native';
+import {
+    Animated,
+    View,
+    TouchableOpacity,
+} from 'react-native';
 
-function MyTabBar({ state, descriptors, navigation, position }) {
-  return (
-    <View style={{ flexDirection: 'row' }}>
-      {state.routes.map((route, index) => {
-        const { options } = descriptors[route.key];
-        const label =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-            ? options.title
-            : route.name;
+function MyTabBar({
+    state,
+    descriptors,
+    navigation,
+    position,
+}) {
+    return (
+        <View style={{ flexDirection: 'row' }}>
+            {state.routes.map((route, index) => {
+                const { options } = descriptors[route.key];
+                const label =
+                    options.tabBarLabel !== undefined
+                        ? options.tabBarLabel
+                        : options.title !== undefined
+                        ? options.title
+                        : route.name;
 
-        const isFocused = state.index === index;
+                const isFocused = state.index === index;
 
-        const onPress = () => {
-          const event = navigation.emit({
-            type: 'tabPress',
-            target: route.key,
-            canPreventDefault: true,
-          });
+                const onPress = () => {
+                    const event = navigation.emit({
+                        type: 'tabPress',
+                        target: route.key,
+                        canPreventDefault: true,
+                    });
 
-          if (!isFocused && !event.defaultPrevented) {
-            // The `merge: true` option makes sure that the params inside the tab screen are preserved
-            navigation.navigate({ name: route.name, merge: true });
-          }
-        };
+                    if (
+                        !isFocused &&
+                        !event.defaultPrevented
+                    ) {
+                        // The `merge: true` option makes sure
+                        // that the params inside the tab screen
+                        // are preserved
+                        navigation.navigate({
+                            name: route.name,
+                            merge: true,
+                        });
+                    }
+                };
 
-        const onLongPress = () => {
-          navigation.emit({
-            type: 'tabLongPress',
-            target: route.key,
-          });
-        };
+                const onLongPress = () => {
+                    navigation.emit({
+                        type: 'tabLongPress',
+                        target: route.key,
+                    });
+                };
 
-        const inputRange = state.routes.map((_, i) => i);
-        const opacity = position.interpolate({
-          inputRange,
-          outputRange: inputRange.map(i => (i === index ? 1 : 0)),
-        });
+                const inputRange = state.routes.map(
+                    (_, i) => i
+                );
+                const opacity = position.interpolate({
+                    inputRange,
+                    outputRange: inputRange.map((i) =>
+                        i === index ? 1 : 0
+                    ),
+                });
 
-        return (
-          <TouchableOpacity
-            accessibilityRole="button"
-            accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarTestID}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            style={{ flex: 1 }}
-          >
-            <Animated.Text style={{ opacity }}>
-              {label}
-            </Animated.Text>
-          </TouchableOpacity>
-        );
-      })}
-    </View>
-  );
+                return (
+                    <TouchableOpacity
+                        accessibilityRole="button"
+                        accessibilityState={
+                            isFocused
+                                ? { selected: true }
+                                : {}
+                        }
+                        accessibilityLabel={
+                            options.tabBarAccessibilityLabel
+                        }
+                        testID={options.tabBarTestID}
+                        onPress={onPress}
+                        onLongPress={onLongPress}
+                        style={{ flex: 1 }}
+                    >
+                        <Animated.Text style={{ opacity }}>
+                            {label}
+                        </Animated.Text>
+                    </TouchableOpacity>
+                );
+            })}
+        </View>
+    );
 }
 
 // ...
 
-<Tab.Navigator tabBar={props => <MyTabBar {...props} />}>
-  {...}
-</Tab.Navigator>
+<Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
+    {/* ... */}
+</Tab.Navigator>;
 ```
 
-This example will render a basic tab bar with labels.
+В этом примере будет отображена базовая панель вкладок с ярлыками.
 
-Note that you **cannot** use the `useNavigation` hook inside the `tabBar` since `useNavigation` is only available inside screens. You get a `navigation` prop for your `tabBar` which you can use instead:
+Обратите внимание, что вы **не можете** использовать хук `useNavigation` внутри `tabBar`, поскольку `useNavigation` доступен только внутри экранов. Вы получаете свойство `navigation` для вашего `tabBar`, которое можно использовать вместо него:
 
 ```js
 function MyTabBar({ navigation }) {
-  return (
-    <Button
-      title="Go somewhere"
-      onPress={() => {
-        // Navigate using the `navigation` prop that you received
-        navigation.navigate('SomeScreen');
-      }}
-    />
-  );
+    return (
+        <Button
+            title="Go somewhere"
+            onPress={() => {
+                // Navigate using the `navigation` prop that you received
+                navigation.navigate('SomeScreen');
+            }}
+        />
+    );
 }
 ```
 
-### Options
+### Опции {#options}
 
-The following [options](screen-options.md) can be used to configure the screens in the navigator:
+Для настройки экранов в навигаторе можно использовать следующие [options](screen-options.md):
 
-Example:
-
-<samp id="material-top-tab-options" />
+Пример:
 
 ```js
 <Tab.Navigator
-  screenOptions={{
-    tabBarLabelStyle: { fontSize: 12 },
-    tabBarItemStyle: { width: 100 },
-    tabBarStyle: { backgroundColor: 'powderblue' },
-  }}
+    screenOptions={{
+        tabBarLabelStyle: { fontSize: 12 },
+        tabBarItemStyle: { width: 100 },
+        tabBarStyle: { backgroundColor: 'powderblue' },
+    }}
 >
-  {/* ... */}
+    {/* ... */}
 </Tab.Navigator>
 ```
 
 #### `title`
 
-Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`.
+Общий заголовок, который может использоваться в качестве запасного варианта для `headerTitle` и `tabBarLabel`.
 
 #### `tabBarLabel`
 
-Title string of a tab displayed in the tab bar or a function that given `{ focused: boolean, color: string }` returns a React.Node, to display in tab bar. When undefined, scene `title` is used. To hide, see [`tabBarShowLabel`](#tabbarshowlabel) option.
+Строка заголовка вкладки, отображаемой в панели вкладок, или функция, которая по команде `{ focused: boolean, color: string }` возвращает узел React.Node, отображаемый в панели вкладок. Если значение не определено, используется сцена `title`. Чтобы скрыть, смотрите опцию [`tabBarShowLabel`](#tabbarshowlabel).
 
 #### `tabBarAccessibilityLabel`
 
-Accessibility label for the tab button. This is read by the screen reader when the user taps the tab. It's recommended to set this if you don't have a label for the tab.
+Метка доступности для кнопки вкладки. Она считывается программой чтения с экрана, когда пользователь нажимает кнопку вкладки. Рекомендуется установить это значение, если у вас нет метки для вкладки.
 
 #### `tabBarAllowFontScaling`
 
-Whether label font should scale to respect Text Size accessibility settings.
+Должен ли шрифт этикетки масштабироваться с учетом настроек доступности Text Size.
 
 #### `tabBarShowLabel`
 
-Whether the tab label should be visible. Defaults to `true`.
+Должна ли быть видна метка вкладки. По умолчанию имеет значение `true`.
 
 #### `tabBarIcon`
 
-Function that given `{ focused: boolean, color: string }` returns a React.Node, to display in the tab bar.
+Функция, которая при задании `{ focused: boolean, color: string }` возвращает узел React.Node для отображения в панели вкладок.
 
 #### `tabBarShowIcon`
 
-Whether the tab icon should be visible. Defaults to `false`.
+Должен ли быть виден значок вкладки. По умолчанию имеет значение `false`.
 
 #### `tabBarBadge`
 
-Function that returns a React element to use as a badge for the tab.
+Функция, возвращающая элемент React для использования в качестве значка вкладки.
 
 #### `tabBarIndicator`
 
-Function that returns a React element as the tab bar indicator.
+Функция, возвращающая элемент React в качестве индикатора панели вкладок.
 
 #### `tabBarIndicatorStyle`
 
-Style object for the tab bar indicator.
+Объект стиля для индикатора панели вкладок.
 
 #### `tabBarIndicatorContainerStyle`
 
-Style object for the view containing the tab bar indicator.
+Объект стиля для представления, содержащего индикатор панели вкладок.
 
 #### `tabBarTestID`
 
-ID to locate this tab button in tests.
+ID для размещения этой кнопки вкладки в тестах.
 
 #### `tabBarActiveTintColor`
 
-Color for the icon and label in the active tab.
+Цвет для пиктограммы и ярлыка на активной вкладке.
 
 #### `tabBarInactiveTintColor`
 
-Color for the icon and label in the inactive tabs.
+Цвет для значка и метки на неактивных вкладках.
 
 #### `tabBarGap`
 
-Spacing between the tab items in the tab bar.
+Расстояние между элементами табуляции на панели табуляции.
 
-Example:
+Пример:
 
 ```js
 <Tab.Navigator
-  //...
-  screenOptions={{
-    tabBarGap: 10,
-  }}
->
-</Tab.Navigator>
+    //...
+    screenOptions={{
+        tabBarGap: 10,
+    }}
+></Tab.Navigator>
 ```
 
 #### `tabBarAndroidRipple`
 
-Allows to customize the android ripple effect.
+Позволяет настроить эффект пульсации для андроида.
 
-Example:
+Пример:
 
 ```js
 <Tab.Navigator
-  //...
-  screenOptions={{
-    tabBarAndroidRipple: { borderless: false },
-  }}
->
-</Tab.Navigator>
+    //...
+    screenOptions={{
+        tabBarAndroidRipple: { borderless: false },
+    }}
+></Tab.Navigator>
 ```
 
 #### `tabBarPressColor`
 
-Color for material ripple.
+Цвет для пульсации материала.
 
-Only supported on Android.
+Поддерживается только на Android.
 
 #### `tabBarPressOpacity`
 
-Opacity for pressed tab.
+Непрозрачность для нажатой вкладки.
 
-Only supported on iOS.
+Поддерживается только на iOS.
 
 #### `tabBarBounces`
 
-Boolean indicating whether the tab bar bounces when overscrolling.
+Булево значение, указывающее, отскакивает ли панель вкладок при перелистывании.
 
 #### `tabBarScrollEnabled`
 
-Boolean indicating whether to make the tab bar scrollable.
+Булево значение, указывающее, делать ли панель вкладок прокручиваемой.
 
-If you set this to `true`, you should also specify a width in `tabBarItemStyle` to improve the performance of initial render.
+При установке значения `true` следует также указать ширину в `tabBarItemStyle` для повышения производительности начального рендеринга.
 
 #### `tabBarIconStyle`
 
-Style object for the tab icon container.
+Объект стиля для контейнера значка вкладки.
 
 #### `tabBarLabelStyle`
 
-Style object for the tab label.
+Объект стиля для метки вкладки.
 
 #### `tabBarItemStyle`
 
-Style object for the individual tab items.
+Объект стиля для отдельных элементов вкладки.
 
 #### `tabBarContentContainerStyle`
 
-Style object for the view containing the tab items.
+Объект стиля для представления, содержащего элементы вкладки.
 
 #### `tabBarStyle`
 
-Style object for the tab bar.
+Объект стиля для панели вкладок.
 
 #### `swipeEnabled`
 
-Boolean indicating whether to enable swipe gestures. Swipe gestures are enabled by default. Passing `false` will disable swipe gestures, but the user can still switch tabs by pressing the tab bar.
+Булево значение, указывающее, следует ли включить жесты пролистывания. По умолчанию жесты пролистывания включены. Если передать `false`, то жесты пролистывания будут отключены, но пользователь по-прежнему сможет переключать вкладки, нажимая на панель вкладок.
 
 #### `lazy`
 
-Whether this screen should be lazily rendered. When this is set to `true`, the screen will be rendered as it comes into the viewport. By default all screens are rendered to provide a smoother swipe experience. But you might want to defer the rendering of screens out of the viewport until the user sees them. To enable lazy rendering for this screen, set `lazy` to `true`.
+Должен ли этот экран лениво отрисовываться. Если установлено значение `true`, экран будет отрисовываться по мере его появления в области просмотра. По умолчанию все экраны отрисовываются, чтобы обеспечить более плавное пролистывание. Однако вы можете захотеть отложить отрисовку экранов, находящихся вне области просмотра, до тех пор, пока пользователь не увидит их. Чтобы включить ленивый рендеринг для этого экрана, установите `lazy` в значение `true`.
 
-When you enable `lazy`, the lazy loaded screens will usually take some time to render when they come into the viewport. You can use the `lazyPlaceholder` prop to customize what the user sees during this short period.
+Когда вы включите `lazy`, экраны с ленивой загрузкой обычно будут занимать некоторое время для рендеринга, когда они попадают в область просмотра. Вы можете использовать параметр `lazyPlaceholder` для настройки того, что пользователь видит в течение этого короткого периода.
 
 #### `lazyPreloadDistance`
 
-When `lazy` is enabled, you can specify how many adjacent screens should be preloaded in advance with this prop. This value defaults to `0` which means lazy pages are loaded as they come into the viewport.
+Когда функция `lazy` включена, с помощью этого параметра можно указать, сколько соседних экранов должно быть загружено заранее. По умолчанию это значение равно `0`, что означает, что "ленивые" страницы загружаются по мере их появления в области просмотра.
 
 #### `lazyPlaceholder`
 
-Function that returns a React element to render if this screen hasn't been rendered yet. The `lazy` option also needs to be enabled for this to work.
+Функция, возвращающая React-элемент для рендеринга, если этот экран еще не был отрендерен. Для работы этой функции также должна быть включена опция `lazy`.
 
-This view is usually only shown for a split second. Keep it lightweight.
+Это представление обычно показывается только на долю секунды. Сохраняйте его легким.
 
-By default, this renders `null`.
+По умолчанию отображается `null`.
 
-### Events
+### События {#events}
 
-The navigator can [emit events](navigation-events.md) on certain actions. Supported events are:
+Навигатор может [выдавать события](navigation-events.md) на определенные действия. Поддерживаются следующие события:
 
 #### `tabPress`
 
-This event is fired when the user presses the tab button for the current screen in the tab bar. By default a tab press does several things:
+Это событие возникает, когда пользователь нажимает кнопку вкладки для текущего экрана на панели вкладок. По умолчанию нажатие кнопки вкладки выполняет несколько действий:
 
-- If the tab is not focused, tab press will focus that tab
-- If the tab is already focused:
-  - If the screen for the tab renders a scroll view, you can use [`useScrollToTop`](use-scroll-to-top.md) to scroll it to top
-  - If the screen for the tab renders a stack navigator, a `popToTop` action is performed on the stack
+-   Если вкладка не сфокусирована, то нажатие кнопки вкладки фокусирует эту вкладку.
+-   Если вкладка уже сфокусирована:
+    -   Если экран для вкладки отображается в виде прокрутки, то можно использовать [`useScrollToTop`](use-scroll-to-top.md) для прокрутки в верхнее положение.
+    -   Если на экране вкладки отображается стековый навигатор, то для стека выполняется действие `popToTop`.
 
-To prevent the default behavior, you can call `event.preventDefault`:
-
-<samp id="material-top-tab-prevent-default" />
+Чтобы предотвратить поведение по умолчанию, можно вызвать `event.preventDefault`:
 
 ```js
 React.useEffect(() => {
-  const unsubscribe = navigation.addListener('tabPress', (e) => {
-    // Prevent default behavior
-    e.preventDefault();
+    const unsubscribe = navigation.addListener(
+        'tabPress',
+        (e) => {
+            // Prevent default behavior
+            e.preventDefault();
 
-    // Do something manually
-    // ...
-  });
+            // Do something manually
+            // ...
+        }
+    );
 
-  return unsubscribe;
+    return unsubscribe;
 }, [navigation]);
 ```
 
 #### `tabLongPress`
 
-This event is fired when the user presses the tab button for the current screen in the tab bar for an extended period.
+Это событие возникает, когда пользователь длительное время нажимает кнопку вкладки для текущего экрана на панели вкладок.
 
-Example:
+Пример:
 
 ```js
 React.useEffect(() => {
-  const unsubscribe = navigation.addListener('tabLongPress', (e) => {
-    // Do something
-  });
+    const unsubscribe = navigation.addListener(
+        'tabLongPress',
+        (e) => {
+            // Do something
+        }
+    );
 
-  return unsubscribe;
+    return unsubscribe;
 }, [navigation]);
 ```
 
-### Helpers
+### Хелперы {#helpers}
 
-The tab navigator adds the following methods to the navigation prop:
+Навигатор вкладок добавляет в реквизит навигации следующие методы:
 
 #### `jumpTo`
 
-Navigates to an existing screen in the tab navigator. The method accepts following arguments:
+Осуществляет переход к существующему экрану в навигаторе вкладок. Метод принимает следующие аргументы:
 
-- `name` - _string_ - Name of the route to jump to.
-- `params` - _object_ - Screen params to pass to the destination route.
-
-<samp id="material-top-tab-jump-to" />
+-   `name` - _string_ - Имя маршрута, на который необходимо перейти.
+-   `params` - _object_ - Параметры экрана для передачи маршруту назначения.
 
 ```js
 navigation.jumpTo('Profile', { name: 'Michaś' });
 ```
 
-## Example
-
-<samp id="material-top-tab-example" />
+## Пример {#example}
 
 ```js
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -465,31 +490,37 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 const Tab = createMaterialTopTabNavigator();
 
 function MyTabs() {
-  return (
-    <Tab.Navigator
-      initialRouteName="Feed"
-      screenOptions={{
-        tabBarActiveTintColor: '#e91e63',
-        tabBarLabelStyle: { fontSize: 12 },
-        tabBarStyle: { backgroundColor: 'powderblue' },
-      }}
-    >
-      <Tab.Screen
-        name="Feed"
-        component={Feed}
-        options={{ tabBarLabel: 'Home' }}
-      />
-      <Tab.Screen
-        name="Notifications"
-        component={Notifications}
-        options={{ tabBarLabel: 'Updates' }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{ tabBarLabel: 'Profile' }}
-      />
-    </Tab.Navigator>
-  );
+    return (
+        <Tab.Navigator
+            initialRouteName="Feed"
+            screenOptions={{
+                tabBarActiveTintColor: '#e91e63',
+                tabBarLabelStyle: { fontSize: 12 },
+                tabBarStyle: {
+                    backgroundColor: 'powderblue',
+                },
+            }}
+        >
+            <Tab.Screen
+                name="Feed"
+                component={Feed}
+                options={{ tabBarLabel: 'Home' }}
+            />
+            <Tab.Screen
+                name="Notifications"
+                component={Notifications}
+                options={{ tabBarLabel: 'Updates' }}
+            />
+            <Tab.Screen
+                name="Profile"
+                component={Profile}
+                options={{ tabBarLabel: 'Profile' }}
+            />
+        </Tab.Navigator>
+    );
 }
 ```
+
+## Ссылки
+
+-   [Material Top Tabs Navigator](https://reactnavigation.org/docs/material-top-tab-navigator/)

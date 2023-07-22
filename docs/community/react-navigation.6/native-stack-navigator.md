@@ -1,30 +1,30 @@
 ---
-id: native-stack-navigator
-title: Native Stack Navigator
-sidebar_label: Native Stack
+description: Native Stack Navigator предоставляет возможность перехода между экранами, при котором каждый новый экран размещается на вершине стопки
 ---
 
-Native Stack Navigator provides a way for your app to transition between screens where each new screen is placed on top of a stack.
+# Native Stack навигатор
 
-This navigator uses the native APIs `UINavigationController` on iOS and `Fragment` on Android so that navigation built with `createNativeStackNavigator` will behave exactly the same and have the same performance characteristics as apps built natively on top of those APIs. It also offers basic Web support using [`react-native-web`](https://github.com/necolas/react-native-web).
+Native Stack Navigator предоставляет возможность перехода между экранами, при котором каждый новый экран размещается на вершине стопки.
 
-One thing to keep in mind is that while `@react-navigation/native-stack` offers native performance and exposes native features such as large title on iOS etc., it may not be as customizable as [`@react-navigation/stack`](stack-navigator.md) depending on your needs. So if you need more customization than what's possible in this navigator, consider using `@react-navigation/stack` instead - which is a more customizable JavaScript based implementation.
+Этот навигатор использует нативные API `UINavigationController` для iOS и `Fragment` для Android, поэтому навигация, созданная с помощью `createNativeStackNavigator`, будет вести себя точно так же и иметь те же характеристики производительности, что и приложения, созданные на базе этих API. Также реализована базовая поддержка Web с помощью [`react-native-web`](https://github.com/necolas/react-native-web).
 
-## Installation
+Следует иметь в виду, что, хотя `@react-navigation/native-stack` обеспечивает нативную производительность и предоставляет нативные возможности, такие как большие заголовки на iOS и т.д., он может быть не таким настраиваемым, как [`@react-navigation/stack`](stack-navigator.md), в зависимости от ваших потребностей. Поэтому если вам нужна более широкая настройка, чем та, которая возможна в этом навигаторе, используйте вместо него `@react-navigation/stack` - это более настраиваемая реализация на основе JavaScript.
 
-To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](getting-started.md), then install [`@react-navigation/native-stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/native-stack):
+## Установка
 
-```bash npm2yarn
+Чтобы использовать этот навигатор, убедитесь, что у вас есть [`@react-navigation/native` и его зависимости (следуйте этому руководству)](getting-started.md), затем установите [`@react-navigation/native-stack`](https://github.com/react-navigation/react-navigation/tree/main/packages/native-stack):
+
+```bash
 npm install @react-navigation/native-stack
 ```
 
-## API Definition
+## Определение API
 
-> 💡 If you encounter any bugs while using `createNativeStackNavigator`, please open issues on [`react-native-screens`](https://github.com/software-mansion/react-native-screens) rather than the `react-navigation` repository!
+!!!note ""
 
-To use this navigator, import it from `@react-navigation/native-stack`:
+    💡 Если вы столкнулись с ошибками при использовании `createNativeStackNavigator`, пожалуйста, открывайте проблемы на [`react-native-screens`](https://github.com/software-mansion/react-native-screens), а не в репозитории `react-navigation`!
 
-<samp id="simple-native-stack" />
+Чтобы использовать этот навигатор, импортируйте его из `@react-navigation/native-stack`:
 
 ```js
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -32,370 +32,381 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 
 function MyStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Notifications" component={Notifications} />
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Settings" component={Settings} />
-    </Stack.Navigator>
-  );
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen
+                name="Notifications"
+                component={Notifications}
+            />
+            <Stack.Screen
+                name="Profile"
+                component={Profile}
+            />
+            <Stack.Screen
+                name="Settings"
+                component={Settings}
+            />
+        </Stack.Navigator>
+    );
 }
 ```
 
 ### Props
 
-The `Stack.Navigator` component accepts following props:
+Компонент `Stack.Navigator` принимает следующие реквизиты:
 
 #### `id`
 
-Optional unique ID for the navigator. This can be used with [`navigation.getParent`](navigation-prop.md#getparent) to refer to this navigator in a child navigator.
+Необязательный уникальный идентификатор навигатора. Он может быть использован с помощью [`navigation.getParent`](navigation-prop.md#getparent) для ссылки на этот навигатор в дочернем навигаторе.
 
 #### `initialRouteName`
 
-The name of the route to render on first load of the navigator.
+Имя маршрута, которое должно отображаться при первой загрузке навигатора.
 
 #### `screenOptions`
 
-Default options to use for the screens in the navigator.
+Параметры по умолчанию, используемые для экранов в навигаторе.
 
 ### Options
 
-The following [options](screen-options.md) can be used to configure the screens in the navigator:
+Для настройки экранов в навигаторе можно использовать следующие [options](screen-options.md):
 
 #### `title`
 
-String that can be used as a fallback for `headerTitle`.
+Строка, которая может быть использована в качестве запасного варианта для `headerTitle`.
 
 #### `headerBackButtonMenuEnabled`
 
-Boolean indicating whether to show the menu on longPress of iOS >= 14 back button. Defaults to `true`.
+Булево значение, указывающее, показывать ли меню при длительном нажатии на кнопку назад в iOS >= 14. По умолчанию имеет значение `true`.
 
-Requires `react-native-screens` version >=3.3.0.
+Требуется версия `react-native-screens` >=3.3.0.
 
-Only supported on iOS.
+Поддерживается только на iOS.
 
 #### `headerBackVisible`
 
-Whether the back button is visible in the header. You can use it to show a back button alongside `headerLeft` if you have specified it.
+Видима ли кнопка "Назад" в заголовке. Вы можете использовать этот параметр для отображения кнопки "Назад" рядом с `headerLeft`, если вы его указали.
 
-This will have no effect on the first screen in the stack.
+Это не будет иметь никакого эффекта для первого экрана в стеке.
 
 #### `headerBackTitle`
 
-Title string used by the back button on iOS. Defaults to the previous scene's title, or "Back" if there's not enough space. Use `headerBackTitleVisible: false` to hide it.
+Строка заголовка, используемая кнопкой "Назад" на iOS. По умолчанию используется заголовок предыдущей сцены или "Back", если не хватает места. Чтобы скрыть его, используйте `headerBackTitleVisible: false`.
 
-Only supported on iOS.
+Поддерживается только на iOS.
 
 #### `headerBackTitleVisible`
 
-Whether the back button title should be visible or not.
+Должен ли заголовок кнопки "Назад" быть видимым или нет.
 
-Only supported on iOS.
+Поддерживается только на iOS.
 
 #### `headerBackTitleStyle`
 
-Style object for header back title. Supported properties:
+Объект стиля для заднего заголовка. Поддерживаемые свойства:
 
-- `fontFamily`
-- `fontSize`
+-   `fontFamily`
+-   `fontSize`
 
-Only supported on iOS.
+Поддерживается только на iOS.
 
 #### `headerBackImageSource`
 
-Image to display in the header as the icon in the back button. Defaults to back icon image for the platform
+Изображение для отображения в заголовке в качестве иконки кнопки "Назад". По умолчанию используется изображение значка кнопки "Назад" для данной платформы
 
-- A chevron on iOS
-- An arrow on Android
+-   Шеврон на iOS
+-   Стрелка на Android
 
 #### `headerLargeStyle`
 
-Style of the header when a large title is shown. The large title is shown if `headerLargeTitle` is `true` and the edge of any scrollable content reaches the matching edge of the header.
+Стиль заголовка при отображении большого заголовка. Большой заголовок будет показан, если `headerLargeTitle` имеет значение `true` и край любого прокручиваемого содержимого достигает совпадающего края заголовка.
 
-Supported properties:
+Поддерживаемые свойства:
 
-- backgroundColor
+-   `backgroundColor`
 
-Only supported on iOS.
+Поддерживается только в iOS.
 
 #### `headerLargeTitle`
 
-Whether to enable header with large title which collapses to regular header on scroll.
+Включать ли заголовок с большим заголовком, который при прокрутке сворачивается в обычный заголовок.
 
-For large title to collapse on scroll, the content of the screen should be wrapped in a scrollable view such as `ScrollView` or `FlatList`. If the scrollable area doesn't fill the screen, the large title won't collapse on scroll. You also need to specify `contentInsetAdjustmentBehavior="automatic"` in your `ScrollView`, `FlatList` etc.
+Чтобы большой заголовок сворачивался при прокрутке, содержимое экрана должно быть обернуто в прокручиваемое представление, такое как `ScrollView` или `FlatList`. Если прокручиваемая область не заполняет экран, то большой заголовок не будет сворачиваться при прокрутке. Также необходимо указать `contentInsetAdjustmentBehavior="automatic"` в ваших `ScrollView`, `FlatList` и т.д.
 
-Only supported on iOS.
+Поддерживается только на iOS.
 
 #### `headerLargeTitleShadowVisible`
 
-Whether drop shadow of header is visible when a large title is shown.
+Будет ли видна падающая тень заголовка при показе большого заголовка.
 
 #### `headerLargeTitleStyle`
 
-Style object for large title in header. Supported properties:
+Объект стиля для большого заголовка в заголовке. Поддерживаемые свойства:
 
-- `fontFamily`
-- `fontSize`
-- `fontWeight`
-- `color`
+-   `fontFamily`
+-   `fontSize`
+-   `fontWeight`
+-   `color`
 
-Only supported on iOS.
+Поддерживается только на iOS.
 
 #### `headerShown`
 
-Whether to show the header. The header is shown by default. Setting this to `false` hides the header.
+Показывать ли заголовок. По умолчанию заголовок отображается. Установка этого значения в `false` скрывает заголовок.
 
 #### `headerStyle`
 
-Style object for header. Supported properties:
+Объект стиля для заголовка. Поддерживаемые свойства:
 
-- `backgroundColor`
+-   `backgroundColor`
 
 #### `headerShadowVisible`
 
-Whether to hide the elevation shadow (Android) or the bottom border (iOS) on the header.
+Нужно ли скрывать тень подъема (Android) или нижнюю границу (iOS) на заголовке.
 
 #### `headerTransparent`
 
-Boolean indicating whether the navigation bar is translucent.
+Булево число, указывающее, является ли панель навигации полупрозрачной.
 
-Defaults to `false`. Setting this to `true` makes the header absolutely positioned - so that the header floats over the screen so that it overlaps the content underneath, and changes the background color to `transparent` unless specified in `headerStyle`.
+По умолчанию имеет значение `false`. Установка значения `true` делает заголовок абсолютно позиционированным - так, чтобы он плавал по экрану, перекрывая содержимое под ним, и изменяет цвет фона на `transparent`, если он не указан в `headerStyle`.
 
-This is useful if you want to render a semi-transparent header or a blurred background.
+Это удобно, если требуется отобразить полупрозрачный заголовок или размытый фон.
 
-Note that if you don't want your content to appear under the header, you need to manually add a top margin to your content. React Navigation won't do it automatically.
+Обратите внимание, что если вы не хотите, чтобы содержимое отображалось под заголовком, вам необходимо вручную добавить верхнее поле к содержимому. React Navigation не сделает этого автоматически.
 
-To get the height of the header, you can use [`HeaderHeightContext`](elements.md#headerheightcontext) with [React's Context API](https://reactjs.org/docs/context.html#contextconsumer) or [`useHeaderHeight`](elements.md#useheaderheight).
+Чтобы получить высоту заголовка, можно использовать [`HeaderHeightContext`](elements.md#headerheightcontext) с помощью [React's Context API](https://reactjs.org/docs/context.html#contextconsumer) или [`useHeaderHeight`](elements.md#useheaderheight).
 
 #### `headerBlurEffect`
 
-Blur effect for the translucent header. The `headerTransparent` option needs to be set to `true` for this to work.
+Эффект размытия для полупрозрачного заголовка. Для работы этого эффекта опция `headerTransparent` должна быть установлена в значение `true`.
 
-Supported values:
+Поддерживаемые значения:
 
-- `extraLight`
-- `light`
-- `dark`
-- `regular`
-- `prominent`
-- `systemUltraThinMaterial`
-- `systemThinMaterial`
-- `systemMaterial`
-- `systemThickMaterial`
-- `systemChromeMaterial`
-- `systemUltraThinMaterialLight`
-- `systemThinMaterialLight`
-- `systemMaterialLight`
-- `systemThickMaterialLight`
-- `systemChromeMaterialLight`
-- `systemUltraThinMaterialDark`
-- `systemThinMaterialDark`
-- `systemMaterialDark`
-- `systemThickMaterialDark`
-- `systemChromeMaterialDark`
+-   `extraLight`
+-   `light`
+-   `dark`
+-   `regular`
+-   `prominent`
+-   `systemUltraThinMaterial`
+-   `systemThinMaterial`
+-   `systemMaterial`
+-   `systemThickMaterial`
+-   `systemChromeMaterial`
+-   `systemUltraThinMaterialLight`
+-   `systemThinMaterialLight`
+-   `systemMaterialLight`
+-   `systemThickMaterialLight`
+-   `systemChromeMaterialLight`
+-   `systemUltraThinMaterialDark`
+-   `systemThinMaterialDark`
+-   `systemMaterialDark`
+-   `systemThickMaterialDark`
+-   `systemChromeMaterialDark`
 
-Only supported on iOS.
+Поддерживается только на iOS.
 
 #### `headerBackground`
 
-Function which returns a React Element to render as the background of the header. This is useful for using backgrounds such as an image or a gradient.
+Функция, возвращающая React-элемент для отображения в качестве фона заголовка. Это полезно для использования фонов, таких как изображение или градиент.
 
 #### `headerTintColor`
 
-Tint color for the header. Changes the color of back button and title.
+Цвет оттенка для заголовка. Изменение цвета кнопки "Назад" и заголовка.
 
 #### `headerLeft`
 
-Function which returns a React Element to display on the left side of the header. This replaces the back button. See `headerBackVisible` to show the back button along side left element.
+Функция, возвращающая React-элемент для отображения в левой части заголовка. Он заменяет кнопку "Назад". Для отображения кнопки "Назад" рядом с левым элементом смотрите `headerBackVisible`.
 
 #### `headerRight`
 
-Function which returns a React Element to display on the right side of the header.
+Функция, возвращающая React-элемент для отображения в правой части заголовка.
 
 #### `headerTitle`
 
-String or a function that returns a React Element to be used by the header. Defaults to `title` or name of the screen.
+Строка или функция, возвращающая React-элемент, который будет использоваться в заголовке. По умолчанию это `title` или название экрана.
 
-When a function is passed, it receives `tintColor` and`children` in the options object as an argument. The title string is passed in `children`.
+При передаче функции в качестве аргумента ей передаются `tintColor` и `children` в объекте options. Строка заголовка передается в `children`.
 
-Note that if you render a custom element by passing a function, animations for the title won't work.
+Обратите внимание, что при рендеринге пользовательского элемента с передачей функции анимация для заголовка работать не будет.
 
 #### `headerTitleAlign`
 
-How to align the header title. Possible values:
+Как выровнять заголовок заголовка. Возможные значения:
 
-- `left`
-- `center`
+-   `left`
+-   `center`
 
-Defaults to `left` on platforms other than iOS.
+По умолчанию принимает значение `left` на платформах, отличных от iOS.
 
-Not supported on iOS. It's always `center` on iOS and cannot be changed.
+Не поддерживается на iOS. На iOS оно всегда `center` и не может быть изменено.
 
 #### `headerTitleStyle`
 
-Style object for header title. Supported properties:
+Объект стиля для заголовка. Поддерживаемые свойства:
 
-- `fontFamily`
-- `fontSize`
-- `fontWeight`
-- `color`
+-   `fontFamily`
+-   `fontSize`
+-   `fontWeight`
+-   `color`
 
 #### `headerSearchBarOptions`
 
-Options to render a native search bar on iOS. Search bars are rarely static so normally it is controlled by passing an object to `headerSearchBarOptions` navigation option in the component's body. You also need to specify `contentInsetAdjustmentBehavior="automatic"` in your `ScrollView`, `FlatList` etc. If you don't have a `ScrollView`, specify `headerTransparent: false`.
+Опции для отображения встроенной панели поиска на iOS. Строки поиска редко бывают статичными, поэтому обычно управление ими осуществляется путем передачи объекта навигационной опции `headerSearchBarOptions` в теле компонента. Также необходимо указать `contentInsetAdjustmentBehavior="automatic"` в ваших `ScrollView`, `FlatList` и т.д. Если у вас нет `ScrollView`, укажите `headerTransparent: false`.
 
-Only supported on iOS and Android.
+Поддерживается только на iOS и Android.
 
-Example:
+Пример:
 
 ```js
 React.useLayoutEffect(() => {
-  navigation.setOptions({
-    headerSearchBarOptions: {
-      // search bar options
-    },
-  });
+    navigation.setOptions({
+        headerSearchBarOptions: {
+            // search bar options
+        },
+    });
 }, [navigation]);
 ```
 
-Supported properties are described below.
+Поддерживаемые свойства описаны ниже.
 
 ##### `autoCapitalize`
 
-Controls whether the text is automatically auto-capitalized as it is entered by the user.
-Possible values:
+Служит для управления автоматическим выделением заглавных букв в тексте при его вводе пользователем.
 
-- `none`
-- `words`
-- `sentences`
-- `characters`
+Возможные значения:
 
-Defaults to `sentences`.
+-   `none`
+-   `words`
+-   `sentences`
+-   `characters`
+
+По умолчанию принимается значение `sentences`.
 
 ##### `autoFocus`
 
-Whether to automatically focus search bar when it's shown. Defaults to `false`.
+Нужно ли автоматически фокусировать строку поиска при ее отображении. По умолчанию имеет значение `false`.
 
-Only supported on Android.
+Поддерживается только в Android.
 
 ##### `barTintColor`
 
-The search field background color. By default bar tint color is translucent.
+Цвет фона поля поиска. По умолчанию цвет фона поля полупрозрачный.
 
-Only supported on iOS.
+Поддерживается только в iOS.
 
 ##### `tintColor`
 
-The color for the cursor caret and cancel button text.
+Цвет для каретки курсора и текста кнопки отмены.
 
-Only supported on iOS.
+Поддерживается только на iOS.
 
 ##### `cancelButtonText`
 
-The text to be used instead of default `Cancel` button text.
+Текст, который будет использоваться вместо текста кнопки `Cancel` по умолчанию.
 
-Only supported on iOS.
+Поддерживается только на iOS.
 
 ##### `disableBackButtonOverride`
 
-Whether the back button should close search bar's text input or not. Defaults to `false`.
+Должна ли кнопка "Назад" закрывать текстовый ввод строки поиска или нет. По умолчанию имеет значение `false`.
 
-Only supported on Android.
+Поддерживается только в Android.
 
 ##### `hideNavigationBar`
 
-Boolean indicating whether to hide the navigation bar during searching. Defaults to `true`.
+Булево значение, указывающее, следует ли скрывать панель навигации во время поиска. По умолчанию имеет значение `true`.
 
-Only supported on iOS.
+Поддерживается только на iOS.
 
 ##### `hideWhenScrolling`
 
-Boolean indicating whether to hide the search bar when scrolling. Defaults to `true`.
+Булево значение, указывающее, следует ли скрывать строку поиска при прокрутке. По умолчанию имеет значение `true`.
 
-Only supported on iOS.
+Поддерживается только на iOS.
 
 ##### `inputType`
 
-The type of the input. Defaults to `"text"`.
+Тип вводимой информации. По умолчанию имеет значение `"text"`.
 
-Supported values:
+Поддерживаемые значения:
 
-- `"text"`
-- `"phone"`
-- `"number"`
-- `"email"`
+-   `"text"`
+-   `"phone"`
+-   `"number"`
+-   `"email"`
 
-Only supported on Android.
+Поддерживается только на платформе Android.
 
 ##### `obscureBackground`
 
-Boolean indicating whether to obscure the underlying content with semi-transparent overlay. Defaults to `true`.
+Булево значение, указывающее, следует ли скрывать основное содержимое полупрозрачным наложением. По умолчанию имеет значение `true`.
 
 ##### `placeholder`
 
-Text displayed when search field is empty.
+Текст, отображаемый при пустом поле поиска.
 
 ##### `textColor`
 
-The color of the text in the search field.
+Цвет текста в поле поиска.
 
 ##### `hintTextColor`
 
-The color of the hint text in the search field.
+Цвет текста подсказки в поле поиска.
 
-Only supported on Android.
+Поддерживается только в Android.
 
 ##### `headerIconColor`
 
-The color of the search and close icons shown in the header
+Цвет значков поиска и закрытия, отображаемых в заголовке
 
-Only supported on Android.
+Поддерживается только в ОС Android.
 
 ##### `shouldShowHintSearchIcon`
 
-Whether to show the search hint icon when search bar is focused. Defaults to `true`.
+Показывать ли значок поисковой подсказки при фокусировке строки поиска. По умолчанию имеет значение `true`.
 
-Only supported on Android.
+Поддерживается только в Android.
 
 ##### `onBlur`
 
-A callback that gets called when search bar has lost focus.
+Обратный вызов, который вызывается, когда панель поиска потеряла фокус.
 
 ##### `onCancelButtonPress`
 
-A callback that gets called when the cancel button is pressed.
+Обратный вызов, который вызывается при нажатии кнопки отмены.
 
 ##### `onChangeText`
 
-A callback that gets called when the text changes. It receives the current text value of the search bar.
+Обратный вызов, который вызывается при изменении текста. Он получает текущее значение текста строки поиска.
 
-Example:
+Пример:
 
 ```js
 const [search, setSearch] = React.useState('');
 
 React.useLayoutEffect(() => {
-  navigation.setOptions({
-    headerSearchBarOptions: {
-      onChangeText: (event) => setSearch(event.nativeEvent.text),
-    },
-  });
+    navigation.setOptions({
+        headerSearchBarOptions: {
+            onChangeText: (event) =>
+                setSearch(event.nativeEvent.text),
+        },
+    });
 }, [navigation]);
 ```
 
 #### `header`
 
-Custom header to use instead of the default header.
+Пользовательский заголовок, используемый вместо заголовка по умолчанию.
 
-This accepts a function that returns a React Element to display as a header. The function receives an object containing the following properties as the argument:
+Функция принимает функцию, возвращающую React-элемент для отображения в качестве заголовка. В качестве аргумента функция получает объект, содержащий следующие свойства:
 
-- `navigation` - The navigation object for the current screen.
-- `route` - The route object for the current screen.
-- `options` - The options for the current screen
-- `back` - Options for the back button, contains an object with a `title` property to use for back button label.
+-   `navigation` - Объект навигации для текущего экрана.
+-   `route` - Объект маршрута для текущего экрана.
+-   `options` - Опции для текущего экрана
+-   `back` - Опции для кнопки "Назад", содержит объект со свойством `title` для использования в качестве метки кнопки "Назад".
 
-Example:
+Пример:
 
 ```js
 import { getHeaderTitle } from '@react-navigation/elements';
@@ -403,261 +414,272 @@ import { getHeaderTitle } from '@react-navigation/elements';
 // ..
 
 header: ({ navigation, route, options, back }) => {
-  const title = getHeaderTitle(options, route.name);
+    const title = getHeaderTitle(options, route.name);
 
-  return (
-    <MyHeader
-      title={title}
-      leftButton={
-        back ? <MyBackButton onPress={navigation.goBack} /> : undefined
-      }
-      style={options.headerStyle}
-    />
-  );
+    return (
+        <MyHeader
+            title={title}
+            leftButton={
+                back ? (
+                    <MyBackButton
+                        onPress={navigation.goBack}
+                    />
+                ) : undefined
+            }
+            style={options.headerStyle}
+        />
+    );
 };
 ```
 
-To set a custom header for all the screens in the navigator, you can specify this option in the `screenOptions` prop of the navigator.
+Чтобы задать пользовательский заголовок для всех экранов навигатора, можно указать эту опцию в свойстве `screenOptions` навигатора.
 
-Note that if you specify a custom header, the native functionality such as large title, search bar etc. won't work.
+Обратите внимание, что при задании пользовательского заголовка не будут работать встроенные функции, такие как большой заголовок, строка поиска и т.д.
 
 #### `statusBarAnimation`
 
-Sets the status bar animation (similar to the `StatusBar` component). Defaults to `fade` on iOS and `none` on Android.
+Устанавливает анимацию строки состояния (аналогично компоненту `StatusBar`). По умолчанию имеет значение `fade` для iOS и `none` для Android.
 
-Supported values:
+Поддерживаемые значения:
 
-- `"fade"`
-- `"none"`
-- `"slide"`
+-   `"fade"`
+-   `"none"`
+-   `"slide"`
 
-On Android, setting either `fade` or `slide` will set the transition of status bar color. On iOS, this option applies to appereance animation of the status bar.
+В Android установка опции `fade` или `lide` задает переход цвета строки состояния. На iOS эта опция применяется к анимации внешнего вида строки состояния.
 
-Requires setting `View controller-based status bar appearance -> YES` (or removing the config) in your `Info.plist` file.
+Требуется установить значение `View controller-based status bar appearance -> YES` (или удалить конфигурацию) в файле `Info.plist`.
 
-Only supported on Android and iOS.
+Поддерживается только на Android и iOS.
 
 #### `statusBarHidden`
 
-Whether the status bar should be hidden on this screen.
+Должна ли строка состояния быть скрыта на этом экране.
 
-Requires setting `View controller-based status bar appearance -> YES` (or removing the config) in your `Info.plist` file.
+Требуется установить значение `View controller-based status bar appearance -> YES` (или удалить конфигурацию) в файле `Info.plist`.
 
-Only supported on Android and iOS.
+Поддерживается только на Android и iOS.
 
 #### `statusBarStyle`
 
-Sets the status bar color (similar to the `StatusBar` component). Defaults to `auto`.
+Устанавливает цвет строки состояния (аналогично компоненту `StatusBar`). По умолчанию имеет значение `auto`.
 
-Supported values:
+Поддерживаемые значения:
 
-- `"auto"`
-- `"inverted"` (iOS only)
-- `"dark"`
-- `"light"`
+-   `"auto"`
+-   `"inverted"` (iOS only)
+-   `"dark"`
+-   `"light"`
 
-Requires setting `View controller-based status bar appearance -> YES` (or removing the config) in your `Info.plist` file.
+Требуется установить значение `View controller-based status bar appearance -> YES` (или удалить конфигурацию) в файле `Info.plist`.
 
-Only supported on Android and iOS.
+Поддерживается только на Android и iOS.
 
 #### `statusBarColor`
 
-Sets the status bar color (similar to the `StatusBar` component). Defaults to initial status bar color.
+Устанавливает цвет строки состояния (аналогично компоненту `StatusBar`). По умолчанию устанавливается начальный цвет строки состояния.
 
-Only supported on Android.
+Поддерживается только в Android.
 
 #### `statusBarTranslucent`
 
-Sets the translucency of the status bar (similar to the `StatusBar` component). Defaults to `false`.
+Устанавливает полупрозрачность строки состояния (аналогично компоненту `StatusBar`). По умолчанию имеет значение `false`.
 
-Only supported on Android.
+Поддерживается только в Android.
 
 #### `contentStyle`
 
-Style object for the scene content.
+Объект стиля для содержимого сцены.
 
 #### `customAnimationOnGesture`
 
-Whether the gesture to dismiss should use animation provided to `animation` prop. Defaults to `false`.
+Должен ли жест увольнения использовать анимацию, предоставленную в свойстве `animation`. По умолчанию имеет значение `false`.
 
-Doesn't affect the behavior of screens presented modally.
+Не влияет на поведение экранов, представленных модально.
 
-Only supported on iOS.
+Поддерживается только в iOS.
 
 #### `fullScreenGestureEnabled`
 
-Whether the gesture to dismiss should work on the whole screen. Using gesture to dismiss with this option results in the same transition animation as `simple_push`. This behavior can be changed by setting `customAnimationOnGesture` prop. Achieving the default iOS animation isn't possible due to platform limitations. Defaults to `false`.
+Должен ли жест увольнения работать на весь экран. Использование жеста для отмены с этой опцией приводит к той же анимации перехода, что и `simple_push`. Это поведение можно изменить, задав параметр `customAnimationOnGesture`. Достижение анимации iOS по умолчанию невозможно из-за ограничений платформы. По умолчанию имеет значение `false`.
 
-Doesn't affect the behavior of screens presented modally.
+Не влияет на поведение экранов, представленных модально.
 
-Only supported on iOS.
+Поддерживается только на iOS.
 
 #### `gestureEnabled`
 
-Whether you can use gestures to dismiss this screen. Defaults to `true`. Only supported on iOS.
+Можно ли использовать жесты для выключения этого экрана. По умолчанию имеет значение `true`. Поддерживается только в iOS.
 
 #### `animationTypeForReplace`
 
-The type of animation to use when this screen replaces another screen. Defaults to `pop`.
+Тип анимации, используемой, когда этот экран заменяет другой экран. По умолчанию используется `pop`.
 
-Supported values:
+Поддерживаемые значения:
 
-- `push`: the new screen will perform push animation.
-- `pop`: the new screen will perform pop animation.
+-   `push`: новый экран будет выполнять анимацию нажатия.
+-   `pop`: новый экран будет выполнять анимацию всплытия.
 
 #### `animation`
 
-How the screen should animate when pushed or popped.
+Как должен анимироваться экран при нажатии или отталкивании.
 
-Supported values:
+Поддерживаемые значения:
 
-- `default`: use the platform default animation
-- `fade`: fade screen in or out
-- `fade_from_bottom`: fade the new screen from bottom
-- `flip`: flip the screen, requires `presentation: "modal"` (iOS only)
-- `simple_push`: default animation, but without shadow and native header transition (iOS only, uses default animation on Android)
-- `slide_from_bottom`: slide in the new screen from bottom
-- `slide_from_right`: slide in the new screen from right (Android only, uses default animation on iOS)
-- `slide_from_left`: slide in the new screen from left (Android only, uses default animation on iOS)
-- `none`: don't animate the screen
+-   `default`: использовать анимацию по умолчанию платформы
+-   `fade`: затухание экрана при входе или выходе
+-   `fade_from_bottom`: затухание нового экрана снизу
+-   `flip`: перевернуть экран, требуется `presentation: "modal"` (только для iOS)
+-   `simple_push`: анимация по умолчанию, но без тени и собственного перехода заголовка (только для iOS, для Android используется анимация по умолчанию)
+-   `slide_from_bottom`: переход на новый экран снизу
+-   `slide_from_right`: переход на новый экран справа (только для Android, для iOS используется анимация по умолчанию)
+-   `slide_from_left`: переход на новый экран слева (только для Android, для iOS используется анимация по умолчанию)
+-   `none`: не анимировать экран
 
-Only supported on Android and iOS.
+Поддерживается только на Android и iOS.
 
 #### `presentation`
 
-How should the screen be presented.
+Как должен быть представлен экран.
 
-Supported values:
+Поддерживаемые значения:
 
-- `card`: the new screen will be pushed onto a stack, which means the default animation will be slide from the side on iOS, the animation on Android will vary depending on the OS version and theme.
-- `modal`: the new screen will be presented modally. this also allows for a nested stack to be rendered inside the screen.
-- `transparentModal`: the new screen will be presented modally, but in addition, the previous screen will stay so that the content below can still be seen if the screen has translucent background.
-- `containedModal`: will use "UIModalPresentationCurrentContext" modal style on iOS and will fallback to "modal" on Android.
-- `containedTransparentModal`: will use "UIModalPresentationOverCurrentContext" modal style on iOS and will fallback to "transparentModal" on Android.
-- `fullScreenModal`: will use "UIModalPresentationFullScreen" modal style on iOS and will fallback to "modal" on Android. A screen using this presentation style can't be dismissed by gesture.
-- `formSheet`: will use "UIModalPresentationFormSheet" modal style on iOS and will fallback to "modal" on Android.
+-   `card`: новый экран будет помещен в стек, что означает, что анимация по умолчанию будет сползать сбоку на iOS, анимация на Android будет зависеть от версии ОС и темы.
+-   `modal`: новый экран будет представлен модально. Это также позволяет отображать вложенный стек внутри экрана.
+-   `transparentModal`: новый экран будет представлен модально, но при этом предыдущий экран останется, так что содержимое ниже будет видно, если экран имеет полупрозрачный фон.
+-   `containedModal`: будет использоваться модальный стиль "UIModalPresentationCurrentContext" на iOS и откат к "modal" на Android.
+-   `containedTransparentModal`: использует модальный стиль "UIModalPresentationOverCurrentContext" на iOS и возвращается к "transparentModal" на Android.
+-   `fullScreenModal`: будет использоваться модальный стиль "UIModalPresentationFullScreen" на iOS и откат к "modal" на Android. Экран, использующий этот стиль представления, не может быть отвергнут жестом.
+-   `formSheet`: будет использовать модальный стиль "UIModalPresentationFormSheet" на iOS и возвращаться к "modal" на Android.
 
-Only supported on Android and iOS.
+Поддерживается только на Android и iOS.
 
 #### `orientation`
 
-The display orientation to use for the screen.
+Ориентация дисплея, используемая для экрана.
 
-Supported values:
+Поддерживаемые значения:
 
-- `default` - resolves to "all" without "portrait_down" on iOS. On Android, this lets the system decide the best orientation.
-- `all`: all orientations are permitted.
-- `portrait`: portrait orientations are permitted.
-- `portrait_up`: right-side portrait orientation is permitted.
-- `portrait_down`: upside-down portrait orientation is permitted.
-- `landscape`: landscape orientations are permitted.
-- `landscape_left`: landscape-left orientation is permitted.
-- `landscape_right`: landscape-right orientation is permitted.
+-   `default` - разрешается как "all" без "portrait_down" на iOS. В Android это значение позволяет системе самой определять оптимальную ориентацию.
+-   `all`: разрешены все ориентации.
+-   `portrait`: разрешена портретная ориентация.
+-   `portrait_up`: разрешена правосторонняя портретная ориентация.
+-   `portrait_down`: разрешена перевернутая портретная ориентация.
+-   `landscape`: разрешены альбомные ориентации.
+-   `landscape_left`: разрешена альбомная ориентация слева.
+-   `landscape_right`: разрешена альбомно-правая ориентация.
 
-Only supported on Android and iOS.
+Поддерживается только на Android и iOS.
 
 #### `autoHideHomeIndicator`
 
-Boolean indicating whether the home indicator should prefer to stay hidden. Defaults to `false`.
+Булево значение, указывающее, должен ли домашний индикатор оставаться скрытым. По умолчанию имеет значение `false`.
 
-Only supported on iOS.
+Поддерживается только в iOS.
 
 #### `gestureDirection`
 
-Sets the direction in which you should swipe to dismiss the screen.
+Устанавливает направление, в котором следует проводить пальцем по экрану для его удаления.
 
-Supported values:
+Поддерживаемые значения:
 
-- `vertical` – dismiss screen vertically
-- `horizontal` – dismiss screen horizontally (default)
+-   `vertical` - отклонение экрана по вертикали
+-   `horizontal` - отклонение экрана по горизонтали (по умолчанию).
 
-When using `vertical` option, options `fullScreenGestureEnabled: true`, `customAnimationOnGesture: true` and `animation: 'slide_from_bottom'` are set by default.
+При использовании опции `vertical` по умолчанию устанавливаются опции `fullScreenGestureEnabled: true`, `customAnimationOnGesture: true` и `animation: 'slide_from_bottom'`.
 
-Only supported on iOS.
+Поддерживается только на iOS.
 
 #### `animationDuration`
 
-Changes the duration (in milliseconds) of `slide_from_bottom`, `fade_from_bottom`, `fade` and `simple_push` transitions on iOS. Defaults to `350`.
+Изменяет длительность (в миллисекундах) переходов `slide_from_bottom`, `fade_from_bottom`, `fade` и `simple_push` на iOS. По умолчанию равно `350`.
 
-The duration of `default` and `flip` transitions isn't customizable.
+Длительность переходов `default` и `flip` не настраивается.
 
-Only supported on iOS.
+Поддерживается только на iOS.
 
 #### `navigationBarColor`
 
-Sets the navigation bar color. Defaults to initial status bar color.
+Устанавливает цвет строки навигации. По умолчанию устанавливается исходный цвет строки состояния.
 
-Only supported on Android.
+Поддерживается только в Android.
 
 #### `navigationBarHidden`
 
-Boolean indicating whether the navigation bar should be hidden. Defaults to `false`.
+Булево значение, указывающее, должна ли панель навигации быть скрыта. По умолчанию имеет значение `false`.
 
-Only supported on Android.
+Поддерживается только в Android.
 
 #### `freezeOnBlur`
 
-Boolean indicating whether to prevent inactive screens from re-rendering. Defaults to `false`.
-Defaults to `true` when `enableFreeze()` from `react-native-screens` package is run at the top of the application.
+Булево значение, указывающее, следует ли запретить повторное отображение неактивных экранов. По умолчанию имеет значение `false`.
 
-Requires `react-native-screens` version >=3.16.0.
+По умолчанию принимает значение `true`, если `enableFreeze()` из пакета `react-native-screens` запущен в верхней части приложения.
 
-Only supported on iOS and Android.
+Требуется версия `react-native-screens` >=3.16.0.
 
-### Events
+Поддерживается только на iOS и Android.
 
-The navigator can [emit events](navigation-events.md) on certain actions. Supported events are:
+### События {#events}
+
+Навигатор может [выдавать события](navigation-events.md) на определенные действия. Поддерживаются следующие события:
 
 #### `transitionStart`
 
-This event is fired when the transition animation starts for the current screen.
+Это событие вызывается, когда начинается анимация перехода для текущего экрана.
 
-Event data:
+Данные события:
 
-- `e.data.closing` - Boolean indicating whether the screen is being opened or closed.
+-   `e.data.closing` - булево значение, указывающее, открывается или закрывается экран.
 
-Example:
+Пример:
 
 ```js
 React.useEffect(() => {
-  const unsubscribe = navigation.addListener('transitionStart', (e) => {
-    // Do something
-  });
+    const unsubscribe = navigation.addListener(
+        'transitionStart',
+        (e) => {
+            // Do something
+        }
+    );
 
-  return unsubscribe;
+    return unsubscribe;
 }, [navigation]);
 ```
 
 #### `transitionEnd`
 
-This event is fired when the transition animation ends for the current screen.
+Это событие вызывается, когда заканчивается анимация перехода для текущего экрана.
 
-Event data:
+Данные события:
 
-- `e.data.closing` - Boolean indicating whether the screen was opened or closed.
+-   `e.data.closing` - булево значение, указывающее, был ли экран открыт или закрыт.
 
-Example:
+Пример:
 
 ```js
 React.useEffect(() => {
-  const unsubscribe = navigation.addListener('transitionEnd', (e) => {
-    // Do something
-  });
+    const unsubscribe = navigation.addListener(
+        'transitionEnd',
+        (e) => {
+            // Do something
+        }
+    );
 
-  return unsubscribe;
+    return unsubscribe;
 }, [navigation]);
 ```
 
-### Helpers
+### Хелперы {#helpers}
 
-The native stack navigator adds the following methods to the navigation prop:
+Собственный навигатор стека добавляет в реквизит навигации следующие методы:
 
 #### `replace`
 
-Replaces the current screen with a new screen in the stack. The method accepts following arguments:
+Заменяет текущий экран на новый экран в стеке. Метод принимает следующие аргументы:
 
-- `name` - _string_ - Name of the route to push onto the stack.
-- `params` - _object_ - Screen params to pass to the destination route.
+-   `name` - _string_ - Имя маршрута, который необходимо поместить в стек.
+-   `params` - _object_ - Параметры экрана для передачи маршруту назначения.
 
 ```js
 navigation.replace('Profile', { owner: 'Michaś' });
@@ -665,10 +687,10 @@ navigation.replace('Profile', { owner: 'Michaś' });
 
 #### `push`
 
-Pushes a new screen to top of the stack and navigate to it. The method accepts following arguments:
+Помещает новый экран на вершину стека и осуществляет переход к нему. Метод принимает следующие аргументы:
 
-- `name` - _string_ - Name of the route to push onto the stack.
-- `params` - _object_ - Screen params to pass to the destination route.
+-   `name` - _string_ - Имя маршрута, который необходимо поместить в стек.
+-   `params` - _object_ - Параметры экрана для передачи маршруту назначения.
 
 ```js
 navigation.push('Profile', { owner: 'Michaś' });
@@ -676,7 +698,7 @@ navigation.push('Profile', { owner: 'Michaś' });
 
 #### `pop`
 
-Pops the current screen from the stack and navigates back to the previous screen. It takes one optional argument (`count`), which allows you to specify how many screens to pop back by.
+Выводит текущий экран из стека и осуществляет переход к предыдущему экрану. Принимает один необязательный аргумент (`count`), который позволяет указать, на сколько экранов нужно вернуться назад.
 
 ```js
 navigation.pop();
@@ -684,7 +706,7 @@ navigation.pop();
 
 #### `popToTop`
 
-Pops all of the screens in the stack except the first one and navigates to it.
+Вызывает все экраны в стопке, кроме первого, и осуществляет переход к нему.
 
 ```js
 navigation.popToTop();
@@ -698,36 +720,40 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 
 function MyStack() {
-  return (
-    <Stack.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        headerTintColor: 'white',
-        headerStyle: { backgroundColor: 'tomato' },
-      }}
-    >
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{
-          title: 'Awesome app',
-        }}
-      />
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          title: 'My profile',
-        }}
-      />
-      <Stack.Screen
-        name="Settings"
-        component={Settings}
-        options={{
-          gestureEnabled: false,
-        }}
-      />
-    </Stack.Navigator>
-  );
+    return (
+        <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+                headerTintColor: 'white',
+                headerStyle: { backgroundColor: 'tomato' },
+            }}
+        >
+            <Stack.Screen
+                name="Home"
+                component={Home}
+                options={{
+                    title: 'Awesome app',
+                }}
+            />
+            <Stack.Screen
+                name="Profile"
+                component={Profile}
+                options={{
+                    title: 'My profile',
+                }}
+            />
+            <Stack.Screen
+                name="Settings"
+                component={Settings}
+                options={{
+                    gestureEnabled: false,
+                }}
+            />
+        </Stack.Navigator>
+    );
 }
 ```
+
+## Ссылки
+
+-   [Native Stack Navigator](https://reactnavigation.org/docs/native-stack-navigator/)
