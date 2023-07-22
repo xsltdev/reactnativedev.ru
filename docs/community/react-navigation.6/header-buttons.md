@@ -1,3 +1,7 @@
+---
+description: В статье описывается работа и настройки хедера и кнопок
+---
+
 # Кнопки заголовков
 
 Теперь, когда мы знаем, как настроить внешний вид наших заголовков, давайте сделаем их разумными! На самом деле, возможно, это амбициозно, давайте просто сделаем их способными реагировать на наши прикосновения очень четко определенными способами.
@@ -106,4 +110,4 @@ function HomeScreen({ navigation }) {
 
 ## Ссылки
 
--   [https://reactnavigation.org/docs/header-buttons](https://reactnavigation.org/docs/header-buttons)
+-   [Header buttons](https://reactnavigation.org/docs/header-buttons)

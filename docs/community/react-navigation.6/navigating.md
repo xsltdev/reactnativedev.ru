@@ -190,4 +190,4 @@ function DetailsScreen({ navigation }) {
 
 ## Ссылки
 
--   [https://reactnavigation.org/docs/navigating](https://reactnavigation.org/docs/navigating)
+-   [Moving between screens](https://reactnavigation.org/docs/navigating)

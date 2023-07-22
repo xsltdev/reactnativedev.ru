@@ -1,112 +1,118 @@
----
-id: navigation-lifecycle
-title: Navigation lifecycle
-sidebar_label: Navigation lifecycle
----
+# Жизненный цикл навигации
 
-In a previous section, we worked with a stack navigator that has two screens (`Home` and `Details`) and learned how to use `navigation.navigate('RouteName')` to navigate between the routes.
+В предыдущем разделе мы работали со стековым навигатором, имеющим два экрана (`Home` и `Details`), и научились использовать `navigation.navigate('RouteName')` для перехода между маршрутами.
 
-An important question in this context is: what happens with `Home` when we navigate away from it, or when we come back to it? How does a route find out that a user is leaving it or coming back to it?
+В связи с этим возникает важный вопрос: что происходит с экраном `Home`, когда мы уходим от него или когда возвращаемся к нему? Как маршрут узнает, что пользователь покидает его или возвращается к нему?
 
-If you are coming to react-navigation from a web background, you may assume that when user navigates from route `A` to route `B`, `A` will unmount (its `componentWillUnmount` is called) and `A` will mount again when user comes back to it. While these React lifecycle methods are still valid and are used in react-navigation, their usage differs from the web. This is driven by more complex needs of mobile navigation.
+Если вы знакомитесь с react-навигацией на веб-основе, то можете предположить, что при переходе пользователя с маршрута `A` на маршрут `B`, маршрут `A` размонтируется (вызывается его `componentWillUnmount`) и `A` снова смонтируется, когда пользователь вернется к нему. Хотя эти методы жизненного цикла React по-прежнему актуальны и используются в react-navigation, их применение отличается от веб-приложений. Это обусловлено более сложными потребностями мобильной навигации.
 
-## Example scenario
+## Пример сценария
 
-Consider a stack navigator with screens A and B. After navigating to A, its `componentDidMount` is called. When pushing B, its `componentDidMount` is also called, but A remains mounted on the stack and its `componentWillUnmount` is therefore not called.
+Рассмотрим стековый навигатор с экранами A и B. При переходе к A вызывается его `componentDidMount`. При переходе к экрану B также вызывается его `componentDidMount`, но A остается смонтированным в стеке, и его `componentWillUnmount`, соответственно, не вызывается.
 
-When going back from B to A, `componentWillUnmount` of B is called, but `componentDidMount` of A is not because A remained mounted the whole time.
+При возврате из B в A вызывается `componentWillUnmount` для B, но `componentDidMount` для A не вызывается, поскольку A все это время оставался смонтированным.
 
-Similar results can be observed (in combination) with other navigators as well. Consider a tab navigator with two tabs, where each tab is a stack navigator:
-
-<samp id="navigation-lifecycle" />
+Подобные результаты можно наблюдать (в сочетании) и с другими навигаторами. Рассмотрим навигатор табов с двумя вкладками, где каждая вкладка является навигатором стека:
 
 ```jsx
 function App() {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="First">
-          {() => (
-            <SettingsStack.Navigator>
-              <SettingsStack.Screen
-                name="Settings"
-                component={SettingsScreen}
-              />
-              <SettingsStack.Screen name="Profile" component={ProfileScreen} />
-            </SettingsStack.Navigator>
-          )}
-        </Tab.Screen>
-        <Tab.Screen name="Second">
-          {() => (
-            <HomeStack.Navigator>
-              <HomeStack.Screen name="Home" component={HomeScreen} />
-              <HomeStack.Screen name="Details" component={DetailsScreen} />
-            </HomeStack.Navigator>
-          )}
-        </Tab.Screen>
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
+    return (
+        <NavigationContainer>
+            <Tab.Navigator>
+                <Tab.Screen name="First">
+                    {() => (
+                        <SettingsStack.Navigator>
+                            <SettingsStack.Screen
+                                name="Settings"
+                                component={SettingsScreen}
+                            />
+                            <SettingsStack.Screen
+                                name="Profile"
+                                component={ProfileScreen}
+                            />
+                        </SettingsStack.Navigator>
+                    )}
+                </Tab.Screen>
+                <Tab.Screen name="Second">
+                    {() => (
+                        <HomeStack.Navigator>
+                            <HomeStack.Screen
+                                name="Home"
+                                component={HomeScreen}
+                            />
+                            <HomeStack.Screen
+                                name="Details"
+                                component={DetailsScreen}
+                            />
+                        </HomeStack.Navigator>
+                    )}
+                </Tab.Screen>
+            </Tab.Navigator>
+        </NavigationContainer>
+    );
 }
 ```
 
-We start on the `HomeScreen` and navigate to `DetailsScreen`. Then we use the tab bar to switch to the `SettingsScreen` and navigate to `ProfileScreen`. After this sequence of operations is done, all 4 of the screens are mounted! If you use the tab bar to switch back to the `HomeStack`, you'll notice you'll be presented with the `DetailsScreen` - the navigation state of the `HomeStack` has been preserved!
+Начнем с экрана `Домашний экран` и перейдем к экрану `Детали`. Затем с помощью панели вкладок переходим на экран `SettingsScreen` и переходим на экран `ProfileScreen`. После выполнения этой последовательности операций все 4 экрана будут смонтированы! Если с помощью панели вкладок переключиться обратно на `HomeStack`, то можно заметить, что перед вами откроется `DetailsScreen` - состояние навигации по `HomeStack` сохранилось!
 
-## React Navigation lifecycle events
+## События жизненного цикла React Navigation
 
-Now that we understand how React lifecycle methods work in React Navigation, let's answer the question we asked at the beginning: "How do we find out that a user is leaving (blur) it or coming back to it (focus)?"
+Теперь, когда мы поняли, как работают методы жизненного цикла React в React Navigation, давайте ответим на вопрос, который мы задали в самом начале: "Как мы узнаем, что пользователь покидает (размытие) или возвращается к нему (фокус)?"
 
-React Navigation emits events to screen components that subscribe to them. We can listen to `focus` and `blur` events to know when a screen comes into focus or goes out of focus respectively.
+React Navigation передает события экранным компонентам, которые на них подписаны. Мы можем прослушивать события `focus` и `blur`, чтобы узнать, когда экран попадает в фокус или уходит из фокуса соответственно.
 
-Example:
-
-<samp id="focus-and-blur" />
+Пример:
 
 ```js
 function Profile({ navigation }) {
-  React.useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      // Screen was focused
-      // Do something
-    });
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener(
+            'focus',
+            () => {
+                // Screen was focused
+                // Do something
+            }
+        );
 
-    return unsubscribe;
-  }, [navigation]);
+        return unsubscribe;
+    }, [navigation]);
 
-  return <ProfileContent />;
+    return <ProfileContent />;
 }
 ```
 
-See [Navigation events](navigation-events.md) for more details on the available events and the API usage.
+Более подробно о доступных событиях и использовании API см. в разделе [Navigation events](navigation-events.md).
 
-Instead of adding event listeners manually, we can use the [`useFocusEffect`](use-focus-effect.md) hook to perform side effects. It's like React's `useEffect` hook, but it ties into the navigation lifecycle.
+Вместо того чтобы добавлять слушателей событий вручную, мы можем использовать хук [`useFocusEffect`](use-focus-effect.md) для выполнения побочных эффектов. Он похож на хук `useEffect` в React, но связан с жизненным циклом навигации.
 
-Example:
-
-<samp id="use-focus-effect" />
+Пример:
 
 ```js
 import { useFocusEffect } from '@react-navigation/native';
 
 function Profile() {
-  useFocusEffect(
-    React.useCallback(() => {
-      // Do something when the screen is focused
+    useFocusEffect(
+        React.useCallback(() => {
+            // Do something when the screen is focused
 
-      return () => {
-        // Do something when the screen is unfocused
-        // Useful for cleanup functions
-      };
-    }, [])
-  );
+            return () => {
+                // Do something when the screen is unfocused
+                // Useful for cleanup functions
+            };
+        }, [])
+    );
 
-  return <ProfileContent />;
+    return <ProfileContent />;
 }
 ```
 
-If you want to render different things based on if the screen is focused or not, you can use the [`useIsFocused`](use-is-focused.md) hook which returns a boolean indicating whether the screen is focused.
+Если вы хотите отображать различные объекты в зависимости от того, сфокусирован экран или нет, вы можете использовать хук [`useIsFocused`](use-is-focused.md), который возвращает булево число, указывающее, сфокусирован ли экран.
 
-## Summary
+## Резюме
 
-- While React's lifecycle methods are still valid, React Navigation adds more events that you can subscribe to through the `navigation` prop.
-- You may also use the `useFocusEffect` or `useIsFocused` hooks.
+-   Хотя методы жизненного цикла React по-прежнему актуальны, React Navigation добавляет больше событий, на которые можно подписаться с помощью свойства `navigation`.
+-   Также можно использовать хуки `useFocusEffect` или `useIsFocused`.
+
+## Ссылки
+
+-   [Navigation lifecycle](https://reactnavigation.org/docs/navigation-lifecycle)

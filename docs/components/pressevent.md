@@ -103,7 +103,7 @@
 ## Используется для
 
 -   [`Button`](button.md)
--   [`PanResponder`](panresponder.md)
+-   [`PanResponder`](../api/panresponder.md)
 -   [`Pressable`](pressable.md)
 -   [`ScrollView`](scrollview.md)
 -   [`Text`](text.md)

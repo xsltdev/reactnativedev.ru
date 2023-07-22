@@ -185,4 +185,4 @@ function StackScreen() {
 
 ## Ссылки
 
--   [https://reactnavigation.org/docs/headers/](https://reactnavigation.org/docs/headers/)
+-   [Configuring the header bar](https://reactnavigation.org/docs/headers/)

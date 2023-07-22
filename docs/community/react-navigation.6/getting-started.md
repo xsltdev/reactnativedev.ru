@@ -122,4 +122,4 @@ export default function App() {
 
 ## Ссылки
 
--   [https://reactnavigation.org/docs/getting-started](https://reactnavigation.org/docs/getting-started)
+-   [Getting started](https://reactnavigation.org/docs/getting-started)

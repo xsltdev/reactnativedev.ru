@@ -249,4 +249,4 @@ navigation.navigate('Profile', { userId: 'jane' });
 
 ## Ссылки
 
--   [https://reactnavigation.org/docs/params](https://reactnavigation.org/docs/params)
+-   [Passing parameters to routes](https://reactnavigation.org/docs/params)
