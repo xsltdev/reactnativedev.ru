@@ -1,61 +1,84 @@
 ---
-id: hiding-tabbar-in-screens
-title: Hiding tab bar in specific screens
-sidebar_label: Hiding tab bar in specific screens
+description: Иногда мы можем захотеть скрыть панель вкладок на определенных экранах в стековом навигаторе, вложенном в навигатор вкладок
 ---
 
-Sometimes we may want to hide the tab bar in specific screens in a stack navigator nested in a tab navigator. Let's say we have 5 screens: `Home`, `Feed`, `Notifications`, `Profile` and `Settings`, and your navigation structure looks like this:
+# Скрытие панели вкладок на определенных экранах
+
+Иногда мы можем захотеть скрыть панель вкладок на определенных экранах в стековом навигаторе, вложенном в навигатор вкладок. Допустим, у нас есть 5 экранов: `Home`, `Feed`, `Notifications`, `Profile` и `Settings`, а структура навигации выглядит следующим образом:
 
 ```js
 function HomeStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Settings" component={Settings} />
-    </Stack.Navigator>
-  );
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen
+                name="Profile"
+                component={Profile}
+            />
+            <Stack.Screen
+                name="Settings"
+                component={Settings}
+            />
+        </Stack.Navigator>
+    );
 }
 
 function App() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeStack} />
-      <Tab.Screen name="Feed" component={Feed} />
-      <Tab.Screen name="Notifications" component={Notifications} />
-    </Tab.Navigator>
-  );
+    return (
+        <Tab.Navigator>
+            <Tab.Screen name="Home" component={HomeStack} />
+            <Tab.Screen name="Feed" component={Feed} />
+            <Tab.Screen
+                name="Notifications"
+                component={Notifications}
+            />
+        </Tab.Navigator>
+    );
 }
 ```
 
-With this structure, when we navigate to the `Profile` or `Settings` screen, the tab bar will still stay visible over those screens.
+При такой структуре при переходе к экрану `Профиль` или `Настройки` панель вкладок будет оставаться видимой на этих экранах.
 
-But if we want to show the tab bar only on the `Home`, `Feed` and `Notifications` screens, but not on the `Profile` and `Settings` screens, we'll need to change the navigation structure. The easiest way to achieve this is to nest the tab navigator inside the first screen of the stack instead of nesting stack inside tab navigator:
-
-<samp id="hiding-tabbar"/>
+Но если мы хотим, чтобы панель вкладок отображалась только на экранах `Home`, `Feed` и `Notifications`, но не на экранах `Profile` и `Settings`, то нам необходимо изменить структуру навигации. Самый простой способ добиться этого - вложить навигатор вкладок в первый экран стека вместо вложения стека в навигатор вкладок:
 
 ```js
 function HomeTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Feed" component={Feed} />
-      <Tab.Screen name="Notifications" component={Notifications} />
-    </Tab.Navigator>
-  );
+    return (
+        <Tab.Navigator>
+            <Tab.Screen name="Home" component={Home} />
+            <Tab.Screen name="Feed" component={Feed} />
+            <Tab.Screen
+                name="Notifications"
+                component={Notifications}
+            />
+        </Tab.Navigator>
+    );
 }
 
 function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeTabs} />
-        <Stack.Screen name="Profile" component={Profile} />
-        <Stack.Screen name="Settings" component={Settings} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen
+                    name="Home"
+                    component={HomeTabs}
+                />
+                <Stack.Screen
+                    name="Profile"
+                    component={Profile}
+                />
+                <Stack.Screen
+                    name="Settings"
+                    component={Settings}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
 ```
 
-After re-organizing the navigation structure, now if we navigate to the `Profile` or `Settings` screens, the tab bar won't be visible over the screen anymore.
+После реорганизации структуры навигации теперь при переходе к экранам `Профиль` или `Настройки` панель вкладок больше не будет видна над экраном.
+
+## Ссылки
+
+-   [Hiding tab bar in specific screens](https://reactnavigation.org/docs/hiding-tabbar-in-screens)

@@ -32,7 +32,9 @@ hide:
 
     Компоненты и API React Native от сообщества
 
-    [:octicons-arrow-right-24: Community](community/index.md)
+    [:octicons-arrow-right-24: API и компоненты](community/index.md)
+
+    [:octicons-arrow-right-24: React Navigation](community/react-navigation.6/getting-started.md) <small>6.x</small>
 
 </div>
 

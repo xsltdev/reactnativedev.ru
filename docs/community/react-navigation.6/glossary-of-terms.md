@@ -1,123 +1,141 @@
 ---
-id: glossary-of-terms
-title: Glossary of terms
-sidebar_label: Glossary of terms
+description: Список терминов, используемых в разработке React Native и React Navigator
 ---
 
-> This is a new section of the documentation and it's missing a lot of terms! Please [submit a pull request or an issue](https://github.com/react-navigation/react-navigation.github.io) with a term that you think should be explained here.
+# Глоссарий терминов
 
-## Navigator
+!!!tip ""
 
-A `Navigator` is React component that decides how to render the screens you have defined. It contains `Screen` elements as its children to define the configuration for screens.
+    Это новый раздел документации, и в нем не хватает многих терминов! Пожалуйста, [отправьте запрос на исправление или проблему](https://github.com/xsltdev/reactnativedev.ru) с термином, который, по вашему мнению, должен быть объяснен здесь.
 
-`NavigationContainer` is a component which manages our navigation tree and contains the [navigation state](navigation-state.md). This component must wrap all navigators structure. Usually, we'd render this component at the root of our app, which is usually the component exported from `App.js`.
+## Навигатор {#navigator}
+
+**Навигатор** (`Navigator`) - это React-компонент, который решает, как отображать заданные экраны. В качестве дочерних элементов он содержит элементы `Screen` для определения конфигурации экранов.
+
+`NavigationContainer` - это компонент, который управляет нашим навигационным деревом и содержит [navigation state](navigation-state.md). Этот компонент должен обернуть всю структуру навигаторов. Обычно мы размещаем этот компонент в корне нашего приложения, который, как правило, является компонентом, экспортируемым из `App.js`.
 
 ```js
 function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator> // <---- This is a Navigator
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+    return (
+        <NavigationContainer>
+            {/* Навигатор */}
+            <Stack.Navigator>
+                <Stack.Screen
+                    name="Home"
+                    component={HomeScreen}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
 ```
 
-## Router
+## Маршрутизатор {#router}
 
-A router is a collection of functions that decide how to handle actions and state changes in the navigator (similar to reducers in Redux apps). Normally you'd never need to interact with a router directly, unless you're writing a [custom navigator](custom-navigators.md).
+**Маршрутизатор** - это набор функций, которые решают, как обрабатывать действия и изменения состояния в навигаторе (аналогично редукторам в приложениях Redux). Обычно вам никогда не нужно взаимодействовать с маршрутизатором напрямую, если только вы не пишете [собственный навигатор](custom-navigators.md).
 
-## Screen component
+## Компонент экрана {#screen-component}
 
-A screen component is a component that we use in our route configuration.
+**Компонент экрана** - это компонент, который мы используем в конфигурации маршрута.
 
 ```js
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = (
-  <Stack.Navigator>
-    <Stack.Screen
-      name="Home"
-      component={HomeScreen} // <----
-    />
-    <Stack.Screen
-      name="Details"
-      component={DetailsScreen} // <----
-    />
-  </Stack.Navigator>
+    <Stack.Navigator>
+        <Stack.Screen
+            name="Home"
+            component={HomeScreen} // <----
+        />
+        <Stack.Screen
+            name="Details"
+            component={DetailsScreen} // <----
+        />
+    </Stack.Navigator>
 );
 ```
 
-The suffix `Screen` in the component name is entirely optional, but a frequently used convention; we could call it `Michael` and this would work just the same.
+Суффикс `Screen` в имени компонента является совершенно необязательным, но часто используемым соглашением; мы могли бы назвать его `Michael`, и это работало бы точно так же.
 
-We saw earlier that our screen components are provided with the `navigation` prop. It's important to note that _this only happens if the screen is rendered as a route by React Navigation_ (for example, in response to `navigation.navigate`). For example, if we render `DetailsScreen` as a child of `HomeScreen`, then `DetailsScreen` won't be provided with the `navigation` prop, and when you press the "Go to Details... again" button on the Home screen, the app will throw one of the quintessential JavaScript exceptions "undefined is not an object".
+Ранее мы видели, что наши экранные компоненты снабжены реквизитом `navigation`. Важно отметить, что _это происходит только в том случае, если экран отображается как маршрут с помощью React Navigation_ (например, в ответ на команду `navigation.navigate`). Например, если мы отобразим `DetailsScreen` как дочерний экран `HomeScreen`, то `DetailsScreen` не получит свойства `navigation`, и при нажатии кнопки "Go to Details... again" на главном экране приложение выбросит одно из квинтэссенциальных исключений JavaScript "undefined is not an object".
 
 ```js
 function HomeScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
-      <DetailsScreen />
-    </View>
-  );
+    return (
+        <View
+            style={{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}
+        >
+            <Text>Home Screen</Text>
+            <Button
+                title="Go to Details"
+                onPress={() =>
+                    navigation.navigate('Details')
+                }
+            />
+            <DetailsScreen />
+        </View>
+    );
 }
 ```
 
-The ["Navigation prop reference"](navigation-prop.md) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `navigation` prop.
+В разделе ["Справочник по навигационным пропсам"](navigation-prop.md) об этом говорится более подробно, описаны обходные пути и приведена дополнительная информация о других свойствах, доступных для свойства `navigation`.
 
-## Navigation Prop
+## Навигационный пропс {#navigation-prop}
 
-This prop will be passed to all screens, and it can be used for the following:
+Этот реквизит будет передаваться всем экранам, и его можно использовать для следующих целей:
 
-- `dispatch` will send an action up to the router
-- `navigate`, `goBack`, etc are available to dispatch actions in a convenient way
+-   `dispatch` отправит действие на маршрутизатор
+-   `navigate`, `goBack` и т.д. доступны для диспетчеризации действий удобным способом
 
-Navigators can also accept a navigation prop, which they should get from the parent navigator, if there is one.
+Навигаторы также могут принимать навигационный реквизит, который они должны получить от родительского навигатора, если таковой имеется.
 
-For more details, see the ["Navigation prop document"](navigation-prop.md).
+Подробнее об этом см. в документе ["Навигационный пропс документа"](navigation-prop.md).
 
-The ["Route prop reference"](route-prop.md) section goes into more detail on this, describes workarounds, and provides more information on other properties available on `route` prop.
+В разделе ["Ссылка на пропс маршрута"](route-prop.md) более подробно рассматривается этот вопрос, описываются обходные пути, а также приводится информация о других свойствах, доступных для свойства `route`.
 
-## Route Prop
+## Маршрутный пропс {#route-prop}
 
-This prop will be passed to all screens. Contains information about current route i.e. `params`, `key` and `name`.
+Этот реквизит будет передаваться на все экраны. Содержит информацию о текущем маршруте, т.е. `params`, `key` и `name`.
 
-## Navigation State
+## Состояние навигации {#navigation-state}
 
-The state of a navigator generally looks something like this:
+Состояние навигатора в общем случае выглядит примерно так:
 
 ```js
 {
-  key: 'StackRouterRoot',
-  index: 1,
-  routes: [
-    { key: 'A', name: 'Home' },
-    { key: 'B', name: 'Profile' },
-  ]
+	key: 'StackRouterRoot',
+	index: 1,
+	routes: [
+		{ key: 'A', name: 'Home' },
+		{ key: 'B', name: 'Profile' },
+	]
 }
 ```
 
-For this navigation state, there are two routes (which may be tabs, or cards in a stack). The index indicates the active route, which is "B".
+Для данного состояния навигации существует два маршрута (которые могут быть вкладками или карточками в стопке). Индекс указывает на активный маршрут, которым является "B".
 
-You can read more about the navigation state [here](navigation-state.md).
+Подробнее о состоянии навигации можно прочитать [здесь](navigation-state.md).
 
-## Route
+## Маршрут {#route}
 
-Each route is an object which contains a key to identify it, and a "name" to designate the type of route. It can also contain arbitrary params:
+Каждый маршрут представляет собой объект, содержащий ключ для его идентификации и "имя" для обозначения типа маршрута. Он также может содержать произвольные параметры:
 
 ```js
 {
-  key: 'B',
-  name: 'Profile',
-  params: { id: '123' }
+	key: 'B',
+	name: 'Profile',
+	params: { id: '123' }
 }
 ```
 
-## Header
+## Заголовок {#header}
 
-Also known as navigation header, navigation bar, app bar, and probably many other things. This is the rectangle at the top of your screen that contains the back button and the title for your screen. The entire rectangle is often referred to as the header in React Navigation.
+Также известен как навигационный заголовок, панель навигации, панель приложений и, вероятно, многие другие. Это прямоугольник в верхней части экрана, который содержит кнопку "Назад" и заголовок экрана. Весь прямоугольник часто называют заголовком в React Navigation.
+
+## Ссылки
+
+-   [Glossary of terms](https://reactnavigation.org/docs/glossary-of-terms)

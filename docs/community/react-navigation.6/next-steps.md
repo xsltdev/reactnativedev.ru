@@ -1,13 +1,17 @@
 ---
-id: next-steps
-title: Next steps
-sidebar_label: Next steps
+description: В статье рассказывается, какие шаги и знания понадобятся дальше для работы
 ---
 
-You are now familiar with how to create a stack navigator, configure it on your screen components, navigate between routes, and display modals. Stack navigators and their related APIs will be the most frequently used tools in your React Navigation toolbelt, but there are problems that they don't solve. For example, you can't build tab-based navigation using a stack navigator &mdash; for that, you need to use a [TabNavigator](tab-based-navigation.md).
+# Следующие шаги
 
-The rest of the documentation is organized around specific use cases, so you can jump between the sections under "Guides" as the need arises (but it also wouldn't hurt you to familiarize yourself with them pre-emptively!).
+Теперь вы знаете, как создать стековый навигатор, настроить его на экранные компоненты, осуществлять навигацию между маршрутами и отображать модалы. Стековые навигаторы и связанные с ними API будут наиболее часто используемыми инструментами в вашем арсенале React Navigation, но есть проблемы, которые они не решают. Например, с помощью стекового навигатора нельзя построить навигацию на основе вкладок &mdash; для этого необходимо использовать [TabNavigator](tab-based-navigation.md).
 
-While most users won't need to do this, if you are curious and want to learn more about how React Navigation works, it's recommended to work through the "Build your own Navigator" section.
+Остальная часть документации организована в соответствии с конкретными случаями использования, поэтому вы можете переходить от одного раздела к другому в разделе "Руководства" по мере возникновения необходимости (но не помешает и предварительное ознакомление с ними!).
 
-Good luck!
+Хотя большинству пользователей это не понадобится, если вы любопытны и хотите узнать больше о том, как работает React Navigation, рекомендуем проработать раздел "Постройте свой собственный навигатор".
+
+Удачи!
+
+## Ссылки
+
+-   [Next steps](https://reactnavigation.org/docs/next-steps)

@@ -1,143 +1,175 @@
 ---
-id: auth-flow
-title: Authentication flows
-sidebar_label: Authentication flows
+description: В большинстве приложений для получения доступа к данным, связанным с пользователем, или другому приватному контенту требуется аутентификация пользователя
 ---
 
-Most apps require that a user authenticates in some way to have access to data associated with a user or other private content. Typically the flow will look like this:
+# Потоки аутентификации
 
-- The user opens the app.
-- The app loads some authentication state from encrypted persistent storage (for example, [`SecureStore`](https://docs.expo.io/versions/latest/sdk/securestore/)).
-- When the state has loaded, the user is presented with either authentication screens or the main app, depending on whether valid authentication state was loaded.
-- When the user signs out, we clear the authentication state and send them back to authentication screens.
+В большинстве приложений для получения доступа к данным, связанным с пользователем, или другому приватному контенту требуется аутентификация пользователя. Как правило, процесс выглядит следующим образом:
 
-> Note: We say "authentication screens" because usually there is more than one. You may have a main screen with a username and password field, another for "forgot password", and another set for sign up.
+-   Пользователь открывает приложение.
+-   Приложение загружает некоторое состояние аутентификации из зашифрованного постоянного хранилища (например, [`SecureStore`](https://docs.expo.io/versions/latest/sdk/securestore/)).
+-   После загрузки состояния пользователю открываются либо экраны аутентификации, либо основное приложение, в зависимости от того, было ли загружено действительное состояние аутентификации.
+-   Когда пользователь выходит из системы, мы очищаем состояние аутентификации и возвращаем его к экранам аутентификации.
 
-## What we need
+!!!note "Примечание"
 
-This is the behavior that we want from the authentication flow: when users sign in, we want to throw away the state of the authentication flow and unmount all of the screens related to authentication, and when we press the hardware back button, we expect to not be able to go back to the authentication flow.
+    Мы говорим "экраны аутентификации", потому что обычно их несколько. У вас может быть основной экран с полем для ввода имени пользователя и пароля, другой экран для "забыл пароль" и еще один экран для регистрации.
 
-## How it will work
+## Что нам нужно
 
-We can define different screens based on some condition. For example, if the user is signed in, we can define `Home`, `Profile`, `Settings` etc. If the user is not signed in, we can define `SignIn` and `SignUp` screens.
+Мы хотим, чтобы поток аутентификации вел себя следующим образом: при входе пользователя в систему мы должны отбрасывать состояние потока аутентификации и размонтировать все экраны, связанные с аутентификацией, а при нажатии аппаратной кнопки "назад" мы не должны иметь возможности вернуться к потоку аутентификации.
 
-For example:
+## Как это будет работать
 
-<samp id="conditional-screens" />
+Мы можем определить различные экраны на основе некоторого условия. Например, если пользователь вошел в систему, мы можем определить `Home`, `Profile`, `Settings` и т.д. Если пользователь не вошел в систему, мы можем определить экраны `SignIn` и `SignUp`.
+
+Например:
 
 ```js
 isSignedIn ? (
-  <>
-    <Stack.Screen name="Home" component={HomeScreen} />
-    <Stack.Screen name="Profile" component={ProfileScreen} />
-    <Stack.Screen name="Settings" component={SettingsScreen} />
-  </>
+    <>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen
+            name="Profile"
+            component={ProfileScreen}
+        />
+        <Stack.Screen
+            name="Settings"
+            component={SettingsScreen}
+        />
+    </>
 ) : (
-  <>
-    <Stack.Screen name="SignIn" component={SignInScreen} />
-    <Stack.Screen name="SignUp" component={SignUpScreen} />
-  </>
+    <>
+        <Stack.Screen
+            name="SignIn"
+            component={SignInScreen}
+        />
+        <Stack.Screen
+            name="SignUp"
+            component={SignUpScreen}
+        />
+    </>
 );
 ```
 
-When we define screens like this, when `isSignedIn` is `true`, React Navigation will only see the `Home`, `Profile` and `Settings` screens, and when it's `false`, React Navigation will see the `SignIn` and `SignUp` screens. This makes it impossible to navigate to the `Home`, `Profile` and `Settings` screens when the user is not signed in, and to `SignIn` and `SignUp` screens when the user is signed in.
+При таком определении экранов, когда `isSignedIn` имеет значение `true`, React Navigation будет видеть только экраны `Home`, `Profile` и `Settings`, а когда `false`, React Navigation будет видеть экраны `SignIn` и `SignUp`. Это делает невозможным переход к экранам `Home`, `Profile` и `Settings`, когда пользователь не вошел в систему, и к экранам `SignIn` и `SignUp`, когда пользователь вошел в систему.
 
-This pattern has been in use by other routing libraries such as React Router for a long time, and is commonly known as "Protected routes". Here, our screens which need the user to be signed in are "protected" and cannot be navigated to by other means if the user is not signed in.
+Этот паттерн уже давно используется в других библиотеках маршрутизации, таких как React Router, и известен как "защищенные маршруты". В данном случае экраны, требующие входа пользователя в систему, "защищены" и не могут быть открыты другими способами, если пользователь не вошел в систему.
 
-The magic happens when the value of the `isSignedIn` variable changes. Let's say, initially `isSignedIn` is `false`. This means, either `SignIn` or `SignUp` screens are shown. After the user signs in, the value of `isSignedIn` will change to `true`. React Navigation will see that the `SignIn` and `SignUp` screens are no longer defined and so it will remove them. Then it'll show the `Home` screen automatically because that's the first screen defined when `isSignedIn` is `true`.
+Волшебство происходит при изменении значения переменной `isSignedIn`. Допустим, изначально `isSignedIn` имеет значение `false`. Это означает, что на экране отображается либо `SignIn`, либо `SignUp`. После того как пользователь зарегистрируется, значение `isSignedIn` изменится на `true`. React Navigation увидит, что экраны `SignIn` и `SignUp` больше не определены, и удалит их. Затем он автоматически покажет экран `Home`, поскольку это первый экран, определенный, когда `isSignedIn` имеет значение `true`.
 
-The example shows stack navigator, but you can use the same approach with any navigator.
+В примере показан стековый навигатор, но вы можете использовать тот же подход с любым навигатором.
 
-By conditionally defining different screens based on a variable, we can implement auth flow in a simple way that doesn't require additional logic to make sure that the correct screen is shown.
+Условно определяя различные экраны на основе переменной, мы можем реализовать поток авторизации простым способом, не требующим дополнительной логики для обеспечения правильного отображения экрана.
 
-## Don't manually navigate when conditionally rendering screens
+## При условной визуализации экранов не нужно осуществлять ручную навигацию
 
-It's important to note that when using such a setup, you **don't manually navigate** to the `Home` screen by calling `navigation.navigate('Home')` or any other method. **React Navigation will automatically navigate to the correct screen** when `isSignedIn` changes - `Home` screen when `isSignedIn` becomes `true`, and to `SignIn` screen when `isSignedIn` becomes `false`. You'll get an error if you attempt to navigate manually.
+Важно отметить, что при такой настройке **не нужно вручную переходить** к экрану `Home`, вызывая `navigation.navigate('Home')` или любой другой метод. **React Navigation будет автоматически переходить на нужный экран** при изменении `isSignedIn` - на экран `Home`, когда `isSignedIn` становится `true`, и на экран `SignIn`, когда `isSignedIn` становится `false`. При попытке навигации вручную вы получите ошибку.
 
-## Define our screens
+## Определяем экраны
 
-In our navigator, we can conditionally define appropriate screens. For our case, let's say we have 3 screens:
+В нашем навигаторе мы можем условно определить соответствующие экраны. В нашем случае, допустим, у нас есть 3 экрана:
 
-- `SplashScreen` - This will show a splash or loading screen when we're restoring the token.
-- `SignInScreen` - This is the screen we show if the user isn't signed in already (we couldn't find a token).
-- `HomeScreen` - This is the screen we show if the user is already signed in.
+-   `SplashScreen` - будет показывать заставку или экран загрузки, когда мы восстанавливаем токен.
+-   `SignInScreen` - этот экран мы показываем, если пользователь еще не вошел в систему (мы не смогли найти токен).
+-   `HomeScreen` - это экран, который мы показываем, если пользователь уже вошел в систему.
 
-So our navigator will look like:
-
-<samp id="conditional-screens-advanced" />
+Таким образом, наш навигатор будет выглядеть следующим образом:
 
 ```js
 if (state.isLoading) {
-  // We haven't finished checking for the token yet
-  return <SplashScreen />;
+    // We haven't finished checking for the token yet
+    return <SplashScreen />;
 }
 
 return (
-  <Stack.Navigator>
-    {state.userToken == null ? (
-      // No token found, user isn't signed in
-      <Stack.Screen
-        name="SignIn"
-        component={SignInScreen}
-        options={{
-          title: 'Sign in',
-          // When logging out, a pop animation feels intuitive
-          // You can remove this if you want the default 'push' animation
-          animationTypeForReplace: state.isSignout ? 'pop' : 'push',
-        }}
-      />
-    ) : (
-      // User is signed in
-      <Stack.Screen name="Home" component={HomeScreen} />
-    )}
-  </Stack.Navigator>
+    <Stack.Navigator>
+        {state.userToken == null ? (
+            // No token found, user isn't signed in
+            <Stack.Screen
+                name="SignIn"
+                component={SignInScreen}
+                options={{
+                    title: 'Sign in',
+                    // When logging out, a pop animation feels intuitive
+                    // You can remove this if you want
+                    // the default 'push' animation
+                    animationTypeForReplace: state.isSignout
+                        ? 'pop'
+                        : 'push',
+                }}
+            />
+        ) : (
+            // User is signed in
+            <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+            />
+        )}
+    </Stack.Navigator>
 );
 ```
 
-In the above snippet, `isLoading` means that we're still checking if we have a token. This can usually be done by checking if we have a token in `SecureStore` and validating the token. After we get the token and if it's valid, we need to set the `userToken`. We also have another state called `isSignout` to have a different animation on sign out.
+В приведенном выше фрагменте `isLoading` означает, что мы все еще проверяем, есть ли у нас токен. Обычно это можно сделать, проверив наличие токена в `SecureStore` и подтвердив его. После того как мы получили токен и убедились, что он действителен, нам нужно установить `userToken`. У нас также есть еще одно состояние `isSignout`, чтобы иметь другую анимацию при выходе из системы.
 
-The main thing to notice is that we're conditionally defining screens based on these state variables:
+Главное, что следует отметить, - это то, что мы условно определяем экраны на основе этих переменных состояния:
 
-- `SignIn` screen is only defined if `userToken` is `null` (user is not signed in)
-- `Home` screen is only defined if `userToken` is non-null (user is signed in)
+-   экран `SignIn` определяется только в том случае, если `userToken` равен `null` (пользователь не вошел в систему)
+-   Экран `Home` определяется только в том случае, если `userToken` не равен `null` (пользователь вошел в систему).
 
-Here, we're conditionally defining one screen for each case. But you could also define multiple screens. For example, you probably want to define password reset, signup, etc screens as well when the user isn't signed in. Similarly, for the screens accessible after signing in, you probably have more than one screen. We can use `React.Fragment` to define multiple screens:
+Здесь мы условно определяем один экран для каждого случая. Но можно определить и несколько экранов. Например, вы, вероятно, захотите определить экраны сброса пароля, регистрации и т.д., когда пользователь не вошел в систему. Аналогично, для экранов, доступных после входа в систему, вероятно, потребуется несколько экранов. Мы можем использовать `React.Fragment` для определения нескольких экранов:
 
 ```js
 state.userToken == null ? (
-  <>
-    <Stack.Screen name="SignIn" component={SignInScreen} />
-    <Stack.Screen name="SignUp" component={SignUpScreen} />
-    <Stack.Screen name="ResetPassword" component={ResetPassword} />
-  </>
+    <>
+        <Stack.Screen
+            name="SignIn"
+            component={SignInScreen}
+        />
+        <Stack.Screen
+            name="SignUp"
+            component={SignUpScreen}
+        />
+        <Stack.Screen
+            name="ResetPassword"
+            component={ResetPassword}
+        />
+    </>
 ) : (
-  <>
-    <Stack.Screen name="Home" component={HomeScreen} />
-    <Stack.Screen name="Profile" component={ProfileScreen} />
-  </>
+    <>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen
+            name="Profile"
+            component={ProfileScreen}
+        />
+    </>
 );
 ```
 
-> If you have both your login-related screens and rest of the screens in two different Stack navigators, we recommend to use a single Stack navigator and place the conditional inside instead of using 2 different navigators. This makes it possible to have a proper transition animation during login/logout.
+!!!note ""
 
-## Implement the logic for restoring the token
+    Если экраны, связанные с входом в систему, и остальные экраны находятся в двух разных навигаторах Stack, мы рекомендуем использовать один навигатор Stack и поместить в него условие, а не использовать два разных навигатора. Это позволит получить корректную анимацию перехода при входе/выходе.
 
-> Note: The following is just an example of how you might implement the logic for authentication in your app. You don't need to follow it as is.
+## Реализуем логику восстановления токена
 
-From the previous snippet, we can see that we need 3 state variables:
+!!!note "Примечание"
 
-- `isLoading` - We set this to `true` when we're trying to check if we already have a token saved in `SecureStore`
-- `isSignout` - We set this to `true` when user is signing out, otherwise set it to `false`
-- `userToken` - The token for the user. If it's non-null, we assume the user is logged in, otherwise not.
+    Ниже приведен пример того, как можно реализовать логику аутентификации в вашем приложении. Не обязательно следовать ему в точности.
 
-So we need to:
+Из предыдущего фрагмента видно, что нам нужны 3 переменные состояния:
 
-- Add some logic for restoring token, signing in and signing out
-- Expose methods for signing in and signing out to other components
+-   `isLoading` - мы устанавливаем это значение в `true`, когда пытаемся проверить, сохранен ли уже токен в `SecureStore`.
+-   `isSignout` - Мы устанавливаем значение `true`, когда пользователь выходит из системы, в противном случае устанавливаем значение `false`.
+-   `userToken` - Токен пользователя. Если он не равен `null`, мы считаем, что пользователь вошел в систему, в противном случае - нет.
 
-We'll use `React.useReducer` and `React.useContext` in this guide. But if you're using a state management library such as Redux or Mobx, you can use them for this functionality instead. In fact, in bigger apps, a global state management library is more suitable for storing authentication tokens. You can adapt the same approach to your state management library.
+Таким образом, нам необходимо:
 
-First we'll need to create a context for auth where we can expose necessary methods:
+-   Добавить логику для восстановления токена, входа и выхода из системы
+-   Предоставить методы для входа и выхода другим компонентам.
+
+В данном руководстве мы будем использовать `React.useReducer` и `React.useContext`. Но если вы используете библиотеку управления состоянием, такую как Redux или Mobx, вы можете использовать их для этой функциональности. На самом деле, в больших приложениях для хранения токенов аутентификации больше подходит глобальная библиотека управления состоянием. Вы можете применить тот же подход к своей библиотеке управления состояниями.
+
+Сначала нам нужно будет создать контекст для `auth`, в котором мы сможем открыть необходимые методы:
 
 ```js
 import * as React from 'react';
@@ -145,194 +177,268 @@ import * as React from 'react';
 const AuthContext = React.createContext();
 ```
 
-So our component will look like this:
-
-<samp id="auth-flow" />
+Таким образом, наш компонент будет выглядеть следующим образом:
 
 ```js
 import * as React from 'react';
 import * as SecureStore from 'expo-secure-store';
 
 export default function App({ navigation }) {
-  const [state, dispatch] = React.useReducer(
-    (prevState, action) => {
-      switch (action.type) {
-        case 'RESTORE_TOKEN':
-          return {
-            ...prevState,
-            userToken: action.token,
-            isLoading: false,
-          };
-        case 'SIGN_IN':
-          return {
-            ...prevState,
+    const [state, dispatch] = React.useReducer(
+        (prevState, action) => {
+            switch (action.type) {
+                case 'RESTORE_TOKEN':
+                    return {
+                        ...prevState,
+                        userToken: action.token,
+                        isLoading: false,
+                    };
+                case 'SIGN_IN':
+                    return {
+                        ...prevState,
+                        isSignout: false,
+                        userToken: action.token,
+                    };
+                case 'SIGN_OUT':
+                    return {
+                        ...prevState,
+                        isSignout: true,
+                        userToken: null,
+                    };
+            }
+        },
+        {
+            isLoading: true,
             isSignout: false,
-            userToken: action.token,
-          };
-        case 'SIGN_OUT':
-          return {
-            ...prevState,
-            isSignout: true,
             userToken: null,
-          };
-      }
-    },
-    {
-      isLoading: true,
-      isSignout: false,
-      userToken: null,
-    }
-  );
+        }
+    );
 
-  React.useEffect(() => {
-    // Fetch the token from storage then navigate to our appropriate place
-    const bootstrapAsync = async () => {
-      let userToken;
+    React.useEffect(() => {
+        // Fetch the token from storage then navigate
+        // to our appropriate place
+        const bootstrapAsync = async () => {
+            let userToken;
 
-      try {
-        userToken = await SecureStore.getItemAsync('userToken');
-      } catch (e) {
-        // Restoring token failed
-      }
+            try {
+                userToken = await SecureStore.getItemAsync(
+                    'userToken'
+                );
+            } catch (e) {
+                // Restoring token failed
+            }
 
-      // After restoring token, we may need to validate it in production apps
+            // After restoring token, we may need to validate it
+            // in production apps
 
-      // This will switch to the App screen or Auth screen and this loading
-      // screen will be unmounted and thrown away.
-      dispatch({ type: 'RESTORE_TOKEN', token: userToken });
-    };
+            // This will switch to the App screen or Auth screen
+            // and this loading
+            // screen will be unmounted and thrown away.
+            dispatch({
+                type: 'RESTORE_TOKEN',
+                token: userToken,
+            });
+        };
 
-    bootstrapAsync();
-  }, []);
+        bootstrapAsync();
+    }, []);
 
-  const authContext = React.useMemo(
-    () => ({
-      signIn: async (data) => {
-        // In a production app, we need to send some data (usually username, password) to server and get a token
-        // We will also need to handle errors if sign in failed
-        // After getting token, we need to persist the token using `SecureStore`
-        // In the example, we'll use a dummy token
+    const authContext = React.useMemo(
+        () => ({
+            signIn: async (data) => {
+                // In a production app, we need to send some data
+                // (usually username, password) to server
+                // and get a token
+                // We will also need to handle errors if sign in failed
+                // After getting token, we need to persist the token
+                // using `SecureStore`
+                // In the example, we'll use a dummy token
 
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
-      },
-      signOut: () => dispatch({ type: 'SIGN_OUT' }),
-      signUp: async (data) => {
-        // In a production app, we need to send user data to server and get a token
-        // We will also need to handle errors if sign up failed
-        // After getting token, we need to persist the token using `SecureStore`
-        // In the example, we'll use a dummy token
+                dispatch({
+                    type: 'SIGN_IN',
+                    token: 'dummy-auth-token',
+                });
+            },
+            signOut: () => dispatch({ type: 'SIGN_OUT' }),
+            signUp: async (data) => {
+                // In a production app, we need to send user data
+                //  to server and get a token
+                // We will also need to handle errors if sign up failed
+                // After getting token, we need to persist
+                // the token using `SecureStore`
+                // In the example, we'll use a dummy token
 
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
-      },
-    }),
-    []
-  );
+                dispatch({
+                    type: 'SIGN_IN',
+                    token: 'dummy-auth-token',
+                });
+            },
+        }),
+        []
+    );
 
-  return (
-    <AuthContext.Provider value={authContext}>
-      <Stack.Navigator>
-        {state.userToken == null ? (
-          <Stack.Screen name="SignIn" component={SignInScreen} />
-        ) : (
-          <Stack.Screen name="Home" component={HomeScreen} />
-        )}
-      </Stack.Navigator>
-    </AuthContext.Provider>
-  );
+    return (
+        <AuthContext.Provider value={authContext}>
+            <Stack.Navigator>
+                {state.userToken == null ? (
+                    <Stack.Screen
+                        name="SignIn"
+                        component={SignInScreen}
+                    />
+                ) : (
+                    <Stack.Screen
+                        name="Home"
+                        component={HomeScreen}
+                    />
+                )}
+            </Stack.Navigator>
+        </AuthContext.Provider>
+    );
 }
 ```
 
-## Fill in other components
+## Заполнение других компонентов
 
-We won't talk about how to implement the text inputs and buttons for the authentication screen, that is outside of the scope of navigation. We'll just fill in some placeholder content.
+Мы не будем говорить о том, как реализовать текстовые вводы и кнопки для экрана аутентификации, это выходит за рамки навигации. Мы просто заполним их содержимым.
 
 ```js
 function SignInScreen() {
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
+    const [username, setUsername] = React.useState('');
+    const [password, setPassword] = React.useState('');
 
-  const { signIn } = React.useContext(AuthContext);
+    const { signIn } = React.useContext(AuthContext);
 
-  return (
-    <View>
-      <TextInput
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <Button title="Sign in" onPress={() => signIn({ username, password })} />
-    </View>
-  );
+    return (
+        <View>
+            <TextInput
+                placeholder="Username"
+                value={username}
+                onChangeText={setUsername}
+            />
+            <TextInput
+                placeholder="Password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+            />
+            <Button
+                title="Sign in"
+                onPress={() =>
+                    signIn({ username, password })
+                }
+            />
+        </View>
+    );
 }
 ```
 
-## Removing shared screens when auth state changes
+## Удаление общих экранов при изменении состояния авторизации
 
-Consider the following example:
+Рассмотрим следующий пример:
 
 ```js
 isSignedIn ? (
-  <>
-    <Stack.Screen name="Home" component={HomeScreen} />
-    <Stack.Screen name="Profile" component={ProfileScreen} />
-    <Stack.Screen name="Help" component={HelpScreen} />
-  </>
+    <>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen
+            name="Profile"
+            component={ProfileScreen}
+        />
+        <Stack.Screen name="Help" component={HelpScreen} />
+    </>
 ) : (
-  <>
-    <Stack.Screen name="SignIn" component={SignInScreen} />
-    <Stack.Screen name="SignUp" component={SignUpScreen} />
-    <Stack.Screen name="Help" component={HelpScreen} />
-  </>
+    <>
+        <Stack.Screen
+            name="SignIn"
+            component={SignInScreen}
+        />
+        <Stack.Screen
+            name="SignUp"
+            component={SignUpScreen}
+        />
+        <Stack.Screen name="Help" component={HelpScreen} />
+    </>
 );
 ```
 
-Here we have specific screens such as `SignIn`, `Home` etc. which are only shown depending on the sign in state. But we also have the `Help` screen which can be shown in both cases. This also means that if the signin state changes when the user is in the `Help` screen, they'll stay on the `Help` screen.
+Здесь у нас есть специальные экраны, такие как `SignIn`, `Home` и т.д., которые показываются только в зависимости от состояния входа в систему. Но у нас также есть экран `Help`, который может быть показан в обоих случаях. Это также означает, что если состояние входа изменится, когда пользователь находится на экране `Help`, то он останется на экране `Help`.
 
-This can be a problem, we probably want the user to be taken to the `SignIn` screen or `Home` screen instead of keeping them on the `Help` screen. To make this work, we can use the [`navigationKey` prop](screen.md#navigationkey). When the `navigationKey` changes, React Navigation will remove all the screen.
+Это может быть проблемой, поскольку мы, вероятно, хотим, чтобы пользователь переходил на экран `SignIn` или `Home`, а не оставался на экране `Help`. Для того чтобы это работало, мы можем использовать свойство [`navigationKey`](screen.md#navigationkey). Когда `navigationKey` изменится, React Navigation удалит все экраны.
 
-So our updated code will look like following:
-
-```js
-<>
-  {isSignedIn ? (
-    <>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-    </>
-  ) : (
-    <>
-      <Stack.Screen name="SignIn" component={SignInScreen} />
-      <Stack.Screen name="SignUp" component={SignUpScreen} />
-    </>
-  )}
-  <Stack.Screen navigationKey={isSignedIn ? 'user' : 'guest'} name="Help" component={HelpScreen} />
-</>
-```
-
-If you have a bunch of shared screens, you can also use [`navigationKey` with a `Group`](group.md#navigationkey) to remove all of the screens in the group. For example:
+Таким образом, наш обновленный код будет выглядеть следующим образом:
 
 ```js
 <>
-  {isSignedIn ? (
-    <>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-    </>
-  ) : (
-    <>
-      <Stack.Screen name="SignIn" component={SignInScreen} />
-      <Stack.Screen name="SignUp" component={SignUpScreen} />
-    </>
-  )}
-  <Stack.Group navigationKey={isSignedIn ? 'user' : 'guest'}>
-    <Stack.Screen name="Help" component={HelpScreen} />
-    <Stack.Screen name="About" component={AboutScreen} />
-  </Stack.Group>
+    {isSignedIn ? (
+        <>
+            <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+            />
+            <Stack.Screen
+                name="Profile"
+                component={ProfileScreen}
+            />
+        </>
+    ) : (
+        <>
+            <Stack.Screen
+                name="SignIn"
+                component={SignInScreen}
+            />
+            <Stack.Screen
+                name="SignUp"
+                component={SignUpScreen}
+            />
+        </>
+    )}
+    <Stack.Screen
+        navigationKey={isSignedIn ? 'user' : 'guest'}
+        name="Help"
+        component={HelpScreen}
+    />
 </>
 ```
+
+Если у вас есть несколько общих экранов, вы также можете использовать [`navigationKey` с `Group`](group.md#navigationkey) для удаления всех экранов в группе. Например:
+
+```js
+<>
+    {isSignedIn ? (
+        <>
+            <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+            />
+            <Stack.Screen
+                name="Profile"
+                component={ProfileScreen}
+            />
+        </>
+    ) : (
+        <>
+            <Stack.Screen
+                name="SignIn"
+                component={SignInScreen}
+            />
+            <Stack.Screen
+                name="SignUp"
+                component={SignUpScreen}
+            />
+        </>
+    )}
+    <Stack.Group
+        navigationKey={isSignedIn ? 'user' : 'guest'}
+    >
+        <Stack.Screen name="Help" component={HelpScreen} />
+        <Stack.Screen
+            name="About"
+            component={AboutScreen}
+        />
+    </Stack.Group>
+</>
+```
+
+## Ссылки
+
+-   [Authentication flows](https://reactnavigation.org/docs/auth-flow)
