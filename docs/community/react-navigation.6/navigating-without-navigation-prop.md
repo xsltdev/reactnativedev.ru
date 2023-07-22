@@ -1,26 +1,26 @@
 ---
-id: navigating-without-navigation-prop
-title: Navigating without the navigation prop
-sidebar_label: Navigating without the navigation prop
+description: Иногда требуется запустить навигационное действие из мест, где нет доступа к реквизиту navigation, например, из промежуточного модуля Redux
 ---
 
-Sometimes you need to trigger a navigation action from places where you do not have access to the `navigation` prop, such as a Redux middleware. For such cases, you can dispatch navigation actions use a [`ref` on the navigation container](navigation-container.md#ref).
+# Навигация без навигационного пропса
 
-**Do not** use the `ref` if:
+Иногда требуется запустить навигационное действие из мест, где нет доступа к реквизиту `navigation`, например, из промежуточного модуля Redux. В таких случаях для диспетчеризации навигационных действий можно использовать [`ref` на контейнер навигации](navigation-container.md#ref).
 
-- You need to navigate from inside a component without needing to pass the `navigation` prop down, see [`useNavigation`](use-navigation.md) instead. The `ref` behaves differently, and many helper methods specific to screens aren't available.
-- You need to handle deep links or universal links. Doing this with the `ref` has many edge cases. See [configuring links](configuring-links.md) for more information on handling deep linking.
-- You need to integrate with third party libraries, such as push notifications, branch etc. See [third party integrations for deep linking](deep-linking.md#third-party-integrations) instead.
+**Не** используйте `ref`, если:
 
-**Do** use the `ref` if:
+-   Вам нужно осуществлять навигацию изнутри компонента без необходимости передачи свойства `navigation` вниз, вместо этого смотрите [`useNavigation`](use-navigation.md). Реквизит `ref` ведет себя по-другому, и многие вспомогательные методы, специфичные для экранов, недоступны.
+-   Необходимо обрабатывать глубокие ссылки или универсальные ссылки. Это можно сделать с помощью `ref`. Дополнительную информацию о работе с глубокими ссылками см. в [configuring links](configuring-links.md).
+-   Необходима интеграция со сторонними библиотеками, такими как push-уведомления, branch и т.д. Смотрите [Интеграции сторонних библиотек для глубокого связывания](deep-linking.md#third-party-integrations) вместо этого.
 
-- You use a state management library such as Redux, where you need to dispatch navigation actions from a middleware.
+**Используйте** `ref`, если:
 
-Note that it's usually better to trigger navigation from user actions such as button presses, rather than from a Redux middleware. Navigating on user action makes the app feel more responsive and provides better UX. So consider this before using the `ref` for navigation. The `ref` is an escape hatch for scenarios that can't be handled with the existing APIs and should only be used in rare situations.
+-   Вы используете библиотеку управления состоянием, такую как Redux, где вам необходимо диспетчеризировать действия навигации из промежуточного ПО.
 
-## Usage
+Обратите внимание, что обычно лучше запускать навигацию от действий пользователя, например, от нажатия кнопки, а не от промежуточного ПО Redux. Навигация по действиям пользователя делает приложение более отзывчивым и обеспечивает лучший UX. Поэтому подумайте об этом, прежде чем использовать `ref` для навигации. `ref` - это выход для сценариев, которые не могут быть реализованы с помощью существующих API, и должен использоваться только в редких случаях.
 
-You can get access to the root navigation object through a `ref` and pass it to the `RootNavigation` which we will later use to navigate.
+## Использование
+
+Вы можете получить доступ к корневому объекту навигации через `ref` и передать его в `RootNavigation`, который мы в дальнейшем будем использовать для навигации.
 
 ```js
 // App.js
@@ -29,33 +29,33 @@ import { NavigationContainer } from '@react-navigation/native';
 import { navigationRef } from './RootNavigation';
 
 export default function App() {
-  return (
-    <NavigationContainer ref={navigationRef}>{/* ... */}</NavigationContainer>
-  );
+    return (
+        <NavigationContainer ref={navigationRef}>
+            {/* ... */}
+        </NavigationContainer>
+    );
 }
 ```
 
-In the next step, we define `RootNavigation`, which is a simple module with functions that dispatch user-defined navigation actions.
+На следующем шаге мы определяем `RootNavigation`, который представляет собой простой модуль с функциями, диспетчеризирующими определенные пользователем навигационные действия.
 
 ```js
 // RootNavigation.js
 
 import { createNavigationContainerRef } from '@react-navigation/native';
 
-export const navigationRef = createNavigationContainerRef()
+export const navigationRef = createNavigationContainerRef();
 
 export function navigate(name, params) {
-  if (navigationRef.isReady()) {
-    navigationRef.navigate(name, params);
-  }
+    if (navigationRef.isReady()) {
+        navigationRef.navigate(name, params);
+    }
 }
 
 // add other navigation functions that you need and export them
 ```
 
-Then, in any of your javascript modules, import the `RootNavigation` and call functions which you exported from it. You may use this approach outside of your React components and, in fact, it works as well when used from within them.
-
- <samp id="no-nav-prop" />
+Затем в любом из своих javascript-модулей импортируйте `RootNavigation` и вызывайте экспортированные из него функции. Этот подход можно использовать вне React-компонентов, и, по сути, он также хорошо работает, если использовать его внутри них.
 
 ```js
 // any js module
@@ -66,7 +66,7 @@ import * as RootNavigation from './path/to/RootNavigation.js';
 RootNavigation.navigate('ChatScreen', { userName: 'Lucy' });
 ```
 
-Apart from `navigate`, you can add other navigation actions:
+Кроме `navigate`, можно добавить и другие действия навигации:
 
 ```js
 import { StackActions } from '@react-navigation/native';
@@ -74,47 +74,49 @@ import { StackActions } from '@react-navigation/native';
 // ...
 
 export function push(...args) {
-  if (navigationRef.isReady()) {
-    navigationRef.dispatch(StackActions.push(...args));
-  }
+    if (navigationRef.isReady()) {
+        navigationRef.dispatch(StackActions.push(...args));
+    }
 }
 ```
 
-Note that a stack navigators needs to be rendered to handle this action. You may want to check the [docs for nesting](nesting-navigators.md#navigating-to-a-screen-in-a-nested-navigator) for more details.
+Обратите внимание, что для выполнения этого действия необходимо отрисовать стек навигаторов. Более подробную информацию можно найти в [документации по вложению](nesting-navigators.md#navigating-to-a-screen-in-a-nested-navigator).
 
-When writing tests, you may mock the navigation functions, and make assertions on whether the correct functions are called with the correct parameters.
+При написании тестов можно подражать функциям навигации и делать утверждения о том, что вызываются правильные функции с правильными параметрами.
 
-## Handling initialization
+## Обработка инициализации
 
-When using this pattern, you need to keep few things in mind to avoid navigation from failing in your app.
+При использовании данного паттерна необходимо учитывать несколько моментов, чтобы избежать сбоев в работе навигации в приложении.
 
-- The `ref` is set only after the navigation container renders, this can be async when handling deep links
-- A navigator needs to be rendered to be able to handle actions, the `ref` won't be ready without a navigator
+-   Установка `ref` происходит только после рендеринга контейнера навигации, при работе с глубокими ссылками это может быть асинхронно
+-   Навигатор должен быть отрендерен, чтобы иметь возможность обрабатывать действия, `ref` не будет готов без навигатора
 
-If you try to navigate without rendering a navigator or before the navigator finishes mounting, it will print an error and do nothing. So you'll need to add an additional check to decide what to do until your app mounts.
+Если попытаться выполнить навигацию без рендеринга навигатора или до того, как навигатор закончит монтироваться, то будет выведена ошибка и ничего не будет сделано. Поэтому необходимо добавить дополнительную проверку, чтобы решить, что делать, пока приложение не смонтируется.
 
-For an example, consider the following scenario, you have a screen somewhere in the app, and that screen dispatches a redux action on `useEffect`/`componentDidMount`. You are listening for this action in your middleware and try to perform navigation when you get it. This will throw an error, because by this time, the parent navigator hasn't finished mounting and isn't ready. Parent's `useEffect`/`componentDidMount` is always called **after** child's `useEffect`/`componentDidMount`.
+Для примера рассмотрим следующий сценарий: у вас есть экран где-то в приложении, и этот экран отправляет действие redux по команде `useEffect`/`componentDidMount`. Вы слушаете это действие в своем промежуточном ПО и пытаетесь выполнить навигацию, когда получаете его. Это приведет к ошибке, поскольку к этому моменту родительский навигатор еще не закончил монтирование и не готов. Родительский `useEffect`/`componentDidMount` всегда вызывается **после** дочернего `useEffect`/`componentDidMount`.
 
-To avoid this, you can use the `isReady()` method available on the ref as shown in the above examples.
-
-<samp id="handling-navigation-init"/>
+Чтобы избежать этого, можно использовать метод `isReady()`, доступный на ref, как показано в примерах выше.
 
 ```js
 // RootNavigation.js
 
 import * as React from 'react';
 
-export const navigationRef = createNavigationContainerRef()
+export const navigationRef = createNavigationContainerRef();
 
 export function navigate(name, params) {
-  if (navigationRef.isReady()) {
-    // Perform navigation if the react navigation is ready to handle actions
-    navigationRef.navigate(name, params);
-  } else {
-    // You can decide what to do if react navigation is not ready
-    // You can ignore this, or add these actions to a queue you can call later
-  }
+    if (navigationRef.isReady()) {
+        // Perform navigation if the react navigation is ready to handle actions
+        navigationRef.navigate(name, params);
+    } else {
+        // You can decide what to do if react navigation is not ready
+        // You can ignore this, or add these actions to a queue you can call later
+    }
 }
 ```
 
-If you're unsure if a navigator is rendered, you can call `navigationRef.current.getRootState()`, and it'll return a valid state object if any navigators are rendered, otherwise it will return `undefined`.
+Если вы не уверены, что навигатор отображается, можно вызвать `navigationRef.current.getRootState()`, и он вернет корректный объект состояния, если все навигаторы отображаются, в противном случае он вернет `undefined`.
+
+## Ссылки
+
+-   [Navigating without the navigation prop](https://reactnavigation.org/docs/navigating-without-navigation-prop)

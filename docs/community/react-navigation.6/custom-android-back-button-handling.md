@@ -1,46 +1,51 @@
 ---
-id: custom-android-back-button-handling
-title: Custom Android back button behavior
-sidebar_label: Custom Android back button behavior
+description: По умолчанию, когда пользователь нажимает аппаратную кнопку Android "Назад", react-navigation открывает экран или выходит из приложения, если экранов нет
 ---
 
-By default, when user presses the Android hardware back button, react-navigation will pop a screen or exit the app if there are no screens to pop. This is a sensible default behavior, but there are situations when you might want to implement custom handling.
+# Пользовательское поведение кнопки "назад" в Android
 
-As an example, consider a screen where user is selecting items in a list, and a "selection mode" is active. On a back button press, you would first want the "selection mode" to be deactivated, and the screen should be popped only on the second back button press. The following code snippet demonstrates the situation. We make use of [`BackHandler`](https://reactnative.dev/docs/backhandler.html) which comes with react-native, along with the `useFocusEffect` hook to add our custom `hardwareBackPress` listener.
+По умолчанию, когда пользователь нажимает аппаратную кнопку Android "Назад", react-navigation открывает экран или выходит из приложения, если экранов нет. Это разумное поведение по умолчанию, но бывают ситуации, когда необходимо реализовать пользовательскую обработку.
 
-Returning `true` from `onBackPress` denotes that we have handled the event, and react-navigation's listener will not get called, thus not popping the screen. Returning `false` will cause the event to bubble up and react-navigation's listener will pop the screen.
+В качестве примера рассмотрим экран, на котором пользователь выбирает элементы в списке, и активен "режим выбора". При нажатии кнопки "назад" сначала нужно отключить "режим выбора", а экран должен открываться только при втором нажатии кнопки "назад". Ниже приведен фрагмент кода, демонстрирующий эту ситуацию. Мы используем [`BackHandler`](https://reactnative.dev/docs/backhandler.html), поставляемый с react-native, вместе с хуком `useFocusEffect` для добавления нашего собственного слушателя `hardwareBackPress`.
 
-<samp id="custom-android-back-button"/>
+Возврат `true` из `onBackPress` означает, что мы обработали событие, и слушатель react-navigation не будет вызван, а значит, экран не появится. Возврат `false` приведет к тому, что событие будет пропущено и слушатель react-navigation выведет экран на экран.
 
 ```js
 function ScreenWithCustomBackBehavior() {
-  // ...
+    // ...
 
-  useFocusEffect(
-    React.useCallback(() => {
-      const onBackPress = () => {
-        if (isSelectionModeEnabled()) {
-          disableSelectionMode();
-          return true;
-        } else {
-          return false;
-        }
-      };
+    useFocusEffect(
+        React.useCallback(() => {
+            const onBackPress = () => {
+                if (isSelectionModeEnabled()) {
+                    disableSelectionMode();
+                    return true;
+                } else {
+                    return false;
+                }
+            };
 
-      const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
+            const subscription = BackHandler.addEventListener(
+                'hardwareBackPress',
+                onBackPress
+            );
 
-      return () => subscription.remove();
-    }, [isSelectionModeEnabled, disableSelectionMode])
-  );
+            return () => subscription.remove();
+        }, [isSelectionModeEnabled, disableSelectionMode])
+    );
 
-  // ...
+    // ...
 }
 ```
 
-The presented approach will work well for screens that are shown in a `StackNavigator`. Custom back button handling in other situations may not be supported at the moment (eg. A known case when this does not work is when you want to handle back button press in an open drawer. PRs for such use cases are welcome!).
+Представленный подход хорошо работает для экранов, отображаемых в `StackNavigator`. Пользовательская обработка нажатия кнопки "назад" в других ситуациях в настоящее время может не поддерживаться (например, известен случай, когда это не работает, если вы хотите обрабатывать нажатие кнопки "назад" в открытом ящике. PR для таких случаев приветствуются!).
 
-If instead of overriding system back button, you'd like to prevent going back from the screen, see docs for [preventing going back](preventing-going-back.md).
+Если вместо переопределения системной кнопки "Назад" вы хотите предотвратить возврат назад с экрана, смотрите документацию по [предотвращению возврата назад](preventing-going-back.md).
 
-### Why not use component lifecycle methods
+## Почему не стоит использовать методы жизненного цикла компонентов
 
-At first, you may be inclined to use `componentDidMount` to subscribe for the back press event and `componentWillUnmount` to unsubscribe, or use `useEffect` to add the listener. This approach will not work - learn more about this in [navigation lifecycle](navigation-lifecycle.md).
+Поначалу вы можете склониться к тому, чтобы использовать `componentDidMount` для подписки на событие нажатия кнопки "назад" и `componentWillUnmount` для отмены подписки, или использовать `useEffect` для добавления слушателя. Такой подход не сработает - подробнее об этом в [жизненный цикл навигации](navigation-lifecycle.md).
+
+## Ссылки
+
+-   [Custom Android back button behavior](https://reactnavigation.org/docs/custom-android-back-button-handling)

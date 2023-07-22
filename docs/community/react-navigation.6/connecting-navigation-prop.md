@@ -1,32 +1,30 @@
 ---
-id: connecting-navigation-prop
-title: Access the navigation prop from any component
-sidebar_label: Access the navigation prop from any component
+description: useNavigation - это хук, предоставляющий доступ к объекту navigation
 ---
 
-[`useNavigation`](use-navigation.md) is a hook which gives access to the `navigation` object. It's useful when you cannot pass the `navigation` prop into the component directly, or don't want to pass it in case of a deeply nested child.
+# Доступ к навигационному параметру из любого компонента
 
-An ordinary component that is not a screen component will not receive the navigation prop automatically. For example in this `GoToButton` component:
+[`useNavigation`](use-navigation.md) - это хук, предоставляющий доступ к объекту `navigation`. Он полезен, когда вы не можете передать свойство `navigation` в компонент напрямую или не хотите передавать его в случае глубоко вложенного дочернего компонента.
+
+Обычный компонент, не являющийся компонентом экрана, не получит автоматически реквизит навигации. Например, в этом компоненте `GoToButton`:
 
 ```js
 import * as React from 'react';
 import { Button } from 'react-native';
 
 function GoToButton({ navigation, screenName }) {
-  return (
-    <Button
-      title={`Go to ${screenName}`}
-      onPress={() => navigation.navigate(screenName)}
-    />
-  );
+    return (
+        <Button
+            title={`Go to ${screenName}`}
+            onPress={() => navigation.navigate(screenName)}
+        />
+    );
 }
 ```
 
-To resolve this exception, you could pass the `navigation` prop in to `GoToButton` when you render it from a screen, like so: `<GoToButton navigation={props.navigation} />`.
+Чтобы решить это исключение, можно передать свойство `navigation` в `GoToButton` при его рендеринге с экрана, например, так: `<GoToButton navigation={props.navigation} />`.
 
-Alternatively, you can use the `useNavigation` to provide the `navigation` prop automatically (through React context, if you're curious).
-
-<samp id="navigation-in-component" >useNavigation in component</samp>
+В качестве альтернативы можно использовать `useNavigation` для автоматического предоставления свойства `navigation` (через контекст React).
 
 ```js
 import * as React from 'react';
@@ -34,15 +32,19 @@ import { Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 function GoToButton({ screenName }) {
-  const navigation = useNavigation();
+    const navigation = useNavigation();
 
-  return (
-    <Button
-      title={`Go to ${screenName}`}
-      onPress={() => navigation.navigate(screenName)}
-    />
-  );
+    return (
+        <Button
+            title={`Go to ${screenName}`}
+            onPress={() => navigation.navigate(screenName)}
+        />
+    );
 }
 ```
 
-Using this approach, you can render `GoToButton` anywhere in your app without passing in a `navigation` prop explicitly and it will work as expected.
+Используя этот подход, вы можете отобразить `GoToButton` в любом месте вашего приложения без явной передачи свойства `navigation`, и она будет работать так, как ожидалось.
+
+## Ссылки
+
+-   [Access the navigation prop from any component](https://reactnavigation.org/docs/connecting-navigation-prop)

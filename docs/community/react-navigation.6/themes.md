@@ -1,112 +1,118 @@
 ---
-id: themes
-title: Themes
-sidebar_label: Themes
+description: Темы позволяют изменять цвета различных компонентов, предоставляемых React Navigation
 ---
 
-Themes allow you to change the colors of various components provided by React Navigation. You can use themes to:
+# Темы
 
-- Customize the colors match your brand
-- Provide light and dark themes based on the time of the day or user preference
+Темы позволяют изменять цвета различных компонентов, предоставляемых React Navigation. Темы можно использовать для:
 
-## Basic usage
+-   Настроить цвета в соответствии с вашим брендом
+-   Предоставить светлые и темные темы в зависимости от времени суток или предпочтений пользователя.
 
-To pass a custom theme, you can pass the `theme` prop to the navigation container.
+## Базовое использование
 
-<samp id="simple-theme" />
+Чтобы передать пользовательскую тему, можно передать свойство `theme` контейнеру навигации.
 
 ```js
 import * as React from 'react';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import {
+    NavigationContainer,
+    DefaultTheme,
+} from '@react-navigation/native';
 
 const MyTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: 'rgb(255, 45, 85)',
-  },
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        primary: 'rgb(255, 45, 85)',
+    },
 };
 
 export default function App() {
-  return (
-    <NavigationContainer theme={MyTheme}>{/* content */}</NavigationContainer>
-  );
+    return (
+        <NavigationContainer theme={MyTheme}>
+            {/* content */}
+        </NavigationContainer>
+    );
 }
 ```
 
-You can change the theme prop dynamically and all the components will automatically update to reflect the new theme. If you haven't provided a `theme` prop, the default theme will be used.
+Вы можете динамически изменять реквизит темы, и все компоненты будут автоматически обновляться в соответствии с новой темой. Если вы не указали реквизит `theme`, то будет использоваться тема по умолчанию.
 
-A theme is a JS object containing a list of colors to use. It contains the following properties:
+Тема - это JS-объект, содержащий список используемых цветов. Она содержит следующие свойства:
 
-- `dark` (`boolean`): Whether this is a dark theme or a light theme
-- `colors` (`object`): Various colors used by react navigation components:
-  - `primary` (`string`): The primary color of the app used to tint various elements. Usually you'll want to use your brand color for this.
-  - `background` (`string`): The color of various backgrounds, such as background color for the screens.
-  - `card` (`string`): The background color of card-like elements, such as headers, tab bars etc.
-  - `text` (`string`): The text color of various elements.
-  - `border` (`string`): The color of borders, e.g. header border, tab bar border etc.
-  - `notification` (`string`): The color of Tab Navigator badge.
+-   `dark` (`boolean`): Является ли эта тема темной или светлой.
+-   `colors` (`object`): Различные цвета, используемые компонентами навигации react:
+    -   `primary` (`string`): Основной цвет приложения, используемый для оттенка различных элементов. Обычно для этого используется цвет вашего бренда.
+    -   `background` (`string`): Цвет различных фоновых элементов, например, цвет фона для экранов.
+    -   `card` (`string`): Цвет фона элементов, похожих на карту, таких как заголовки, панели вкладок и т.д.
+    -   `text` (`string`): Цвет текста различных элементов.
+    -   `border` (`string`): Цвет границ, например, границы заголовка, границы панели вкладок и т.д.
+    -   `notification` (`string`): Цвет значка Tab Navigator.
 
-When creating a custom theme, you will need to provide all of these properties.
+При создании пользовательской темы необходимо указать все эти свойства.
 
-Example theme:
+Пример темы:
 
 ```js
 const MyTheme = {
-  dark: false,
-  colors: {
-    primary: 'rgb(255, 45, 85)',
-    background: 'rgb(242, 242, 242)',
-    card: 'rgb(255, 255, 255)',
-    text: 'rgb(28, 28, 30)',
-    border: 'rgb(199, 199, 204)',
-    notification: 'rgb(255, 69, 58)',
-  },
+    dark: false,
+    colors: {
+        primary: 'rgb(255, 45, 85)',
+        background: 'rgb(242, 242, 242)',
+        card: 'rgb(255, 255, 255)',
+        text: 'rgb(28, 28, 30)',
+        border: 'rgb(199, 199, 204)',
+        notification: 'rgb(255, 69, 58)',
+    },
 };
 ```
 
-Providing a theme will take care of styling of all the official navigators. React Navigation also provides several tools to help you make your customizations of those navigators and the screens within the navigators can use the theme too.
+Предоставление темы позаботится о стилизации всех официальных навигаторов. React Navigation также предоставляет несколько инструментов для настройки этих навигаторов, а экраны внутри навигаторов также могут использовать тему.
 
-## Built-in themes
+## Встроенные темы
 
-As operating systems add built-in support for light and dark modes, supporting dark mode is less about keeping hip to trends and more about conforming to the average user expectations for how apps should work. In order to provide support for light and dark mode in a way that is reasonably consistent with the OS defaults, these themes are built in to React Navigation.
+По мере того как операционные системы добавляют встроенную поддержку светлого и темного режимов, поддержка темного режима становится не столько модным трендом, сколько необходимостью соответствовать ожиданиям рядовых пользователей в отношении работы приложений. Для того чтобы обеспечить поддержку светлого и темного режимов в разумном соответствии с настройками ОС по умолчанию, эти темы встроены в React Navigation.
 
-You can import the default and dark themes like so:
+Импортировать темы по умолчанию и темные темы можно следующим образом:
 
 ```js
-import { DefaultTheme, DarkTheme } from '@react-navigation/native';
+import {
+    DefaultTheme,
+    DarkTheme,
+} from '@react-navigation/native';
 ```
 
-## Using the operating system preferences
+## Использование предпочтений операционной системы
 
-On iOS 13+ and Android 10+, you can get user's preferred color scheme (`'dark'` or `'light'`) with the ([Appearance API](https://reactnative.dev/docs/appearance)).
-
-<samp id="system-themes" />
+На iOS 13+ и Android 10+ можно получить предпочитаемую пользователем цветовую схему (`dark` или `light`) с помощью ([Appearance API](https://reactnative.dev/docs/appearance)).
 
 ```js
 import { useColorScheme } from 'react-native';
 import {
-  NavigationContainer,
-  DefaultTheme,
-  DarkTheme,
+    NavigationContainer,
+    DefaultTheme,
+    DarkTheme,
 } from '@react-navigation/native';
 
 export default () => {
-  const scheme = useColorScheme();
+    const scheme = useColorScheme();
 
-  return (
-    <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
-      {/* content */}
-    </NavigationContainer>
-  );
+    return (
+        <NavigationContainer
+            theme={
+                scheme === 'dark' ? DarkTheme : DefaultTheme
+            }
+        >
+            {/* content */}
+        </NavigationContainer>
+    );
 };
 ```
 
-## Using the current theme in your own components
+## Использование текущей темы в собственных компонентах
 
-To gain access to the theme in any component that is rendered inside the navigation container:, you can use the `useTheme` hook. It returns the theme object:
-
-<samp id="system-themes" />
+Для получения доступа к теме в любом компоненте, который рендерится внутри навигационного контейнера:, можно использовать хук `useTheme`. Он возвращает объект темы:
 
 ```js
 import * as React from 'react';
@@ -115,12 +121,20 @@ import { useTheme } from '@react-navigation/native';
 
 // Black background and white text in light theme, inverted on dark theme
 function MyButton() {
-  const { colors } = useTheme();
+    const { colors } = useTheme();
 
-  return (
-    <TouchableOpacity style={{ backgroundColor: colors.card }}>
-      <Text style={{ color: colors.text }}>Button!</Text>
-    </TouchableOpacity>
-  );
+    return (
+        <TouchableOpacity
+            style={{ backgroundColor: colors.card }}
+        >
+            <Text style={{ color: colors.text }}>
+                Button!
+            </Text>
+        </TouchableOpacity>
+    );
 }
 ```
+
+## Ссылки
+
+-   [Themes](https://reactnavigation.org/docs/themes)

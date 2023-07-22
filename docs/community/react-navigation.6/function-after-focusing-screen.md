@@ -1,87 +1,87 @@
 ---
-id: function-after-focusing-screen
-title: Call a function when focused screen changes
-sidebar_label: Call a function when focused screen changes
+description: В этом руководстве мы будем вызывать функцию или отображать что-либо при фокусировке экрана
 ---
 
-In this guide we will call a function or render something on screen focusing. This is useful for making additional API calls when a user revisits a particular screen in a Tab Navigator, or to track user events as they tap around our app.
+# Вызов функции при смене фокуса экрана
 
-There are multiple approaches available to us:
+В этом руководстве мы будем вызывать функцию или отображать что-либо при фокусировке экрана. Это полезно для выполнения дополнительных вызовов API, когда пользователь возвращается к определенному экрану в Tab Navigator, или для отслеживания событий пользователя при касании экрана в нашем приложении.
 
-1. Listening to the `'focus'` event with an event listener.
-2. Using the `useFocusEffect` hook provided by react-navigation.
-3. Using the `useIsFocused` hook provided by react-navigation.
+Существует несколько подходов:
 
-## Triggering an action with a `'focus'` event listener
+1.  Прослушивание события `'focus'` с помощью слушателя событий.
+2.  Использование хука `useFocusEffect`, предоставляемого react-navigation.
+3.  Использование хука `useIsFocused`, предоставляемого react-navigation.
 
-We can also listen to the `'focus'` event with an event listener. After setting up an event listener, we must also stop listening to the event when the screen is unmounted.
+## Запуск действия с помощью слушателя события `'focus'`
 
-With this approach, we will only be able to call an action when the screen focuses. This is useful for performing an action such as logging the screen view for analytics.
+Мы также можем прослушивать событие `'focus'` с помощью слушателя событий. После настройки слушателя мы должны также прекратить прослушивание события, когда экран будет размонтирован.
 
-Example:
+При таком подходе мы сможем вызывать действие только тогда, когда экран сфокусируется. Это удобно для выполнения такого действия, как запись в журнал вида экрана для аналитики.
 
-<samp id="focus-event-listener" />
+Пример:
 
 ```js
 import * as React from 'react';
 import { View } from 'react-native';
 
 function ProfileScreen({ navigation }) {
-  React.useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      // The screen is focused
-      // Call any action
-    });
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener(
+            'focus',
+            () => {
+                // The screen is focused
+                // Call any action
+            }
+        );
 
-    // Return the function to unsubscribe from the event so it gets removed on unmount
-    return unsubscribe;
-  }, [navigation]);
+        // Return the function to unsubscribe from the event so it gets removed on unmount
+        return unsubscribe;
+    }, [navigation]);
 
-  return <View />;
+    return <View />;
 }
 ```
 
-See the [navigation events guide](navigation-events.md) for more details on the event listener API.
+Более подробная информация об API слушателей событий приведена в руководстве [navigation events guide](navigation-events.md).
 
-In most cases, it's recommended to use the `useFocusEffect` hook instead of adding the listener manually. See below for details.
+В большинстве случаев рекомендуется использовать хук `useFocusEffect` вместо добавления слушателя вручную. Подробности см. ниже.
 
-## Triggering an action with the `useFocusEffect` hook
+## Запуск действия с помощью хука `useFocusEffect`
 
-React Navigation provides a [hook](https://reactjs.org/docs/hooks-intro.html) that runs an effect when the screen comes into focus and cleans it up when it goes out of focus. This is useful for cases such as adding event listeners, for fetching data with an API call when a screen becomes focused, or any other action that needs to happen once the screen comes into view.
+React Navigation предоставляет [хук](https://reactdev.ru/reference/hooks/), который запускает эффект, когда экран входит в фокус, и очищает его, когда он выходит из фокуса. Это полезно для таких случаев, как добавление слушателей событий, получение данных с помощью вызова API, когда экран становится сфокусированным, или для любых других действий, которые должны происходить, как только экран становится видимым.
 
-This is particularly handy when we are trying to stop something when the page is unfocused, like stopping a video or audio file from playing, or stopping the tracking of a user's location.
-
-<samp id="simple-focus-effect" />
+Это особенно удобно, когда мы пытаемся остановить какое-либо действие, когда страница расфокусирована, например, остановить воспроизведение видео- или аудиофайла или остановить отслеживание местоположения пользователя.
 
 ```js
 import { useFocusEffect } from '@react-navigation/native';
 
 function Profile({ userId }) {
-  const [user, setUser] = React.useState(null);
+    const [user, setUser] = React.useState(null);
 
-  useFocusEffect(
-    React.useCallback(() => {
-      const unsubscribe = API.subscribe(userId, user => setUser(data));
+    useFocusEffect(
+        React.useCallback(() => {
+            const unsubscribe = API.subscribe(
+                userId,
+                (user) => setUser(data)
+            );
 
-      return () => unsubscribe();
-    }, [userId])
-  );
+            return () => unsubscribe();
+        }, [userId])
+    );
 
-  return <ProfileContent user={user} />;
+    return <ProfileContent user={user} />;
 }
 ```
 
-See the [`useFocusEffect`](https://reactnavigation.org/docs/use-focus-effect/) documentation for more details.
+Подробнее см. документацию по [`useFocusEffect`](use-focus-effect.md).
 
-## Re-rendering screen with the `useIsFocused` hook
+## Рендеринг экрана с помощью хука `useIsFocused`.
 
-React Navigation provides a [hook](https://reactjs.org/docs/hooks-intro.html) that returns a boolean indicating whether the screen is focused or not.
+React Navigation предоставляет [хук](https://reactdev.ru/reference/hooks/), который возвращает булево число, указывающее, сфокусирован экран или нет.
 
-The hook will return `true` when the screen is focused and `false` when our component is no longer focused. This enables us to render something conditionally based on whether the user is on the screen or not.
+Хук будет возвращать `true`, когда экран сфокусирован, и `false`, когда наш компонент больше не сфокусирован. Это позволяет нам отображать что-либо условно в зависимости от того, находится ли пользователь на экране или нет.
 
-The `useIsFocused` hook will cause our component to re-render when we focus and unfocus a screen. Using this hook component may introduce unnecessary component re-renders as a screen comes in and out of focus. This could cause issues depending on the type of action we're calling on focusing. Hence we recommend to use this hook only if you need to trigger a re-render. For side-effects such as subscribing to events or fetching data, use the methods described above.
-
-<samp id="use-is-focused" />
+Хук `useIsFocused` заставит наш компонент перерисовываться при фокусировке и разфокусировке экрана. Использование этого хука может привести к ненужным повторным рендерам компонента, когда экран входит и выходит из фокуса. Это может привести к проблемам, зависящим от типа действия, которое мы вызываем при фокусировке. Поэтому мы рекомендуем использовать этот хук только в том случае, если необходимо вызвать повторный рендеринг. Для таких побочных эффектов, как подписка на события или получение данных, используйте методы, описанные выше.
 
 ```js
 import * as React from 'react';
@@ -89,11 +89,17 @@ import { Text } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 
 function Profile() {
-  // This hook returns `true` if the screen is focused, `false` otherwise
-  const isFocused = useIsFocused();
+    // This hook returns `true` if the screen is focused, `false` otherwise
+    const isFocused = useIsFocused();
 
-  return <Text>{isFocused ? 'focused' : 'unfocused'}</Text>;
+    return (
+        <Text>{isFocused ? 'focused' : 'unfocused'}</Text>
+    );
 }
 ```
 
-This example is also documented in the [`useIsFocused` API documentation](use-is-focused.md).
+Этот пример также описан в документации по API [`useIsFocused`](use-is-focused.md).
+
+## Ссылки
+
+-   [Call a function when focused screen changes](https://reactnavigation.org/docs/function-after-focusing-screen)

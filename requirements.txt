@@ -8,7 +8,6 @@ pymdown-extensions
 mkdocs-material==9.2.0b1
 mkdocs-awesome-pages-plugin
 mkdocs-minify-plugin
-mkdocs-video
 PyYAML
 six
 tornado

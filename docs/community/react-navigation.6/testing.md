@@ -1,25 +1,25 @@
 ---
-id: testing
-title: Testing with Jest
-sidebar_label: Testing with Jest
+description: Testing code using React Navigation may require some setup since we need to mock native dependencies used in the navigators
 ---
 
-Testing code using React Navigation may require some setup since we need to mock native dependencies used in the navigators. We recommend using [Jest](https://jestjs.io) to write unit tests.
+# Тестирование с Jest
 
-## Mocking native modules
+Тестирование кода с использованием React Navigation может потребовать некоторой настройки, поскольку нам необходимо имитировать нативные зависимости, используемые в навигаторах. Мы рекомендуем использовать [Jest](https://jestjs.io) для написания модульных тестов.
 
-To be able to test React Navigation components, certain dependencies will need to be mocked depending on which components are being used.
+## Подражание нативным модулям
 
-If you're using `@react-navigation/drawer`, you will need to mock:
+Чтобы протестировать компоненты React Navigation, необходимо подружить некоторые зависимости в зависимости от того, какие компоненты используются.
 
-- `react-native-reanimated`
-- `react-native-gesture-handler`
+Если вы используете `@react-navigation/drawer`, то вам нужно будет подружить:
 
-If you're using `@react-navigation/stack`, you will only need to mock:
+-   `react-native-reanimated`
+-   `react-native-gesture-handler`.
 
-- `react-native-gesture-handler`
+Если вы используете `@react-navigation/stack`, то вам нужно только подражать:
 
-To add the mocks, create a file `jest/setup.js` (or any other file name of your choice) and paste the following code in it:
+-   `react-native-gesture-handler`.
+
+Для добавления макетов создайте файл `jest/setup.js` (или любое другое имя файла по вашему выбору) и вставьте в него следующий код:
 
 ```js
 // include this line for mocking react-native-gesture-handler
@@ -27,30 +27,34 @@ import 'react-native-gesture-handler/jestSetup';
 
 // include this section and the NativeAnimatedHelper section for mocking react-native-reanimated
 jest.mock('react-native-reanimated', () => {
-  const Reanimated = require('react-native-reanimated/mock');
+    const Reanimated = require('react-native-reanimated/mock');
 
-  // The mock for `call` immediately calls the callback which is incorrect
-  // So we override it with a no-op
-  Reanimated.default.call = () => {};
+    // The mock for `call` immediately calls the callback which is incorrect
+    // So we override it with a no-op
+    Reanimated.default.call = () => {};
 
-  return Reanimated;
+    return Reanimated;
 });
 
 // Silence the warning: Animated: `useNativeDriver` is not supported because the native animated module is missing
-jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
+jest.mock(
+    'react-native/Libraries/Animated/NativeAnimatedHelper'
+);
 ```
 
-Then we need to use this setup file in our jest config. You can add it under `setupFiles` option in a `jest.config.js` file or the `jest` key in `package.json`:
+Затем нам необходимо использовать этот установочный файл в конфигурации jest. Вы можете добавить его в опцию `setupFiles` в файле `jest.config.js` или в ключ `jest` в файле `package.json`:
 
 ```json
 {
-  "preset": "react-native",
-  "setupFiles": [
-    "<rootDir>/jest/setup.js"
-  ],
+    "preset": "react-native",
+    "setupFiles": ["<rootDir>/jest/setup.js"]
 }
 ```
 
-Make sure that the path to the file in `setupFiles` is correct. Jest will run these files before running your tests, so it's the best place to put your global mocks.
+Убедитесь, что путь к файлу в `setupFiles` указан правильно. Jest будет запускать эти файлы перед выполнением тестов, поэтому это лучшее место для размещения глобальных имитаторов.
 
-If you're not using Jest, then you'll need to mock these modules according to the test framework you are using.
+Если вы не используете Jest, то вам придется подставлять эти модули в соответствии с используемым тестовым фреймворком.
+
+## Ссылки
+
+-   [Testing with Jest](https://reactnavigation.org/docs/testing/)

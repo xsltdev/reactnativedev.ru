@@ -101,8 +101,7 @@ plugins:
               - ru
               - en
     - awesome-pages
-    - mkdocs-video
-#    - social
+    - social
 
 extra_css:
     - '/assets/stylesheets/styles.css?5'

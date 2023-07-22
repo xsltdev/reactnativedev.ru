@@ -1,95 +1,104 @@
 ---
-id: configuring-links
-title: Configuring links
-sidebar_label: Configuring links
+description: В этом руководстве мы настроим React Navigation для работы с внешними ссылками
 ---
 
-In this guide, we will configure React Navigation to handle external links. This is necessary if you want to:
+# Конфигурирование ссылок
 
-1. Handle deep links in React Native apps on Android and iOS
-2. Enable URL integration in browser when using on web
-3. Use [`<Link />`](link.md) or [`useLinkTo`](use-link-to.md) to navigate using paths.
+В этом руководстве мы настроим React Navigation для работы с внешними ссылками. Это необходимо, если вы хотите:
 
-Make sure that you have [configured deep links](deep-linking.md) in your app before proceeding. If you have an Android or iOS app, remember to specify the [`prefixes`](navigation-container.md#linkingprefixes) option.
+1.  Обрабатывать глубокие ссылки в приложениях React Native на Android и iOS
+2.  Включить интеграцию URL в браузере при использовании в Интернете
+3.  Используйте [`<Link />`](link.md) или [`useLinkTo`](use-link-to.md) для навигации по путям.
 
-The `NavigationContainer` accepts a [`linking`](navigation-container.md#linking) prop that makes it easier to handle incoming links. The 2 of the most important properties you can specify in the `linking` prop are `prefixes` and `config`:
+Прежде чем приступить к работе, убедитесь, что в вашем приложении настроены [deep links](deep-linking.md). Если у вас приложение для Android или iOS, не забудьте указать параметр [`prefixes`](navigation-container.md#linkingprefixes).
+
+Контейнер `NavigationContainer` принимает свойство [`linking`](navigation-container.md#linking), которое облегчает работу с входящими ссылками. Два наиболее важных свойства, которые можно указать в реквизите `linking`, - это `prefixes` и `config`:
 
 ```js
 import { NavigationContainer } from '@react-navigation/native';
 
 const linking = {
-  prefixes: [
-    /* your linking prefixes */
-  ],
-  config: {
-    /* configuration for matching screens with paths */
-  },
+    prefixes: [
+        /* your linking prefixes */
+    ],
+    config: {
+        /* configuration for matching screens with paths */
+    },
 };
 
 function App() {
-  return (
-    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
-      {/* content */}
-    </NavigationContainer>
-  );
+    return (
+        <NavigationContainer
+            linking={linking}
+            fallback={<Text>Loading...</Text>}
+        >
+            {/* content */}
+        </NavigationContainer>
+    );
 }
 ```
 
-When you specify the `linking` prop, React Navigation will handle incoming links automatically. On Android and iOS, it'll use React Native's [`Linking` module](https://reactnative.dev/docs/linking) to handle incoming links, both when the app was opened with the link, and when new links are received when the app is open. On the Web, it'll use the [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) to sync the URL with the browser.
+При указании свойства `linking` React Navigation будет автоматически обрабатывать входящие ссылки. На Android и iOS для обработки входящих ссылок используется модуль React Native [`Linking`](https://reactnative.dev/docs/linking), как при открытии приложения со ссылкой, так и при получении новых ссылок при открытом приложении. В Интернете для синхронизации URL с браузером используется [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API).
 
-> Note: Currently there seems to be bug ([facebook/react-native#25675](https://github.com/facebook/react-native/issues/25675)) which results in it never resolving on Android. We add a timeout to avoid getting stuck forever, but it means that the link might not be handled in some cases.
+!!!note "Примечание"
 
-You can also pass a [`fallback`](navigation-container.md#fallback) prop to `NavigationContainer` which controls what's displayed when React Navigation is trying to resolve the initial deep link URL.
+    В настоящее время, похоже, существует ошибка ([facebook/react-native#25675](https://github.com/facebook/react-native/issues/25675)), из-за которой ссылка не разрешается на Android. Мы добавляем таймаут, чтобы избежать вечного застревания, но это означает, что в некоторых случаях ссылка может быть не обработана.
 
-## Prefixes
+Также в `NavigationContainer` можно передать параметр [`fallback`](navigation-container.md#fallback), который определяет, что будет отображаться, когда React Navigation пытается разрешить начальный URL глубокой ссылки.
 
-The `prefixes` option can be used to specify custom schemes (e.g. `mychat://`) as well as host & domain names (e.g. `https://mychat.com`) if you have configured [Universal Links](https://developer.apple.com/ios/universal-links/) or [Android App Links](https://developer.android.com/training/app-links).
+## Префиксы
 
-For example:
+Опция `prefixes` может быть использована для указания пользовательских схем (например, `mychat://`), а также имен хостов и доменов (например, `https://mychat.com`), если вы настроили [Universal Links](https://developer.apple.com/ios/universal-links/) или [Android App Links](https://developer.android.com/training/app-links).
 
-```js
-const linking = {
-  prefixes: ['mychat://', 'https://mychat.com'],
-};
-```
-
-Note that the `prefixes` option is not supported on Web. The host & domain names will be automatically determined from the Website URL in the browser. If your app runs only on Web, then you can omit this option from the config.
-
-### Multiple subdomains​
-
-To match all subdomains of an associated domain, you can specify a wildcard by prefixing `*`. before the beginning of a specific domain. Note that an entry for `*.mychat.com` does not match `mychat.com` because of the period after the asterisk. To enable matching for both `*.mychat.com` and `mychat.com`, you need to provide a separate prefix entry for each.
+Например:
 
 ```js
 const linking = {
-  prefixes: ['mychat://', 'https://mychat.com', 'https://*.mychat.com'],
+    prefixes: ['mychat://', 'https://mychat.com'],
 };
 ```
 
-## Mapping path to route names
+Обратите внимание, что опция `prefixes` не поддерживается в Web. Имена хоста и домена будут автоматически определяться из URL сайта в браузере. Если ваше приложение работает только на Web, то эту опцию можно опустить в конфигурации.
 
-To handle a link, you need to translate it to a valid [navigation state](navigation-state.md) and vice versa. For example, the path `/rooms/chat?user=jane` may be translated to a state object like this:
+### Несколько поддоменов
+
+Чтобы найти все поддомены связанного домена, можно указать подстановочный знак, добавив префикс `*`. перед началом определенного домена. Обратите внимание, что запись для `*.mychat.com` не соответствует `mychat.com` из-за точки после звездочки. Чтобы обеспечить соответствие для доменов `*.mychat.com` и `mychat.com`, необходимо создать отдельный префикс для каждого из них.
+
+```js
+const linking = {
+    prefixes: [
+        'mychat://',
+        'https://mychat.com',
+        'https://*.mychat.com',
+    ],
+};
+```
+
+## Сопоставление путей с именами маршрутов
+
+Для работы со ссылкой необходимо перевести ее в допустимое состояние [navigation state](navigation-state.md) и наоборот. Например, путь `/rooms/chat?user=jane` может быть преобразован в объект state следующим образом:
 
 ```js
 const state = {
-  routes: [
-    {
-      name: 'rooms',
-      state: {
-        routes: [
-          {
-            name: 'chat',
-            params: { user: 'jane' },
-          },
-        ],
-      },
-    },
-  ],
+    routes: [
+        {
+            name: 'rooms',
+            state: {
+                routes: [
+                    {
+                        name: 'chat',
+                        params: { user: 'jane' },
+                    },
+                ],
+            },
+        },
+    ],
 };
 ```
 
-By default, React Navigation will use the path segments as the route name when parsing the URL. But directly translating path segments to route names may not be the expected behavior.
+По умолчанию React Navigation использует сегменты пути в качестве имени маршрута при разборе URL. Однако прямое преобразование сегментов пути в имена маршрутов может не соответствовать ожидаемому поведению.
 
-For example, you might want to parse the path `/feed/latest` to something like:
+Например, для разбора пути `/feed/latest` может потребоваться что-то вроде:
 
 ```js
 const state = {
@@ -104,474 +113,514 @@ const state = {
 }
 ```
 
-You can specify the [`config`](navigation-container.md#linkingconfig) option in `linking` to control how the deep link is parsed to suit your needs.
+Вы можете указать опцию [`config`](navigation-container.md#linkingconfig) в `linking`, чтобы управлять разбором глубокой ссылки в соответствии с вашими потребностями.
 
 ```js
 const config = {
-  screens: {
-    Chat: 'feed/:sort',
-    Profile: 'user',
-  },
+    screens: {
+        Chat: 'feed/:sort',
+        Profile: 'user',
+    },
 };
 ```
 
-Here `Chat` is the name of the screen that handles the URL `/feed`, and `Profile` handles the URL `/user`.
+Здесь `Chat` - это имя экрана, который обрабатывает URL `/feed`, а `Profile` - URL `/user`.
 
-The config option can then be passed in the `linking` prop to the container:
+Затем опция конфигурации может быть передана в свойстве `linking` контейнеру:
 
 ```js
 import { NavigationContainer } from '@react-navigation/native';
 
 const config = {
-  screens: {
-    Chat: 'feed/:sort',
-    Profile: 'user',
-  },
+    screens: {
+        Chat: 'feed/:sort',
+        Profile: 'user',
+    },
 };
 
 const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
-  config,
+    prefixes: ['https://mychat.com', 'mychat://'],
+    config,
 };
 
 function App() {
-  return (
-    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
-      {/* content */}
-    </NavigationContainer>
-  );
+    return (
+        <NavigationContainer
+            linking={linking}
+            fallback={<Text>Loading...</Text>}
+        >
+            {/* content */}
+        </NavigationContainer>
+    );
 }
 ```
 
-The config object must match the navigation structure for your app. For example, the above configuration is if you have `Chat` and `Profile` screens in the navigator at the root:
+Объект `config` должен соответствовать структуре навигации вашего приложения. Например, приведенная выше конфигурация будет работать, если в корневой части навигатора находятся экраны `Chat` и `Profile`:
 
 ```js
 function App() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Chat" component={ChatScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-    </Stack.Navigator>
-  );
+    return (
+        <Stack.Navigator>
+            <Stack.Screen
+                name="Chat"
+                component={ChatScreen}
+            />
+            <Stack.Screen
+                name="Profile"
+                component={ProfileScreen}
+            />
+        </Stack.Navigator>
+    );
 }
 ```
 
-If your `Chat` screen is inside a nested navigator, we'd need to account for that. For example, consider the following structure where your `Profile` screen is at the root, but the `Chat` screen is nested inside `Home`:
+Если экран `Chat` находится внутри вложенного навигатора, то это необходимо учитывать. Например, рассмотрим следующую структуру, в которой экран `Profile` находится в корне, а экран `Chat` вложен внутрь `Home`:
 
 ```js
 function App() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-    </Stack.Navigator>
-  );
+    return (
+        <Stack.Navigator>
+            <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+            />
+            <Stack.Screen
+                name="Profile"
+                component={ProfileScreen}
+            />
+        </Stack.Navigator>
+    );
 }
 
 function HomeScreen() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Chat" component={ChatScreen} />
-    </Tab.Navigator>
-  );
+    return (
+        <Tab.Navigator>
+            <Tab.Screen
+                name="Chat"
+                component={ChatScreen}
+            />
+        </Tab.Navigator>
+    );
 }
 ```
 
-For above structure, our configuration will look like this:
+Для приведенной выше структуры наша конфигурация будет выглядеть следующим образом:
 
 ```js
 const config = {
-  screens: {
-    Home: {
-      screens: {
-        Chat: 'feed/:sort',
-      },
+    screens: {
+        Home: {
+            screens: {
+                Chat: 'feed/:sort',
+            },
+        },
+        Profile: 'user',
     },
-    Profile: 'user',
-  },
 };
 ```
 
-Similarly, any nesting needs to be reflected in the configuration. See [handling nested navigators](#handling-nested-navigators) for more details.
+Аналогично, любая вложенность должна быть отражена в конфигурации. Подробнее об этом см. в разделе "обработка вложенных навигаторов".
 
-## Passing params
+## Передача параметров
 
-A common use case is to pass params to a screen to pass some data. For example, you may want the `Profile` screen to have an `id` param to know which user's profile it is. It's possible to pass params to a screen through a URL when handling deep links.
+Частым случаем использования является передача параметров экрану для передачи некоторых данных. Например, вы можете захотеть, чтобы экран `Profile` имел параметр `id`, чтобы знать, профиль какого пользователя он использует. При работе с глубокими ссылками можно передавать параметры экрану через URL.
 
-By default, query params are parsed to get the params for a screen. For example, with the above example, the URL `/user?id=wojciech` will pass the `id` param to the `Profile` screen.
+По умолчанию параметры запроса анализируются для получения параметров экрана. Например, в приведенном выше примере URL `/user?id=wojciech` передаст параметр `id` на экран `Profile`.
 
-You can also customize how the params are parsed from the URL. Let's say you want the URL to look like `/user/wojciech` where the `id` param is `wojciech` instead of having the `id` in query params. You can do this by specifying `user/:id` for the `path`. **When the path segment starts with `:`, it'll be treated as a param**. For example, the URL `/user/wojciech` would resolve to `Profile` screen with the string `wojciech` as a value of the `id` param and will be available in `route.params.id` in `Profile` screen.
+Вы также можете настроить способ разбора параметров из URL. Допустим, вы хотите, чтобы URL выглядел как `/user/wojciech`, где параметр `id` - это `wojciech`, а не `id` в параметрах запроса. Это можно сделать, указав `user/:id` для `пути`. **Если сегмент пути начинается с `:`, то он будет рассматриваться как параметр**. Например, URL `/user/wojciech` разрешится в экран `Profile` со строкой `wojciech` в качестве значения параметра `id` и будет доступен в `route.params.id` в экране `Profile`.
 
-By default, all params are treated as strings. You can also customize how to parse them by specifying a function in the `parse` property to parse the param, and a function in the `stringify` property to convert it back to a string.
+По умолчанию все параметры обрабатываются как строки. Вы также можете настроить их разбор, указав в свойстве `parse` функцию для разбора параметра, а в свойстве `stringify` - функцию для его обратного преобразования в строку.
 
-If you wanted to resolve `/user/wojciech/settings` to result in the params `{ id: 'user-wojciech' section: 'settings' }`, you could make `Profile`'s config to look like this:
+Если вы хотите, чтобы разрешение `/user/wojciech/settings` приводило к параметрам `{ id: 'user-wojciech' section: 'settings' }`, вы можете сделать конфигурацию `Profile` такой:
 
 ```js
 const config = {
-  screens: {
-    Profile: {
-      path: 'user/:id/:section',
-      parse: {
-        id: (id) => `user-${id}`,
-      },
-      stringify: {
-        id: (id) => id.replace(/^user-/, ''),
-      },
+    screens: {
+        Profile: {
+            path: 'user/:id/:section',
+            parse: {
+                id: (id) => `user-${id}`,
+            },
+            stringify: {
+                id: (id) => id.replace(/^user-/, ''),
+            },
+        },
     },
-  },
 };
 ```
 
-This will result in something like:
+В результате получится что-то вроде:
 
 ```js
 const state = {
-  routes: [
-    {
-      name: 'Profile',
-      params: { id: 'user-wojciech', section: 'settings' },
-    },
-  ],
+    routes: [
+        {
+            name: 'Profile',
+            params: {
+                id: 'user-wojciech',
+                section: 'settings',
+            },
+        },
+    ],
 };
 ```
 
-## Marking params as optional
+## Пометка параметров как необязательных
 
-Sometimes a param may or may not be present in the URL depending on certain conditions. For example, in the above scenario, you may not always have the section parameter in the URL, i.e. both `/user/wojciech/settings` and `/user/wojciech` should go to the `Profile` screen, but the `section` param (with the value `settings` in this case) may or may not be present.
+Иногда параметр может присутствовать или не присутствовать в URL в зависимости от определенных условий. Например, в приведенном выше сценарии параметр section может присутствовать в URL не всегда, т.е. и `/user/wojciech/settings`, и `/user/wojciech` должны переходить на экран `Profile`, но параметр `section` (в данном случае со значением `settings`) может присутствовать, а может и нет.
 
-In this case, you would need to mark the `section` param as optional. You can do it by adding the `?` suffix after the param name:
+В этом случае необходимо пометить параметр `section` как необязательный. Это можно сделать, добавив суффикс `?` после имени параметра:
 
 ```js
 const config = {
-  screens: {
-    Profile: {
-      path: 'user/:id/:section?',
-      parse: {
-        id: (id) => `user-${id}`,
-      },
-      stringify: {
-        id: (id) => id.replace(/^user-/, ''),
-      },
+    screens: {
+        Profile: {
+            path: 'user/:id/:section?',
+            parse: {
+                id: (id) => `user-${id}`,
+            },
+            stringify: {
+                id: (id) => id.replace(/^user-/, ''),
+            },
+        },
     },
-  },
 };
 ```
 
-With the URL `/users/wojciech`, this will result in:
+Для URL `/users/wojciech` это приведет к следующему результату:
 
 ```js
 const state = {
-  routes: [
-    {
-      name: 'Profile',
-      params: { id: 'user-wojciech' },
-    },
-  ],
+    routes: [
+        {
+            name: 'Profile',
+            params: { id: 'user-wojciech' },
+        },
+    ],
 };
 ```
 
-If the URL contains a `section` param, e.g. `/users/wojciech/settings`, this will result in the following with the same config:
+Если URL содержит параметр `section`, например `/users/wojciech/settings`, то с той же конфигурацией это приведет к следующему результату:
 
 ```js
 const state = {
-  routes: [
-    {
-      name: 'Profile',
-      params: { id: 'user-wojciech', section: 'settings' },
-    },
-  ],
+    routes: [
+        {
+            name: 'Profile',
+            params: {
+                id: 'user-wojciech',
+                section: 'settings',
+            },
+        },
+    ],
 };
 ```
 
-## Handling nested navigators
+## Работа с вложенными навигаторами
 
-Sometimes you'll have the target navigator nested in other navigators which aren't part of the deep link. For example, let's say your navigation structure looks like this:
+Иногда целевой навигатор оказывается вложенным в другие навигаторы, не являющиеся частью глубокой ссылки. Допустим, структура навигации выглядит следующим образом:
 
 ```js
 function Home() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Profile" component={Profile} />
-      <Tab.Screen name="Feed" component={Feed} />
-    </Tab.Navigator>
-  );
+    return (
+        <Tab.Navigator>
+            <Tab.Screen
+                name="Profile"
+                component={Profile}
+            />
+            <Tab.Screen name="Feed" component={Feed} />
+        </Tab.Navigator>
+    );
 }
 
 function App() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Settings" component={Settings} />
-    </Stack.Navigator>
-  );
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen
+                name="Settings"
+                component={Settings}
+            />
+        </Stack.Navigator>
+    );
 }
 ```
 
-Here you have a stack navigator in the root, and inside the `Home` screen of the root stack, you have a tab navigator with various screens. With this structure, let's say you want the path `/users/:id` to go to the `Profile` screen. You can express the nested config like so:
+Здесь в корне имеется навигатор стеков, а внутри экрана `Home` корневого стека - навигатор вкладок с различными экранами. При такой структуре, допустим, вы хотите, чтобы путь `/users/:id` вел на экран `Profile`. Вы можете выразить вложенную конфигурацию следующим образом:
 
 ```js
 const config = {
-  screens: {
-    Home: {
-      screens: {
-        Profile: 'users/:id',
-      },
-    },
-  },
-};
-```
-
-In this config, you specify that the `Profile` screen should be resolved for the `users/:id` pattern and it's nested inside the `Home` screen. Then parsing `users/jane` will result in the following state object:
-
-```js
-const state = {
-  routes: [
-    {
-      name: 'Home',
-      state: {
-        routes: [
-          {
-            name: 'Profile',
-            params: { id: 'jane' },
-          },
-        ],
-      },
-    },
-  ],
-};
-```
-
-It's important to note that the state object must match the hierarchy of nested navigators. Otherwise the state will be discarded.
-
-## Handling unmatched routes or 404
-
-If your app is opened with an invalid URL, most of the times you'd want to show an error page with some information. On the web, this is commonly known as 404 - or page not found error.
-
-To handle this, you'll need to define a catch-all route that will be rendered if no other routes match the path. You can do it by specifying `*` for the path matching pattern.
-
-For example:
-
-```js
-const config = {
-  screens: {
-    Home: {
-      initialRouteName: 'Feed',
-      screens: {
-        Profile: 'users/:id',
-        Settings: 'settings',
-      },
-    },
-    NotFound: '*',
-  },
-};
-```
-
-Here, we have defined a route named `NotFound` and set it to match `*` aka everything. If the path didn't match `user/:id` or `settings`, it'll be matched by this route.
-
-So, a path like `/library` or `/settings/notification` will resolve to the following state object:
-
-```js
-const state = {
-  routes: [{ name: 'NotFound' }],
-};
-```
-
-You can even go more specific, for example, say if you want to show a different screen for invalid paths under `/settings`, you can specify such a pattern under `Settings`:
-
-```js
-const config = {
-  screens: {
-    Home: {
-      initialRouteName: 'Feed',
-      screens: {
-        Profile: 'users/:id',
-        Settings: {
-          path: 'settings',
-          screens: {
-            InvalidSettings: '*',
-          },
-        },
-      },
-    },
-    NotFound: '*',
-  },
-};
-```
-
-With this configuration, the path `/settings/notification` will resolve to the following state object:
-
-```js
-const state = {
-  routes: [
-    {
-      name: 'Home',
-      state: {
-        index: 1,
-        routes: [
-          { name: 'Feed' },
-          {
-            name: 'Settings',
-            state: {
-              routes: [
-                { name: 'InvalidSettings', path: '/settings/notification' },
-              ],
+    screens: {
+        Home: {
+            screens: {
+                Profile: 'users/:id',
             },
-          },
-        ],
-      },
+        },
     },
-  ],
 };
 ```
 
-The `route` passed to the `NotFound` screen will contain a `path` property which corresponds to the path that opened the page. If you need, you can use this property to customize what's shown in this screen, e.g. load the page in a `WebView`:
+В этой конфигурации указывается, что экран `Profile` должен быть разрешен по шаблону `users/:id` и вложен внутрь экрана `Home`. Тогда при разборе экрана `users/jane` будет получен следующий объект состояния:
+
+```js
+const state = {
+    routes: [
+        {
+            name: 'Home',
+            state: {
+                routes: [
+                    {
+                        name: 'Profile',
+                        params: { id: 'jane' },
+                    },
+                ],
+            },
+        },
+    ],
+};
+```
+
+Важно отметить, что объект state должен соответствовать иерархии вложенных навигаторов. В противном случае состояние будет отброшено.
+
+## Обработка несоответствующих маршрутов или 404
+
+Если ваше приложение открывается по некорректному URL-адресу, то в большинстве случаев вы хотите показать страницу ошибки с некоторой информацией. В Интернете это обычно называется 404 - ошибка "страница не найдена".
+
+Чтобы справиться с этой проблемой, необходимо определить универсальный маршрут, который будет отображаться, если ни один другой маршрут не соответствует пути. Это можно сделать, указав `*` для шаблона соответствия пути.
+
+Например:
+
+```js
+const config = {
+    screens: {
+        Home: {
+            initialRouteName: 'Feed',
+            screens: {
+                Profile: 'users/:id',
+                Settings: 'settings',
+            },
+        },
+        NotFound: '*',
+    },
+};
+```
+
+Здесь мы определили маршрут с именем `NotFound` и установили, что он будет соответствовать `*` aka все. Если путь не соответствует `user/:id` или `Settings`, то он будет соответствовать этому маршруту.
+
+Таким образом, путь типа `/library` или `/settings/notification` будет разрешаться в следующий объект состояния:
+
+```js
+const state = {
+    routes: [{ name: 'NotFound' }],
+};
+```
+
+Можно даже уточнить, например, если вы хотите показывать другой экран для недействительных путей в `/settings`, вы можете указать такой шаблон в `Settings`:
+
+```js
+const config = {
+    screens: {
+        Home: {
+            initialRouteName: 'Feed',
+            screens: {
+                Profile: 'users/:id',
+                Settings: {
+                    path: 'settings',
+                    screens: {
+                        InvalidSettings: '*',
+                    },
+                },
+            },
+        },
+        NotFound: '*',
+    },
+};
+```
+
+При такой конфигурации путь `/settings/notification` будет разрешаться в следующий объект состояния:
+
+```js
+const state = {
+    routes: [
+        {
+            name: 'Home',
+            state: {
+                index: 1,
+                routes: [
+                    { name: 'Feed' },
+                    {
+                        name: 'Settings',
+                        state: {
+                            routes: [
+                                {
+                                    name: 'InvalidSettings',
+                                    path:
+                                        '/settings/notification',
+                                },
+                            ],
+                        },
+                    },
+                ],
+            },
+        },
+    ],
+};
+```
+
+Маршрут `route`, передаваемый экрану `NotFound`, будет содержать свойство `path`, соответствующее пути, по которому была открыта страница. При необходимости это свойство можно использовать для настройки того, что будет показано на этом экране, например, для загрузки страницы в `WebView`:
 
 ```js
 function NotFoundScreen({ route }) {
-  if (route.path) {
-    return <WebView source={{ uri: `https://mywebsite.com/${route.path}` }} />;
-  }
+    if (route.path) {
+        return (
+            <WebView
+                source={{
+                    uri: `https://mywebsite.com/${route.path}`,
+                }}
+            />
+        );
+    }
 
-  return <Text>This screen doesn't exist!</Text>;
+    return <Text>This screen doesn't exist!</Text>;
 }
 ```
 
-When doing server rendering, you'd also want to return correct status code for 404 errors. See [server rendering docs](server-rendering.md#handling-404-or-other-status-codes) for a guide on how to handle it.
+При серверном рендеринге также необходимо возвращать корректный код состояния для ошибок 404. Как это сделать, смотрите в [server rendering docs](server-rendering.md#handling-404-or-other-status-codes).
 
-## Rendering an initial route
+## Рендеринг начального маршрута
 
-Sometimes you want to ensure that a certain screen will always be present as the first screen in the navigator's state. You can use the `initialRouteName` property to specify the screen to use for the initial screen.
+Иногда требуется, чтобы определенный экран всегда присутствовал в качестве первого экрана в состоянии навигатора. Для этого можно использовать свойство `initialRouteName`, чтобы указать экран, который будет использоваться в качестве начального.
 
-In the above example, if you want the `Feed` screen to be the initial route in the navigator under `Home`, your config will look like this:
-
-```js
-const config = {
-  screens: {
-    Home: {
-      initialRouteName: 'Feed',
-      screens: {
-        Profile: 'users/:id',
-        Settings: 'settings',
-      },
-    },
-  },
-};
-```
-
-Then, the path `/users/42` will resolve to the following state object:
-
-```js
-const state = {
-  routes: [
-    {
-      name: 'Home',
-      state: {
-        index: 1,
-        routes: [
-          { name: 'Feed' },
-          {
-            name: 'Profile',
-            params: { id: '42' },
-          },
-        ],
-      },
-    },
-  ],
-};
-```
-
-It's not possible to pass params to the initial screen through the URL. So make sure that your initial route doesn't need any params or specify `initialParams` to pass required params.
-
-In this case, any params in the URL are only passed to the `Profile` screen which matches the path pattern `users/:id`, and the `Feed` screen doesn't receive any params. If you want to have the same params in the `Feed` screen, you can specify a [custom `getStateFromPath` function](navigation-container.md#linkinggetstatefrompath) and copy those params.
-
-Similarly, if you want to access params of a parent screen from a child screen, you can use [React Context](https://reactjs.org/docs/context.html) to expose them.
-
-## Matching exact paths
-
-By default, paths defined for each screen are matched against the URL relative to their parent screen's path. Consider the following config:
+В приведенном выше примере, если вы хотите, чтобы экран `Feed` был начальным маршрутом в навигаторе в разделе `Home`, ваша конфигурация будет выглядеть следующим образом:
 
 ```js
 const config = {
-  screens: {
-    Home: {
-      path: 'feed',
-      screens: {
-        Profile: 'users/:id',
-      },
-    },
-  },
-};
-```
-
-Here, you have a `path` property defined for the `Home` screen, as well as the child `Profile` screen. The profile screen specifies the path `users/:id`, but since it's nested inside a screen with the path `feed`, it'll try to match the pattern `feed/users/:id`.
-
-This will result in the URL `/feed` navigating to `Home` screen, and `/feed/users/cal` navigating to the `Profile` screen.
-
-In this case, it makes more sense to navigate to the `Profile` screen using a URL like `/users/cal`, rather than `/feed/users/cal`. To achieve this, you can override the relative matching behavior to `exact` matching:
-
-```js
-const config = {
-  screens: {
-    Home: {
-      path: 'feed',
-      screens: {
-        Profile: {
-          path: 'users/:id',
-          exact: true,
+    screens: {
+        Home: {
+            initialRouteName: 'Feed',
+            screens: {
+                Profile: 'users/:id',
+                Settings: 'settings',
+            },
         },
-      },
     },
-  },
 };
 ```
 
-With `exact` property set to `true`, `Profile` will ignore the parent screen's `path` config and you'll be able to navigate to `Profile` using a URL like `users/cal`.
-
-## Omitting a screen from path
-
-Sometimes, you may not want to have the route name of a screen in the path. For example, let's say you have a `Home` screen and our [navigation state](navigation-state.md) looks like this:
+Тогда путь `/users/42` разрешится в следующий объект состояния:
 
 ```js
 const state = {
-  routes: [{ name: 'Home' }],
+    routes: [
+        {
+            name: 'Home',
+            state: {
+                index: 1,
+                routes: [
+                    { name: 'Feed' },
+                    {
+                        name: 'Profile',
+                        params: { id: '42' },
+                    },
+                ],
+            },
+        },
+    ],
 };
 ```
 
-When this state is serialized to a path with the following config, you'll get `/home`:
+Передать параметры в начальный экран через URL невозможно. Поэтому убедитесь, что ваш начальный маршрут не нуждается в параметрах, или укажите `initialParams` для передачи необходимых параметров.
+
+В этом случае все параметры в URL передаются только экрану `Profile`, который соответствует шаблону пути `users/:id`, а экран `Feed` не получает никаких параметров. Если вы хотите иметь те же параметры в экране `Feed`, вы можете указать [пользовательскую функцию `getStateFromPath`](navigation-container.md#linkinggetstatefrompath) и скопировать эти параметры.
+
+Аналогично, если необходимо получить доступ к параметрам родительского экрана из дочернего экрана, можно использовать [React Context](https://reactjs.org/docs/context.html) для их отображения.
+
+## Соответствие точным путям
+
+По умолчанию пути, определенные для каждого экрана, сопоставляются с URL относительно пути их родительского экрана. Рассмотрим следующую конфигурацию:
 
 ```js
 const config = {
-  screens: {
-    Home: {
-      path: 'home',
-      screens: {
-        Profile: 'users/:id',
-      },
+    screens: {
+        Home: {
+            path: 'feed',
+            screens: {
+                Profile: 'users/:id',
+            },
+        },
     },
-  },
 };
 ```
 
-But it'll be nicer if the URL was just `/` when visiting the home screen. You can specify an empty string as path or not specify a path at all, and React Navigation won't add the screen to the path (think of it like adding empty string to the path, which doesn't change anything):
+Здесь свойство `path` определено для экрана `Home`, а также для дочернего экрана `Profile`. Экран профиля указывает путь `users/:id`, но поскольку он вложен в экран с путем `feed`, то он будет пытаться соответствовать шаблону `feed/users/:id`.
+
+В результате URL `/feed` перейдет на экран `Home`, а `/feed/users/cal` - на экран `Profile`.
+
+В данном случае логичнее переходить к экрану `Profile`, используя URL типа `/users/cal`, а не `/feed/users/cal`. Для этого можно переопределить поведение относительного соответствия на `exact` соответствие:
 
 ```js
 const config = {
-  screens: {
-    Home: {
-      path: '',
-      screens: {
-        Profile: 'users/:id',
-      },
+    screens: {
+        Home: {
+            path: 'feed',
+            screens: {
+                Profile: {
+                    path: 'users/:id',
+                    exact: true,
+                },
+            },
+        },
     },
-  },
 };
 ```
 
-## Serializing and parsing params
+Если свойство `exact` установлено в `true`, то `Profile` будет игнорировать конфигурацию `path` родительского экрана, и вы сможете перейти к `Profile`, используя URL типа `users/cal`.
 
-Since URLs are strings, any params you have for routes are also converted to strings when constructing the path.
+## Исключение экрана из пути
 
-For example, say you have a state like following:
+Иногда бывает нежелательно указывать в пути маршрутное имя экрана. Например, допустим, у вас есть экран `Home`, а наш [navigation state] (navigation-state.md) выглядит следующим образом:
+
+```js
+const state = {
+    routes: [{ name: 'Home' }],
+};
+```
+
+Если это состояние сериализовать в путь со следующей конфигурацией, то получится `/home`:
+
+```js
+const config = {
+    screens: {
+        Home: {
+            path: 'home',
+            screens: {
+                Profile: 'users/:id',
+            },
+        },
+    },
+};
+```
+
+Но было бы приятнее, если бы при посещении главного экрана URL был просто `/`. В качестве пути можно указать пустую строку или вообще не указывать путь, и React Navigation не будет добавлять экран в путь (считайте, что это как добавление пустой строки в путь, которое ничего не меняет):
+
+```js
+const config = {
+    screens: {
+        Home: {
+            path: '',
+            screens: {
+                Profile: 'users/:id',
+            },
+        },
+    },
+};
+```
+
+## Сериализация и разбор параметров
+
+Поскольку URL являются строками, любые параметры, задаваемые для маршрутов, также преобразуются в строки при построении пути.
+
+Например, у вас есть состояние, подобное следующему:
 
 ```js
 const state = {
@@ -584,17 +633,17 @@ const state = {
 }
 ```
 
-It'll be converted to `chat/1589842744264` with the following config:
+Он будет преобразован в `chat/1589842744264` со следующей конфигурацией:
 
 ```js
 const config = {
-  screens: {
-    Chat: 'chat/:date',
-  },
+    screens: {
+        Chat: 'chat/:date',
+    },
 };
 ```
 
-When parsing this path, you'll get the following state:
+При разборе этого пути вы получите следующее состояние:
 
 ```js
 const state = {
@@ -607,124 +656,122 @@ const state = {
 }
 ```
 
-Here, the `date` param was parsed as a string because React Navigation doesn't know that it's supposed to be a timestamp, and hence number. You can customize it by providing a custom function to use for parsing:
+Здесь параметр `date` был разобран как строка, поскольку React Navigation не знает, что это должна быть временная метка, а значит, число. Вы можете настроить его, предоставив пользовательскую функцию, которая будет использоваться для разбора:
 
 ```js
 const config = {
-  screens: {
-    Chat: {
-      path: 'chat/:date',
-      parse: {
-        date: Number,
-      },
-    },
-  },
-};
-```
-
-You can also provide a custom function to serialize the params. For example, let's say that you want to use a DD-MM-YYYY format in the path instead of a timestamp:
-
-```js
-const config = {
-  screens: {
-    Chat: {
-      path: 'chat/:date',
-      parse: {
-        date: (date) => new Date(date).getTime(),
-      },
-      stringify: {
-        date: (date) => {
-          const d = new Date(date);
-
-          return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+    screens: {
+        Chat: {
+            path: 'chat/:date',
+            parse: {
+                date: Number,
+            },
         },
-      },
     },
-  },
 };
 ```
 
-Depending on your requirements, you can use this functionality to parse and stringify more complex data.
+Вы также можете предоставить пользовательскую функцию для сериализации параметров. Например, допустим, вы хотите использовать в пути формат DD-MM-YYYY вместо временной метки:
 
-## Advanced cases
+```js
+const config = {
+    screens: {
+        Chat: {
+            path: 'chat/:date',
+            parse: {
+                date: (date) => new Date(date).getTime(),
+            },
+            stringify: {
+                date: (date) => {
+                    const d = new Date(date);
 
-For some advanced cases, specifying the mapping may not be sufficient. To handle such cases, you can specify a custom function to parse the URL into a state object ([`getStateFromPath`](navigation-container.md#linkinggetstatefrompath)), and a custom function to serialize the state object into an URL ([`getPathFromState`](navigation-container.md#linkinggetpathfromstate)).
+                    return (
+                        d.getFullYear() +
+                        '-' +
+                        d.getMonth() +
+                        '-' +
+                        d.getDate()
+                    );
+                },
+            },
+        },
+    },
+};
+```
 
-Example:
+В зависимости от ваших требований, вы можете использовать эту функциональность для анализа и структуризации более сложных данных.
+
+## Расширенные случаи
+
+Для некоторых сложных случаев указания отображения может быть недостаточно. Для таких случаев можно указать пользовательскую функцию для разбора URL в объект состояния ([`getStateFromPath`](navigation-container.md#linkinggetstatefrompath)) и пользовательскую функцию для сериализации объекта состояния в URL ([`getPathFromState`](navigation-container.md#linkinggetpathfromstate)).
+
+Пример:
 
 ```js
 const linking = {
-  prefixes: ['https://mychat.com', 'mychat://'],
-  config: {
-    screens: {
-      Chat: 'feed/:sort',
+    prefixes: ['https://mychat.com', 'mychat://'],
+    config: {
+        screens: {
+            Chat: 'feed/:sort',
+        },
     },
-  },
-  getStateFromPath: (path, options) => {
-    // Return a state object here
-    // You can also reuse the default logic by importing `getStateFromPath` from `@react-navigation/native`
-  },
-  getPathFromState(state, config) {
-    // Return a path string here
-    // You can also reuse the default logic by importing `getPathFromState` from `@react-navigation/native`
-  },
+    getStateFromPath: (path, options) => {
+        // Return a state object here
+        // You can also reuse the default logic by importing `getStateFromPath` from `@react-navigation/native`
+    },
+    getPathFromState(state, config) {
+        // Return a path string here
+        // You can also reuse the default logic by importing `getPathFromState` from `@react-navigation/native`
+    },
 };
 ```
 
-## Updating config
+## Обновление конфигурации
 
-Older versions of React Navigation had a slightly different configuration format for linking. The old config allowed a simple key value pair in the object regardless of nesting of navigators:
-
-```js
-const config = {
-  Home: 'home',
-  Feed: 'feed',
-  Profile: 'profile',
-  Settings: 'settings',
-};
-```
-
-Let's say, your `Feed` and `Profile` screens are nested inside `Home`. Even if you don't have such a nesting with the above configuration, as long as the URL was `/home/profile`, it would work. Furthermore, it would also treat path segments and route names the same, which means that you could deep link to a screen that's not specified in the configuration. For example, if you have a `Albums` screen inside `Home`, the deep link `/home/Albums` would navigate to that screen. While that may be desirable in some cases, there's no way to prevent access to specific screens. This approach also makes it impossible to have something like a 404 screen since any route name is a valid path.
-
-Latest versions of React Navigation use a different config format which is stricter in this regard:
-
-- The shape of the config must match the shape of the nesting in the navigation structure
-- Only screens defined in the config will be eligible for deep linking
-
-So, you'd refactor the above config to the following format:
+Старые версии React Navigation имели несколько иной формат конфигурации для связывания. Старая конфигурация позволяла использовать простую пару ключ-значение в объекте независимо от вложенности навигаторов:
 
 ```js
 const config = {
-  screens: {
-    Home: {
-      path: 'home',
-      screens: {
-        Feed: 'feed',
-        Profile: 'profile',
-      },
-    },
+    Home: 'home',
+    Feed: 'feed',
+    Profile: 'profile',
     Settings: 'settings',
-  },
 };
 ```
 
-Here, there's a new `screens` property to the configuration object, and the `Feed` and `Profile` configs are now nested under `Home` to match the navigation structure.
+Допустим, экраны `Feed` и `Profile` вложены внутрь `Home`. Даже если у вас нет такой вложенности с приведенной выше конфигурацией, до тех пор, пока URL будет `/home/profile`, это будет работать. Более того, сегменты пути и имена маршрутов будут рассматриваться одинаково, что означает возможность глубокой ссылки на экран, не указанный в конфигурации. Например, если экран `Albums` находится внутри `Home`, то глубокая ссылка `/home/Albums` будет переходить на этот экран. Хотя в некоторых случаях это и желательно, но запретить доступ к определенным экранам невозможно. Такой подход также делает невозможным создание чего-то вроде экрана 404, поскольку любое имя маршрута является допустимым путем.
 
-If you have the old format, it will continue to work without any changes. However, you won't be able to specify a wildcard pattern to handle unmatched screens or prevent screens from being deep linked. The old format will be removed in the next major release. So we recommend to migrate to the new format when you can.
+В последних версиях React Navigation используется другой формат конфигурации, более строгий в этом отношении:
 
-## Playground
+-   Форма конфига должна соответствовать форме вложенности в структуре навигации
+-   Только экраны, определенные в конфигурации, могут быть использованы для глубокого связывания.
 
-You can play around with customizing the config and path below, and see how the path is parsed.
+Таким образом, приведенный выше конфиг следует рефакторить до следующего формата:
 
-import LinkingTester from '@site/src/components/LinkingTester'
+```js
+const config = {
+    screens: {
+        Home: {
+            path: 'home',
+            screens: {
+                Feed: 'feed',
+                Profile: 'profile',
+            },
+        },
+        Settings: 'settings',
+    },
+};
+```
 
-<LinkingTester />
+Здесь у объекта конфигурации появилось новое свойство `screens`, а конфигурации `Feed` и `Profile` теперь вложены в `Home`, чтобы соответствовать структуре навигации.
 
-## Example App
+Если у вас используется старый формат, то он продолжит работать без изменений. Однако вы не сможете указать шаблон подстановочного знака для обработки несопоставленных экранов или предотвратить глубокую привязку экранов. Старый формат будет удален в следующем крупном релизе. Поэтому мы рекомендуем переходить на новый формат, когда это будет возможно.
 
-In the example app, you will use the Expo managed workflow. The guide will focus on creating the deep linking configuration and not on creating the components themselves, but you can always check the full implementation in the [github repo](https://github.com/react-navigation/deep-linking-example).
+## Пример приложения
 
-First, you need to decide the navigation structure of your app. To keep it simple, the main navigator will be bottom-tabs navigator with two screens. Its first screen will be a simple stack navigator, called `HomeStack`, with two screens: `Home` and `Profile`, and the second tabs screen will be just a simple one without any nested navigators, called `Settings`:
+В примере приложения будет использован управляемый рабочий процесс Expo. Руководство будет посвящено созданию конфигурации глубокой перелинковки, а не созданию самих компонентов, но вы всегда можете ознакомиться с полной реализацией в [github repo](https://github.com/react-navigation/deep-linking-example).
+
+Прежде всего, необходимо определиться с навигационной структурой приложения. Если говорить просто, то основным навигатором будет навигатор нижних вкладок с двумя экранами. Первый экран будет представлять собой простой стековый навигатор, называемый `HomeStack`, с двумя экранами: `Home` и `Profile`, а второй экран вкладок будет простым, без вложенных навигаторов, и будет называться `Settings`:
 
 ```bash
 BottomTabs
@@ -734,39 +781,43 @@ BottomTabs
 └── Settings
 ```
 
-After creating the navigation structure, you can create a config for deep linking, which will contain mappings for each screen to a path segment. For example:
+После создания структуры навигации можно создать конфиг для глубокой привязки, который будет содержать отображения для каждого экрана на сегмент пути. Например:
 
 ```js
 const config = {
-  screens: {
-    HomeStack: {
-      screens: {
-        Home: 'home',
-        Profile: 'user',
-      },
+    screens: {
+        HomeStack: {
+            screens: {
+                Home: 'home',
+                Profile: 'user',
+            },
+        },
+        Settings: 'settings',
     },
-    Settings: 'settings',
-  },
 };
 ```
 
-As you can see, `Home` and `Profile` are nested in the `screens` property of `HomeStack`. This means that when you pass the `/home` URL, it will be resolved to a `HomeStack`->`Home` state object (similarly for `/user` it would be `HomeStack`->`Profile`). The nesting in this object should match the nesting of our navigators.
+Как видно, `Home` и `Profile` вложены в свойство `screens` свойства `HomeStack`. Это означает, что при передаче URL-адреса `/home` он будет преобразован в объект состояния `HomeStack`->`Home` (аналогично для `/user` это будет `HomeStack`->`Profile`). Вложенность этого объекта должна соответствовать вложенности наших навигаторов.
 
-Here, the `HomeStack` property contains a config object. The config can go as deep as you want, e.g. if `Home` was a navigator, you could make it an object with `screens` property, and put more screens or navigators inside it, making the URL string much more readable.
+Здесь свойство `HomeStack` содержит объект config. Конфигурация может быть сколь угодно глубокой, например, если `Home` был навигатором, то можно сделать его объектом со свойством `screens` и поместить внутрь него больше экранов или навигаторов, что сделает строку URL более читаемой.
 
-What if you wanted a specific screen to used as the initial screen in the navigator? For example, if you had a URL that would open `Home` screen, you would like to be able to navigate to `Profile` from it by using navigation's `navigation.goBack()` method. It is possible by defining `initialRouteName` for a navigator. It would look like this:
+А что если вы хотите, чтобы в качестве начального экрана в навигаторе использовался определенный экран? Например, если у вас есть URL, открывающий экран `Home`, вы хотите иметь возможность перейти к `Profile` с него, используя метод навигации `navigation.goBack()`. Это возможно, если определить для навигатора `initialRouteName`. Оно будет выглядеть следующим образом:
 
 ```js
 const config = {
-  screens: {
-    HomeStack: {
-      initialRouteName: 'Profile',
-      screens: {
-        Home: 'home',
-        Profile: 'user',
-      },
+    screens: {
+        HomeStack: {
+            initialRouteName: 'Profile',
+            screens: {
+                Home: 'home',
+                Profile: 'user',
+            },
+        },
+        Settings: 'settings',
     },
-    Settings: 'settings',
-  },
 };
 ```
+
+## Ссылки
+
+-   [Configuring links](https://reactnavigation.org/docs/configuring-links/)
