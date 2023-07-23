@@ -1,44 +1,42 @@
 ---
-id: tab-view
-title: React Native Tab View
-sidebar_label: Tab View
+description: React Native Tab View - это кроссплатформенный компонент Tab View для React Native, реализованный с использованием react-native-pager-view на Android и iOS и PanResponder на Web, macOS и Windows
 ---
 
-React Native Tab View is a cross-platform Tab View component for React Native implemented using [`react-native-pager-view`](https://github.com/callstack/react-native-viewpager) on Android & iOS, and [PanResponder](https://reactnative.dev/docs/panresponder) on Web, macOS, and Windows.
+# React Native Tab View
 
-It follows material design guidelines by default, but you can also use your own custom tab bar or position the tab bar at the bottom.
+React Native Tab View - это кроссплатформенный компонент Tab View для React Native, реализованный с использованием [`react-native-pager-view`](https://github.com/callstack/react-native-viewpager) на Android и iOS и [PanResponder](https://reactnative.dev/docs/panresponder) на Web, macOS и Windows.
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <img src="/assets/libraries/tab-view.gif" width="360px" />
-</div>
+По умолчанию он соответствует принципам материального дизайна, но вы можете использовать собственную пользовательскую панель вкладок или расположить ее внизу.
 
-This package doesn't integrate with React Navigation. If you want to integrate the tab view with React Navigation's navigation system, e.g. want to show screens in the tab bar and be able to navigate between them using `navigation.navigate` etc, use [Material Top Tab Navigator](material-top-tab-navigator.md) instead.
+![React Native Tab View](tab-view.gif)
 
-## Installation
+Данный пакет не интегрируется с React Navigation. Если вы хотите интегрировать представление вкладок с системой навигации React Navigation, например, отображать экраны в панели вкладок и иметь возможность переходить между ними с помощью `navigation.navigate` и т.д., используйте вместо этого [Material Top Tab Navigator](material-top-tab-navigator.md).
 
-To use this package, open a Terminal in the project root and run:
+## Установка
 
-```bash npm2yarn
+Чтобы использовать этот пакет, откройте Терминал в корне проекта и выполните команду:
+
+```bash
 npm install react-native-tab-view
 ```
 
-Next, install [`react-native-pager-view`](https://github.com/callstack/react-native-viewpager) if you plan to support iOS and Android.
+Далее установите [`react-native-pager-view`](https://github.com/callstack/react-native-viewpager), если вы планируете поддерживать iOS и Android.
 
-If you are using Expo, to ensure that you get the compatible versions of the libraries, run:
+Если вы используете Expo, то для обеспечения совместимости версий библиотек выполните команду:
 
 ```bash
 expo install react-native-pager-view
 ```
 
-If you are not using Expo, run the following:
+Если вы не используете Expo, выполните следующее:
 
-```bash npm2yarn
+```bash
 npm install react-native-pager-view
 ```
 
-We're done! Now you can build and run the app on your device/simulator.
+Готово! Теперь вы можете собрать и запустить приложение на своем устройстве/симуляторе.
 
-## Quick start
+## Быстрый старт
 
 ```js
 import * as React from 'react';
@@ -46,84 +44,84 @@ import { View, useWindowDimensions } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 
 const FirstRoute = () => (
-  <View style={{ flex: 1, backgroundColor: '#ff4081' }} />
+    <View style={{ flex: 1, backgroundColor: '#ff4081' }} />
 );
 
 const SecondRoute = () => (
-  <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
+    <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
 );
 
 const renderScene = SceneMap({
-  first: FirstRoute,
-  second: SecondRoute,
+    first: FirstRoute,
+    second: SecondRoute,
 });
 
 export default function TabViewExample() {
-  const layout = useWindowDimensions();
+    const layout = useWindowDimensions();
 
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    { key: 'first', title: 'First' },
-    { key: 'second', title: 'Second' },
-  ]);
+    const [index, setIndex] = React.useState(0);
+    const [routes] = React.useState([
+        { key: 'first', title: 'First' },
+        { key: 'second', title: 'Second' },
+    ]);
 
-  return (
-    <TabView
-      navigationState={{ index, routes }}
-      renderScene={renderScene}
-      onIndexChange={setIndex}
-      initialLayout={{ width: layout.width }}
-    />
-  );
+    return (
+        <TabView
+            navigationState={{ index, routes }}
+            renderScene={renderScene}
+            onIndexChange={setIndex}
+            initialLayout={{ width: layout.width }}
+        />
+    );
 }
 ```
 
-[Try this example on Snack](https://snack.expo.io/@satya164/react-native-tab-view-quick-start)
+[Попробуйте рассмотреть этот пример на Snack](https://snack.expo.io/@satya164/react-native-tab-view-quick-start)
 
-## More examples on Snack
+## Другие примеры на Snack
 
-- [Custom Tab Bar](https://snack.expo.io/@satya164/react-native-tab-view-custom-tabbar)
-- [Lazy Load](https://snack.expo.io/@satya164/react-native-tab-view-lazy-load)
+-   [Custom Tab Bar](https://snack.expo.io/@satya164/react-native-tab-view-custom-tabbar)
+-   [Lazy Load](https://snack.expo.io/@satya164/react-native-tab-view-lazy-load)
 
-## API reference
+## Справочник по API
 
-The package exports a `TabView` component which is the one you'd use to render the tab view, and a `TabBar` component which is the default tab bar implementation.
+Пакет экспортирует компонент `TabView`, который используется для отображения вида вкладок, и компонент `TabBar`, который является реализацией панели вкладок по умолчанию.
 
 ### `TabView`
 
-Container component responsible for rendering and managing tabs. Follows material design styles by default.
+Контейнерный компонент, отвечающий за отрисовку и управление вкладками. По умолчанию использует стили Material Design.
 
-Basic usage look like this:
+Базовое использование выглядит следующим образом:
 
 ```js
 <TabView
-  navigationState={{ index, routes }}
-  onIndexChange={setIndex}
-  renderScene={SceneMap({
-    first: FirstRoute,
-    second: SecondRoute,
-  })}
+    navigationState={{ index, routes }}
+    onIndexChange={setIndex}
+    renderScene={SceneMap({
+        first: FirstRoute,
+        second: SecondRoute,
+    })}
 />
 ```
 
-#### TabView Props
+Параметры `TabView`:
 
-##### `navigationState` (`required`)
+**`navigationState` (`required`)**
 
-State for the tab view. The state should contain the following properties:
+Состояние для представления вкладки. Состояние должно содержать следующие свойства:
 
-- `index`: a number representing the index of the active route in the `routes` array
-- `routes`: an array containing a list of route objects used for rendering the tabs
+-   `index`: число, представляющее индекс активного маршрута в массиве `routes`.
+-   `routes`: массив, содержащий список объектов маршрутов, используемых для отображения вкладок.
 
-Each route object should contain the following properties:
+Каждый объект маршрута должен содержать следующие свойства:
 
-- `key`: a unique key to identify the route (required)
-- `title`: title for the route to display in the tab bar
-- `icon`: icon for the route to display in the tab bar
-- `accessibilityLabel`: accessibility label for the tab button
-- `testID`: test id for the tab button
+-   `key`: уникальный ключ для идентификации маршрута (обязательно)
+-   `title`: заголовок маршрута для отображения на панели вкладок
+-   `icon`: иконка маршрута для отображения на панели вкладок
+-   `accessibilityLabel`: метка доступности для кнопки вкладки
+-   `testID`: идентификатор теста для кнопки вкладки
 
-Example:
+Пример:
 
 ```js
 {
@@ -137,31 +135,32 @@ Example:
 }
 ```
 
-`TabView` is a controlled component, which means the `index` needs to be updated via the `onIndexChange` callback.
+`TabView` является управляемым компонентом, а значит, `index` должен обновляться через обратный вызов `onIndexChange`.
 
-##### `onIndexChange` (`required`)
+**`onIndexChange` (`required`)**
 
-Callback which is called on tab change, receives the index of the new tab as argument.
-The navigation state needs to be updated when it's called, otherwise the change is dropped.
+Обратный вызов, который вызывается при смене вкладки и получает в качестве аргумента индекс новой вкладки.
 
-##### `renderScene` (`required`)
+При его вызове состояние навигации должно быть обновлено, иначе изменение будет отменено.
 
-Callback which returns a react element to render as the page for the tab. Receives an object containing the route as the argument:
+**`renderScene` (`required`)**
+
+Обратный вызов, который возвращает элемент react для рендеринга в качестве страницы вкладки. В качестве аргумента получает объект, содержащий маршрут:
 
 ```js
 const renderScene = ({ route, jumpTo }) => {
-  switch (route.key) {
-    case 'music':
-      return <MusicRoute jumpTo={jumpTo} />;
-    case 'albums':
-      return <AlbumsRoute jumpTo={jumpTo} />;
-  }
+    switch (route.key) {
+        case 'music':
+            return <MusicRoute jumpTo={jumpTo} />;
+        case 'albums':
+            return <AlbumsRoute jumpTo={jumpTo} />;
+    }
 };
 ```
 
-You need to make sure that your individual routes implement a `shouldComponentUpdate` to improve the performance. To make it easier to specify the components, you can use the `SceneMap` helper.
+Для повышения производительности необходимо убедиться в том, что отдельные маршруты реализуют `shouldComponentUpdate`. Для упрощения задания компонентов можно использовать помощник `SceneMap`.
 
-`SceneMap` takes an object with the mapping of `route.key` to React components and returns a function to use with `renderScene` prop.
+`SceneMap` принимает объект с отображением `route.key` на компоненты React и возвращает функцию для использования в свойстве `renderScene`.
 
 ```js
 import { SceneMap } from 'react-native-tab-view';
@@ -174,455 +173,460 @@ const renderScene = SceneMap({
 });
 ```
 
-Specifying the components this way is easier and takes care of implementing a `shouldComponentUpdate` method.
+Такое задание компонентов проще и позволяет обойтись без реализации метода `shouldComponentUpdate`.
 
-Each scene receives the following props:
+Каждая сцена получает следующие реквизиты:
 
-- `route`: the current route rendered by the component
-- `jumpTo`: method to jump to other tabs, takes a `route.key` as it's argument
-- `position`: animated node which represents the current position
+-   `route`: текущий маршрут, отображаемый компонентом
+-   `jumpTo`: метод для перехода на другие вкладки, в качестве аргумента принимает `route.key`.
+-   `position`: анимированный узел, представляющий текущую позицию
 
-The `jumpTo` method can be used to navigate to other tabs programmatically:
+Метод `jumpTo` может быть использован для программного перехода на другие вкладки:
 
 ```js
 props.jumpTo('albums');
 ```
 
-All the scenes rendered with `SceneMap` are optimized using `React.PureComponent` and don't re-render when parent's props or states change. If you need more control over how your scenes update (e.g. - triggering a re-render even if the `navigationState` didn't change), use `renderScene` directly instead of using `SceneMap`.
+Все сцены, отрисованные с помощью `SceneMap`, оптимизированы с использованием `React.PureComponent` и не перерисовываются при изменении реквизитов или состояний родителя. Если вам нужен больший контроль над обновлением сцен (например, инициирование повторного рендеринга, даже если `navigationState` не изменилось), используйте `renderScene` напрямую, а не с помощью `SceneMap`.
 
-**IMPORTANT:** **Do not** pass inline functions to `SceneMap`, for example, don't do the following:
+**ВАЖНО:** **Не** передавайте в `SceneMap` инлайн-функции, например, не делайте следующее:
 
 ```js
 SceneMap({
-  first: () => <FirstRoute foo={props.foo} />,
-  second: SecondRoute,
+    first: () => <FirstRoute foo={props.foo} />,
+    second: SecondRoute,
 });
 ```
 
-Always define your components elsewhere in the top level of the file. If you pass inline functions, it'll re-create the component every render, which will cause the entire route to unmount and remount every change. It's very bad for performance and will also cause any local state to be lost.
+Всегда определяйте свои компоненты в другом месте на верхнем уровне файла. Если вы передаете inline-функции, то при каждом рендеринге компонент будет создаваться заново, что приведет к размонтированию и повторному монтированию всего маршрута при каждом изменении. Это очень плохо сказывается на производительности, а также приводит к потере всех локальных состояний.
 
-If you need to pass additional props, use a custom `renderScene` function:
+Если необходимо передать дополнительные реквизиты, используйте пользовательскую функцию `renderScene`:
 
 ```js
 const renderScene = ({ route }) => {
-  switch (route.key) {
-    case 'first':
-      return <FirstRoute foo={this.props.foo} />;
-    case 'second':
-      return <SecondRoute />;
-    default:
-      return null;
-  }
+    switch (route.key) {
+        case 'first':
+            return <FirstRoute foo={this.props.foo} />;
+        case 'second':
+            return <SecondRoute />;
+        default:
+            return null;
+    }
 };
 ```
 
-##### `renderTabBar`
+**`renderTabBar`**
 
-Callback which returns a custom React Element to use as the tab bar:
+Обратный вызов, который возвращает пользовательский элемент React Element для использования в качестве панели вкладок:
 
 ```js
 import { TabBar } from 'react-native-tab-view';
 
-...
+// ...
 
 <TabView
-  renderTabBar={props => <TabBar {...props} />}
-  ...
-/>
+    renderTabBar={(props) => <TabBar {...props} />}
+    // ...
+/>;
 ```
 
-If this is not specified, the default tab bar is rendered. You pass this props to customize the default tab bar, provide your own tab bar, or disable the tab bar completely.
+Если этот реквизит не указан, то отображается панель вкладок по умолчанию. Передавая этот реквизит, можно настроить панель вкладок по умолчанию, создать свою собственную панель вкладок или полностью отключить панель вкладок.
 
 ```js
 <TabView
-  renderTabBar={() => null}
-  ...
+    renderTabBar={() => null}
+    // ...
 />
 ```
 
-##### `tabBarPosition`
+**`tabBarPosition`**
 
-Position of the tab bar in the tab view. Possible values are `'top'` and `'bottom'`. Defaults to `'top'`.
+Положение панели вкладок в представлении вкладок. Возможные значения: `top` и `bottom`. По умолчанию принимается значение `top`.
 
-##### `lazy`
+**`lazy`**
 
-Function which takes an object with the current route and returns a boolean to indicate whether to lazily render the scenes.
+Функция принимает объект с текущим маршрутом и возвращает булево значение, указывающее, нужно ли лениво отрисовывать сцены.
 
-By default all scenes are rendered to provide a smoother swipe experience. But you might want to defer the rendering of unfocused scenes until the user sees them. To enable lazy rendering for a particular scene, return `true` from `getLazy` for that `route`:
+По умолчанию все сцены отображаются, чтобы обеспечить более плавное пролистывание. Однако вы можете захотеть отложить отрисовку несфокусированных сцен до тех пор, пока пользователь не увидит их. Чтобы включить ленивый рендеринг для конкретной сцены, верните `true` из `getLazy` для этого `route`:
 
 ```js
 <TabView
-  lazy={({ route }) => route.name === 'Albums'}
-  ...
+    lazy={({ route }) => route.name === 'Albums'}
+    // ...
 />
 ```
 
-When you enable lazy rendering for a screen, it will usually take some time to render when it comes into focus. You can use the `renderLazyPlaceholder` prop to customize what the user sees during this short period.
+Когда вы включаете ленивый рендеринг для экрана, обычно требуется некоторое время для рендеринга, когда он оказывается в фокусе. Вы можете использовать параметр `renderLazyPlaceholder` для настройки того, что пользователь видит в течение этого короткого периода.
 
-You can also pass a boolean to enable lazy for all of the scenes:
+Можно также передать булево значение, чтобы включить ленивый рендеринг для всех сцен:
+
+```js
+<TabView lazy />
+```
+
+**`lazyPreloadDistance`**
+
+Когда `lazy` включен, можно указать, сколько соседних маршрутов должно быть предварительно загружено с помощью данного параметра. По умолчанию это значение равно `0`, что означает, что ленивые страницы загружаются по мере их попадания в область просмотра.
+
+**`renderLazyPlaceholder`**
+
+Обратный вызов, возвращающий пользовательский React-элемент для отрисовки маршрутов, которые еще не были отрисованы. В качестве аргумента получает объект, содержащий маршрут. Также необходимо включить параметр `lazy`.
+
+Это представление обычно показывается только на долю секунды. Необходимо поддерживать его легковесным.
+
+По умолчанию отображается `null`.
+
+**`keyboardDismissMode`**
+
+Строка, указывающая, будет ли клавиатура отключаться в ответ на жест перетаскивания. Возможные значения:
+
+-   `'auto'` (по умолчанию): клавиатура отключается при изменении индекса.
+-   `'on-drag'`: клавиатура отключается, когда начинается перетаскивание.
+-   `'none'`: перетаскивание не приводит к отключению клавиатуры.
+
+**`swipeEnabled`**
+
+Булево значение, указывающее, следует ли включить жесты пролистывания. По умолчанию жесты пролистывания включены. Если передать `false`, то жесты пролистывания будут отключены, но пользователь по-прежнему сможет переключать вкладки, нажимая на панель вкладок.
+
+**`animationEnabled`**
+
+Включает анимацию при смене вкладки. По умолчанию это значение равно `true`.
+
+**`onSwipeStart`**
+
+Обратный вызов, который вызывается, когда начинается жест смахивания, т.е. пользователь касается экрана и перемещает его.
+
+**`onSwipeEnd`**
+
+Обратный вызов, который вызывается, когда жест смахивания заканчивается, т.е. пользователь убирает палец с экрана после жеста смахивания.
+
+**`initialLayout`**
+
+Объект, содержащий начальную высоту и ширину экранов. Передача этого параметра позволит повысить производительность начального рендеринга. Для большинства приложений это хорошее значение по умолчанию:
 
 ```js
 <TabView
-  lazy
+    initialLayout={{
+        width: Dimensions.get('window').width,
+    }}
+    // ...
 />
 ```
 
-##### `lazyPreloadDistance`
+**`overScrollMode`**
 
-When `lazy` is enabled, you can specify how many adjacent routes should be preloaded with this prop. This value defaults to `0` which means lazy pages are loaded as they come into the viewport.
+Используется для переопределения значения по умолчанию режима прокрутки пейджера. Может иметь значение `auto`, `always` или `never` (только для Android).
 
-##### `renderLazyPlaceholder`
+**`sceneContainerStyle`**
 
-Callback which returns a custom React Element to render for routes that haven't been rendered yet. Receives an object containing the route as the argument. The `lazy` prop also needs to be enabled.
+Стиль, применяемый к представлению, оборачивающему каждый экран. Его можно передать, чтобы отменить некоторые стили по умолчанию, например, обрезание переполнения:
 
-This view is usually only shown for a split second. Keep it lightweight.
+**`pagerStyle`**
 
-By default, this renders `null`.
+Стиль, который будет применяться к представлению пейджера, оборачивающему все сцены.
 
-##### `keyboardDismissMode`
+**`style`**
 
-String indicating whether the keyboard gets dismissed in response to a drag gesture. Possible values are:
-
-- `'auto'` (default): the keyboard is dismissed when the index changes.
-- `'on-drag'`: the keyboard is dismissed when a drag begins.
-- `'none'`: drags do not dismiss the keyboard.
-
-##### `swipeEnabled`
-
-Boolean indicating whether to enable swipe gestures. Swipe gestures are enabled by default. Passing `false` will disable swipe gestures, but the user can still switch tabs by pressing the tab bar.
-
-#### `animationEnabled`
-
-Enables animation when changing tab. By default it's true.
-
-##### `onSwipeStart`
-
-Callback which is called when the swipe gesture starts, i.e. the user touches the screen and moves it.
-
-##### `onSwipeEnd`
-
-Callback which is called when the swipe gesture ends, i.e. the user lifts their finger from the screen after the swipe gesture.
-
-##### `initialLayout`
-
-Object containing the initial height and width of the screens. Passing this will improve the initial rendering performance. For most apps, this is a good default:
-
-```js
-<TabView
-  initialLayout={{ width: Dimensions.get('window').width }}
-  ...
-/>
-```
-
-##### `overScrollMode`
-
-Used to override default value of pager's overScroll mode. Can be `auto`, `always` or `never` (Android only).
-
-##### `sceneContainerStyle`
-
-Style to apply to the view wrapping each screen. You can pass this to override some default styles such as overflow clipping:
-
-##### `pagerStyle`
-
-Style to apply to the pager view wrapping all the scenes.
-
-##### `style`
-
-Style to apply to the tab view container.
+Стиль, применяемый к контейнеру представления вкладки.
 
 ### `TabBar`
 
-Material design themed tab bar. To customize the tab bar, you'd need to use the `renderTabBar` prop of `TabView` to render the `TabBar` and pass additional props.
+Тематическая панель вкладок в стиле Material Design. Для настройки панели вкладок необходимо использовать свойство `renderTabBar` функции `TabView` для рендеринга `TabBar` и передать дополнительные реквизиты.
 
-For example, to customize the indicator color and the tab bar background color, you can pass `indicatorStyle` and `style` props to the `TabBar` respectively:
+Например, чтобы настроить цвет индикатора и цвет фона панели вкладок, можно передать реквизиты `indicatorStyle` и `style` в `TabBar` соответственно:
 
 ```js
-const renderTabBar = props => (
-  <TabBar
-    {...props}
-    indicatorStyle={{ backgroundColor: 'white' }}
-    style={{ backgroundColor: 'pink' }}
-  />
+const renderTabBar = (props) => (
+    <TabBar
+        {...props}
+        indicatorStyle={{ backgroundColor: 'white' }}
+        style={{ backgroundColor: 'pink' }}
+    />
 );
 
 //...
 
-
 return (
-  <TabView
-    renderTabBar={renderTabBar}
-    ...
-  />
+    <TabView
+        renderTabBar={renderTabBar}
+        // ...
+    />
 );
 ```
 
-#### TabBar Props
+Параметры `TabBar`:
 
-##### `getLabelText`
+**`getLabelText`**
 
-Function which takes an object with the current route and returns the label text for the tab. Uses `route.title` by default.
+Функция, принимающая объект с текущим маршрутом и возвращающая текст метки для вкладки. По умолчанию используется `route.title`.
 
 ```js
 <TabBar
-  getLabelText={({ route }) => route.title}
-  ...
+    getLabelText={({ route }) => route.title}
+    // ...
 />
 ```
 
-##### `getAccessible`
+**`getAccessible`**
 
-Function which takes an object with the current route and returns a boolean to indicate whether to mark a tab as `accessible`. Defaults to `true`.
+Функция принимает объект с текущим маршрутом и возвращает логическое значение, указывающее, следует ли пометить вкладку как `accessible`. По умолчанию принимает значение `true`.
 
-##### `getAccessibilityLabel`
+**`getAccessibilityLabel`**
 
-Function which takes an object with the current route and returns a accessibility label for the tab button. Uses `route.accessibilityLabel` by default if specified, otherwise uses the route title.
-
-```js
-<TabBar
-  getAccessibilityLabel={({ route }) => route.accessibilityLabel}
-  ...
-/>
-```
-
-##### `getTestID`
-
-Function which takes an object with the current route and returns a test id for the tab button to locate this tab button in tests. Uses `route.testID` by default.
+Функция, принимающая объект с текущим маршрутом и возвращающая метку доступности для кнопки вкладки. По умолчанию используется `route.accessibilityLabel`, если он указан, в противном случае используется заголовок маршрута.
 
 ```js
 <TabBar
-  getTestID={({ route }) => route.testID}
-  ...
-/>
-```
-
-##### `renderIcon`
-
-Function which takes an object with the current route, focused status and color and returns a custom React Element to be used as a icon.
-
-```js
-<TabBar
-  renderIcon={({ route, focused, color }) => (
-    <Icon
-      name={focused ? 'albums' : 'albums-outlined'}
-      color={color}
-    />
-  )}
-  ...
-/>
-```
-
-##### `renderLabel`
-
-Function which takes an object with the current route, focused status and color and returns a custom React Element to be used as a label.
-
-```js
-<TabBar
-  renderLabel={({ route, focused, color }) => (
-    <Text style={{ color, margin: 8 }}>
-      {route.title}
-    </Text>
-  )}
-  ...
-/>
-```
-
-##### `renderTabBarItem`
-
-Function which takes a `TabBarItemProps` object and returns a custom React Element to be used as a tab button.
-
-##### `renderIndicator`
-
-Function which takes an object with the current route and returns a custom React Element to be used as a tab indicator.
-
-##### `renderBadge`
-
-Function which takes an object with the current route and returns a custom React Element to be used as a badge.
-
-##### `onTabPress`
-
-Function to execute on tab press. It receives the scene for the pressed tab, useful for things like scroll to top.
-
-By default, tab press also switches the tab. To prevent this behavior, you can call `preventDefault`:
-
-```js
-<TabBar
-  onTabPress={({ route, preventDefault }) => {
-    if (route.key === 'home') {
-      preventDefault();
-
-      // Do something else
+    getAccessibilityLabel={({ route }) =>
+        route.accessibilityLabel
     }
-  }}
-  ...
+    // ...
 />
 ```
 
-##### `onTabLongPress`
+**`getTestID`**
 
-Function to execute on tab long press, use for things like showing a menu with more options
+Функция, принимающая объект с текущим маршрутом и возвращающая тестовый идентификатор кнопки вкладки для определения местоположения этой кнопки в тестах. По умолчанию используется `route.testID`.
 
-##### `activeColor`
+```js
+<TabBar
+    getTestID={({ route }) => route.testID}
+    // ...
+/>
+```
 
-Custom color for icon and label in the active tab.
+**`renderIcon`**
 
-##### `inactiveColor`
+Функция принимает объект с текущим маршрутом, сфокусированным статусом и цветом и возвращает пользовательский React-элемент для использования в качестве иконки.
 
-Custom color for icon and label in the inactive tab.
+```js
+<TabBar
+    renderIcon={({ route, focused, color }) => (
+        <Icon
+            name={focused ? 'albums' : 'albums-outlined'}
+            color={color}
+        />
+    )}
+    // ...
+/>
+```
 
-##### `pressColor`
+**`renderLabel`**
 
-Color for material ripple (Android >= 5.0 only).
+Функция принимает объект с текущим маршрутом, сфокусированным статусом и цветом и возвращает пользовательский React-элемент для использования в качестве метки.
 
-##### `pressOpacity`
+```js
+<TabBar
+    renderLabel={({ route, focused, color }) => (
+        <Text style={{ color, margin: 8 }}>
+            {route.title}
+        </Text>
+    )}
+    // ...
+/>
+```
 
-Opacity for pressed tab (iOS and Android < 5.0 only).
+**`renderTabBarItem`**
 
-##### `scrollEnabled`
+Функция, принимающая объект `TabBarItemProps` и возвращающая пользовательский React-элемент, который будет использоваться в качестве кнопки вкладки.
 
-Boolean indicating whether to make the tab bar scrollable.
+**`renderIndicator`**
 
-If you set `scrollEnabled` to `true`, you should also specify a `width` in `tabStyle` to improve the initial render.
+Функция, которая принимает объект с текущим маршрутом и возвращает пользовательский React-элемент для использования в качестве индикатора вкладки.
 
-##### `bounces`
+**`renderBadge`**
 
-Boolean indicating whether the tab bar bounces when scrolling.
+Функция, которая принимает объект с текущим маршрутом и возвращает пользовательский React-элемент для использования в качестве бейджа.
 
-##### `tabStyle`
+**`onTabPress`**
 
-Style to apply to the individual tab items in the tab bar.
+Функция, выполняемая при нажатии на вкладку. Она получает сцену для нажатой вкладки, что полезно для таких вещей, как прокрутка к верху.
 
-By default, all tab items take up the same pre-calculated width based on the width of the container. If you want them to take their original width, you can specify `width: 'auto'` in `tabStyle`.
+По умолчанию нажатие вкладки также переключает вкладку. Чтобы предотвратить такое поведение, можно вызвать функцию `preventDefault`:
 
-##### `indicatorStyle`
+```js
+<TabBar
+    onTabPress={({ route, preventDefault }) => {
+        if (route.key === 'home') {
+            preventDefault();
 
-Style to apply to the active indicator.
+            // Do something else
+        }
+    }}
+    // ...
+/>
+```
 
-##### `indicatorContainerStyle`
+**`onTabLongPress`**
 
-Style to apply to the container view for the indicator.
+Функция, выполняемая при длительном нажатии на вкладку, используется для отображения меню с дополнительными опциями
 
-##### `labelStyle`
+**`activeColor`**
 
-Style to apply to the tab item label.
+Пользовательский цвет для иконки и ярлыка на активной вкладке.
 
-##### `contentContainerStyle`
+**`inactiveColor`**
 
-Style to apply to the inner container for tabs.
+Пользовательский цвет для иконки и ярлыка неактивной вкладки.
 
-##### `style` (`TabBar`)
+**`pressColor`**
 
-Style to apply to the tab bar container.
+Цвет для пульсации материала (только для Android >= 5.0).
 
-##### `gap`
+**`pressOpacity`**
 
-Define a spacing between tabs.
+Непрозрачность для вкладки с нажатой кнопкой (только для iOS и Android < 5.0).
 
-##### `testID`
+**`scrollEnabled`**
 
-Test id for the tabBar. Can be used for scrolling the tab bar in tests
+Булево значение, указывающее, следует ли сделать панель вкладок прокручиваемой.
 
-## Optimization Tips
+При установке `scrollEnabled` в `true` следует также указать `width` в `tabStyle` для улучшения начального рендеринга.
 
-### Avoid unnecessary re-renders
+**`bounces`**
 
-The `renderScene` function is called every time the index changes. If your `renderScene` function is expensive, it's good idea move each route to a separate component if they don't depend on the index, and use `shouldComponentUpdate` or `React.memo` in your route components to prevent unnecessary re-renders.
+Булево значение, указывающее, отскакивает ли панель вкладок при прокрутке.
 
-For example, instead of:
+**`tabStyle`**
+
+Стиль, применяемый к отдельным элементам вкладки на панели вкладок.
+
+По умолчанию все элементы вкладки занимают одну и ту же предварительно рассчитанную ширину, основанную на ширине контейнера. Если вы хотите, чтобы они имели свою первоначальную ширину, то можете указать `width: 'auto'` в `tabStyle`.
+
+**`indicatorStyle`**
+
+Стиль, применяемый к активному индикатору.
+
+**`indicatorContainerStyle`**
+
+Стиль, применяемый к представлению контейнера для индикатора.
+
+**`labelStyle`**
+
+Стиль, применяемый к метке элемента вкладки.
+
+**`ContentContainerStyle`**
+
+Стиль, применяемый к внутреннему контейнеру для вкладок.
+
+**`style` (`TabBar`)**
+
+Стиль, применяемый к контейнеру панели вкладок.
+
+**`gap`**
+
+Определяет расстояние между вкладками.
+
+**`testID`**
+
+Тестовый идентификатор для панели вкладок. Может использоваться для прокрутки панели вкладок в тестах
+
+## Советы по оптимизации
+
+### Избегайте ненужных повторных рендеров
+
+Функция `renderScene` вызывается каждый раз при изменении индекса. Если функция `renderScene` является дорогостоящей, то для предотвращения ненужных повторных рендеров целесообразно переместить каждый маршрут в отдельный компонент, если он не зависит от индекса, и использовать `shouldComponentUpdate` или `React.memo` в компонентах маршрута.
+
+Например, вместо:
 
 ```js
 const renderScene = ({ route }) => {
-  switch (route.key) {
-    case 'home':
-      return (
-        <View style={styles.page}>
-          <Avatar />
-          <NewsFeed />
-        </View>
-      );
-    default:
-      return null;
-  }
+    switch (route.key) {
+        case 'home':
+            return (
+                <View style={styles.page}>
+                    <Avatar />
+                    <NewsFeed />
+                </View>
+            );
+        default:
+            return null;
+    }
 };
 ```
 
-Do the following:
+Выполните следующие действия:
 
 ```js
 const renderScene = ({ route }) => {
-  switch (route.key) {
-    case 'home':
-      return <HomeComponent />;
-    default:
-      return null;
-  }
+    switch (route.key) {
+        case 'home':
+            return <HomeComponent />;
+        default:
+            return null;
+    }
 };
 ```
 
-Where `<HomeComponent />` is a `PureComponent` if you're using class components:
+Где `<HomeComponent />` - это `PureComponent`, если вы используете компоненты класса:
 
 ```js
 export default class HomeComponent extends React.PureComponent {
-  render() {
-    return (
-      <View style={styles.page}>
-        <Avatar />
-        <NewsFeed />
-      </View>
-    );
-  }
+    render() {
+        return (
+            <View style={styles.page}>
+                <Avatar />
+                <NewsFeed />
+            </View>
+        );
+    }
 }
 ```
 
-Or, wrapped in `React.memo` if you're using function components:
+Или обернуть в `React.memo`, если вы используете функциональные компоненты:
 
 ```js
 function HomeComponent() {
-  return (
-    <View style={styles.page}>
-      <Avatar />
-      <NewsFeed />
-    </View>
-  );
+    return (
+        <View style={styles.page}>
+            <Avatar />
+            <NewsFeed />
+        </View>
+    );
 }
 
 export default React.memo(HomeComponent);
 ```
 
-### Avoid one frame delay
+### Избежать задержки на один кадр
 
-We need to measure the width of the container and hence need to wait before rendering some elements on the screen. If you know the initial width upfront, you can pass it in and we won't need to wait for measuring it. Most of the time, it's just the window width.
+Нам необходимо измерить ширину контейнера и, следовательно, подождать перед выводом некоторых элементов на экран. Если вы заранее знаете начальную ширину, то можете передать ее, и нам не нужно будет ждать ее измерения. Чаще всего это просто ширина окна.
 
-For example, pass the following `initialLayout` to `TabView`:
+Например, передадим `initialLayout` в `TabView`:
 
 ```js
 const initialLayout = {
-  height: 0,
-  width: Dimensions.get('window').width,
+    height: 0,
+    width: Dimensions.get('window').width,
 };
 ```
 
-The tab view will still react to changes in the dimension and adjust accordingly to accommodate things like orientation change.
+Вид вкладки по-прежнему будет реагировать на изменения размеров и соответствующим образом подстраиваться под такие вещи, как изменение ориентации.
 
-### Optimize large number of routes
+### Оптимизация большого количества маршрутов
 
-If you've a large number of routes, especially images, it can slow the animation down a lot. You can instead render a limited number of routes.
+Если у вас большое количество маршрутов, особенно изображений, это может сильно замедлить анимацию. Вместо этого можно отрисовывать ограниченное число маршрутов.
 
-For example, do the following to render only 2 routes on each side:
+Например, чтобы отобразить только 2 маршрута с каждой стороны, сделайте следующее:
 
 ```js
 const renderScene = ({ route }) => {
-  if (Math.abs(index - routes.indexOf(route)) > 2) {
-    return <View />;
-  }
+    if (Math.abs(index - routes.indexOf(route)) > 2) {
+        return <View />;
+    }
 
-  return <MySceneComponent route={route} />;
+    return <MySceneComponent route={route} />;
 };
 ```
 
-### Avoid rendering TabView inside ScrollView
+### Избегайте рендеринга TabView внутри ScrollView
 
-Nesting the `TabView` inside a vertical `ScrollView` will disable the optimizations in the `FlatList` components rendered inside the `TabView`. So avoid doing it if possible.
+Вложение `TabView` внутри вертикального `ScrollView` приведет к отключению оптимизаций в компонентах `FlatList`, отрисованных внутри `TabView`. Поэтому по возможности избегайте этого.
 
-### Use `lazy` and `renderLazyPlaceholder` props to render routes as needed
+### Используйте реквизиты `lazy` и `renderLazyPlaceholder` для рендеринга маршрутов по мере необходимости
 
-The `lazy` option is disabled by default to provide a smoother tab switching experience, but you can enable it and provide a placeholder component for a better lazy loading experience. Enabling `lazy` can improve initial load performance by rendering routes only when they come into view. Refer the [prop reference](#lazy) for more details.
+Опция `lazy` отключена по умолчанию для обеспечения более плавного переключения вкладок, но вы можете включить ее и предоставить компонент-плейсхолдер для лучшей работы с ленивой загрузкой. Включение `lazy` может повысить производительность начальной загрузки за счет отрисовки маршрутов только при их появлении.
+
+## Ссылки
+
+-   [React Native Tab View](https://reactnavigation.org/docs/tab-view)

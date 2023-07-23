@@ -1,62 +1,60 @@
 ---
-id: drawer-layout
-title: React Native Drawer Layout
-sidebar_label: Drawer Layout
+description: Кроссплатформенный компонент Drawer для React Native, реализованный с использованием react-native-gesture-handler и react-native-reanimated
 ---
 
-A cross-platform Drawer component for React Native implemented using [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/).
+# React Native Drawer Layout
 
-<div style={{ display: 'flex', margin: '16px 0' }}>
-  <video playsInline autoPlay muted loop>
-    <source src="/assets/navigators/drawer/drawer.mov" />
-  </video>
-</div>
+Кроссплатформенный компонент **`Drawer`** для React Native, реализованный с использованием [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) и [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/).
 
-This package doesn't integrate with React Navigation. If you want to integrate the drawer layout with React Navigation's navigation system, e.g. want to show screens in the drawer and be able to navigate between them using `navigation.navigate` etc, use [Drawer Navigator](drawer-navigator.md) instead.
+![Drawer Navigator](drawer.apng)
 
-## Installation
+Этот пакет не интегрируется с React Navigation. Если вы хотите интегрировать компоновку drawer с навигационной системой React Navigation, например, отображать экраны в drawer и иметь возможность переходить между ними с помощью `navigation.navigate` и т.д., используйте вместо этого [Drawer Navigator](drawer-navigator.md).
 
-To use this package, open a Terminal in the project root and run:
+## Установка
 
-```bash npm2yarn
+Чтобы использовать этот пакет, откройте Терминал в корне проекта и выполните команду:
+
+```bash
 npm install react-native-drawer-layout
 ```
 
-Then, you need to install and configure the libraries that are required by the drawer:
+Затем необходимо установить и настроить библиотеки, которые требуются drawer:
 
-1. First, install [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) and [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/).
+1.  Сначала установите [`react-native-gesture-handler`](https://docs.swmansion.com/react-native-gesture-handler/) и [`react-native-reanimated`](https://docs.swmansion.com/react-native-reanimated/).
 
-   If you have a Expo managed project, in your project directory, run:
+    Если у вас Expo-управляемый проект, то в каталоге проекта выполните команду:
 
-   ```bash
-   npx expo install react-native-gesture-handler react-native-reanimated
-   ```
+    ```bash
+    npx expo install react-native-gesture-handler react-native-reanimated
+    ```
 
-   If you have a bare React Native project, in your project directory, run:
+    Если у вас есть "голый" проект React Native, в каталоге проекта выполните команду:
 
-   ```bash npm2yarn
-   npm install react-native-gesture-handler react-native-reanimated
-   ```
+    ```bash
+    npm install react-native-gesture-handler react-native-reanimated
+    ```
 
-   The Drawer supports both Reanimated 1 and Reanimated 2. If you want to use Reanimated 2, make sure to configure it following the [installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
+    Drawer поддерживает как Reanimated 1, так и Reanimated 2. Если вы хотите использовать Reanimated 2, обязательно настройте его, следуя [руководству по установке](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation).
 
-2. To finalize installation of `react-native-gesture-handler`, add the following at the **top** (make sure it's at the top and there's nothing else before it) of your entry file, such as `index.js` or `App.js`:
+2.  Чтобы завершить установку `react-native-gesture-handler`, добавьте следующее в **top** (убедитесь, что он находится в самом верху и перед ним нет ничего другого) вашего входного файла, например `index.js` или `App.js`:
 
-   ```js
-   import 'react-native-gesture-handler';
-   ```
+    ```js
+    import 'react-native-gesture-handler';
+    ```
 
-   > Note: If you are building for Android or iOS, do not skip this step, or your app may crash in production even if it works fine in development. This is not applicable to other platforms.
+    !!!note ""
 
-3. If you're on a Mac and developing for iOS, you also need to install the pods (via [Cocoapods](https://cocoapods.org/)) to complete the linking.
+        Если вы создаете приложение для Android или iOS, не пропускайте этот шаг, иначе оно может упасть в производстве, даже если в разработке оно работает нормально. Это не относится к другим платформам.
 
-```bash
-npx pod-install ios
-```
+3.  Если вы работаете на Mac и разрабатываете под iOS, то для завершения связывания необходимо также установить капсулы (через [Cocoapods](https://cocoapods.org/)).
 
-We're done! Now you can build and run the app on your device/simulator.
+    ```bash
+    npx pod-install ios
+    ```
 
-## Quick start
+Готово! Теперь вы можете собрать и запустить приложение на своем устройстве/симуляторе.
+
+## Быстрый старт
 
 ```js
 import * as React from 'react';
@@ -64,166 +62,143 @@ import { Button, Text } from 'react-native';
 import { Drawer } from 'react-native-drawer-layout';
 
 export default function DrawerExample() {
-  const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
 
-  return (
-    <Drawer
-      open={open}
-      onOpen={() => setOpen(true)}
-      onClose={() => setOpen(false)}
-      renderDrawerContent={() => {
-        return <Text>Drawer content</Text>;
-      }}
-    >
-      <Button
-        onPress={() => setOpen((prevOpen) => !prevOpen)}
-        title={`${open ? 'Close' : 'Open'} drawer`}
-      />
-    </Drawer>
-  );
+    return (
+        <Drawer
+            open={open}
+            onOpen={() => setOpen(true)}
+            onClose={() => setOpen(false)}
+            renderDrawerContent={() => {
+                return <Text>Drawer content</Text>;
+            }}
+        >
+            <Button
+                onPress={() =>
+                    setOpen((prevOpen) => !prevOpen)
+                }
+                title={`${open ? 'Close' : 'Open'} drawer`}
+            />
+        </Drawer>
+    );
 }
 ```
 
-## API reference
+## Справочник по API
 
-The package exports a `Drawer` component which is the one you'd use to render the drawer.
+Пакет экспортирует компонент `Drawer`, который используется для визуализации ящика.
 
 ### `Drawer`
 
-Component responsible for rendering a drawer with animations and gestures.
+Компонент, отвечающий за отрисовку ящика с анимацией и жестами.
 
-#### Drawer Props
+Параметры `Drawer`
 
-##### `open`
+**`open`**
 
-Whether the drawer is open or not.
+Открыт ли ящик или нет.
 
-##### `onOpen`
+**`onOpen`**
 
-Callback which is called when the drawer is opened.
+Обратный вызов, который вызывается при открытии ящика.
 
-##### `onClose`
+**`onClose`**
 
-Callback which is called when the drawer is closed.
+Обратный вызов, который вызывается при закрытии ящика.
 
-##### `renderDrawerContent`
+**`renderDrawerContent`**
 
-Callback which returns a react element to render as the content of the drawer.
+Обратный вызов, который возвращает элемент react для отображения в качестве содержимого ящика.
 
-##### `layout`
+**`layout`**
 
-Object containing the layout of the container. Defaults to the dimensions of the application's window.
+Объект, содержащий макет контейнера. По умолчанию соответствует размерам окна приложения.
 
-##### `drawerPosition`
+**`drawerPosition`**
 
-Position of the drawer on the screen. Defaults to `right` in RTL mode, otherwise `left`.
+Положение ящика на экране. По умолчанию в режиме RTL - `правая`, в остальных случаях - `левая`.
 
-##### `drawerType`
+**`drawerType`**
 
-Type of the drawer. It determines how the drawer looks and animates.
+Тип ящика. Он определяет внешний вид и анимацию ящика.
 
-- `front`: Traditional drawer which covers the screen with a overlay behind it.
-- `back`: The drawer is revealed behind the screen on swipe.
-- `slide`: Both the screen and the drawer slide on swipe to reveal the drawer.
-- `permanent`: A permanent drawer is shown as a sidebar.
+-   `front`: Традиционный ящик, закрывающий экран с накладкой за ним.
+-   `back`: Ящик открывается за экраном при пролистывании.
+-   `slide`: Экран и ящик сдвигаются при пролистывании, открывая ящик.
+-   `permanent`: Постоянный ящик отображается в виде боковой панели.
 
-Defaults to `slide` on iOS and `front` on other platforms.
+По умолчанию `slide` на iOS и `front` на других платформах.
 
-##### `drawerStyle`
+**`drawerStyle`**
 
-Style object for the drawer. You can pass a custom background color for drawer or a custom width for the drawer.
+Объект стиля для ящика. Вы можете передать пользовательский цвет фона для ящика или его ширину.
 
-##### `overlayStyle`
+**`overlayStyle`**
 
-Style object for the overlay.
+Объект стиля для оверлея.
 
-##### `hideStatusBarOnOpen`
+**`hideStatusBarOnOpen`**
 
-Whether to hide the status bar when the drawer is open. Defaults to `false`.
+Скрывать ли строку состояния при открытии ящика. По умолчанию имеет значение `false`.
 
-##### `keyboardDismissMode`
+**`keyboardDismissMode`**
 
-Whether to dismiss the keyboard when the drawer is open. Supported values are:
+Должна ли клавиатура отключаться при открытии ящика. Поддерживаются следующие значения:
 
-- `none`: The keyboard will not be dismissed when the drawer is open.
-- `on-drag`: The keyboard will be dismissed when the drawer is opened by a swipe gesture.
+-   `none`: Клавиатура не будет отключаться при открытии ящика.
+-   `on-drag`: Клавиатура будет отключаться при открытии ящика жестом пролистывания.
 
-Defaults to `on-drag`.
+По умолчанию установлено значение `on-drag`.
 
-##### `statusBarAnimation`
+**`statusBarAnimation`**
 
-Animation to use when the status bar is hidden. Supported values are:
+Анимация, используемая при скрытии строки состояния. Поддерживаются следующие значения:
 
-- `slide`: The status bar will slide out of view.
-- `fade`: The status bar will fade out of view.
-- `none`: The status bar will not animate.
+-   `slide`: Строка состояния будет скрыта из виду.
+-   `fade`: Строка состояния будет исчезать из поля зрения.
+-   `none`: Строка состояния не будет анимироваться.
 
-Use it in combination with `hideStatusBarOnOpen`.
+Используется в сочетании с `hideStatusBarOnOpen`.
 
-##### `swipeEnabled`
+**`swipeEnabled`**
 
-Whether to enable swipe gestures to open the drawer. Defaults to `true`.
+Включать ли жесты пролистывания для открытия ящика. По умолчанию имеет значение `true`.
 
-Swipe gestures are only supported on iOS and Android.
+Жесты пролистывания поддерживаются только на iOS и Android.
 
-##### `swipeEdgeWidth`
+**`swipeEdgeWidth`**
 
-How far from the edge of the screen the swipe gesture should activate. Defaults to `32`.
+На каком расстоянии от края экрана должен активироваться жест пролистывания. По умолчанию `32`.
 
-This is only supported on iOS and Android.
+Поддерживается только на iOS и Android.
 
-##### `swipeMinDistance`
+**`swipeMinDistance`**
 
-Minimum swipe distance that should activate opening the drawer. Defaults to `60`.
+Минимальное расстояние пролистывания, при котором должно активироваться открытие ящика. По умолчанию `60`.
 
-This is only supported on iOS and Android.
+Поддерживается только на iOS и Android.
 
-##### `swipeMinVelocity`
+**`swipeMinVelocity`**
 
-Minimum swipe velocity that should activate opening the drawer. Defaults to `500`.
+Минимальная скорость движения, при которой должно активироваться открытие ящика. По умолчанию `500`.
 
-This is only supported on iOS and Android.
+Поддерживается только на iOS и Android.
 
-##### `gestureHandlerProps`
+**`gestureHandlerProps`**
 
-Props to pass to the underlying pan gesture handler.
+Реквизиты для передачи базовому обработчику жестов панорамирования.
 
-This is only supported on iOS and Android.
+Поддерживается только на iOS и Android.
 
-##### `children`
+**`children`**
 
-Content that the drawer should wrap.
+Содержимое, в которое должен быть обернут ящик.
 
 ### `useDrawerProgress`
 
-The `useDrawerProgress` hook returns a Reanimated SharedValue (with modern implementation) or Reanimated Node (with legacy implementation) which represents the progress of the drawer. It can be used to animate the content of the screen.
+Хук `useDrawerProgress` возвращает Reanimated SharedValue (при современной реализации) или Reanimated Node (при устаревшей реализации), которые представляют прогресс работы ящика. Его можно использовать для анимирования содержимого экрана.
 
-Example with modern implementation:
-
-```js
-import { Animated } from 'react-native-reanimated';
-import { useDrawerProgress } from 'react-native-drawer-layout';
-
-// ...
-
-function MyComponent() {
-  const progress = useDrawerProgress();
-
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        {
-          translateX: interpolate(progress, [0, 1], [-100, 0]),
-        },
-      ],
-    };
-  });
-
-  return <Animated.View style={animatedStyle}>{/* ... */}</Animated.View>;
-}
-```
-
-Example with legacy implementation:
+Пример с современной реализацией:
 
 ```js
 import { Animated } from 'react-native-reanimated';
@@ -232,23 +207,58 @@ import { useDrawerProgress } from 'react-native-drawer-layout';
 // ...
 
 function MyComponent() {
-  const progress = useDrawerProgress();
+    const progress = useDrawerProgress();
 
-  // If you are on react-native-reanimated 1.x, use `Animated.interpolate` instead of `Animated.interpolateNode`
-  const translateX = Animated.interpolateNode(progress, {
-    inputRange: [0, 1],
-    outputRange: [-100, 0],
-  });
+    const animatedStyle = useAnimatedStyle(() => {
+        return {
+            transform: [
+                {
+                    translateX: interpolate(
+                        progress,
+                        [0, 1],
+                        [-100, 0]
+                    ),
+                },
+            ],
+        };
+    });
 
-  return (
-    <Animated.View style={{ transform: [{ translateX }] }}>
-      {/* ... */}
-    </Animated.View>
-  );
+    return (
+        <Animated.View style={animatedStyle}>
+            {/* ... */}
+        </Animated.View>
+    );
 }
 ```
 
-If you are using class components, you can use the `DrawerProgressContext` to get the progress value.
+Пример с унаследованной реализацией:
+
+```js
+import { Animated } from 'react-native-reanimated';
+import { useDrawerProgress } from 'react-native-drawer-layout';
+
+// ...
+
+function MyComponent() {
+    const progress = useDrawerProgress();
+
+    // If you are on react-native-reanimated 1.x, use `Animated.interpolate` instead of `Animated.interpolateNode`
+    const translateX = Animated.interpolateNode(progress, {
+        inputRange: [0, 1],
+        outputRange: [-100, 0],
+    });
+
+    return (
+        <Animated.View
+            style={{ transform: [{ translateX }] }}
+        >
+            {/* ... */}
+        </Animated.View>
+    );
+}
+```
+
+Если вы используете компоненты класса, то для получения значения прогресса можно использовать `DrawerProgressContext`.
 
 ```js
 import { DrawerProgressContext } from 'react-native-drawer-layout';
@@ -256,12 +266,16 @@ import { DrawerProgressContext } from 'react-native-drawer-layout';
 // ...
 
 class MyComponent extends React.Component {
-  static contextType = DrawerProgressContext;
+    static contextType = DrawerProgressContext;
 
-  render() {
-    const progress = this.context;
+    render() {
+        const progress = this.context;
 
-    // ...
-  }
+        // ...
+    }
 }
 ```
+
+## Ссылки
+
+-   [React Native Drawer Layout](https://reactnavigation.org/docs/drawer-layout/)

@@ -1,90 +1,106 @@
 ---
-id: devtools
-title: Developer tools
-sidebar_label: Developer tools
+description: Инструменты разработчика для облегчения отладки при использовании React Navigation
 ---
 
-Developer tools to make debugging easier when using React Navigation.
+# Инструменты разработчика
 
-To use the developer tools, install [`@react-navigation/devtools`](https://github.com/react-navigation/react-navigation/tree/master/packages/devtools):
+Инструменты разработчика для облегчения отладки при использовании React Navigation.
 
-```bash npm2yarn
+Чтобы воспользоваться инструментами разработчика, установите [`@react-navigation/devtools`](https://github.com/react-navigation/react-navigation/tree/master/packages/devtools):
+
+```bash
 npm install @react-navigation/devtools
 ```
 
-Hooks from this package only work during development and are disabled in production. You don't need to do anything special to remove them from the production build.
+Хуки из этого пакета работают только во время разработки и отключаются в производстве. Чтобы удалить их из производственной сборки, не нужно делать ничего особенного.
 
-## API Definition
+## Определение API
 
-The package exposes the following APIs:
+Пакет предоставляет следующие API:
 
 ### `useFlipper`
 
-This hook provides integration with [Flipper](https://fbflipper.com/) for React Native apps.
+Этот хук обеспечивает интеграцию с [Flipper](https://fbflipper.com/) для приложений React Native.
 
-> This doesn't work in Expo managed apps since they don't support Flipper.
+!!!note ""
 
-To be able to use this hook, you need to:
+    Он не работает в приложениях, управляемых Expo, поскольку они не поддерживают Flipper.
 
-- [Configure Flipper in your React Native app](https://fbflipper.com/docs/features/react-native/) if it's not configured already
-- Install the `react-native-flipper` package in your app:
+Чтобы использовать этот хук, необходимо:
 
-  ```bash npm2yarn
-  npm install --save-dev react-native-flipper
-  ```
+-   [Настроить Flipper в вашем приложении React Native](https://fbflipper.com/docs/features/react-native/), если он еще не настроен.
+-   Установить пакет `react-native-flipper` в ваше приложение:
 
-- Install the `react-navigation` plugin in the Flipper app
+    ```bash
+    npm install --save-dev react-native-flipper
+    ```
 
-  ![Install Flipper](/assets/devtools/flipper-plugin-install.png)
+-   Установите плагин `react-navigation` в приложении Flipper
 
-**Usage:**
+    ![Install Flipper](flipper-plugin-install.png)
 
-To use the hook, import it and pass a `ref` to the `NavigationContainer` as its argument:
+**Использование:**.
+
+Чтобы использовать хук, импортируйте его и передайте в качестве аргумента `ref` на `NavigationContainer`:
 
 ```js
 import * as React from 'react';
-import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
+import {
+    NavigationContainer,
+    useNavigationContainerRef,
+} from '@react-navigation/native';
 import { useFlipper } from '@react-navigation/devtools';
 
 export default function App() {
-  const navigationRef = useNavigationContainerRef();
+    const navigationRef = useNavigationContainerRef();
 
-  useFlipper(navigationRef);
+    useFlipper(navigationRef);
 
-  return (
-    <NavigationContainer ref={navigationRef}>{/* ... */}</NavigationContainer>
-  );
+    return (
+        <NavigationContainer ref={navigationRef}>
+            {/* ... */}
+        </NavigationContainer>
+    );
 }
 ```
 
-Now, you'll be able to use the React Navigation devtools in Flipper whenever your device is connected to Flipper.
+Теперь вы сможете использовать инструменты React Navigation devtools в Flipper, когда ваше устройство подключено к Flipper.
 
-![React Navigation Logs](/assets/devtools/flipper-plugin-logs.png)
+![React Navigation Logs](flipper-plugin-logs.png)
 
-![React Navigation Linking](/assets/devtools/flipper-plugin-linking.png)
+![React Navigation Linking](flipper-plugin-linking.png)
 
 ### `useReduxDevToolsExtension`
 
-This hook provides integration with [Redux DevTools Extension](https://github.com/reduxjs/redux-devtools). It also works with [`React Native Debugger app`](https://github.com/jhen0409/react-native-debugger) which includes this extension.
+Этот хук обеспечивает интеграцию с [Redux DevTools Extension](https://github.com/reduxjs/redux-devtools). Он также работает с [`React Native Debugger app`](https://github.com/jhen0409/react-native-debugger), которое включает это расширение.
 
-**Usage:**
+**Использование:**
 
-To use the hook, import it and pass a `ref` to the `NavigationContainer` as its argument:
+Чтобы использовать хук, импортируйте его и передайте в качестве аргумента `ref` на `NavigationContainer`:
 
 ```js
 import * as React from 'react';
-import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
+import {
+    NavigationContainer,
+    useNavigationContainerRef,
+} from '@react-navigation/native';
 import { useReduxDevToolsExtension } from '@react-navigation/devtools';
 
 export default function App() {
-  const navigationRef = useNavigationContainerRef();
+    const navigationRef = useNavigationContainerRef();
 
-  useReduxDevToolsExtension(navigationRef);
+    useReduxDevToolsExtension(navigationRef);
 
-  return (
-    <NavigationContainer ref={navigationRef}>{/* ... */}</NavigationContainer>
-  );
+    return (
+        <NavigationContainer ref={navigationRef}>
+            {/* ... */}
+        </NavigationContainer>
+    );
 }
 ```
 
-Now, you'll be able to see logs from React Navigation in Redux DevTools Extension, e.g. when you're debugging your app with React Native Debugger app.
+Теперь вы сможете видеть логи из React Navigation в расширении Redux DevTools Extension, например, при отладке приложения с помощью приложения React Native Debugger.
+
+## Ссылки
+
+-   [Developer tools](https://reactnavigation.org/docs/devtools/)
