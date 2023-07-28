@@ -1,16 +1,20 @@
+---
+description: Модуль Keyboard служит для управления событиями клавиатуры
+---
+
 # Keyboard
 
-Модуль **`Keyboard`** для управления событиями клавиатуры.
+Модуль **`Keyboard`** служит для управления событиями клавиатуры.
 
-## Использование
+## Использование {#usage}
 
 Модуль Keyboard позволяет прослушивать события клавиатуры и реагировать на них, а также вносить изменения в клавиатуру, например, отключать ее.
 
 <div data-snack-id="@bndby/keyboard-example" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-## Методы
+## Методы {#methods}
 
-### `addListener()`
+### addListener()
 
 ```ts
 static addListener: (
@@ -25,10 +29,10 @@ static addListener: (
 
 **Параметры:**
 
-| Name                    | Type     | Description                                                                    |
-| ----------------------- | -------- | ------------------------------------------------------------------------------ |
-| eventName (обязательно) | string   | The string that identifies the event you're listening for. See the list below. |
-| callback (обязательно)  | function | The function to be called when the event fires                                 |
+| Имя                       | Тип        | Описание                                                                     |
+| ------------------------- | ---------- | ---------------------------------------------------------------------------- |
+| `eventName` (обязательно) | `string`   | Строка, идентифицирующая событие, которое вы прослушиваете. См. список ниже. |
+| `callback` (обязательно)  | `function` | Функция, вызываемая при срабатывании события                                 |
 
 **`eventName`**
 
@@ -45,7 +49,7 @@ static addListener: (
 
     Обратите внимание, что на Android доступны только события `keyboardDidShow` и `keyboardDidHide`. Эти события не будут срабатывать при использовании Android 10 и ниже, если для вашей активности `android:windowSoftInputMode` установлено значение `adjustNothing`.
 
-### `dismiss()`
+### dismiss()
 
 ```ts
 static dismiss();
@@ -53,7 +57,7 @@ static dismiss();
 
 Отключает активную клавиатуру и снимает фокус.
 
-### `scheduleLayoutAnimation`
+### scheduleLayoutAnimation
 
 ```ts
 static scheduleLayoutAnimation(event: KeyboardEvent);
@@ -61,15 +65,15 @@ static scheduleLayoutAnimation(event: KeyboardEvent);
 
 Используется для синхронизации изменений размера позиции `TextInput` (или другого представления клавиатурного аксессуара) с движениями клавиатуры.
 
-### `isVisible()`
+### isVisible()
 
 ```ts
 static isVisible(): boolean;
 ```
 
-Когда клавиатура была видна в последний раз.
+Информация о том, была ли клавиатура видна в последний раз.
 
-### `metrics()`
+### metrics()
 
 ```ts
 static metrics(): KeyboardMetrics | undefined;

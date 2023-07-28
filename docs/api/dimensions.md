@@ -1,8 +1,12 @@
+---
+description: useWindowDimensions — это предпочтительный API для компонентов React. В отличие от Dimensions, он обновляется по мере обновления размеров окна
+---
+
 # Dimensions
 
 !!!warning ""
 
-    [`useWindowDimensions`](usewindowdimensions.md) — это предпочтительный API для компонентов React. В отличие от `Dimensions`, он обновляется по мере обновления размеров окна. Это хорошо сочетается с парадигмой React.
+    [`useWindowDimensions`](usewindowdimensions.md) — это предпочтительный API для компонентов React. В отличие от **`Dimensions`**, он обновляется по мере обновления размеров окна. Это хорошо сочетается с парадигмой React.
 
 ```ts
 import { Dimensions } from 'react-native';
@@ -17,17 +21,17 @@ const windowHeight = Dimensions.get('window').height;
 
 !!!warning ""
 
-    Хотя размеры доступны сразу, они могут меняться (например, из-за поворота устройства, складывания устройства и т.д.), поэтому любая логика рендеринга или стили, которые зависят от этих констант, должны пытаться вызывать эту функцию при каждом рендеринге, а не кэшировать значение (например, использовать встроенные стили, а не устанавливать значение в `StyleSheet`).
+    Хотя размеры доступны сразу, они могут меняться (например, из-за поворота устройства, складывания устройства и т. д.), поэтому любая логика рендеринга или стили, которые зависят от этих констант, должны пытаться вызывать эту функцию при каждом рендеринге, а не кэшировать значение (например, использовать встроенные стили, а не устанавливать значение в `StyleSheet`).
 
 Если вы нацелены на складные устройства или устройства, которые могут изменять размер экрана или размер окна приложения, вы можете использовать слушатель событий, доступный в модуле Dimensions, как показано в примере ниже.
 
-## Пример
+## Пример {#example}
 
 <div data-snack-id="@bndby/dimensions" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-## Методы
+## Методы {#methods}
 
-### `addEventListener()`
+### addEventListener()
 
 ```ts
 static addEventListener(
@@ -43,7 +47,7 @@ static addEventListener(
 
 -   `change`: Срабатывает при изменении свойства в объекте `Dimensions`. Аргументом обработчика события является объект типа `DimensionsValue`.
 
-### `get()`
+### get()
 
 ```ts
 static get(dim: 'window' | 'screen'): ScaledSize;
@@ -55,9 +59,9 @@ static get(dim: 'window' | 'screen'): ScaledSize;
 
 **Параметры:**
 
-| Name           | Type   | Description                                                                       |
-| -------------- | ------ | --------------------------------------------------------------------------------- |
-| dim (Required) | string | Name of dimension as defined when calling `set`. Returns value for the dimension. |
+| Имя                 | Тип      | Описание                                                                             |
+| ------------------- | -------- | ------------------------------------------------------------------------------------ |
+| `dim` (обязательно) | `string` | Имя размерности, определенное при вызове `set`. Возвращает значение для размерности. |
 
 !!!warning ""
 
@@ -69,22 +73,22 @@ static get(dim: 'window' | 'screen'): ScaledSize;
 
 **Свойства:**
 
-| Name   | Type         | Description                             |
-| ------ | ------------ | --------------------------------------- |
-| window | `ScaledSize` | Size of the visible Application window. |
-| screen | `ScaledSize` | Size of the device's screen.            |
+| Имя      | Тип          | Описание                         |
+| -------- | ------------ | -------------------------------- |
+| `window` | `ScaledSize` | Размер видимого окна приложения. |
+| `screen` | `ScaledSize` | Размер экрана устройства.        |
 
 ### ScaledSize
 
-| Type   |
-| ------ |
-| object |
+| Тип      |
+| -------- |
+| `object` |
 
 **Свойства:**
 
-| Name      | Type   |
-| --------- | ------ |
-| width     | number |
-| height    | number |
-| scale     | number |
-| fontScale | number |
+| Имя         | Тип      |
+| ----------- | -------- |
+| `width`     | `number` |
+| `height`    | `number` |
+| `scale`     | `number` |
+| `fontScale` | `number` |

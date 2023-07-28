@@ -1,3 +1,7 @@
+---
+description: Функция DynamicColorIOS — это тип цвета платформы, специфичный для iOS
+---
+
 # DynamicColorIOS
 
 Функция **`DynamicColorIOS`** — это тип цвета платформы, специфичный для iOS.
@@ -19,13 +23,13 @@ DynamicColorIOS({
 
 === "Web"
 
-    Если вы знакомы с `@media (prefers-color-scheme: dark)` в CSS, это похоже! Только вместо того, чтобы определять все цвета в медиа-запросе, вы определяете, какой цвет использовать при тех или иных обстоятельствах, прямо там, где вы его используете. Отлично!
+    Если вы знакомы с `@media (prefers-color-scheme: dark)` в CSS, это похоже! Только вместо того, чтобы определять все цвета в медиа-запросе, вы определяете, какой цвет использовать при тех или иных обстоятельствах, прямо там, где вы его используете.
 
 === "iOS"
 
     Функция `DynamicColorIOS` аналогична нативным методам iOS [`UIColor colorWithDynamicProvider:`](https://developer.apple.com/documentation/uikit/uicolor/3238040-colorwithdynamicprovider)
 
-## Пример
+## Пример {#example}
 
 ```ts
 import { DynamicColorIOS } from 'react-native';

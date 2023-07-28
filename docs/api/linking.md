@@ -1,27 +1,31 @@
+---
+description: Linking предоставляет вам общий интерфейс для взаимодействия с входящими и исходящими ссылками приложений
+---
+
 # Linking
 
-`Linking` предоставляет вам общий интерфейс для взаимодействия с входящими и исходящими ссылками приложений.
+**`Linking`** предоставляет вам общий интерфейс для взаимодействия с входящими и исходящими ссылками приложений.
 
 Каждая ссылка (URL) имеет схему URL, некоторые сайты имеют префикс `https://` или `http://`, а `http` является схемой URL. Для краткости будем называть ее схемой.
 
-Помимо `https`, вы, скорее всего, знакомы со схемой `mailto`. Когда вы открываете ссылку со схемой mailto, ваша операционная система открывает установленное почтовое приложение. Аналогично существуют схемы для совершения телефонных звонков и отправки SMS.
+Помимо `https`, вы, скорее всего, знакомы со схемой `mailto`. Когда вы открываете ссылку со схемой `mailto`, ваша операционная система открывает установленное почтовое приложение. Аналогично существуют схемы для совершения телефонных звонков и отправки SMS.
 
-Подобно использованию схемы mailto, можно ссылаться на другие приложения, используя пользовательские схемы url. Например, когда вы получаете письмо **Magic Link** от Slack, кнопка **Launch Slack** представляет собой тег якоря с href, который выглядит примерно так: `slack://secret/magic-login/other-secret`. Как и в случае со Slack, вы можете указать операционной системе, что хотите работать с пользовательской схемой. Когда приложение Slack открывается, оно получает URL-адрес, который был использован для его открытия. Это часто называют глубоким связыванием. Читайте подробнее о том, как получить глубокую ссылку в вашем приложении.
+Подобно использованию схемы `mailto`, можно ссылаться на другие приложения, используя пользовательские схемы `url`. Например, когда вы получаете письмо **Magic Link** от Slack, кнопка **Launch Slack** представляет собой тег якоря с `href`, который выглядит примерно так: `slack://secret/magic-login/other-secret`. Как и в случае со Slack, вы можете указать операционной системе, что хотите работать с пользовательской схемой. Когда приложение Slack открывается, оно получает URL-адрес, который был использован для его открытия. Это часто называют _глубоким связыванием_.
 
 Пользовательская схема URL — это не единственный способ открыть ваше приложение на мобильном устройстве. Вы не хотите использовать пользовательскую схему URL в ссылках в письме, потому что тогда ссылки будут нерабочими на рабочем столе. Вместо этого вы хотите использовать обычные ссылки `https`, например `https://www.myapp.io/records/1234546`. И на мобильном телефоне вы хотите, чтобы эта ссылка открывала ваше приложение. В Android это называется **Deep Links** (Universal Links — iOS).
 
-## Встроенные схемы URL
+## Встроенные схемы URL {#built-in-url-schemes}
 
 Как уже упоминалось во введении, существуют некоторые схемы URL для основной функциональности, которые существуют на каждой платформе. Приведенный ниже список не является исчерпывающим, но охватывает наиболее часто используемые схемы.
 
-| Scheme           | Description                                | iOS | Android |
-| ---------------- | ------------------------------------------ | --- | ------- |
-| `mailto`         | Open mail app, eg: mailto: support@expo.io | ✅  | ✅      |
-| `tel`            | Open phone app, eg: tel:+123456789         | ✅  | ✅      |
-| `sms`            | Open SMS app, eg: sms:+123456789           | ✅  | ✅      |
-| `https` / `http` | Open web browser app, eg: https://expo.io  | ✅  | ✅      |
+| Схема            | Описание                                                     | iOS | Android |
+| ---------------- | ------------------------------------------------------------ | --- | ------- |
+| `mailto`         | Открывает почтовое приложение, eg: `mailto: support@expo.io` | ✅  | ✅      |
+| `tel`            | Открывает приложение телефон, eg: `tel:+123456789`           | ✅  | ✅      |
+| `sms`            | Открывает смс приложение, eg: `sms:+123456789`               | ✅  | ✅      |
+| `https` / `http` | Открывает браузер, eg: `https://expo.io`                     | ✅  | ✅      |
 
-### Включение глубоких ссылок
+## Включение глубоких ссылок {#enabling-deep-links}
 
 !!!info "Проекты только с нативным кодом"
 
@@ -87,21 +91,21 @@
     }
     ```
 
-### Работа с глубокими ссылками
+## Работа с глубокими ссылками {#handling-deep-links}
 
 Существует два способа обработки URL-адресов, открывающих ваше приложение.
 
-#### 1. Если приложение уже открыто, оно переводится на передний план и запускается событие Linking 'url'
+### 1. Если приложение уже открыто, оно переводится на передний план и запускается событие Linking 'url'
 
 Вы можете обрабатывать эти события с помощью `Linking.addEventListener('url', callback)` — он вызывает `callback({url})` с URL ссылки
 
-#### 2. Если приложение еще не открыто, оно открывается, и в качестве начальногоURL передается url
+### 2. Если приложение еще не открыто, оно открывается, и в качестве начальногоURL передается url
 
 Вы можете обрабатывать эти события с помощью `Linking.getInitialURL()` — он возвращает Promise, который разрешается в URL, если он есть.
 
-## Пример
+## Пример {#example}
 
-### Открытые ссылки и глубокие ссылки (универсальные ссылки)
+### Открытые ссылки и глубокие ссылки (универсальные ссылки) {#open-links-and-deep-links-universal-links}
 
 === "TypeScript"
 
@@ -111,7 +115,7 @@
 
     <div data-snack-id="@bndby/js-linking-example-1" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-### Открыть пользовательские настройки
+### Открыть пользовательские настройки {#open-custom-settings}
 
 === "TypeScript"
 
@@ -121,7 +125,7 @@
 
     <div data-snack-id="@bndby/js-linking-example-2" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-### Получить глубокую ссылку
+### Получить глубокую ссылку {#get-the-deep-link}
 
 === "TypeScript"
 
@@ -131,9 +135,19 @@
 
     <div data-snack-id="@bndby/js-linking-example-3" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-## Методы
+### Отправка интенций (Android) {#send-intents-android}
 
-### `addEventListener()`
+=== "TypeScript"
+
+    <div data-snack-id="@bndby/linking-example-send-intents-ts" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#fbfcfd;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
+
+=== "JavaScript"
+
+    <div data-snack-id="@bndby/linking-example-send-intents-js" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#fbfcfd;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
+
+## Методы {#methods}
+
+### addEventListener()
 
 ```ts
 static addEventListener(
@@ -144,7 +158,7 @@ static addEventListener(
 
 Добавьте обработчик изменений `Linking`, прослушивая тип события `url` и предоставляя обработчик.
 
-### `canOpenURL()`
+### canOpenURL()
 
 ```ts
 static canOpenURL(url: string): Promise<boolean>;
@@ -158,9 +172,9 @@ static canOpenURL(url: string): Promise<boolean>;
 
 **Параметры:**
 
-| Name           | Type   | Description      |
-| -------------- | ------ | ---------------- |
-| url (Required) | string | The URL to open. |
+| Имя                 | Тип      | Описание                |
+| ------------------- | -------- | ----------------------- |
+| `url` (обязательно) | `string` | URL-адрес для открытия. |
 
 !!!warning ""
 
@@ -193,7 +207,7 @@ static canOpenURL(url: string): Promise<boolean>;
     </manifest>
     ```
 
-### `getInitialURL()`
+### getInitialURL()
 
 ```ts
 static getInitialURL(): Promise<string | null>;
@@ -209,7 +223,7 @@ static getInitialURL(): Promise<string | null>;
 
     `getInitialURL` может вернуть `null` при включенной отладке. Отключите отладчик, чтобы убедиться, что он будет передан.
 
-### `openSettings()`
+### openSettings()
 
 ```ts
 static openSettings(): Promise<void>;
@@ -217,7 +231,7 @@ static openSettings(): Promise<void>;
 
 Откройте приложение "Настройки" и отобразите пользовательские настройки приложения, если они есть.
 
-### `openURL()`
+### openURL()
 
 ```ts
 static openURL(url: string): Promise<any>;
@@ -225,15 +239,15 @@ static openURL(url: string): Promise<any>;
 
 Попробуйте открыть заданный `url` с помощью любого из установленных приложений.
 
-Вы можете использовать другие URL, например, местоположение (например, "geo:37.484847,-122.148386" на Android или "http://maps.apple.com/?ll=37.484847,-122.148386" на iOS), контакт или любой другой URL, который можно открыть с помощью установленных приложений.
+Вы можете использовать другие URL, например, местоположение (например, `"geo:37.484847,-122.148386"` на Android или `"http://maps.apple.com/?ll=37.484847,-122.148386"` на iOS), контакт или любой другой URL, который можно открыть с помощью установленных приложений.
 
-Метод возвращает объект `Promise`. Если пользователь подтверждает диалог открытия или url открывается автоматически, обещание выполняется. Если пользователь отменяет открытый диалог или для url нет зарегистрированных приложений, обещание отклоняется.
+Метод возвращает объект `Promise`. Если пользователь подтверждает диалог открытия или `url` открывается автоматически, обещание выполняется. Если пользователь отменяет открытый диалог или для `url` нет зарегистрированных приложений, обещание отклоняется.
 
 **Параметры:**
 
-| Name           | Type   | Description      |
-| -------------- | ------ | ---------------- |
-| url (Required) | string | The URL to open. |
+| Имя                 | Тип      | Описание                |
+| ------------------- | -------- | ----------------------- |
+| `url` (обязательно) | `string` | URL-адрес для открытия. |
 
 !!!warning ""
 
@@ -247,7 +261,7 @@ static openURL(url: string): Promise<any>;
 
     Этот метод может вести себя по-разному в симуляторе, например, ссылки `"tel:"` не могут быть обработаны в симуляторе iOS, так как нет доступа к приложению dialer.
 
-### `sendIntent()` :simple-android:
+### sendIntent() :simple-android:
 
 ```ts
 static sendIntent(
@@ -260,7 +274,7 @@ static sendIntent(
 
 **Параметры:**
 
-| Name              | Type                                                         |
-| ----------------- | ------------------------------------------------------------ |
-| action (Required) | string                                                       |
-| extras            | array of `{key: string, value: string \| number \| boolean}` |
+| Имя                    | Тип                                                           |
+| ---------------------- | ------------------------------------------------------------- |
+| `action` (обязательно) | `string`                                                      |
+| `extras`               | массив из `{key: string, value: string \| number \| boolean}` |

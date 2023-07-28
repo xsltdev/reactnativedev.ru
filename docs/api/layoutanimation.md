@@ -1,3 +1,7 @@
+---
+description: Автоматически анимирует представления в их новые позиции, когда происходит следующая компоновка
+---
+
 # LayoutAnimation
 
 Автоматически анимирует представления в их новые позиции, когда происходит следующая компоновка.
@@ -16,13 +20,13 @@ if (Platform.OS === 'android') {
 }
 ```
 
-## Пример
+## Пример {#example}
 
 <div data-snack-id="@bndby/layoutanimation" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-## Методы
+## Методы {#methods}
 
-### `configureNext()`
+### configureNext()
 
 ```ts
 static configureNext(
@@ -34,13 +38,13 @@ static configureNext(
 
 Планирует анимацию на следующий макет.
 
-#### Параметры:
+**Параметры:**
 
-| Имя                | Тип      | Требуемые | Описание.                               |
-| ------------------ | -------- | --------- | --------------------------------------- |
-| config             | object   | Yes       | См. описание конфигурации ниже.         |
-| onAnimationDidEnd  | function | No        | Вызывается при завершении анимации.     |
-| onAnimationDidFail | function | No        | Вызывается, когда анимация завершилась. |
+| Имя                    | Тип        | Описание                                |
+| ---------------------- | ---------- | --------------------------------------- |
+| `config` (обязательно) | `object`   | См. описание конфигурации ниже.         |
+| `onAnimationDidEnd`    | `function` | Вызывается при завершении анимации.     |
+| `onAnimationDidFail`   | `function` | Вызывается, когда анимация завершилась. |
 
 Параметр `config` представляет собой объект с ключами, указанными ниже. [`create`](layoutanimation.md#create) возвращает правильный объект для `config`, и объекты [`Presets`](layoutanimation.md#presets) также могут быть переданы в качестве `config`.
 
@@ -58,7 +62,7 @@ static configureNext(
 -   `delay` (число, необязательно)
 -   `duration` (число, необязательно)
 
-### `create()`
+### create()
 
 ```ts
 static create(duration, type, creationProp)
@@ -70,51 +74,51 @@ static create(duration, type, creationProp)
 
 <div data-snack-id="@bndby/layoutanimation-2" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-## Свойства
+## Свойства {#properties}
 
 ### Types
 
 Перечисление типов анимации для использования в методе [`create`](layoutanimation.md#create) или в конфигурациях `create`/`update`/`delete` для [`configureNext`](layoutanimation.md#configurenext). (пример использования: `LayoutAnimation.Types.easeIn`)
 
-| Types         |
-| ------------- |
-| spring        |
-| linear        |
-| easeInEaseOut |
-| easeIn        |
-| easeOut       |
-| keyboard      |
+| Types           |
+| --------------- |
+| `spring`        |
+| `linear`        |
+| `easeInEaseOut` |
+| `easeIn`        |
+| `easeOut`       |
+| `keyboard`      |
 
 ### Properties
 
 Перечисление свойств макета, которые должны быть анимированы для использования в методе [`create`](layoutanimation.md#create) или в конфигурациях `create`/`update`/`delete` для [`configureNext`](layoutanimation.md#configurenext). (пример использования: `LayoutAnimation.Properties.opacity`)
 
-| Свойства |
-| -------- |
-| opacity  |
-| scaleX   |
-| scaleY   |
-| scaleXY  |
+| Свойства  |
+| --------- |
+| `opacity` |
+| `scaleX`  |
+| `scaleY`  |
+| `scaleXY` |
 
-### Предустановки
+### Предустановки {#presets}
 
 Набор предопределенных конфигураций анимации для передачи в [`configureNext`](layoutanimation.md#configurenext).
 
-| Presets       | Value                                                                                                                                                         |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| easeInEaseOut | `create(300, 'easeInEaseOut', 'opacity')`                                                                                                                     |
-| linear        | `create(500, 'linear', 'opacity')`                                                                                                                            |  | linear | `create(500, 'linear', 'opacity')`. |
-| spring        | `{duration: 700, create: {тип: 'linear', свойство: 'opacity'}, update: {тип: 'spring', springDamping: 0.4}, delete: { type: 'linear', property: 'opacity'} }` |
+| Предустановки   | Значение                                                                                                                                                       |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `easeInEaseOut` | `create(300, 'easeInEaseOut', 'opacity')`                                                                                                                      |
+| `linear`        | `create(500, 'linear', 'opacity')`                                                                                                                             |
+| `spring`        | `{duration: 700, create: {type: 'linear', property: 'opacity'}, update: {type: 'spring', springDamping: 0.4}, delete: {type: 'linear', property: 'opacity'} }` |
 
-### `easeInEaseOut`
+### easeInEaseOut
 
 Вызывает `configureNext()` с `Presets.easeInEaseOut`.
 
-### `linear`
+### linear
 
 Вызывает `configureNext()` с `Presets.linear`.
 
-### `spring`
+### spring
 
 Вызывает `configureNext()` с `Presets.spring`.
 

@@ -16,4 +16,4 @@ AsyncStorage для Android использует SQLite в качестве бэ
 
     Мы предлагаем не превышать этот размер, разбивая данные на множество записей, а не на одну большую запись.
 
-    Именно здесь могут пригодиться API [`multiGet`](API.md#multiget) и [`multiSet`](API.md#multiset).
+    Именно здесь могут пригодиться API [`multiGet`](api.md#multiget) и [`multiSet`](api.md#multiset).

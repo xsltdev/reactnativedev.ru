@@ -1,10 +1,14 @@
+---
+description: Модуль Easing реализует общие функции перемещения. Этот модуль используется Animated.timing() для передачи физически правдоподобного движения в анимации
+---
+
 # Easing
 
-Модуль **`Easing`** реализует общие функции смягчения. Этот модуль используется [`Animated.timing()`](animated.md#timing) для передачи физически правдоподобного движения в анимации.
+Модуль **`Easing`** реализует общие функции перемещения. Этот модуль используется [`Animated.timing()`](animated.md#timing) для передачи физически правдоподобного движения в анимации.
 
-Визуализацию некоторых распространенных функций смягчения можно найти на [сайте](https://easings.net/).
+Визуализацию некоторых распространенных функций перемещения можно найти на [сайте](https://easings.net/).
 
-## Предопределенные анимации
+## Предопределенные анимации {#predefined-animations}
 
 Модуль `Easing` предоставляет несколько предопределенных анимаций через следующие методы:
 
@@ -13,9 +17,9 @@
 -   [`ease`](easing.md#ease) обеспечивает базовую инерционную анимацию
 -   [`elastic`](easing.md#elastic) обеспечивает базовое взаимодействие пружины
 
-## Стандартные функции
+## Стандартные функции {#standard-functions}
 
-Предоставляются три стандартные функции смягчения:
+Предоставляются три стандартные функции перемещения:
 
 -   [`linear`](easing.md#linear)
 -   [`quad`](easing.md#quad)
@@ -23,7 +27,7 @@
 
 Функция [`poly`](easing.md#poly) может быть использована для реализации квартовых, квинтовых и других функций высшей силы.
 
-## Дополнительные функции
+## Дополнительные функции {#additional-functions}
 
 Дополнительные математические функции предоставляются следующими методами:
 
@@ -34,11 +38,11 @@
 
 Следующие помощники используются для модификации других функций easing.
 
--   [`in`](easing.md#in) запускает функцию смягчения вперед
--   [`inOut`](easing.md#inout) делает любую функцию смягчения симметричной
--   [`out`](easing.md#out) запускает функцию ослабления назад
+-   [`in`](easing.md#in) запускает функцию перемещения вперед
+-   [`inOut`](easing.md#inout) делает любую функцию перемещения симметричной
+-   [`out`](easing.md#out) запускает функцию перемещения назад
 
-## Пример
+## Пример {#example}
 
 === "TypeScript"
 
@@ -48,9 +52,9 @@
 
     <div data-snack-id="@bndby/js-easing-demo" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-## Методы
+## Методы {#methods}
 
-### `step0()`
+### step0()
 
 ```ts
 static step0(n: number);
@@ -58,7 +62,7 @@ static step0(n: number);
 
 Пошаговая функция, возвращает `1` для любого положительного значения `n`.
 
-### `step1()`
+### step1()
 
 ```ts
 static step1(n: number);
@@ -66,7 +70,7 @@ static step1(n: number);
 
 Пошаговая функция, возвращает `1`, если `n` больше или равно `1`.
 
-### `linear()`
+### linear()
 
 ```ts
 static linear(t: number);
@@ -76,7 +80,7 @@ static linear(t: number);
 
 [https://cubic-bezier.com/#0,0,1,1](https://cubic-bezier.com/#0,0,1,1)
 
-### `ease()`
+### ease()
 
 ```ts
 static ease(t: number);
@@ -86,7 +90,7 @@ static ease(t: number);
 
 [https://cubic-bezier.com/#.42,0,1,1](https://cubic-bezier.com/#.42,0,1,1)
 
-### `quad()`
+### quad()
 
 ```ts
 static quad(t: number);
@@ -96,7 +100,7 @@ static quad(t: number);
 
 [https://easings.net/#easeInQuad](https://easings.net/#easeInQuad)
 
-### `cubic()`
+### cubic()
 
 ```ts
 static cubic(t: number);
@@ -106,7 +110,7 @@ static cubic(t: number);
 
 [https://easings.net/#easeInCubic](https://easings.net/#easeInCubic)
 
-### `poly()`
+### poly()
 
 ```ts
 static poly(n: number);
@@ -116,7 +120,7 @@ static poly(n: number);
 
 n = 4: [https://easings.net/#easeInQuart](https://easings.net/#easeInQuart) n = 5: [https://easings.net/#easeInQuint](https://easings.net/#easeInQuint)
 
-### `sin()`
+### sin()
 
 ```ts
 static sin(t: number);
@@ -126,7 +130,7 @@ static sin(t: number);
 
 [https://easings.net/#easeInSine](https://easings.net/#easeInSine)
 
-### `circle()`
+### circle()
 
 ```ts
 static circle(t: number);
@@ -136,7 +140,7 @@ static circle(t: number);
 
 [https://easings.net/#easeInCirc](https://easings.net/#easeInCirc)
 
-### `exp()`
+### exp()
 
 ```ts
 static exp(t: number);
@@ -158,7 +162,7 @@ static elastic(bounciness: number);
 
 [https://easings.net/#easeInElastic](https://easings.net/#easeInElastic)
 
-### `back()`
+### back()
 
 ```ts
 static back(s)
@@ -166,7 +170,7 @@ static back(s)
 
 Используется с `Animated.parallel()` для создания базового эффекта, когда объект слегка отступает назад, когда начинается анимация.
 
-### `bounce()`
+### bounce()
 
 ```ts
 static bounce(t: number);
@@ -176,7 +180,7 @@ static bounce(t: number);
 
 [https://easings.net/#easeInBounce](https://easings.net/#easeInBounce)
 
-### `bezier()`
+### bezier()
 
 ```ts
 static bezier(x1: number, y1: number, x2: number, y2: number);
@@ -186,26 +190,26 @@ static bezier(x1: number, y1: number, x2: number, y2: number);
 
 Полезный инструмент для визуализации кубических кривых Безье можно найти на [сайте](https://cubic-bezier.com/).
 
-### `in()`
+### in()
 
 ```ts
 static in(easing: number);
 ```
 
-Запускает функцию смягчения вперед.
+Запускает функцию перемещения вперед.
 
-### `out()`
+### out()
 
 ```ts
 static out(easing: number);
 ```
 
-Выполняет функцию ослабления в обратном направлении.
+Выполняет функцию перемещения в обратном направлении.
 
-### `inOut()`
+### inOut()
 
 ```ts
 static inOut(easing: number);
 ```
 
-Делает любую функцию смягчения симметричной. Функция смягчения будет работать вперед в течение половины времени, а затем назад в течение оставшейся части времени.
+Делает любую функцию перемещения симметричной. Функция перемещения будет работать вперед в течение половины времени, а затем назад в течение оставшейся части времени.

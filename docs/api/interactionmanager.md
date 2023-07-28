@@ -1,8 +1,12 @@
+---
+description: InteractionManager позволяет планировать выполнение длительных задач после завершения всех взаимодействий и анимаций
+---
+
 # InteractionManager
 
-**`InteractionManager`** позволяет планировать длительную работу после завершения всех взаимодействий/анимаций. В частности, это позволяет JavaScript-анимации работать плавно.
+**`InteractionManager`** позволяет планировать выполнение длительных задач после завершения всех взаимодействий/анимаций. В частности, это позволяет JavaScript-анимации работать плавно.
 
-Приложения могут планировать выполнение задач после завершения взаимодействий с помощью следующего:
+Приложения могут планировать выполнение задач после завершения взаимодействий с помощью следующего кода:
 
 ```ts
 InteractionManager.runAfterInteractions(() => {
@@ -32,9 +36,9 @@ InteractionManager.clearInteractionHandle(handle);
 
 По умолчанию, поставленные в очередь задачи выполняются вместе в цикле в одном пакете `setImmediate`. Если `setDeadline` вызывается с положительным числом, то задачи будут выполняться только до тех пор, пока не наступит крайний срок (в терминах времени выполнения цикла событий js), после чего выполнение завершится через setTimeout, позволяя таким событиям, как касания, начать взаимодействие и блокировать выполнение поставленных в очередь задач, делая приложения более отзывчивыми.
 
-## Пример
+## Пример {#example}
 
-### Основной
+### Основной {#basic}
 
 === "TypeScript"
 
@@ -44,7 +48,7 @@ InteractionManager.clearInteractionHandle(handle);
 
     <div data-snack-id="@bndby/js-interactionmanager-function-component-basic-example" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-### Продвинутый пример
+### Продвинутый пример {#advanced}
 
 === "TypeScript"
 
@@ -58,9 +62,9 @@ InteractionManager.clearInteractionHandle(handle);
 
     `InteractionManager.runAfterInteractions()` не работает должным образом в веб. Он срабатывает немедленно, не дожидаясь завершения взаимодействия.
 
-## Методы
+## Методы {#methods}
 
-### `runAfterInteractions()`
+### runAfterInteractions()
 
 ```ts
 static runAfterInteractions(task?: (() => any) | SimpleTask | PromiseTask);
@@ -68,7 +72,7 @@ static runAfterInteractions(task?: (() => any) | SimpleTask | PromiseTask);
 
 Запланируйте выполнение функции после завершения всех взаимодействий. Возвращает отменяемое "обещание".
 
-### `createInteractionHandle()`
+### createInteractionHandle()
 
 ```ts
 static createInteractionHandle(): Handle;
@@ -76,7 +80,7 @@ static createInteractionHandle(): Handle;
 
 Уведомление менеджера о начале взаимодействия.
 
-### `clearInteractionHandle()`
+### clearInteractionHandle()
 
 ```ts
 static clearInteractionHandle(handle: Handle);
@@ -84,7 +88,7 @@ static clearInteractionHandle(handle: Handle);
 
 Уведомление менеджера о завершении взаимодействия.
 
-### `setDeadline()`
+### setDeadline()
 
 ```ts
 static setDeadline(deadline: number);

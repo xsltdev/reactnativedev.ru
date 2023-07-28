@@ -1,10 +1,14 @@
+---
+description: AppRegistry — это точка входа JS для запуска всех приложений React Native
+---
+
 # AppRegistry
 
 !!!note "Требуется проект с нативным кодом"
 
     Если вы используете управляемый рабочий процесс Expo, то только один входной компонент, зарегистрированный в `AppRegistry`, и он обрабатывается автоматически (или через [registerRootComponent](https://docs.expo.dev/versions/latest/sdk/register-root-component/)). Вам не нужно использовать этот API.
 
-`AppRegistry` — это точка входа JS для запуска всех приложений React Native. Корневые компоненты приложения должны зарегистрировать себя с помощью `AppRegistry.registerComponent`, после чего нативная система может загрузить пакет для приложения и затем фактически запустить приложение, когда оно будет готово, вызвав `AppRegistry.runApplication`.
+**`AppRegistry`** — это точка входа JS для запуска всех приложений React Native. Корневые компоненты приложения должны зарегистрировать себя с помощью `AppRegistry.registerComponent`, после чего нативная система может загрузить пакет для приложения и затем фактически запустить приложение, когда оно будет готово, вызвав `AppRegistry.runApplication`.
 
 ```ts
 import { Text, AppRegistry } from 'react-native';
@@ -22,9 +26,9 @@ AppRegistry.registerComponent('Appname', () => App);
 
 `AppRegistry` следует требовать в самом начале последовательности `require`, чтобы убедиться, что среда выполнения JS настроена до того, как потребуются другие модули.
 
-## Методы
+## Методы {#methods}
 
-### `getAppKeys()`
+### getAppKeys()
 
 ```ts
 static getAppKeys(): string[];
@@ -32,7 +36,7 @@ static getAppKeys(): string[];
 
 Возвращает массив строк.
 
-### `getRegistry()`
+### getRegistry()
 
 ```ts
 static getRegistry(): {sections: string[]; runnables: Runnable[]};
@@ -40,21 +44,21 @@ static getRegistry(): {sections: string[]; runnables: Runnable[]};
 
 Возвращает объект [Registry](appregistry.md#registry).
 
-### `getRunnable()`
+### getRunnable()
 
 ```ts
 static getRunnable(appKey: string): : Runnable | undefined;
 ```
 
-Возвращает объект [Runnable](appregistry.md#runnable).
+Возвращает объект [`Runnable`](appregistry.md#runnable).
 
 **Параметры:**
 
-| Name                 | Type   |
-| -------------------- | ------ |
-| appKey (обязательно) | string |
+| Имя                    | Тип      |
+| ---------------------- | -------- |
+| `appKey` (обязательно) | `string` |
 
-### `getSectionKeys()`
+### getSectionKeys()
 
 ```ts
 static getSectionKeys(): string[];
@@ -62,15 +66,15 @@ static getSectionKeys(): string[];
 
 Возвращает массив строк.
 
-### `getSections()`
+### getSections()
 
 ```ts
 static getSections(): Record<string, Runnable>;
 ```
 
-Возвращает объект [Runnables](appregistry.md#runnables).
+Возвращает объект [`Runnables`](appregistry.md#runnables).
 
-### `registerCancellableHeadlessTask()`
+### registerCancellableHeadlessTask()
 
 ```ts
 static registerCancellableHeadlessTask(
@@ -84,13 +88,13 @@ static registerCancellableHeadlessTask(
 
 **Параметры:**
 
-| Name                                 | Type                                                    | Description                                                                                                                                                                                                                                                                     |
-| ------------------------------------ | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| taskKey<br/>(обязательно)            | string                                                  | Собственный идентификатор для данного экземпляра задачи, который использовался при вызове `startHeadlessTask`.                                                                                                                                                                  |
-| taskProvider<br/>(обязательно)       | [`TaskProvider`](appregistry.md#taskprovider)           | Функция возврата обещания, принимающая в качестве единственного аргумента некоторые данные, переданные с нативной стороны. Когда обещание разрешается или отклоняется, родная сторона получает уведомление об этом событии и может принять решение об уничтожении JS-контекста. |
-| taskCancelProvider<br/>(обязательно) | [TaskCancelProvider](appregistry.md#taskcancelprovider) | возвращающая пустоту функция, не принимающая аргументов; когда запрашивается отмена, функция, выполняемая taskProvider, должна сворачиваться и возвращаться как можно скорее.                                                                                                   |
+| Имя                                    | Тип                                                     | Описание                                                                                                                                                                                                                                                                        |
+| -------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `taskKey`<br/>(обязательно)            | `string`                                                | Собственный идентификатор для данного экземпляра задачи, который использовался при вызове `startHeadlessTask`.                                                                                                                                                                  |
+| `taskProvider`<br/>(обязательно)       | [`TaskProvider`](appregistry.md#taskprovider)           | Функция возврата обещания, принимающая в качестве единственного аргумента некоторые данные, переданные с нативной стороны. Когда обещание разрешается или отклоняется, родная сторона получает уведомление об этом событии и может принять решение об уничтожении JS-контекста. |
+| `taskCancelProvider`<br/>(обязательно) | [TaskCancelProvider](appregistry.md#taskcancelprovider) | возвращающая пустоту функция, не принимающая аргументов; когда запрашивается отмена, функция, выполняемая `taskProvider`, должна сворачиваться и возвращаться как можно скорее.                                                                                                 |
 
-### `registerComponent()`
+### registerComponent()
 
 ```ts
 static registerComponent(
@@ -102,13 +106,13 @@ static registerComponent(
 
 **Параметры:**
 
-| Name                            | Type              |
-| ------------------------------- | ----------------- |
-| appKey (обязательно)            | string            |
-| componentProvider (обязательно) | ComponentProvider |
-| section                         | boolean           |
+| Имя                               | Тип                 |
+| --------------------------------- | ------------------- |
+| `appKey` (обязательно)            | `string`            |
+| `componentProvider` (обязательно) | `ComponentProvider` |
+| `section`                         | `boolean`           |
 
-### `registerConfig()`
+### registerConfig()
 
 ```ts
 static registerConfig(config: AppConfig[]);
@@ -116,11 +120,11 @@ static registerConfig(config: AppConfig[]);
 
 **Параметры:**
 
-| Name                 | Type                                    |
-| -------------------- | --------------------------------------- |
-| config (обязательно) | [AppConfig](appregistry.md#appconfig)[] |
+| Имя                    | Тип                                       |
+| ---------------------- | ----------------------------------------- |
+| `config` (обязательно) | [`AppConfig`](appregistry.md#appconfig)[] |
 
-### `registerHeadlessTask()`
+### registerHeadlessTask()
 
 ```ts
 static registerHeadlessTask(
@@ -129,18 +133,18 @@ static registerHeadlessTask(
 );
 ```
 
-Зарегистрируйте безголовое задание. Безголовая задача — это часть кода, которая выполняется без пользовательского интерфейса.
+Зарегистрируйте безголовое задание. _Безголовая задача_ — это часть кода, которая выполняется без пользовательского интерфейса.
 
 Это способ запуска задач на JavaScript, пока ваше приложение находится в фоновом режиме. Его можно использовать, например, для синхронизации свежих данных, обработки push-уведомлений или воспроизведения музыки.
 
 **Параметры:**
 
-| Name                       | Type                                        | Description                                                                                                                                                                                                                                                                     |
-| -------------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| taskKey (обязательно)      | string                                      | Собственный идентификатор для данного экземпляра задачи, который использовался при вызове startHeadlessTask.                                                                                                                                                                    |
-| taskProvider (обязательно) | [TaskProvider](appregistry.md#taskprovider) | Функция возврата обещания, принимающая в качестве единственного аргумента некоторые данные, переданные с нативной стороны. Когда обещание разрешается или отклоняется, родная сторона получает уведомление об этом событии и может принять решение об уничтожении JS-контекста. |
+| Имя                          | Тип                                           | Описание                                                                                                                                                                                                                                                                        |
+| ---------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `taskKey` (обязательно)      | `string`                                      | Собственный идентификатор для данного экземпляра задачи, который использовался при вызове `startHeadlessTask`.                                                                                                                                                                  |
+| `taskProvider` (обязательно) | [`TaskProvider`](appregistry.md#taskprovider) | Функция возврата обещания, принимающая в качестве единственного аргумента некоторые данные, переданные с нативной стороны. Когда обещание разрешается или отклоняется, родная сторона получает уведомление об этом событии и может принять решение об уничтожении JS-контекста. |
 
-### `registerRunnable()`
+### registerRunnable()
 
 ```ts
 static registerRunnable(appKey: string, func: Runnable): string;
@@ -148,12 +152,12 @@ static registerRunnable(appKey: string, func: Runnable): string;
 
 **Параметры:**
 
-| Name                 | Type     |
-| -------------------- | -------- |
-| appKey (обязательно) | string   |
-| run (обязательно)    | function |
+| Имя                    | Тип        |
+| ---------------------- | ---------- |
+| `appKey` (обязательно) | `string`   |
+| `run` (обязательно)    | `function` |
 
-### `registerSection()`
+### registerSection()
 
 ```ts
 static registerSection(
@@ -164,12 +168,12 @@ static registerSection(
 
 **Параметры:**
 
-| Name                    | Type              |
-| ----------------------- | ----------------- |
-| appKey (обязательно)    | string            |
-| component (обязательно) | ComponentProvider |
+| Имя                       | Тип                 |
+| ------------------------- | ------------------- |
+| `appKey` (обязательно)    | `string`            |
+| `component` (обязательно) | `ComponentProvider` |
 
-### `runApplication()`
+### runApplication()
 
 ```ts
 static runApplication(appKey: string, appParameters: any): void;
@@ -179,12 +183,12 @@ static runApplication(appKey: string, appParameters: any): void;
 
 **Параметры:**
 
-| Name                        | Type   |
-| --------------------------- | ------ |
-| appKey (обязательно)        | string |
-| appParameters (обязательно) | any    |
+| Имя                           | Тип      |
+| ----------------------------- | -------- |
+| `appKey` (обязательно)        | `string` |
+| `appParameters` (обязательно) | `any`    |
 
-### `setComponentProviderInstrumentationHook()`
+### setComponentProviderInstrumentationHook()
 
 ```ts
 static setComponentProviderInstrumentationHook(
@@ -194,20 +198,20 @@ static setComponentProviderInstrumentationHook(
 
 **Параметры:**
 
-| Name               | Type     |
-| ------------------ | -------- |
-| hook (обязательно) | function |
+| Имя                  | Тип        |
+| -------------------- | ---------- |
+| `hook` (обязательно) | `function` |
 
 Правильная функция `hook` принимает в качестве аргументов следующее:
 
-| Name                                  | Type               |
-| ------------------------------------- | ------------------ |
-| component (обязательно)               | ComponentProvider  |
-| scopedPerformanceLogger (обязательно) | IPerformanceLogger |
+| Имя                                     | Тип                 |
+| --------------------------------------- | ------------------- |
+| `component` (обязательно)               | `ComponentProvider` |
+| `scopedPerformanceLogger` (обязательно) | IPerfo`rmanceLogger |
 
 Функция также должна возвращать React Component.
 
-### `setWrapperComponentProvider()`
+### setWrapperComponentProvider()
 
 ```ts
 static setWrapperComponentProvider(
@@ -217,11 +221,11 @@ static setWrapperComponentProvider(
 
 **Параметры:**
 
-| Name                   | Type              |
-| ---------------------- | ----------------- |
-| provider (обязательно) | ComponentProvider |
+| Имя                      | Тип                 |
+| ------------------------ | ------------------- |
+| `provider` (обязательно) | `ComponentProvider` |
 
-### `startHeadlessTask()`
+### startHeadlessTask()
 
 ```ts
 static startHeadlessTask(
@@ -235,13 +239,13 @@ static startHeadlessTask(
 
 **Параметры:**
 
-| Name                  | Type   | Description                                                          |
-| --------------------- | ------ | -------------------------------------------------------------------- |
-| taskId (обязательно)  | number | The native id for this task instance to keep track of its execution. |
-| taskKey (обязательно) | string | The key for the task to start.                                       |
-| data (обязательно)    | any    | The data to pass to the task.                                        |
+| Имя                     | Тип      | Описание                                                                          |
+| ----------------------- | -------- | --------------------------------------------------------------------------------- |
+| `taskId` (обязательно)  | `number` | Нативный идентификатор данного экземпляра задачи для отслеживания его выполнения. |
+| `taskKey` (обязательно) | `string` | Ключ для запуска задачи.                                                          |
+| `data` (обязательно)    | `any`    | Данные для передачи в задачу.                                                     |
 
-### `unmountApplicationComponentAtRootTag()`
+### unmountApplicationComponentAtRootTag()
 
 ```ts
 static unmountApplicationComponentAtRootTag(rootTag: number);
@@ -251,9 +255,9 @@ static unmountApplicationComponentAtRootTag(rootTag: number);
 
 **Параметры:**
 
-| Name                  | Type   |
-| --------------------- | ------ |
-| rootTag (обязательно) | number |
+| Имя                     | Тип      |
+| ----------------------- | -------- |
+| `rootTag` (обязательно) | `number` |
 
 ## Определения типов
 
@@ -261,18 +265,18 @@ static unmountApplicationComponentAtRootTag(rootTag: number);
 
 Конфигурация приложения для метода `registerConfig`.
 
-| Type   |
-| ------ |
-| object |
+| Тип      |
+| -------- |
+| `object` |
 
 **Параметры:**
 
-| Name                 | Type              |
-| -------------------- | ----------------- |
-| appKey (обязательно) | string            |
-| component            | ComponentProvider |
-| run                  | function          |
-| section              | boolean           |
+| Имя                    | Тип                 |
+| ---------------------- | ------------------- |
+| `appKey` (обязательно) | `string`            |
+| `component`            | `ComponentProvider` |
+| `run`                  | `function`          |
+| `section`              | `boolean`           |
 
 !!!note ""
 
@@ -280,66 +284,66 @@ static unmountApplicationComponentAtRootTag(rootTag: number);
 
 ### Registry
 
-| Type   |
-| ------ |
-| object |
+| Тип      |
+| -------- |
+| `object` |
 
 **Параметры:**
 
-| Name      | Type                                          |
-| --------- | --------------------------------------------- |
-| runnables | array of [Runnables](appregistry.md#runnable) |
-| sections  | массив строк                                  |
+| Имя         | Тип                                           |
+| ----------- | --------------------------------------------- |
+| `runnables` | массив [`Runnables`](appregistry.md#runnable) |
+| `sections`  | массив строк                                  |
 
 ### Runnable
 
-| Тип    |
-| ------ |
-| объект |
+| Тип      |
+| -------- |
+| `object` |
 
 **Свойства:**
 
-| Имя       | Тип               |
-| --------- | ----------------- |
-| компонент | ComponentProvider |
-| run       | function          |
+| Имя         | Тип                 |
+| ----------- | ------------------- |
+| `component` | `ComponentProvider` |
+| `run`       | `function`          |
 
 ### Runnables
 
 Объект с ключом `appKey` и значением типа [`Runnable`](appregistry.md#runnable).
 
-| Тип    |
-| ------ |
-| объект |
+| Тип      |
+| -------- |
+| `object` |
 
 ### Task
 
 `Task` — это функция, которая принимает любые данные в качестве аргумента и возвращает `Promise`, который разрешается в `undefined`.
 
-| Тип     |
-| ------- |
-| функция |
+| Тип        |
+| ---------- |
+| `function` |
 
 ### TaskCanceller
 
 Функция `TaskCanceller` — это функция, которая не принимает никаких аргументов и возвращает `void`.
 
-| Type    |
-| ------- |
-| функция |
+| Тип        |
+| ---------- |
+| `function` |
 
 ### TaskCancelProvider
 
 Правильный `TaskCancelProvider` — это функция, которая возвращает [`TaskCanceller`](appregistry.md#taskcanceller).
 
-| Тип     |
-| ------- |
-| функция |
+| Тип        |
+| ---------- |
+| `function` |
 
 ### TaskProvider
 
 Правильный `TaskProvider` — это функция, которая возвращает [`Task`](appregistry.md#task).
 
-| Type    |
-| ------- |
-| функция |
+| Тип        |
+| ---------- |
+| `function` |

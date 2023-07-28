@@ -1,10 +1,14 @@
+---
+description: Модуль DevSettings раскрывает методы для настройки параметров для разработчиков в процессе разработки
+---
+
 # DevSettings
 
-Модуль `DevSettings` раскрывает методы для настройки параметров для разработчиков в процессе разработки.
+Модуль **`DevSettings`** раскрывает методы для настройки параметров для разработчиков в процессе разработки.
 
-## Методы
+## Методы {#methods}
 
-### `addMenuItem()`
+### addMenuItem()
 
 ```ts
 static addMenuItem(title: string, handler: () => any);
@@ -14,10 +18,10 @@ static addMenuItem(title: string, handler: () => any);
 
 **Параметры:**
 
-| Name                  | Type     |
-| --------------------- | -------- |
-| title (обязательно)   | string   |
-| handler (обязательно) | function |
+| Имя                     | Тип        |
+| ----------------------- | ---------- |
+| `title` (обязательно)   | `string`   |
+| `handler` (обязательно) | `function` |
 
 **Пример:**
 
@@ -27,7 +31,7 @@ DevSettings.addMenuItem('Show Secret Dev Screen', () => {
 });
 ```
 
-### `reload()`
+### reload()
 
 ```ts
 static reload(reason?: string): void;
