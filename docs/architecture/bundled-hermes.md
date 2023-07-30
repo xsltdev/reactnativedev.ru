@@ -1,6 +1,10 @@
+---
+description: На этой странице представлен обзор как построены Hermes и React Native
+---
+
 # Bundled Hermes
 
-На этой странице представлен обзор **как** построены Hermes и React Native.
+На этой странице представлен обзор как построены Hermes и React Native.
 
 Если вы ищете инструкции по использованию Hermes в вашем приложении, вы можете найти их на этой странице: [использование Hermes](../guides/hermes.md)
 
@@ -87,10 +91,9 @@ dependencies {
 -   Убедитесь, что [Visual Studio Command Prompt](https://docs.microsoft.com/en-us/visualstudio/ide/reference/command-prompt-powershell?view=vs-2022) настроен правильно. Это необходимо для того, чтобы в командной строке была настроена соответствующая переменная окружения компилятора C++.
 -   Запустите приложение с помощью `npx react-native run-android` внутри Visual Studio Command Prompt.
 
-### Могут ли пользователи по-прежнему использовать другой двигатель?
+### Могут ли пользователи по-прежнему использовать другой движок?
 
-Да, пользователи могут включать/выключать Hermes (с помощью переменной `enableHermes` на Android, `hermes_enabled` на iOS).
-Изменение 'Bundled Hermes' повлияет только на **как Hermes собирается и комплектуется** для вас.
+Да, пользователи могут включать/выключать Hermes (с помощью переменной `enableHermes` на Android, `hermes_enabled` на iOS). Изменение 'Bundled Hermes' повлияет только на **как Hermes собирается и комплектуется** для вас.
 
 Начиная с версии React Native 0.70, по умолчанию для `enableHermes`/`hermes_enabled` используется значение `true`.
 
@@ -146,11 +149,11 @@ exclude group:'com.facebook.fbjni'
 
 Hermes собирается в рамках задания `build_hermes_macos` на CircleCI. В качестве артефакта задание создаст тарбол, который будет загружен подспеком `hermes-engine` при использовании опубликованного релиза React Native ([вот пример артефактов, созданных для React Native 0.69 в `build_hermes_macos`](https://app.circleci.com/pipelines/github/facebook/react-native/13679/workflows/5172f8e4-6b02-4ccb-ab97-7cb954911fae/jobs/258701/artifacts)).
 
-##### Готовый Гермес
+##### Готовый Hermes
 
 Если для используемой версии React Native нет готовых артефактов (т.е. вы работаете с React Native из ветки `main`), то Hermes придется собирать из исходников. Сначала компилятор Hermes, `hermesc`, будет собран для macOS во время `pod install`, затем сам Hermes будет собран как часть конвейера сборки Xcode с помощью скрипта `build-hermes-xcode.sh`.
 
-##### Построение Гермеса из источника
+##### Сборка Hermes из источника
 
 Hermes всегда собирается из исходного кода при использовании React Native из ветки `main`. Если вы используете стабильную версию React Native, вы можете заставить Hermes быть собранным из исходного кода, установив параметр `CI` в `true` при использовании CocoaPods: `CI=true pod install`.
 

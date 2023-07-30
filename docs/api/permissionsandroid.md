@@ -1,20 +1,24 @@
+---
+description: PermissionsAndroid предоставляет доступ к новой модели разрешений Android M
+---
+
 # PermissionsAndroid
 
 !!!info "Необходим проект с нативным кодом"
 
-    Следующая глава относится только к проектам с открытым кодом. Если вы используете управляемый рабочий процесс Expo, смотрите руководство по <a href="https://docs.expo.dev/guides/permissions/">Разрешениям</a> в документации Expo для соответствующей альтернативы.
+    Следующая глава относится только к проектам с открытым кодом. Если вы используете управляемый рабочий процесс Expo, смотрите руководство по [Разрешениям](https://docs.expo.dev/guides/permissions/) в документации Expo для соответствующей альтернативы.
 
-`PermissionsAndroid` предоставляет доступ к новой модели разрешений Android M. Так называемые "нормальные" разрешения предоставляются по умолчанию при установке приложения, если они есть в файле `AndroidManifest.xml`. Однако "опасные" разрешения требуют диалогового запроса. Для таких разрешений следует использовать этот модуль.
+**`PermissionsAndroid`** предоставляет доступ к новой модели разрешений Android M. Так называемые "нормальные" разрешения предоставляются по умолчанию при установке приложения, если они есть в файле `AndroidManifest.xml`. Однако "опасные" разрешения требуют диалогового запроса. Для таких разрешений следует использовать этот модуль.
 
 На устройствах до версии SDK 23 разрешения предоставляются автоматически, если они есть в манифесте, поэтому `check` всегда должен приводить к `true`, а `request` всегда должен разрешаться в `PermissionsAndroid.RESULTS.GRANTED`.
 
 Если пользователь ранее отключил разрешение, которое вы запрашиваете, ОС посоветует вашему приложению показать обоснование необходимости этого разрешения. Необязательный аргумент `rationale` покажет диалоговое приглашение только в случае необходимости — в противном случае появится обычное приглашение разрешения.
 
-## Пример
+## Пример {#example}
 
 <div data-snack-id="@bndby/permissionsandroid-example" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-### Разрешения, требующие запроса пользователя
+### Разрешения, требующие запроса пользователя {#permissions-that-require-prompting-the-user}
 
 Доступны как константы в разделе `PermissionsAndroid.PERMISSIONS`:
 
@@ -64,7 +68,7 @@
 -   `READ_VOICEMAIL`: 'com.android.voicemail.permission.READ_VOICEMAIL'
 -   `WRITE_VOICEMAIL`: 'com.android.voicemail.permission.WRITE_VOICEMAIL'
 
-### Строки результатов для запроса разрешений
+### Строки результатов для запроса разрешений {#result-strings-for-requesting-permissions}
 
 Доступны как константы в разделе `PermissionsAndroid.RESULTS`:
 
@@ -72,9 +76,9 @@
 -   `DENIED`: 'отказано'
 -   `NEVER_ASK_AGAIN`: 'never_ask_again'
 
-## Методы
+## Методы {#methods}
 
-### `check()`
+### check()
 
 ```ts
 static check(permission: Permission): Promise<boolean>;
@@ -84,11 +88,11 @@ static check(permission: Permission): Promise<boolean>;
 
 **Параметры:**
 
-| Name       | Type   | Required | Description                  |
-| ---------- | ------ | -------- | ---------------------------- |
-| permission | string | Yes      | The permission to check for. |
+| Имя                        | Тип      | Описание                                  |
+| -------------------------- | -------- | ----------------------------------------- |
+| `permission` (обязательно) | `string` | Разрешение, которое необходимо проверить. |
 
-### `request()`
+### request()
 
 ```ts
 static request(
@@ -103,22 +107,22 @@ static request(
 
 **Параметры:**
 
-| Name       | Type   | Required | Description                |
-| ---------- | ------ | -------- | -------------------------- |
-| permission | string | Yes      | The permission to request. |
-| rationale  | object | No       | See `rationale` below.     |
+| Имя          | Тип      | Обязательно | Описание              |
+| ------------ | -------- | ----------- | --------------------- |
+| `permission` | `string` | Да          | Разрешение на запрос. |
+| `rationale`  | `object` | Нет         | См. `rationale` ниже. |
 
 **Обоснование:**
 
-| Name           | Type   | Required | Description                      |
-| -------------- | ------ | -------- | -------------------------------- |
-| title          | string | Yes      | The title of the dialog.         |
-| message        | string | Yes      | The message of the dialog.       |
-| buttonPositive | string | Yes      | The text of the positive button. |
-| buttonNegative | string | No       | The text of the negative button. |
-| buttonNeutral  | string | No       | The text of the neutral button.  |
+| Имя              | Тип      | Обязательно | Описание                  |
+| ---------------- | -------- | ----------- | ------------------------- |
+| `title`          | `string` | Да          | Заголовок диалога.        |
+| `message`        | `string` | Да          | Сообщение диалога.        |
+| `buttonPositive` | `string` | Да          | Текст позитивной кнопки.  |
+| `buttonNegative` | `string` | Нет         | Текст негативной кнопки.  |
+| `buttonNeutral`  | `string` | Нет         | Текст нейтральной кнопки. |
 
-### `requestMultiple()`
+### requestMultiple()
 
 ```ts
 static requestMultiple(
@@ -130,6 +134,6 @@ static requestMultiple(
 
 **Параметры:**
 
-| Name        | Type  | Required | Description                      |
-| ----------- | ----- | -------- | -------------------------------- |
-| permissions | array | Yes      | Array of permissions to request. |
+| Имя           | Тип     | Обязательно | Описание                         |
+| ------------- | ------- | ----------- | -------------------------------- |
+| `permissions` | `array` | Да          | Массив запрашиваемых разрешений. |

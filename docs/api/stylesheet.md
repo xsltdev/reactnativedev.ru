@@ -1,3 +1,7 @@
+---
+description: StyleSheet — это абстракция, аналогичная таблицам стилей CSS
+---
+
 # StyleSheet
 
 **`StyleSheet`** — это абстракция, аналогичная таблицам стилей CSS.
@@ -9,9 +13,9 @@
 -   Перенося стили из функции рендеринга, вы облегчаете понимание кода.
 -   Именование стилей — хороший способ придать смысл компонентам низкого уровня в функции рендеринга.
 
-## Методы
+## Методы {#methods}
 
-### `compose()`
+### compose()
 
 ```ts
 static compose(style1: Object, style2: Object): Object | Object[];
@@ -21,7 +25,7 @@ static compose(style1: Object, style2: Object): Object | Object[];
 
 <div data-snack-id="@bndby/stylesheet-compose" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-### `create()`
+### create()
 
 ```ts
 static create(styles: Object): Object;
@@ -29,7 +33,7 @@ static create(styles: Object): Object;
 
 Создает ссылку стиля `StyleSheet` из заданного объекта.
 
-### `flatten()`
+### flatten()
 
 ```ts
 static flatten(style: Object[]): Object;
@@ -37,7 +41,7 @@ static flatten(style: Object[]): Object;
 
 Сплющивает массив объектов стиля в один объединенный объект стиля. Также этот метод можно использовать для поиска идентификаторов, возвращаемых функцией `StyleSheet.register`.
 
-!!!warning "ПРИМЕЧАНИЕ"
+!!!warning "Примечание"
 
     Соблюдайте осторожность, так как злоупотребление этим может привести к оптимизации. Идентификаторы позволяют оптимизировать работу моста и памяти в целом. Прямое обращение к объектам стиля лишит вас этих оптимизаций.
 
@@ -45,9 +49,9 @@ static flatten(style: Object[]): Object;
 
 Этот метод использует `StyleSheetRegistry.getStyleByID(style)` для разрешения объектов стиля, представленных идентификаторами. Таким образом, массив объектов стиля (экземпляры `StyleSheet.create()`), индивидуально разрешаются в соответствующие объекты, объединяются как один и затем возвращаются. Это также объясняет альтернативное использование.
 
-### `setStyleAttributePreprocessor()`
+### setStyleAttributePreprocessor()
 
-!!!warning "ПРЕДУПРЕЖДЕНИЕ: ЭКСПЕРИМЕНТАЛЬНО."
+!!!warning "Экспериментально"
 
     Изменения будут происходить часто и не будут достоверно объявлены. Все это может быть удалено, кто знает? Используйте на свой страх и риск.
 
@@ -60,21 +64,21 @@ static setStyleAttributePreprocessor(
 
 Устанавливает функцию для предварительной обработки значения свойства стиля. Эта функция используется для внутренней обработки значений цвета и трансформации. Не следует использовать эту функцию, если вы не знаете, что делаете, и не исчерпали другие возможности.
 
-## Свойства
+## Свойства {#properties}
 
-### `absoluteFill`
+### absoluteFill
 
 Очень распространенным шаблоном является создание оверлеев с абсолютной позицией и нулевым позиционированием (`position: 'absolute', left: 0, right: 0, top: 0, bottom: 0`), поэтому `absoluteFill` можно использовать для удобства и уменьшения дублирования этих повторяющихся стилей. Если вы хотите, absoluteFill можно использовать для создания настраиваемой записи в таблице стилей, например:
 
 <div data-snack-id="@bndby/stylesheet-absolutefill" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-### `absoluteFillObject`
+### absoluteFillObject
 
 Иногда вам может понадобиться `absoluteFill`, но с некоторыми изменениями — `absoluteFillObject` можно использовать для создания настраиваемой записи в `StyleSheet`, например:
 
 <div data-snack-id="@bndby/stylesheet-absolutefillobject" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-### `hairlineWidth`
+### hairlineWidth
 
 Определяется как ширина тонкой линии на платформе. Она может использоваться в качестве толщины границы или разделения между двумя элементами. Пример:
 

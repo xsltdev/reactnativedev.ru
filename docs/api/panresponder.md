@@ -1,3 +1,7 @@
+---
+description: PanResponder объединяет несколько касаний в один жест. Он делает жесты с одним касанием устойчивыми к дополнительным касаниям и может использоваться для распознавания основных жестов с несколькими касаниями
+---
+
 # PanResponder
 
 **`PanResponder`** объединяет несколько касаний в один жест. Он делает жесты с одним касанием устойчивыми к дополнительным касаниям и может использоваться для распознавания основных жестов с несколькими касаниями.
@@ -25,7 +29,7 @@ onPanResponderMove: (event, gestureState) => {};
 -   `vy` — текущая скорость жеста
 -   `numberActiveTouches` — количество касаний, находящихся в данный момент на экране
 
-## Шаблон использования
+## Шаблон использования {#usage-pattern}
 
 ```ts
 const ExampleComponent = () => {
@@ -89,7 +93,7 @@ const ExampleComponent = () => {
 };
 ```
 
-## Пример
+## Пример {#example}
 
 `PanResponder` работает с API `Animated`, чтобы помочь создать сложные жесты в пользовательском интерфейсе. Следующий пример содержит анимированный компонент `View`, который можно свободно перетаскивать по экрану
 
@@ -97,19 +101,19 @@ const ExampleComponent = () => {
 
 Попробуйте использовать пример [PanResponder в RNTester](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/PanResponder/PanResponderExample.js).
 
-## Методы
+## Методы {#methods}
 
-### `create()`
+### create()
 
 ```ts
 static create(config: PanResponderCallbacks): PanResponderInstance;
 ```
 
-**Parameters:**
+**Параметры:**
 
-| Name                 | Type   | Description |
-| -------------------- | ------ | ----------- |
-| config (обязательно) | object | Refer below |
+| Имя                    | Тип      | Описание    |
+| ---------------------- | -------- | ----------- |
+| `config` (обязательно) | `object` | Refer below |
 
 Объект `config` предоставляет расширенные версии всех обратных вызовов ответчика, которые обеспечивают не только [`PressEvent`](../components/pressevent.md), но и состояние жеста `PanResponder`, путем замены слова `Responder` на `PanResponder` в каждом из типичных обратных вызовов `onResponder*`. Например, объект `config` будет выглядеть следующим образом:
 

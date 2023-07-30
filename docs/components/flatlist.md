@@ -1,3 +1,7 @@
+---
+description: Производительный интерфейс для вывода основных плоских списков, поддерживающий наиболее удобные функции
+---
+
 # FlatList
 
 Производительный интерфейс для вывода основных плоских списков, поддерживающий наиболее удобные функции:
@@ -15,7 +19,7 @@
 
 Если вам нужна поддержка секций, используйте [`<SectionList>`](sectionlist.md).
 
-## Пример
+## Пример {#example}
 
 === "Typescript"
 
@@ -49,13 +53,13 @@
 
 -   По умолчанию список ищет свойство `key` у каждого элемента и использует его для ключа React. В качестве альтернативы вы можете предоставить собственный пропс `keyExtractor`.
 
-## пропсы
+## Пропсы {#props}
 
-### [пропсы ScrollView](scrollview.md#props)
+### [Пропсы ScrollView](scrollview.md#props)
 
 Наследует [ScrollView Props](scrollview.md#props), если он не вложен в другой `FlatList` той же ориентации.
 
-### `renderItem` (обязательно)
+### renderItem (обязательно)
 
 ```ts
 renderItem({
@@ -73,9 +77,9 @@ renderItem({
 
 Предоставляет дополнительные метаданные, такие как `index`, если они вам нужны, а также более общую функцию `separators.updateProps`, которая позволяет вам установить любой пропс, который вы хотите изменить отображение ведущего или последующего разделителя в случае, если более распространенные `highlight` и `unhighlight` (которые устанавливают пропс `highlighted: boolean`) недостаточны для вашего случая использования.
 
-| Type     |
-| -------- |
-| function |
+| Тип        |
+| ---------- |
+| `function` |
 
 -   `item` (Объект): Выводимый элемент из `data`.
 -   `index` (число): Индекс, соответствующий этому элементу в массиве `data`.
@@ -117,79 +121,79 @@ renderItem({
 />
 ```
 
-### `data` (обязательно)
+### data (обязательно)
 
 Массив (или список, похожий на массив) элементов для рендеринга. Другие типы данных можно использовать, обращаясь непосредственно к [`VirtualizedList`](virtualizedlist.md).
 
-| Type      |
-| --------- |
-| ArrayLike |
+| Тип         |
+| ----------- |
+| `ArrayLike` |
 
-### `ItemSeparatorComponent`
+### ItemSeparatorComponent
 
 Рендерится между каждым элементом, но не сверху или снизу. По умолчанию предоставляются пропсы `highlighted` и `leadingItem`. `renderItem` предоставляет `separators.highlight`/`unhighlight`, которые обновляют пропс `highlighted`, но вы также можете добавить пользовательские пропсы с помощью `separators.updateProps`. Может быть React Component (например, `SomeComponent`) или React элемент (например, `<SomeComponent />`).
 
-| Type                         |
-| ---------------------------- |
-| component, function, element |
+| Тип                                |
+| ---------------------------------- |
+| `component`, `function`, `element` |
 
-### `ListEmptyComponent`
+### ListEmptyComponent
 
 Отображается, когда список пуст. Может быть компонентом React (например, `SomeComponent`) или элементом React (например, `<SomeComponent />`).
 
-| Type               |
-| ------------------ |
-| component, element |
+| Тип                    |
+| ---------------------- |
+| `component`, `element` |
 
-### `ListFooterComponent`
+### ListFooterComponent
 
 Отображается в нижней части всех элементов. Может быть компонентом React (например, `SomeComponent`) или элементом React (например, `<SomeComponent />`).
 
-| Type               |
-| ------------------ |
-| component, element |
+| Тип                    |
+| ---------------------- |
+| `component`, `element` |
 
-### `ListFooterComponentStyle`
+### ListFooterComponentStyle
 
 Стилизация для внутреннего представления для `ListFooterComponent`.
 
-| Type                              |
+| Тип                               |
 | --------------------------------- |
 | [View Style](view-style-props.md) |
 
-### `ListHeaderComponent`
+### ListHeaderComponent
 
 Отображается в верхней части всех элементов. Может быть компонентом React (например, `SomeComponent`) или элементом React (например, `<SomeComponent />`).
 
-| Type               |
-| ------------------ |
-| component, element |
+| Тип                    |
+| ---------------------- |
+| `component`, `element` |
 
-### `ListHeaderComponentStyle`
+### ListHeaderComponentStyle
 
 Стилизация для внутреннего представления для `ListHeaderComponent`.
 
-| Type                              |
+| Тип                               |
 | --------------------------------- |
 | [View Style](view-style-props.md) |
 
-### `columnWrapperStyle`
+### columnWrapperStyle
 
 Необязательный пользовательский стиль для строк с несколькими элементами, создаваемых, когда `numColumns > 1`.
 
-| Type                              |
+| Тип                               |
 | --------------------------------- |
 | [View Style](view-style-props.md) |
 
-### `extraData`
+### extraData
 
 Свойство-маркер для указания списку на повторный рендеринг (поскольку он реализует `PureComponent`). Если какая-либо из ваших функций `renderItem`, `Header`, `Footer` и т. д. зависит от чего-либо вне свойства `data`, поместите его сюда и обращайтесь с ним неизменно.
 
-| Type |
-| ---- |
-| any  |
+| Тип   |
+| ----- |
+| `any` |
 
-### `getItemLayout`
+### getItemLayout
 
 ```ts
 (data, index) => {length: number, offset: number, index: number}
@@ -198,50 +202,50 @@ renderItem({
 `getItemLayout` — это дополнительная оптимизация, которая позволяет пропустить измерение динамического содержимого, если вы заранее знаете размер (высоту или ширину) элементов. `getItemLayout` эффективен, если у вас есть элементы фиксированного размера, например:
 
 ```ts
-  getItemLayout={(data, index) => (
+getItemLayout={(data, index) => (
     {length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index}
-  )}
+)}
 ```
 
 Добавление `getItemLayout` может значительно повысить производительность для списков из нескольких сотен элементов. Не забудьте включить длину разделителя (высоту или ширину) в расчет смещения, если вы указываете `ItemSeparatorComponent`.
 
-| Type     |
-| -------- |
-| function |
+| Тип        |
+| ---------- |
+| `function` |
 
-### `horizontal`
+### horizontal
 
 Если `true`, элементы отображаются рядом друг с другом горизонтально, а не вертикально.
 
-| Type    |
-| ------- |
-| boolean |
+| Тип       |
+| --------- |
+| `boolean` |
 
-### `initialNumToRender`
+### initialNumToRender
 
 Сколько элементов нужно отобразить в начальной партии. Этого должно быть достаточно, чтобы заполнить экран, но не больше. Обратите внимание, что эти элементы никогда не будут размонтированы как часть оконного рендеринга, чтобы улучшить восприятие действий прокрутки к вершине.
 
-| Type   | Default |
-| ------ | ------- |
-| number | `10`    |
+| Тип      | По-умолчанию |
+| -------- | ------------ |
+| `number` | `10`         |
 
-### `initialScrollIndex`
+### initialScrollIndex
 
 Вместо того чтобы начинать сверху с первого элемента, начните с `initialScrollIndex`. Это отключает оптимизацию "прокрутки к вершине", которая сохраняет первые элементы `initialNumToRender` всегда отрисованными и сразу отрисовывает элементы, начинающиеся с этого начального индекса. Требуется реализация `getItemLayout`.
 
-| Type   |
-| ------ |
-| number |
+| Тип      |
+| -------- |
+| `number` |
 
-### `inverted`
+### inverted
 
 Изменяет направление прокрутки. Использует масштабные преобразования `-1`.
 
-| Type    |
-| ------- |
-| boolean |
+| Тип       |
+| --------- |
+| `boolean` |
 
-### `keyExtractor`
+### keyExtractor
 
 ```ts
 (item: ItemT, index: number) => string;
@@ -249,19 +253,19 @@ renderItem({
 
 Используется для извлечения уникального ключа для данного элемента по указанному индексу. Ключ используется для кэширования и в качестве ключа react для отслеживания переупорядочивания элементов. Экстрактор по умолчанию проверяет `item.key`, затем `item.id`, а затем возвращается к использованию индекса, как это делает React.
 
-| Type     |
-| -------- |
-| function |
+| Тип        |
+| ---------- |
+| `function` |
 
-### `numColumns`
+### numColumns
 
 Несколько колонок могут быть отображены только с `horizontal={false}` и будут зигзагообразно перемещаться, как в макете `flexWrap`. Все элементы должны быть одинаковой высоты — кладочные макеты не поддерживаются.
 
-| Type   |
-| ------ |
-| number |
+| Тип      |
+| -------- |
+| `number` |
 
-### `onEndReached`
+### onEndReached
 
 ```ts
 (info: {distanceFromEnd: number}) => void;
@@ -269,19 +273,19 @@ renderItem({
 
 Вызывается один раз, когда позиция прокрутки оказывается в пределах `onEndReachedThreshold` от отображаемого содержимого.
 
-| Type     |
-| -------- |
-| function |
+| Тип        |
+| ---------- |
+| `function` |
 
-### `onEndReachedThreshold`
+### onEndReachedThreshold
 
 На каком расстоянии от конца (в единицах видимой длины списка) должен находиться нижний край списка от конца содержимого, чтобы сработал обратный вызов `onEndReached`. Таким образом, значение `0.5` будет вызывать `onEndReached`, когда конец содержимого находится в пределах половины видимой длины списка.
 
-| Type   |
-| ------ |
-| number |
+| Тип      |
+| -------- |
+| `number` |
 
-### `onRefresh`
+### onRefresh
 
 ```ts
 () => void;
@@ -289,35 +293,35 @@ renderItem({
 
 Если указано, будет добавлен стандартный `RefreshControl` для функциональности "Pull to Refresh". Не забудьте также правильно установить параметр `refreshing`.
 
-| Type     |
-| -------- |
-| function |
+| Тип        |
+| ---------- |
+| `function` |
 
-### `onViewableItemsChanged`
+### onViewableItemsChanged
 
 Вызывается, когда изменяется просматриваемость строк, как определено параметром `viewabilityConfig`.
 
-| Type                                                                                                   |
+| Тип                                                                                                    |
 | ------------------------------------------------------------------------------------------------------ |
 | (callback: {changed: [ViewToken](viewtoken.md)[], viewableItems: [ViewToken](viewtoken.md)[]} => void; |
 
-### `progressViewOffset`
+### progressViewOffset
 
 Установите этот параметр, если для правильного отображения индикатора загрузки требуется смещение.
 
-| Type   |
-| ------ |
-| number |
+| Тип      |
+| -------- |
+| `number` |
 
-### `refreshing`
+### refreshing
 
 Установите значение `true` в ожидании новых данных от обновления.
 
-| Type    |
-| ------- |
-| boolean |
+| Тип       |
+| --------- |
+| `boolean` |
 
-### `removeClippedSubviews`
+### removeClippedSubviews
 
 Это может повысить производительность прокрутки для больших списков. В Android значение по умолчанию — `true`.
 
@@ -325,31 +329,31 @@ renderItem({
 
     Примечание: Может иметь ошибки (отсутствующее содержимое) в некоторых обстоятельствах — используйте на свой страх и риск.
 
-| Type    |
-| ------- |
-| boolean |
+| Тип       |
+| --------- |
+| `boolean` |
 
-### `viewabilityConfig`
+### viewabilityConfig
 
 Тип потока и дальнейшую документацию смотрите в [`ViewabilityHelper.js`](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Lists/ViewabilityHelper.js).
 
-| Type              |
-| ----------------- |
-| ViewabilityConfig |
+| Тип                 |
+| ------------------- |
+| `ViewabilityConfig` |
 
 `viewabilityConfig` принимает тип `ViewabilityConfig` объект со следующими свойствами
 
-| Property                         | Type    |
-| -------------------------------- | ------- |
-| minimumViewTime                  | number  |
-| viewAreaCoveragePercentThreshold | number  |
-| itemVisiblePercentThreshold      | number  |
-| waitForInteraction               | boolean |
+| Свойство                           | Тип       |
+| ---------------------------------- | --------- |
+| `minimumViewTime`                  | `number`  |
+| `viewAreaCoveragePercentThreshold` | `number`  |
+| `itemVisiblePercentThreshold`      | `number`  |
+| `waitForInteraction`               | `boolean` |
 
 Требуется хотя бы одно из значений `viewAreaCoveragePercentThreshold` или `itemVisiblePercentThreshold`. Это необходимо сделать в `конструкторе`, чтобы избежать следующей ошибки ([ссылка](https://github.com/facebook/react-native/issues/17408)):
 
 ```
-  Error: Changing viewabilityConfig on the fly is not supported
+Error: Changing viewabilityConfig on the fly is not supported
 ```
 
 ```ts
@@ -366,7 +370,8 @@ constructor (props) {
 ```ts
 <FlatList
     viewabilityConfig={this.viewabilityConfig}
-  ...
+    // ...
+/>
 ```
 
 #### minimumViewTime
@@ -385,17 +390,17 @@ constructor (props) {
 
 Ничто не считается доступным для просмотра, пока пользователь не прокрутит страницу или не вызовет `recordInteraction` после рендеринга.
 
-### `viewabilityConfigCallbackPairs`
+### viewabilityConfigCallbackPairs
 
 Список пар `ViewabilityConfig`/`onViewableItemsChanged`. Конкретный `onViewableItemsChanged` будет вызван при выполнении условий соответствующего `ViewabilityConfig`. Смотрите `ViewabilityHelper.js` для типа потока и дальнейшей документации.
 
-| Type                                   |
-| -------------------------------------- |
-| array of ViewabilityConfigCallbackPair |
+| Тип                                      |
+| ---------------------------------------- |
+| array of `ViewabilityConfigCallbackPair` |
 
-## Методы
+## Методы {#methods}
 
-### `flashScrollIndicators()`
+### flashScrollIndicators()
 
 ```ts
 flashScrollIndicators();
@@ -403,7 +408,7 @@ flashScrollIndicators();
 
 Кратковременно отображает индикаторы прокрутки.
 
-### `getNativeScrollRef()`
+### getNativeScrollRef()
 
 ```ts
 getNativeScrollRef(): React.ElementRef<typeof ScrollViewComponent>;
@@ -411,7 +416,7 @@ getNativeScrollRef(): React.ElementRef<typeof ScrollViewComponent>;
 
 Предоставляет ссылку на базовый компонент прокрутки
 
-### `getScrollResponder()`
+### getScrollResponder()
 
 ```ts
 getScrollResponder(): ScrollResponderMixin;
@@ -419,7 +424,7 @@ getScrollResponder(): ScrollResponderMixin;
 
 Предоставляет обращение к базовому ответчику прокрутки.
 
-### `getScrollableNode()`
+### getScrollableNode()
 
 ```ts
 getScrollableNode(): any;
@@ -427,7 +432,7 @@ getScrollableNode(): any;
 
 Предоставляет управление базовым узлом прокрутки.
 
-### `scrollToEnd()`
+### scrollToEnd()
 
 ```ts
 scrollToEnd(params?: {animated?: boolean});
@@ -437,15 +442,15 @@ scrollToEnd(params?: {animated?: boolean});
 
 **Параметры:**
 
-| Name   | Type   |
-| ------ | ------ |
-| params | object |
+| Имя      | Тип      |
+| -------- | -------- |
+| `params` | `object` |
 
 Допустимыми ключами `params` являются:
 
--   'animated' (boolean) — Должен ли список делать анимацию при прокрутке. По умолчанию имеет значение `true`.
+-   `'animated'` (`boolean`) — Должен ли список делать анимацию при прокрутке. По умолчанию имеет значение `true`.
 
-### `scrollToIndex()`
+### scrollToIndex()
 
 ```ts
 scrollToIndex: (params: {
@@ -464,9 +469,9 @@ scrollToIndex: (params: {
 
 **Параметры:**
 
-| Name                                                        | Type   |
-| ----------------------------------------------------------- | ------ |
-| params <div className="label basic required">Required</div> | object |
+| Имя                    | Тип      |
+| ---------------------- | -------- |
+| `params` (обязательно) | `object` |
 
 Допустимыми ключами `params` являются:
 
@@ -475,7 +480,7 @@ scrollToIndex: (params: {
 -   `'viewOffset'` (число) — фиксированное число пикселей для смещения конечной позиции цели.
 -   `'viewPosition'` (число) — При значении `0` элемент, указанный индексом, располагается сверху, `1` — снизу, а `0.5` — по центру.
 
-### `scrollToItem()`
+### scrollToItem()
 
 ```ts
 scrollToItem(params: {
@@ -493,9 +498,9 @@ scrollToItem(params: {
 
 **Параметры:**
 
-| Name              | Type   |
-| ----------------- | ------ |
-| params (Required) | object |
+| Имя                    | Тип      |
+| ---------------------- | -------- |
+| `params` (обязательно) | `object` |
 
 Допустимыми ключами `params` являются:
 
@@ -503,7 +508,7 @@ scrollToItem(params: {
 -   `'item'` (объект) — Элемент для прокрутки. Требуется.
 -   `'viewPosition'` (число)
 
-### `scrollToOffset()`
+### scrollToOffset()
 
 ```ts
 scrollToOffset(params: {
@@ -516,9 +521,9 @@ scrollToOffset(params: {
 
 **Параметры:**
 
-| Name                                                        | Type   |
-| ----------------------------------------------------------- | ------ |
-| params <div className="label basic required">Required</div> | object |
+| Имя                    | Тип      |
+| ---------------------- | -------- |
+| `params` (обязательно) | `object` |
 
 Допустимыми ключами `params` являются:
 

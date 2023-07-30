@@ -1,8 +1,12 @@
+---
+description: АПИ для управления вибрацией устройства
+---
+
 # Vibration
 
 Вибрация устройства.
 
-## Пример
+## Пример {#example}
 
 <div data-snack-id="@bndby/vibration-example" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
@@ -14,9 +18,9 @@
 
     API вибрации реализован как вызов `AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)` на iOS.
 
-## Методы
+## Методы {#methods}
 
-### `cancel()`
+### cancel()
 
 ```ts
 static cancel();
@@ -24,7 +28,7 @@ static cancel();
 
 Вызовите эту функцию, чтобы остановить вибрацию после вызова `vibrate()` с включенным повторением.
 
-### `vibrate()`
+### vibrate()
 
 ```ts
 static vibrate(
@@ -43,7 +47,7 @@ static vibrate(
 
 **Параметры:**
 
-| Name    | Type                                         | Default | Description                                                                                       |
-| ------- | -------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------- |
-| pattern | number :simple-android:<hr/>array of numbers | `400`   | Vibration duration in milliseconds.<hr/>Vibration pattern as an array of numbers in milliseconds. |
-| repeat  | boolean                                      | `false` | Repeat vibration pattern until `cancel()`.                                                        |
+| Имя       | Тип                                            | По-умолчанию | Описание                                                                                         |
+| --------- | ---------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------ |
+| `pattern` | `number` :simple-android:<hr/>array of numbers | `400`        | Длительность вибрации в миллисекундах.<hr/>Шаблон вибрации в виде массива чисел в миллисекундах. |
+| `repeat`  | `boolean`                                      | `false`      | Повторяйте процедуру вибрации до тех пор, пока `cancel()`.                                       |

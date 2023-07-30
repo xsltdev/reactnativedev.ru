@@ -1,3 +1,7 @@
+---
+description: View Flattening — это оптимизация рендеринга React Native, позволяющая избежать глубоких деревьев компоновки
+---
+
 # View Flattening
 
 **View Flattening** — это оптимизация рендеринга React Native, позволяющая избежать глубоких деревьев компоновки.

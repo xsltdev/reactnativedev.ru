@@ -1,8 +1,12 @@
+---
+description: PixelRatio дает вам доступ к плотности пикселей устройства и масштабу шрифта
+---
+
 # PixelRatio
 
-`PixelRatio` дает вам доступ к плотности пикселей устройства и масштабу шрифта.
+**`PixelRatio`** дает вам доступ к плотности пикселей устройства и масштабу шрифта.
 
-## Получение изображения правильного размера
+## Получение изображения правильного размера {#fetching-a-correctly-sized-image}
 
 Вы должны получить изображение с более высоким разрешением, если используете устройство с высокой плотностью пикселей. Хорошее эмпирическое правило — умножить размер отображаемого изображения на соотношение пикселей.
 
@@ -17,7 +21,7 @@ const image = getImage({
 />;
 ```
 
-## Привязка пиксельной сетки
+## Привязка пиксельной сетки {#pixel-grid-snapping}
 
 В iOS можно задавать позиции и размеры для элементов с произвольной точностью, например 29,674825. Но в конечном итоге физический дисплей имеет только фиксированное количество пикселей, например 640×1136 для iPhone SE (1-го поколения) или 828×1792 для iPhone 11. iOS пытается максимально точно соответствовать пользовательскому значению, распределяя один исходный пиксель на несколько, чтобы обмануть глаз. Недостатком этой техники является то, что результирующий элемент выглядит размытым.
 
@@ -27,13 +31,13 @@ const image = getImage({
 
 В React Native все в JavaScript и в механизме компоновки работает с числами произвольной точности. Только когда мы задаем положение и размеры нативного элемента в основном потоке, мы округляем. Кроме того, округление производится относительно корня, а не родителя, опять же, чтобы избежать накопления ошибок округления.
 
-## Пример
+## Пример {#example}
 
 <div data-snack-id="@bndby/pixelratio-example" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-## Методы
+## Методы {#methods}
 
-### `get()`
+### get()
 
 ```ts
 static get(): number;
@@ -61,7 +65,7 @@ static get(): number;
     -   Pixel XL, Pixel 2 XL
     -   [xxxhdpi Android-устройства](https://material.io/tools/devices/)
 
-### `getFontScale()`
+### getFontScale()
 
 ```ts
 static getFontScale(): number;
@@ -74,7 +78,7 @@ static getFontScale(): number;
 
 Если масштаб шрифта не задан, возвращается соотношение пикселей устройства.
 
-### `getPixelSizeForLayoutSize()`
+### getPixelSizeForLayoutSize()
 
 ```ts
 static getPixelSizeForLayoutSize(layoutSize: number): number;
@@ -84,10 +88,10 @@ static getPixelSizeForLayoutSize(layoutSize: number): number;
 
 Гарантированно возвращает целое число.
 
-### `roundToNearestPixel()`
+### roundToNearestPixel()
 
 ```ts
 static roundToNearestPixel(layoutSize: number): number;
 ```
 
-Округляет размер макета (dp) до ближайшего размера макета, соответствующего целому числу пикселей. Например, на устройстве с PixelRatio равным 3, `PixelRatio.roundToNearestPixel(8.4) = 8.33`, что соответствует точно (8.33 \* 3) = 25 пикселям.
+Округляет размер макета (dp) до ближайшего размера макета, соответствующего целому числу пикселей. Например, на устройстве с PixelRatio равным 3, `PixelRatio.roundToNearestPixel(8.4) = 8.33`, что соответствует точно `(8.33 * 3) = 25` пикселям.

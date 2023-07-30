@@ -1,31 +1,35 @@
+---
+description: API ToastAndroid в React Native раскрывает модуль ToastAndroid платформы Android как JS-модуль
+---
+
 # ToastAndroid
 
-API `ToastAndroid` в React Native раскрывает модуль `ToastAndroid` платформы Android как JS-модуль. Он предоставляет метод `show(message, duration)`, который принимает следующие параметры:
+API **`ToastAndroid`** в React Native раскрывает модуль `ToastAndroid` платформы Android как JS-модуль. Он предоставляет метод `show(message, duration)`, который принимает следующие параметры:
 
--   _message_ Строка с текстом тоста.
--   _duration_ Продолжительность тоста — либо `ToastAndroid.SHORT`, либо `ToastAndroid.LONG`.
+-   `message` - Строка с текстом сообщения.
+-   `duration` - Продолжительность сообщения — либо `ToastAndroid.SHORT`, либо `ToastAndroid.LONG`.
 
-Вы можете использовать `showWithGravity(message, duration, gravity)`, чтобы указать место появления тоста в макете экрана. Это может быть `ToastAndroid.TOP`, `ToastAndroid.BOTTOM` или `ToastAndroid.CENTER`.
+Вы можете использовать `showWithGravity(message, duration, gravity)`, чтобы указать место появления сообщения в макете экрана. Это может быть `ToastAndroid.TOP`, `ToastAndroid.BOTTOM` или `ToastAndroid.CENTER`.
 
-Метод 'showWithGravityAndOffset(message, duration, gravity, xOffset, yOffset)' добавляет возможность указать смещение в пикселях.
+Метод `showWithGravityAndOffset(message, duration, gravity, xOffset, yOffset)` добавляет возможность указать смещение в пикселях.
 
 <div data-snack-id="@bndby/toast-android-api-example" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-## Методы
+## Методы {#methods}
 
-### `show()`
+### show()
 
 ```ts
 static show(message: string, duration: number);
 ```
 
-### `showWithGravity()`
+### showWithGravity()
 
 ```ts
 static showWithGravity(message: string, duration: number, gravity: number);
 ```
 
-### `showWithGravityAndOffset()`
+### showWithGravityAndOffset()
 
 ```ts
 static showWithGravityAndOffset(
@@ -37,9 +41,9 @@ static showWithGravityAndOffset(
 );
 ```
 
-## Свойства
+## Свойства {#properties}
 
-### `SHORT`
+### SHORT
 
 Указывает продолжительность на экране.
 
@@ -47,7 +51,7 @@ static showWithGravityAndOffset(
 static SHORT: number;
 ```
 
-### `LONG`
+### LONG
 
 Указывает продолжительность на экране.
 
@@ -55,7 +59,7 @@ static SHORT: number;
 static LONG: number;
 ```
 
-### `TOP`
+### TOP
 
 Указывает положение на экране.
 
@@ -63,7 +67,7 @@ static LONG: number;
 static TOP: number;
 ```
 
-### `BOTTOM`
+### BOTTOM
 
 Указывает положение на экране.
 
@@ -71,7 +75,7 @@ static TOP: number;
 static BOTTOM: number;
 ```
 
-### `CENTER`
+### CENTER
 
 Указывает положение на экране.
 

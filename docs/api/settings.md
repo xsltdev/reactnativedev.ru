@@ -1,14 +1,18 @@
+---
+description: Settings служит оберткой для NSUserDefaults, постоянного хранилища ключевых значений, доступного только на iOS
+---
+
 # Settings
 
-`Settings` служит оберткой для [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults), постоянного хранилища ключевых значений, доступного только на iOS.
+**`Settings`** служит оберткой для [`NSUserDefaults`](https://developer.apple.com/documentation/foundation/nsuserdefaults), постоянного хранилища ключевых значений, доступного только на iOS.
 
-## Пример
+## Пример {#example}
 
 <div data-snack-id="@bndby/settings-example" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-## Методы
+## Методы {#methods}
 
-### `clearWatch()`
+### clearWatch()
 
 ```ts
 static clearWatch(watchId: number);
@@ -16,7 +20,7 @@ static clearWatch(watchId: number);
 
 `watchId` — это номер, возвращенный функцией `watchKeys()` при первоначальной настройке подписки.
 
-### `get()`
+### get()
 
 ```ts
 static get(key: string): any;
@@ -24,7 +28,7 @@ static get(key: string): any;
 
 Получение текущего значения для заданного `key` в `NSUserDefaults`.
 
-### `set()`
+### set()
 
 ```ts
 static set(settings: Record<string, any>);
@@ -32,7 +36,7 @@ static set(settings: Record<string, any>);
 
 Установите одно или несколько значений в `NSUserDefaults`.
 
-### `watchKeys()`
+### watchKeys()
 
 ```ts
 static watchKeys(keys: string | array<string>, callback: () => void): number;

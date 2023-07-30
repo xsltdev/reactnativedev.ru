@@ -1,6 +1,10 @@
+---
+description: Базовый компонент кнопки Button, который должен хорошо отображаться на любой платформе
+---
+
 # Button
 
-Базовый компонент кнопки, который должен хорошо отображаться на любой платформе. Поддерживает минимальный уровень кастомизации.
+Базовый компонент кнопки **`Button`**, который должен хорошо отображаться на любой платформе. Поддерживает минимальный уровень кастомизации.
 
 Если эта кнопка не подходит для вашего приложения, вы можете создать свою собственную кнопку, используя [Pressable](pressable.md). Для вдохновения посмотрите [исходный код компонента Button](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Components/Button.js).
 
@@ -13,142 +17,142 @@
 />
 ```
 
-## Пример
+## Пример {#example}
 
 <div data-snack-id="@bndby/button-example" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-## пропсы
+## Пропсы {#props}
 
-### `onPress` (обязательный)
+### onPress (обязательный) {#requiredonpress}
 
 Обработчик, вызываемый при нажатии пользователем кнопки.
 
-| Type                                         |
+| Тип                                          |
 | -------------------------------------------- |
 | ({nativeEvent: [PressEvent](pressevent.md)}) |
 
-### `title` (обязательный)
+### title (обязательный) {#requiredtitle}
 
 Текст для отображения внутри кнопки. На Android заданный заголовок будет преобразован в заглавную форму.
 
-| Type   |
-| ------ |
-| string |
+| Тип      |
+| -------- |
+| `string` |
 
-### `accessibilityLabel`
+### accessibilityLabel
 
 Текст для отображения в целях обеспечения доступности для слепых.
 
-| Type   |
-| ------ |
-| string |
+| Тип      |
+| -------- |
+| `string` |
 
-### `accessibilityLanguage` :simple-ios:
+### accessibilityLanguage :simple-ios: {#accessibilitylanguage-ios}
 
 Значение, указывающее, какой язык должен использоваться программой чтения с экрана при взаимодействии пользователя с элементом. Оно должно соответствовать [спецификации BCP 47](https://www.rfc-editor.org/info/bcp47).
 
 Дополнительную информацию см. в [iOS `accessibilityLanguage` doc](https://developer.apple.com/documentation/objectivec/nsobject/1615192-accessibilitylanguage).
 
-| Type   |
-| ------ |
-| string |
+| Тип      |
+| -------- |
+| `string` |
 
-### `accessibilityActions`
+### accessibilityActions
 
 Действия доступности позволяют ассистивной технологии программно вызывать действия компонента. Свойство `accessibilityActions` должно содержать список объектов действий. Каждый объект действия должен содержать имя поля и метку.
 
 Дополнительную информацию см. в [Руководстве по доступности](../guides/accessibility.md#accessibility-actions).
 
-| Type  | Required |
-| ----- | -------- |
-| array | No       |
+| Тип     | Требуется |
+| ------- | --------- |
+| `array` | Нет       |
 
-### `onAccessibilityAction`
+### onAccessibilityAction
 
 Вызывается, когда пользователь выполняет действия по обеспечению доступности. Единственным аргументом этой функции является событие, содержащее имя выполняемого действия.
 
 Дополнительную информацию см. в [Руководстве по доступности](../guides/accessibility.md#accessibility-actions).
 
-| Type     | Required |
-| -------- | -------- |
-| function | No       |
+| Тип        | Требуется |
+| ---------- | --------- |
+| `function` | Нет       |
 
-### `color`
+### color
 
 Цвет текста (iOS) или цвет фона кнопки (Android).
 
-| Type                         | Default                                                    |
+| Тип                          | По-умолчанию                                               |
 | ---------------------------- | ---------------------------------------------------------- |
 | [color](../guides/colors.md) | `'#2196F3'` :simple-android:<hr/> `'#007AFF'` :simple-ios: |
 
-### `disabled`
+### disabled
 
 Если `true`, отключите все взаимодействия для этого компонента.
 
-| Type | Default |
-| ---- | ------- |
-| bool | `false` |
+| Тип    | По-умолчанию |
+| ------ | ------------ |
+| `bool` | `false`      |
 
-### `hasTVPreferredFocus` :tv:
+### hasTVPreferredFocus :tv:
 
 Предпочтение отдается телевидению.
 
-| Type | Default |
-| ---- | ------- |
-| bool | `false` |
+| Тип    | По-умолчанию |
+| ------ | ------------ |
+| `bool` | `false`      |
 
-### `nextFocusDown` :simple-android: :tv:
+### nextFocusDown :simple-android: :tv:
 
 Назначает следующее представление, которое будет получать фокус, когда пользователь перемещается вниз. См. [документацию по Android](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusDown).
 
-| Type   |
-| ------ |
-| number |
+| Тип      |
+| -------- |
+| `number` |
 
-### `nextFocusForward` :simple-android: :tv:
+### nextFocusForward :simple-android: :tv:
 
 Назначает следующее представление, которое будет получать фокус, когда пользователь перемещается вперед. См. [документацию по Android](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusForward).
 
-| Type   |
-| ------ |
-| number |
+| Тип      |
+| -------- |
+| `number` |
 
-### `nextFocusLeft` :simple-android: :tv:
+### nextFocusLeft :simple-android: :tv:
 
 Назначает следующее представление, которое будет получать фокус, когда пользователь перемещается влево. См. [документацию по Android](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusLeft).
 
-| Type   |
-| ------ |
-| number |
+| Тип      |
+| -------- |
+| `number` |
 
-### `nextFocusRight` :simple-android: :tv:
+### nextFocusRight :simple-android: :tv:
 
 Назначает следующее представление для получения фокуса, когда пользователь перемещается вправо. См. [документацию по Android](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusRight).
 
-| Type   |
-| ------ |
-| number |
+| Тип      |
+| -------- |
+| `number` |
 
-### `nextFocusUp` :simple-android: :tv:
+### nextFocusUp :simple-android: :tv:
 
 Назначает следующее представление, которое будет получать фокус при навигации пользователя вверх. См. [документацию по Android](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusUp).
 
-| Type   |
-| ------ |
-| number |
+| Тип      |
+| -------- |
+| `number` |
 
-### `testID`
+### testID
 
 Используется для размещения этого представления в сквозных тестах.
 
-| Type   |
-| ------ |
-| string |
+| Тип      |
+| -------- |
+| `string` |
 
-### `touchSoundDisabled` :simple-android:
+### touchSoundDisabled :simple-android:
 
 Если `true`, не воспроизводит системный звук при прикосновении.
 
-| Type    | Default |
-| ------- | ------- |
-| boolean | `false` |
+| Тип       | По-умолчанию |
+| --------- | ------------ |
+| `boolean` | `false`      |

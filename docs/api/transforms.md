@@ -1,14 +1,18 @@
+---
+description: Transforms — это свойства стиля, которые помогут вам изменить внешний вид и положение компонентов с помощью 2D- или 3D-трансформаций
+---
+
 # Transforms
 
 **`Transforms`** — это свойства стиля, которые помогут вам изменить внешний вид и положение компонентов с помощью 2D- или 3D-трансформаций. Однако после применения трансформаций макеты остаются неизменными вокруг преобразованного компонента, поэтому он может накладываться на соседние компоненты. Чтобы предотвратить такое перекрытие, можно применить отступ к преобразованному компоненту, соседним компонентам или подкладку к контейнеру.
 
-## Пример
+## Пример {#example}
 
 <div data-snack-id="@bndby/transforms" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-## Методы
+## Методы {#methods}
 
-### `transform()`
+### transform()
 
 `transform` принимает массив объектов преобразования или разделенных пробелами строковых значений. Каждый объект указывает свойство, которое будет преобразовано в качестве ключа, и значение, которое будет использоваться в преобразовании. Объекты не должны объединяться. Используйте одну пару ключ/значение для каждого объекта.
 
@@ -37,7 +41,7 @@ transform([{ skewX: '45deg' }]);
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
 | Массив объектов: {matrix: number[]}, {perspective: number}, {rotate: string}, {rotateX: string}, {rotateY: string}, {rotateZ: string}, {scale: number}, {scaleX: number}, {scaleY: number}, {translateX: number}, {translateY: number}, {skewX: string}, {skewY: string} или string | No        | No |
 
-### `decomposedMatrix`, `rotation`, `scaleX`, `scaleY`, `transformMatrix`, `translateX`, `translateY`.
+### decomposedMatrix, rotation, scaleX, scaleY, transformMatrix, translateX, translateY
 
 !!!danger "Устарело"
 

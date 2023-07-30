@@ -1,45 +1,49 @@
+---
+description: Отображает круговой индикатор загрузки
+---
+
 # ActivityIndicator
 
-Отображает круговой индикатор загрузки.
+Компонент **`ActivityIndicator`** отображает круговой индикатор загрузки.
 
-## Пример
+## Пример {#example}
 
 <div data-snack-id="@bndby/activityindicator-example" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
-## пропсы
+## Пропсы {#props}
 
 ### [View Props](view.md#props)
 
 Наследует [View Props](view.md#props).
 
-### `animating`
+### animating
 
 Показывать ли индикатор (`true`) или скрывать его (`false`).
 
-| Type | Default |
-| ---- | ------- |
-| bool | `true`  |
+| Тип    | По-умолчанию |
+| ------ | ------------ |
+| `bool` | `true`       |
 
-### `color`
+### color
 
 Цвет переднего плана волчка.
 
-| Type                         | Default                                                                              |
-| ---------------------------- | ------------------------------------------------------------------------------------ |
-| [color](../guides/colors.md) | `null` (system accent default color) :simple-android: <hr/> `'#999999'` :simple-ios: |
+| Тип                            | По-умолчанию                                                                                |
+| ------------------------------ | ------------------------------------------------------------------------------------------- |
+| [`color`](../guides/colors.md) | `null` (системный акцент цвет по умолчанию) :simple-android: <hr/> `'#999999'` :simple-ios: |
 
-### `hidesWhenStopped` :simple-ios:
+### hidesWhenStopped :simple-ios:
 
 Должен ли индикатор скрываться, когда он не анимирован.
 
-| Type | Default |
-| ---- | ------- |
-| bool | `true`  |
+| Тип    | По-умолчанию |
+| ------ | ------------ |
+| `bool` | `true`       |
 
-### `size`
+### size
 
 Размер индикатора.
 
-| Type                                                   | Default   |
-| ------------------------------------------------------ | --------- |
-| enum(`'small'`, `'large'`)<hr/>number :simple-android: | `'small'` |
+| Тип                                                    | По-умолчанию |
+| ------------------------------------------------------ | ------------ |
+| `enum('small', 'large')`<hr/>`number` :simple-android: | `'small'`    |
