@@ -1,6 +1,10 @@
+---
+description: InputAccessoryView - компонент, позволяющий настраивать вид аксессуара ввода с клавиатуры на iOS
+---
+
 # InputAccessoryView
 
-Компонент, позволяющий настраивать вид аксессуара ввода с клавиатуры на iOS. Представление аксессуара ввода отображается над клавиатурой, когда `TextInput` имеет фокус. Этот компонент можно использовать для создания пользовательских панелей инструментов.
+**`InputAccessoryView`** - компонент, позволяющий настраивать вид аксессуара ввода с клавиатуры на iOS. Представление аксессуара ввода отображается над клавиатурой, когда `TextInput` имеет фокус. Этот компонент можно использовать для создания пользовательских панелей инструментов.
 
 Чтобы использовать этот компонент, оберните свою панель инструментов компонентом InputAccessoryView и задайте `nativeID`. Затем передайте этот `nativeID` в качестве `inputAccessoryViewID` любого желаемого `TextInput`. Основной пример:
 
@@ -8,29 +12,29 @@
 
 Этот компонент также может быть использован для создания "липких" текстовых вводов (текстовых вводов, привязанных к верхней части клавиатуры). Для этого оберните `TextInput` компонентом `InputAccessoryView` и не задавайте `nativeID`. В качестве примера можно посмотреть [InputAccessoryViewExample.js](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/InputAccessoryView/InputAccessoryViewExample.js).
 
-## пропсы
+## Пропсы {#props}
 
-### `backgroundColor`
+### backgroundColor
 
-| Type                         |
+| Тип                          |
 | ---------------------------- |
 | [color](../guides/colors.md) |
 
-### `nativeID`
+### nativeID
 
 Идентификатор, который используется для привязки данного `InputAccessoryView` к указанному `TextInput`(ам).
 
-| Type   |
-| ------ |
-| string |
+| Тип      |
+| -------- |
+| `string` |
 
-### `style`
+### style
 
-| Type                              |
+| Тип                               |
 | --------------------------------- |
 | [View Style](view-style-props.md) |
 
-# Известные проблемы
+## Известные проблемы
 
 -   [react-native#18997](https://github.com/facebook/react-native/issues/18997): Не поддерживается многострочный `TextInput`
 -   [react-native#20157](https://github.com/facebook/react-native/issues/20157): Невозможно использовать с нижней панелью вкладок
