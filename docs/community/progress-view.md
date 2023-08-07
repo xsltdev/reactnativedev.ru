@@ -34,7 +34,7 @@ yarn add @react-native-community/progress-view
 
 **React Native 0.60+**
 
-Пакет [автоматически связывается](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md) при сборке приложения. Все, что вам нужно сделать, это:
+Пакет автоматически связывается при сборке приложения. Все, что вам нужно сделать, это:
 
 ```sh
 npx pod-install
@@ -127,7 +127,7 @@ import { ProgressView } from '@react-native-community/progress-view';
 
 ## Props
 
--   [Наследованные свойства `View`...](view.md#props)
+-   [Наследованные свойства `View`...](../rn/view.md#props)
 
 ### `progress`
 
