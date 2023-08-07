@@ -1,8 +1,5 @@
 nav:
     - 🏠: index.md
-    - guides
-    - components
-    - api
-    - architecture
+    - rn
     - community
     - Спасибо: https://boosty.to/bndby

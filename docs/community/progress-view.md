@@ -127,7 +127,7 @@ import { ProgressView } from '@react-native-community/progress-view';
 
 ## Props
 
--   [Наследованные свойства `View`...](../components/view.md#props)
+-   [Наследованные свойства `View`...]view.md#props)
 
 ### `progress`
 

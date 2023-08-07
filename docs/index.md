@@ -18,15 +18,15 @@ hide:
 
     Перевод официальной документации
 
-    [:octicons-arrow-right-24: Гайды](guides/introduction.md)
+    [:octicons-arrow-right-24: Гайды](rn/introduction.md)
 
-    [:octicons-arrow-right-24: Компоненты](components/components-and-apis.md)
+    [:octicons-arrow-right-24: Компоненты](rn/components-and-apis.md)
 
-    [:octicons-arrow-right-24: API](api/accessibilityinfo.md)
+    [:octicons-arrow-right-24: API](rn/accessibilityinfo.md)
 
-    [:octicons-arrow-right-24: Архитектура](architecture/architecture-overview.md)
+    [:octicons-arrow-right-24: Архитектура](rn/architecture-overview.md)
 
--   :material-comment-account-outline:{ .lg .middle } **React Native Community**
+-   :material-comment-account-outline:{ .lg .middle } **Сообщество**
 
     ***
 
@@ -35,6 +35,14 @@ hide:
     [:octicons-arrow-right-24: API и компоненты](community/index.md)
 
     [:octicons-arrow-right-24: React Navigation](community/react-navigation.6/getting-started.md) <small>6.x</small>
+
+-   :material-tools:{ .lg .middle } **Инструменты**
+
+    ***
+
+    [:octicons-arrow-right-24: Каталог сообщества :octicons-link-external-16:](https://reactnative.directory/)
+
+    [:octicons-arrow-right-24: Инструмент обновления :octicons-link-external-16:](https://react-native-community.github.io/upgrade-helper/)
 
 </div>
 

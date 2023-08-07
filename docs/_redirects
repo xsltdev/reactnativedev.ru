@@ -1,0 +1,4 @@
+/guides/* /rn/:splat 301
+/components/* /rn/:splat 301
+/architecture/* /rn/:splat 301
+/api/* /rn/:splat 301
