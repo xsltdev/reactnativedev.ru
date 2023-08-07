@@ -60,4 +60,4 @@
 
 ### PanResponder
 
-Для более высокоуровневой интерпретации жестов посмотрите [PanResponder]panresponder.md).
+Для более высокоуровневой интерпретации жестов посмотрите [PanResponder](panresponder.md).

@@ -75,9 +75,9 @@ function MyComponent(props: MyComponentProps) {
 
 Цвет подложки, который будет отображаться при активном прикосновении.
 
-| Тип              |
-| ---------------- |
-| [цвет]colors.md) |
+| Тип               |
+| ----------------- |
+| [цвет](colors.md) |
 
 ### hasTVPreferredFocus :simple-ios:
 

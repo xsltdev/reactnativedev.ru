@@ -1,8 +1,8 @@
 title: React Native
 nav:
+    - index.md
     - Руководство:
         - Основы:
-            - introduction.md
             - intro-react-native-components.md
             - intro-react.md
             - handling-text-input.md

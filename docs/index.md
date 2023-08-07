@@ -18,7 +18,7 @@ hide:
 
     Перевод официальной документации
 
-    [:octicons-arrow-right-24: Гайды](rn/introduction.md)
+    [:octicons-arrow-right-24: Гайды](rn/index.md)
 
     [:octicons-arrow-right-24: Компоненты](rn/components-and-apis.md)
 

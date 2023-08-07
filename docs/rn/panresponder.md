@@ -8,13 +8,13 @@ description: PanResponder объединяет несколько касаний
 
 По умолчанию `PanResponder` содержит хэндл `InteractionManager`, чтобы блокировать длительные события JS от прерывания активных жестов.
 
-Он представляет собой предсказуемую обертку обработчиков, предоставляемых [gesture responder system]gesture-responder-system.md). Для каждого обработчика он предоставляет новый объект `gestureState` наряду с собственным объектом события:
+Он представляет собой предсказуемую обертку обработчиков, предоставляемых [gesture responder system](gesture-responder-system.md). Для каждого обработчика он предоставляет новый объект `gestureState` наряду с собственным объектом события:
 
 ```ts
 onPanResponderMove: (event, gestureState) => {};
 ```
 
-Нативное событие — это синтетическое событие касания с формой [PressEvent]pressevent.md).
+Нативное событие — это синтетическое событие касания с формой [PressEvent](pressevent.md).
 
 Объект `gestureState` имеет следующее:
 
@@ -115,7 +115,7 @@ static create(config: PanResponderCallbacks): PanResponderInstance;
 | ---------------------- | -------- | ----------- |
 | `config` (обязательно) | `object` | Refer below |
 
-Объект `config` предоставляет расширенные версии всех обратных вызовов ответчика, которые обеспечивают не только [`PressEvent`]pressevent.md), но и состояние жеста `PanResponder`, путем замены слова `Responder` на `PanResponder` в каждом из типичных обратных вызовов `onResponder*`. Например, объект `config` будет выглядеть следующим образом:
+Объект `config` предоставляет расширенные версии всех обратных вызовов ответчика, которые обеспечивают не только [`PressEvent`](pressevent.md), но и состояние жеста `PanResponder`, путем замены слова `Responder` на `PanResponder` в каждом из типичных обратных вызовов `onResponder*`. Например, объект `config` будет выглядеть следующим образом:
 
 -   `onMoveShouldSetPanResponder: (e, gestureState) => {...}`
 -   `onMoveShouldSetPanResponderCapture: (e, gestureState) => {...}`

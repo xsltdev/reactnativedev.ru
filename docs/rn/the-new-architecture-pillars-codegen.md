@@ -122,7 +122,7 @@ codegen
 
 Кроме того, **Codegen** также создает файлы `ComponentDescriptor.h` и `RCTComponentViewHelpers.h`: первый используется React Native и Fabric для правильного получения ссылки на нативный компонент Fabric, а второй содержит некоторые вспомогательные методы и протоколы, которые могут быть реализованы нативным представлением для правильного ответа на вызовы JSI.
 
-Для получения более подробной информации о работе Fabric ознакомьтесь с разделом [Renderer]fabric-renderer.md).
+Для получения более подробной информации о работе Fabric ознакомьтесь с разделом [Renderer](fabric-renderer.md).
 
 #### RCTThirdPartyFabricComponentsProvider
 

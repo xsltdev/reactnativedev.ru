@@ -16,9 +16,9 @@
 
 Это свойство работает только на Android API 28 и выше. Для получения аналогичной функциональности на более низких версиях Android API используйте свойство [`elevation`](view-style-props.md#elevation-android).
 
-| Type              |
-| ----------------- |
-| [color]colors.md) |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
 
 ### `shadowOffset` :simple-ios:
 

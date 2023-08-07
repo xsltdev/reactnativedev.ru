@@ -16,9 +16,9 @@ description: InputAccessoryView - компонент, позволяющий н�
 
 ### backgroundColor
 
-| Тип               |
-| ----------------- |
-| [color]colors.md) |
+| Тип                |
+| ------------------ |
+| [color](colors.md) |
 
 ### nativeID
 

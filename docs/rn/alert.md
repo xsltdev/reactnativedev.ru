@@ -80,7 +80,7 @@ static prompt: (
 | `callbackOrButtons`   | function<hr/>`AlertButton` | Если передать функцию, то она будет вызвана со значением подсказки<br/>`(text: string) => void`, когда пользователь нажмет кнопку 'OK'.<hr/>Если передать массив, то кнопки будут сконфигурированы на основе содержимого массива. |
 | `type`                | `AlertType`                | При этом настраивается ввод текста.                                                                                                                                                                                               |
 | `defaultValue`        | string                     | Текст по умолчанию в текстовом вводе.                                                                                                                                                                                             |
-| `keyboardType`        | string                     | Тип клавиатуры первого текстового поля (если оно существует). Один из TextInput [`keyboardTypes`]textinput.md#keyboardtype).                                                                                                      |
+| `keyboardType`        | string                     | Тип клавиатуры первого текстового поля (если оно существует). Один из TextInput [`keyboardTypes`](textinput.md#keyboardtype).                                                                                                     |
 | `options`             | `Options`                  | Дополнительная конфигурация Alert.                                                                                                                                                                                                |
 
 ## Определения типа

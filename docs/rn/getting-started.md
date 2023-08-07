@@ -315,7 +315,7 @@
 
     		-   Если вы хотите добавить этот новый код React Native в существующее приложение, ознакомьтесь с руководством [Integration guide](integration-with-existing-apps.md).
 
-    		Если вам интересно узнать больше о React Native, ознакомьтесь с [Introduction to React Native](introduction.md).
+    		Если вам интересно узнать больше о React Native, ознакомьтесь с [Introduction to React Native](index.md).
 
     		<!-- 0016.part.md -->
 
@@ -506,7 +506,7 @@
 
     		-   Если вы хотите добавить этот новый код React Native в существующее приложение, ознакомьтесь с руководством [Integration guide](integration-with-existing-apps.md).
 
-    		Если вам интересно узнать больше о React Native, ознакомьтесь с [Introduction to React Native](introduction.md).
+    		Если вам интересно узнать больше о React Native, ознакомьтесь с [Introduction to React Native](index.md).
 
     === "Windows"
 
@@ -771,7 +771,7 @@
 
     		-   Если вы хотите добавить этот новый код React Native в существующее приложение, ознакомьтесь с руководством [Integration guide](integration-with-existing-apps.md).
 
-    		Если вам интересно узнать больше о React Native, ознакомьтесь с [Introduction to React Native](introduction.md).
+    		Если вам интересно узнать больше о React Native, ознакомьтесь с [Introduction to React Native](index.md).
 
     		<!-- 0017.part.md -->
 
@@ -1005,7 +1005,7 @@
 
     		-   Если вы хотите добавить этот новый код React Native в существующее приложение, ознакомьтесь с руководством [Integration guide](integration-with-existing-apps.md).
 
-    		Если вам интересно узнать больше о React Native, ознакомьтесь с [Introduction to React Native](introduction.md).
+    		Если вам интересно узнать больше о React Native, ознакомьтесь с [Introduction to React Native](index.md).
 
     		<!-- 0013.part.md -->
 

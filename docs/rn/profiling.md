@@ -36,7 +36,7 @@ $ <path_to_android_sdk>/platform-tools/systrace/systrace.py --time=10 -o trace.h
 
 После открытия трассировки в браузере (предпочтительно Chrome) вы должны увидеть что-то вроде этого:
 
-![Пример]SystraceExample.png)
+![Пример](SystraceExample.png)
 
 !!!note "Подсказка"
 

@@ -14,9 +14,9 @@
 
 ### `color`
 
-| Type              |
-| ----------------- |
-| [color]colors.md) |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
 
 ### `fontFamily`
 
@@ -90,9 +90,9 @@
 
 ### `textDecorationColor` :simple-ios:
 
-| Type              |
-| ----------------- |
-| [color]colors.md) |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
 
 ### `textDecorationLine`
 
@@ -108,9 +108,9 @@
 
 ### `textShadowColor`
 
-| Type              |
-| ----------------- |
-| [color]colors.md) |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
 
 ### `textShadowOffset`
 

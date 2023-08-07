@@ -34,9 +34,9 @@ description: Параметры стиля изображения
 
 ### backgroundColor
 
-| Тип               |
-| ----------------- |
-| [color]colors.md) |
+| Тип                |
+| ------------------ |
+| [color](colors.md) |
 
 ### borderBottomLeftRadius
 
@@ -52,9 +52,9 @@ description: Параметры стиля изображения
 
 ### borderColor
 
-| Тип               |
-| ----------------- |
-| [color]colors.md) |
+| Тип                |
+| ------------------ |
+| [color](colors.md) |
 
 ### borderRadius
 
@@ -137,6 +137,6 @@ description: Параметры стиля изображения
 
 Изменяет цвет всех непрозрачных пикселей на `tintColor`.
 
-| Тип               |
-| ----------------- |
-| [color]colors.md) |
+| Тип                |
+| ------------------ |
+| [color](colors.md) |

@@ -38,9 +38,9 @@
 
 Цвет фона строки состояния.
 
-| Type              | Required | Default                                                                |
-| ----------------- | -------- | ---------------------------------------------------------------------- |
-| [color]colors.md) | No       | default system StatusBar background color, or `'black'` if not defined |
+| Type               | Required | Default                                                                |
+| ------------------ | -------- | ---------------------------------------------------------------------- |
+| [color](colors.md) | No       | default system StatusBar background color, or `'black'` if not defined |
 
 ### `barStyle`
 

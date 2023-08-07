@@ -14,15 +14,15 @@
 
 ### `backgroundColor`
 
-| Type              |
-| ----------------- |
-| [color]colors.md) |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
 
 ### `borderBottomColor`
 
-| Type              |
-| ----------------- |
-| [color]colors.md) |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
 
 ### `borderBottomEndRadius`
 
@@ -56,9 +56,9 @@
 
 ### `borderColor`
 
-| Type              |
-| ----------------- |
-| [color]colors.md) |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
 
 ### `borderCurve` :simple-ios:
 
@@ -70,15 +70,15 @@
 
 ### `borderEndColor`
 
-| Type              |
-| ----------------- |
-| [color]colors.md) |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
 
 ### `borderLeftColor`
 
-| Type              |
-| ----------------- |
-| [color]colors.md) |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
 
 ### `borderLeftWidth`
 
@@ -96,9 +96,9 @@
 
 ### `borderRightColor`
 
-| Type              |
-| ----------------- |
-| [color]colors.md) |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
 
 ### `borderRightWidth`
 
@@ -108,9 +108,9 @@
 
 ### `borderStartColor`
 
-| Type              |
-| ----------------- |
-| [color]colors.md) |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
 
 ### `borderStyle`
 
@@ -120,9 +120,9 @@
 
 ### `borderTopColor`
 
-| Type              |
-| ----------------- |
-| [color]colors.md) |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
 
 ### `borderTopEndRadius`
 

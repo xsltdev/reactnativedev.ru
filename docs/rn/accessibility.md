@@ -45,7 +45,7 @@
 
 ### `accessibilityLabelledBy` :simple-android:
 
-Ссылка на другой элемент [nativeID]view.md#nativeid), используемый для построения сложных форм.
+Ссылка на другой элемент [nativeID](view.md#nativeid), используемый для построения сложных форм.
 Значение `accessibilityLabelledBy` должно соответствовать `nativeID` связанного элемента:
 
 ```ts
@@ -271,7 +271,7 @@
 
 ### `aria-labelledby` :simple-android:
 
-Определяет элемент, который маркирует элемент, к которому он применяется. Значение `aria-labelledby` должно соответствовать [`nativeID`]view.md#nativeid) связанного элемента:
+Определяет элемент, который маркирует элемент, к которому он применяется. Значение `aria-labelledby` должно соответствовать [`nativeID`](view.md#nativeid) связанного элемента:
 
 ```ts
 <View>
@@ -450,7 +450,7 @@
 
 ## Проверка, включено ли устройство чтения с экрана
 
-API `AccessibilityInfo` позволяет определить, активен ли в данный момент экранный считыватель. Подробности см. в документации [AccessibilityInfo]accessibilityinfo.md).
+API `AccessibilityInfo` позволяет определить, активен ли в данный момент экранный считыватель. Подробности см. в документации [AccessibilityInfo](accessibilityinfo.md).
 
 ## Отправка событий доступности :simple-android:
 

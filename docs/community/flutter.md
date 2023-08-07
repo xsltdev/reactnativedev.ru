@@ -1597,7 +1597,7 @@ Widget build(BuildContext context) {
 
 === "iOS"
 
-    ![]iOS(flutter-navigation-ios.gif)
+    ![iOS](flutter-navigation-ios.gif)
 
 ## Обнаружение жестов и обработка событий касания
 

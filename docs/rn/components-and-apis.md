@@ -4,9 +4,9 @@ description: React Native предоставляет ряд встроенных
 
 # Основные компоненты и API
 
-React Native предоставляет ряд встроенных [Core Components]intro-react-native-components.md), которые вы можете использовать в своем приложении.
+React Native предоставляет ряд встроенных [Core Components](intro-react-native-components.md), которые вы можете использовать в своем приложении.
 
-Вы не ограничены компонентами и API, поставляемыми в комплекте с React Native. Сообщество React Native насчитывает тысячи разработчиков. Если вы ищете библиотеку, которая делает что-то конкретное, обратитесь к [этому руководству по поиску библиотек]libraries.md).
+Вы не ограничены компонентами и API, поставляемыми в комплекте с React Native. Сообщество React Native насчитывает тысячи разработчиков. Если вы ищете библиотеку, которая делает что-то конкретное, обратитесь к [этому руководству по поиску библиотек](libraries.md).
 
 ## Основные компоненты
 
@@ -27,7 +27,7 @@ React Native предоставляет ряд встроенных [Core Compon
 [`ScrollView`](scrollview.md)
 : Представляет собой контейнер для прокрутки, в котором могут размещаться несколько компонентов и представлений.
 
-[`StyleSheet`]stylesheet.md)
+[`StyleSheet`](stylesheet.md)
 : Предоставляет уровень абстракции, подобный таблицам стилей CSS.
 
 ## Пользовательский интерфейс
@@ -54,23 +54,23 @@ React Native предоставляет ряд встроенных [Core Compon
 
 Многие из следующих компонентов предоставляют обертки для часто используемых классов Android.
 
-[`BackHandler`]backhandler.md)
+[`BackHandler`](backhandler.md)
 : Определение нажатия аппаратной кнопки для навигации назад.
 
 [`DrawerLayoutAndroid`](drawerlayoutandroid.md)
 : Рендеринг `DrawerLayout` на Android.
 
-[`PermissionsAndroid`]permissionsandroid.md)
+[`PermissionsAndroid`](permissionsandroid.md)
 : Предоставляет доступ к модели разрешений, представленной в Android M.
 
-[`ToastAndroid`]toastandroid.md)
+[`ToastAndroid`](toastandroid.md)
 : Создает оповещение Android Toast.
 
 ## Компоненты и API для iOS
 
 Многие из следующих компонентов предоставляют обертки для часто используемых классов UIKit.
 
-[`ActionSheetIOS`]actionsheetios.md)
+[`ActionSheetIOS`](actionsheetios.md)
 : API для отображения листа действий или листа акций iOS.
 
 ## Другие
@@ -80,25 +80,25 @@ React Native предоставляет ряд встроенных [Core Compon
 [`ActivityIndicator`](activityindicator.md)
 : Отображает круговой индикатор загрузки.
 
-[`Alert`]alert.md)
+[`Alert`](alert.md)
 : Запускает диалог предупреждения с указанным заголовком и сообщением.
 
-[`Animated`]animated.md)
+[`Animated`](animated.md)
 : Библиотека для создания плавных, мощных анимаций, которые легко создавать и поддерживать.
 
-[`Dimensions`]dimensions.md)
+[`Dimensions`](dimensions.md)
 : Предоставляет интерфейс для получения размеров устройства.
 
 [`KeyboardAvoidingView`](keyboardavoidingview.md)
 : Предоставляет вид, который автоматически перемещается с пути виртуальной клавиатуры.
 
-[`Linking`]linking.md)
+[`Linking`](linking.md)
 : Представляет общий интерфейс для взаимодействия с входящими и исходящими ссылками приложения.
 
 [`Modal`](modal.md)
 : Представляет простой способ представления контента поверх объемного представления.
 
-[`PixelRatio`]pixelratio.md)
+[`PixelRatio`](pixelratio.md)
 : Предоставляет доступ к плотности пикселей устройства.
 
 [`RefreshControl`](refreshcontrol.md)
