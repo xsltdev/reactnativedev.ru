@@ -36,6 +36,8 @@ hide:
 
     [:octicons-arrow-right-24: React Navigation](community/react-navigation.6/getting-started.md) <small>6.x</small>
 
+    :octicons-arrow-right-24: Reanimated <small>3.x</small>
+
 -   :material-tools:{ .lg .middle } **Инструменты**
 
     ***
@@ -60,4 +62,5 @@ hide:
     [![XSLT](xslt.svg){: style="height:16px;width:16px;vertical-align:middle;"} XSLT](https://xsltdev.ru/) &nbsp;&nbsp;&nbsp;
     [![БД](db.svg){: style="height:16px;width:16px;vertical-align:middle;"} Базы данных](https://dbasedev.ru/) &nbsp;&nbsp;&nbsp;
 
+<!-- https://github.com/software-mansion/react-native-reanimated -->
 <!-- https://github.com/react-native-community/hooks -->
