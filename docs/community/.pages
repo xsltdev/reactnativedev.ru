@@ -1,6 +1,7 @@
 nav:
     - index.md
     - react-navigation.6
+    - reanimated.3
     - async-storage
     - progress-view.md
     - flutter.md

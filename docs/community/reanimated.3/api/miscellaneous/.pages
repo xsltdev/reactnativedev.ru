@@ -1,0 +1,7 @@
+title: Прочее
+nav:
+    - getRelativeCoords.md
+    - interpolate.md
+    - runonJS.md
+    - runOnUI.md
+    - interpolateColors.md

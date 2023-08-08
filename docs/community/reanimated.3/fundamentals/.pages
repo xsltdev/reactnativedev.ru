@@ -1,0 +1,13 @@
+title: Основы
+nav:
+    - about.md
+    - installation.md
+    - worklets.md
+    - shared-values.md
+    - animations.md
+    - events.md
+    - custom_events.md
+    - layout_animations.md
+    - architecture.md
+    - web-support.md
+    - troubleshooting.md
