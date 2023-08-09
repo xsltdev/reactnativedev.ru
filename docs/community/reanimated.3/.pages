@@ -1,5 +1,12 @@
 title: Reanimated 3.x
 nav:
     - fundamentals
-    - api
-    - tutorial.md
+    - animations
+    - core
+    - scroll
+    - device
+    - layout-animations
+    - shared-element-transitions
+    - threading
+    - utilities
+    - advanced
