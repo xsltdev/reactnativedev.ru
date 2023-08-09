@@ -66,3 +66,7 @@ description: Устранение распространенных пробле�
     ```bash
     npm install
     ```
+
+## Ссылки
+
+-   [Troubleshooting common problems](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/troubleshooting/)

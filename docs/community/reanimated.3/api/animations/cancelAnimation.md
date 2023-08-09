@@ -1,26 +1,29 @@
 ---
-id: cancelAnimation
-title: cancelAnimation
-sidebar_label: cancelAnimation
+description: Отменяет анимацию, связанную с заданным shared value.
 ---
 
-Cancels animation linked to given shared value.
+# cancelAnimation
 
-### Arguments
+Отменяет анимацию, связанную с заданным shared value.
 
-#### `sharedValue` [SharedValueRef]
+## Аргументы
 
-The value for which we want the previously started animation to be cancelled.
-If there was no animation started on that value, or the animation completed, no error will be thrown.
+### `sharedValue` [SharedValueRef]
 
-## Example
+Значение, для которого мы хотим отменить ранее запущенную анимацию. Если для этого значения не было запущено анимации или она завершилась, то ошибка не возникнет.
 
-```js {5}
+## Пример
+
+```js
 const someValue = useSharedValue(0);
 
 const gestureHandler = useAnimatedGestureHandler({
-  onStart: (_, ctx) => {
-    cancelAnimation(someValue);
-  },
+    onStart: (_, ctx) => {
+        cancelAnimation(someValue);
+    },
 });
 ```
+
+## Ссылки
+
+-   [cancelAnimation](https://docs.swmansion.com/react-native-reanimated/docs/api/animations/cancelAnimation/)
