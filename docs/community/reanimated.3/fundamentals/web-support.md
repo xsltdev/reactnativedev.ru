@@ -1,145 +1,147 @@
 ---
-id: web-support
-title: Web Support
-sidebar_label: Web Support
+description: Запуск Reanimated возможен и в веб-браузере. В этом случае все функциональные возможности реализованы исключительно на JavaScript, поэтому эффективность анимации может быть ниже
 ---
 
-It's possible to launch Reanimated in a web browser. For that case all of the functionalities are implemented purely in JavaScript, hence the efficiency of the animations might be lower.
+# Web-поддержка
 
-Reanimated for Web requires the following configuration steps. You need to add [`@babel/plugin-proposal-export-namespace-from`](https://babeljs.io/docs/en/babel-plugin-proposal-export-namespace-from) as well as Reanimated Babel plugin to your `babel.config.js`.
+Запуск Reanimated возможен и в веб-браузере. В этом случае все функциональные возможности реализованы исключительно на JavaScript, поэтому эффективность анимации может быть ниже.
+
+Reanimated для Web требует следующих шагов по настройке. Необходимо добавить [`@babel/plugin-proposal-export-namespace-from`](https://babeljs.io/docs/en/babel-plugin-proposal-export-namespace-from), а также плагин Reanimated Babel в ваш `babel.config.js`.
 
 ```bash
 yarn add @babel/plugin-proposal-export-namespace-from
 ```
 
-```js {5,6}
+```js
 module.exports = {
-  presets: [
-      ...
-  ],
-  plugins: [
-    ...
-    '@babel/plugin-proposal-export-namespace-from',
-    'react-native-reanimated/plugin',
-  ],
+    presets: [
+        // ...
+    ],
+    plugins: [
+        // ...
+        '@babel/plugin-proposal-export-namespace-from',
+        'react-native-reanimated/plugin',
+    ],
 };
 ```
 
-If you use
-[playground](https://github.com/software-mansion-labs/reanimated-2-playground)
-app and want to start it in the browser just type:
+Если вы используете [playground](https://github.com/software-mansion-labs/reanimated-2-playground) и хотите запустить его в браузере, просто введите:
+
 ```shell
 yarn web
 ```
 
-If you want to start the example applications from the 
-[reanimated repository](https://github.com/software-mansion/react-native-reanimated)
-you need to run the following command inside the `Example` directory:
+Если вы хотите запустить примеры приложений из [reanimated репозитория](https://github.com/software-mansion/react-native-reanimated), то необходимо выполнить следующую команду внутри каталога `Example`:
+
 ```shell
 yarn start-web
 ```
 
-## Webpack support
+## Поддержка Webpack
 
-If you want to use Reanimated in a `webpack` app you should adjust your `webpack` config.
+Если вы хотите использовать Reanimated в приложении на `webpack`, вам необходимо настроить конфигурацию `webpack`.
 
-Example webpack config file with Reanimated support:
+Пример конфигурационного файла webpack с поддержкой Reanimated:
 
-```js {6,14,15,34}
+```js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: [
-    'babel-polyfill', 
-    './index.js'
-  ],
-  plugins: [
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: './index.html',
-    }),
-    new webpack.EnvironmentPlugin({ JEST_WORKER_ID: null }),
-    new webpack.DefinePlugin({ process: { env: {} } })
-  ],
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              '@babel/preset-react',
-              { plugins: ['@babel/plugin-proposal-class-properties'] }
-            ],
-          },
-        },
-      },
+    entry: ['babel-polyfill', './index.js'],
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: './index.html',
+        }),
+        new webpack.EnvironmentPlugin({
+            JEST_WORKER_ID: null,
+        }),
+        new webpack.DefinePlugin({ process: { env: {} } }),
     ],
-  },
-  resolve: {
-    alias: { 'react-native$': 'react-native-web', },
-    extensions: ['.web.js', '.js'],
-  },
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx)$/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            '@babel/preset-react',
+                            {
+                                plugins: [
+                                    '@babel/plugin-proposal-class-properties',
+                                ],
+                            },
+                        ],
+                    },
+                },
+            },
+        ],
+    },
+    resolve: {
+        alias: { 'react-native$': 'react-native-web' },
+        extensions: ['.web.js', '.js'],
+    },
 };
 ```
 
-## Web without a Babel plugin
+## Web без плагина Babel {#web-without-a-babel-plugin}
 
-It is possible to use Reanimated without the Babel plugin (`react-native-reanimated/plugin` on the Web, with some additional configuration.
+В Web можно использовать Reanimated без плагина Babel (`react-native-reanimated/plugin`), с некоторыми дополнительными настройками.
 
-Reanimated hooks all accept optional dependency arrays. Under the hood, the Reanimated Babel plugin inserts these for you.
+Все хуки Reanimated принимают необязательные массивы зависимостей. Под капотом плагин Reanimated Babel вставляет их за вас.
 
-In order to use Reanimated without a Babel/SWC plugin, you need to explicitly pass the dependency array whenever you use a Reanimated hook.
+Чтобы использовать Reanimated без плагина Babel/SWC, необходимо явно передавать массив зависимостей каждый раз, когда вы используете хук Reanimated.
 
-Passing a dependency array is valid on both Web and native. Adding them will not negatively impact iOS or Android.
+Передача массива зависимостей актуальна как для Web, так и для native. Их добавление не окажет негативного влияния на iOS или Android.
 
-Make sure the following hooks have a dependency array as the last argument:
+Убедитесь, что следующие хуки имеют массив зависимостей в качестве последнего аргумента:
 
-- `useDerivedValue`
-- `useAnimatedStyle`
-- `useAnimatedProps`
-- `useAnimatedReaction`
+-   `useDerivedValue`
+-   `useAnimatedStyle`
+-   `useAnimatedProps`
+-   `useAnimatedReaction`
 
-For example:
+Например:
 
 ```ts
 const sv = useSharedValue(0);
 const dv = useDerivedValue(
-  () => sv.value + 1, 
-  [sv] // dependency array here
+    () => sv.value + 1,
+    [sv] // dependency array here
 );
 ```
 
-Be sure to pass the dependency itself (`sv`) and not `sv.value` to the dependency array.
+Обязательно передавайте в массив зависимостей саму зависимость (`sv`), а не `sv.value`.
 
-> Babel users will still need to install the `@babel/plugin-proposal-class-properties` plugin.
+!!!note ""
 
+    Пользователям Babel по-прежнему необходимо установить плагин `@babel/plugin-proposal-class-properties`.
 
-### ESLint Support
+### Поддержка ESLint
 
-When you use hooks from React, they give you nice suggestions from ESLint to include all dependencies. In order to add this support to Reanimated hooks, add the following to your ESLint config:
+Когда вы используете хуки из React, они дают вам приятные предложения от ESLint включить все зависимости. Чтобы добавить эту поддержку в хуки Reanimated, добавьте в конфигурацию ESLint следующее:
 
 ```json
 {
-  "rules": {
-    "react-hooks/exhaustive-deps": [
-      "error",
-      {
-        "additionalHooks": "(useAnimatedStyle|useDerivedValue|useAnimatedProps)"
-      }
-    ]
-  }
+    "rules": {
+        "react-hooks/exhaustive-deps": [
+            "error",
+            {
+                "additionalHooks": "(useAnimatedStyle|useDerivedValue|useAnimatedProps)"
+            }
+        ]
+    }
 }
 ```
 
-This assumes you've already installed the `react-hooks` eslint [plugin](https://www.npmjs.com/package/eslint-plugin-react-hooks).
+При этом предполагается, что у вас уже установлен [плагин](https://www.npmjs.com/package/eslint-plugin-react-hooks) eslint `react-hooks` .
 
-If you're using ESLint autofix, the ESLint plugin may add `.value` to the dependency arrays, rather than the root dependency. In these cases, you should update the array yourself.
+Если вы используете автофикс ESLint, то плагин ESLint может добавить `.value` в массив зависимостей, а не в корневую зависимость. В таких случаях следует обновлять массив самостоятельно.
 
 ```tsx
-const sv = useSharedValue(0)
+const sv = useSharedValue(0);
 
 // 🚨 bad, sv.value is in the array
 const dv = useDerivedValue(() => sv.value, [sv.value]);
@@ -148,20 +150,24 @@ const dv = useDerivedValue(() => sv.value, [sv.value]);
 const dv = useDerivedValue(() => sv.value, [sv]);
 ```
 
-## Solito / Next.js Compatibility
+## Совместимость с Solito / Next.js
 
-There is an experimental SWC plugin in the works. However, given that this may not work properly, you can use the ["Web without a Babel plugin"](#web-without-a-babel-plugin) instructions above.
+В разработке находится экспериментальный плагин SWC. Однако, учитывая, что он может работать некорректно, вы можете воспользоваться инструкцией ["Web без плагина Babel"](#web-without-a-babel-plugin), приведенной выше.
 
 ### Next.js Polyfill
 
-In order to use Reanimated with Next.js / Solito, you'll need to add the `raf` polyfill for `requestAnimationFrame` to not throw on the server:
+Для того чтобы использовать Reanimated с Next.js / Solito, необходимо добавить полифилл `raf` для того, чтобы `requestAnimationFrame` не бросался на сервер:
 
 ```sh
 yarn add raf
 ```
 
-Add the following to the top of your `_app.tsx`:
+Добавьте в верхнюю часть файла `_app.tsx` следующее:
 
 ```ts
-import 'raf/polyfill'
+import 'raf/polyfill';
 ```
+
+## Ссылки
+
+-   [Web Support](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/web-support/)

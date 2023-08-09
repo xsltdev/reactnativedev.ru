@@ -1,144 +1,147 @@
 ---
-id: shared-values
-title: Shared Values
-sidebar_label: Shared Values
+description: Общие значения (Shared Values) являются одной из фундаментальных концепций Reanimated
 ---
 
-Shared Values are among the fundamental concepts behind Reanimated.
-If you are familiar with React Native's [Animated API](https://reactnative.dev/docs/animated) you can compare them to `Animated.Values`.
-They serve a similar purpose of carrying "animateable" data, providing a notion of reactiveness, and driving animations.
-We will discuss each of those key roles of Shared Values in sections below.
-At the end we present a brief overview of the differences between Shared Values and `Animated.Value` for the readers familiar with the `Animated` API.
+# Общие значения
 
-## Carrying data
+**Общие значения** (Shared Values) являются одной из фундаментальных концепций Reanimated.
+Если вы знакомы с [Animated API](../../../rn/animated.md) React Native, то можете сравнить их с `Animated.Values`.
 
-One of the primary goals of Shared Values is to provide a notion of shared memory in Reanimated (hence their name).
-As you might've learned in the article about [worklets](worklets), Reanimated runs animation code in a separate thread using a separate JS VM context.
-Shared Values make it possible to maintain a reference to mutable data that can be read and modified securely across those threads.
+Они выполняют аналогичные функции: переносят "одушевляемые" данные, обеспечивают понятие реактивности и управляют анимацией.
 
-Shared Value objects serve as references to pieces of shared data that can be accessed and modified using their `.value` property.
-It is important to remember that whether you want to access or update shared data, you should use `.value` property (one of the most common sources of mistakes in Reanimated code, is to expect the Shared Value reference to return the data instead of accessing it's `.value` property).
+Ниже мы рассмотрим каждую из этих ключевых ролей Shared Values. В конце мы представим краткий обзор различий между Shared Values и `Animated.Value` для читателей, знакомых с API `Animated`.
 
-In order to provide secure and fast ways of accessing shared data across two threads, we had to make some tradeoffs when designing Shared Values.
-As, during animations, updates most of the time happen on the UI thread, Shared Values are optimized to be updated and read from the UI thread.
-Hence, read and writes done from the UI thread are all synchronous, which means that when running from a worklet on the UI thread, you can update the value and expect it to be updated immediately after that call.
-The consequence of this choice is that updates made on the React Native JS thread are all asynchronous.
-Instead of those updates being immediate in such case, Reanimated core schedules the update to be performed on the UI thread, this way preventing any concurrency issues.
-When accessing and updating Shared Values from the React Native JS thread, it is best to think about it as if the value worked the same way as React's state.
-We can make updates to the state, but the updates are not immediate, and in order to read the data we need to wait till the next re-render.
+## Перенос данных
 
-In order to create a Shared Value reference, you should use `useSharedValue` hook:
+Одна из основных целей Shared Values - предоставить понятие общей памяти в Reanimated (отсюда и их название).
+
+Как вы уже могли узнать из статьи о [worklets](worklets.md), Reanimated выполняет код анимации в отдельном потоке, используя отдельный контекст JS VM. Shared Values позволяют хранить ссылки на мутируемые данные, которые можно безопасно читать и изменять в этих потоках.
+
+Объекты Shared Value служат ссылками на фрагменты общих данных, доступ к которым и их изменение возможны с помощью свойства `.value`. Важно помнить, что для доступа или обновления общих данных необходимо использовать свойство `.value` (один из наиболее распространенных источников ошибок в коде Reanimated - ожидание, что ссылка на Shared Value вернет данные, а не обращение к свойству `.value`).
+
+Для того чтобы обеспечить безопасный и быстрый доступ к общим данным в двух потоках, при разработке Shared Values пришлось пойти на некоторые компромиссы.
+
+Поскольку во время анимации обновления чаще всего происходят в потоке UI, Shared Values оптимизированы для обновления и чтения из потока UI. Таким образом, чтение и запись из потока UI являются синхронными, что означает, что при запуске из воркета в потоке UI можно обновить значение и ожидать, что оно будет обновлено сразу после этого вызова. Следствием такого выбора является то, что обновления, выполняемые в потоке React Native JS, являются асинхронными.
+
+Вместо немедленного обновления в этом случае ядро Reanimated планирует обновление в потоке UI, что позволяет избежать проблем с параллелизмом. При обращении к общим значениям и их обновлении из потока React Native JS лучше всего думать о том, что значение работает так же, как и состояние React. Мы можем обновлять состояние, но обновления происходят не сразу, и для того, чтобы прочитать данные, необходимо дождаться следующего рендеринга.
+
+Для того чтобы создать ссылку на Shared Value, необходимо использовать хук `useSharedValue`:
 
 ```js
 const sharedVal = useSharedValue(3.1415);
 ```
 
-The Shared Value constructor hook takes a single argument which is the initial payload of the Shared Value.
-This can be any primitive or nested data like object, array, number, string or boolean.
+Конструктор Shared Value принимает один аргумент, который является начальной полезной нагрузкой Shared Value. Это могут быть любые примитивные или вложенные данные, такие как объект, массив, число, строка или булево.
 
-In order to update a Shared Value from the React Native thread or from a worklet running on the UI thread, you should set a new value onto the `.value` property.
+Для обновления Shared Value из потока React Native или из воркета, запущенного в потоке UI, необходимо установить новое значение в свойство `.value`.
 
-```js {4,7}
+```js
 import { useSharedValue } from 'react-native-reanimated';
 
 function SomeComponent() {
-  const sharedVal = useSharedValue(0);
-  return (
-    <Button
-      onPress={() => (sharedVal.value = Math.random())}
-      title="Randomize"
-    />
-  );
+    const sharedVal = useSharedValue(0);
+    return (
+        <Button
+            onPress={() =>
+                (sharedVal.value = Math.random())
+            }
+            title="Randomize"
+        />
+    );
 }
 ```
 
-In the above example we update the value asynchronously from the React Native JS thread.
-Updates can be done synchronously when making them from within a worklet, like so:
+В приведенном выше примере мы обновляем значение асинхронно из потока React Native JS.
+Обновления можно выполнять синхронно, если делать их изнутри воркета, например, так:
 
-```js {7,11}
+```js
 import Animated, {
-  useSharedValue,
-  useAnimatedScrollHandler,
+    useSharedValue,
+    useAnimatedScrollHandler,
 } from 'react-native-reanimated';
 
 function SomeComponent({ children }) {
-  const scrollOffset = useSharedValue(0);
+    const scrollOffset = useSharedValue(0);
 
-  const scrollHandler = useAnimatedScrollHandler({
-    onScroll: (event) => {
-      scrollOffset.value = event.contentOffset.y;
-    },
-  });
+    const scrollHandler = useAnimatedScrollHandler({
+        onScroll: (event) => {
+            scrollOffset.value = event.contentOffset.y;
+        },
+    });
 
-  return (
-    <Animated.ScrollView onScroll={scrollHandler}>
-      {children}
-    </Animated.ScrollView>
-  );
+    return (
+        <Animated.ScrollView onScroll={scrollHandler}>
+            {children}
+        </Animated.ScrollView>
+    );
 }
 ```
 
-Above, the scroll handler is a worklet and runs the scroll event logic on the UI thread.
-Updates made in that worklet are synchronous.
+Выше обработчик прокрутки является воркетом и выполняет логику события прокрутки в потоке UI.
+Обновления, выполняемые в этом ворклете, являются синхронными.
 
-## Reactiveness with Shared Values
+## Реактивность с помощью Shared Values
 
-Second most important aspect of Shared Values is that they provide a notion of reactiveness to Reanimated framework.
-By that, we mean that updates made to Shared Values can trigger corresponding code execution on the UI thread, that can further result in starting animations, view updates, etc.
+Второй важнейший аспект Shared Values заключается в том, что они обеспечивают понятие реактивности для фреймворка Reanimated. Под этим мы понимаем, что обновление Shared Values может инициировать выполнение соответствующего кода в потоке UI, что в дальнейшем может привести к запуску анимации, обновлению вида и т.д.
 
-The reactiveness layer has been designed to be fully transparent from the developer perspective.
-It is based on the concept of Shared Values being captured by reactive worklets (called internally "mapper worklets").
+Слой реактивности спроектирован таким образом, чтобы быть полностью прозрачным с точки зрения разработчика. В его основе лежит концепция захвата общих значений реактивными рабочими элементами (называемыми внутри компании "mapper worklets").
 
-Currently, there are two ways how you can create a reactive worklet.
-This can be done either by using [`useAnimatedStyle`](../api/hooks/useAnimatedStyle) or [`useDerivedValue`](../api/hooks/useDerivedValue) hooks.
-When a Shared Value is captured by a worklet provided to these hooks, the worklet will re-run upon the Shared Value change.
-Under the hood, Reanimated engine builds a graph of dependencies between Shared Values and reactive worklets that allows us to only execute the code that needs to update and to make sure updates are done in the correct order.
-For example, when we have a Shared Value `x`, a derived value `y` that uses `x`, and an animated style that uses both `x` and `y`, we only re-run the derived value worklet when `x` updates.
-In such a case, we will also always run the derived value `y` updater first prior to running the animated style updater, because the style depends on it.
+В настоящее время существует два способа создания реактивного рабочего модуля. Это можно сделать либо с помощью хуков [`useAnimatedStyle`](../api/hooks/useAnimatedStyle.md), либо с помощью хука [`useDerivedValue`](../api/hooks/useDerivedValue.md). Когда Shared Value перехватывается заготовкой, связанной с этими хуками, заготовка будет перезапускаться при изменении Shared Value.
 
-Let us now look at a code example:
+Под капотом движок Reanimated строит граф зависимостей между Shared Value и реактивными ворклетами, что позволяет нам выполнять только тот код, который нуждается в обновлении, и следить за тем, чтобы обновления происходили в правильном порядке.
 
-```js {3,7,11,17}
+Например, если у нас есть общее значение `x`, производное значение `y`, которое использует `x`, и анимированный стиль, который использует и `x`, и `y`, мы повторно запускаем ворклет производного значения только после обновления `x`.
+
+В этом случае мы также всегда будем сначала запускать апдейтер производного значения `y`, а затем апдейтер анимированного стиля, поскольку стиль зависит от него.
+
+Теперь рассмотрим пример кода:
+
+```js
 import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
+    useSharedValue,
+    useAnimatedStyle,
 } from 'react-native-reanimated';
 
 function Box() {
-  const offset = useSharedValue(0);
+    const offset = useSharedValue(0);
 
-  const animatedStyles = useAnimatedStyle(() => {
-    return {
-      transform: [{ translateX: offset.value }],
-    };
-  });
+    const animatedStyles = useAnimatedStyle(() => {
+        return {
+            transform: [{ translateX: offset.value }],
+        };
+    });
 
-  return (
-    <>
-      <Animated.View style={[styles.box, animatedStyles]} />
-      <Button onPress={() => (offset.value = Math.random() * 255)} title="Move" />
-    </>
-  );
+    return (
+        <>
+            <Animated.View
+                style={[styles.box, animatedStyles]}
+            />
+            <Button
+                onPress={() =>
+                    (offset.value = Math.random() * 255)
+                }
+                title="Move"
+            />
+        </>
+    );
 }
 ```
 
-In the above code, we define `offset` Shared Value which is used inside `useAnimatedStyle` reactive worklet.
-The `offset` Shared Value is set to `0` initially, and we added a button that updates the value using `Math.random()`.
-This way each time we press on the button, the `offset` will update to a random value from `0` to `1`.
-Since animated style worklets are reactive, and in our case they depend on a single `offset` Shared Variable, the worklet won't be executed except from the initial run, or unless the value is updated.
-Upon the button press, and when the value updates, Reanimated core will execute dependent worklets.
-In our case that'd be our animated style worklet.
-As a result, the worklet will re-execute causing the style to be updated.
-Since in `useAnimatedStyle` we take `offset`'s value, multiply it by `255` and map that to the x-translation of the view, the view will immediately be shifted to a new location that is from `0` to `255` pixels far from the initial view position.
-This is what you will observe:
+В приведенном выше коде мы определяем общее значение `offset`, которое используется внутри реактивного заготовки `useAnimatedStyle`. Изначально значение `offset` Shared Value установлено в `0`, и мы добавили кнопку, которая обновляет это значение с помощью `Math.random()`.
 
-![](/docs/shared-values/sv-immediate.gif)
+Таким образом, при каждом нажатии на кнопку значение `offset` будет обновляться до случайного значения от `0` до `1`. Поскольку заготовки в анимированном стиле являются реактивными, а в нашем случае они зависят от единственной общей переменной `offset`, заготовка не будет выполняться, кроме как при первоначальном запуске, или если значение не будет обновлено. При нажатии кнопки и обновлении значения ядро Reanimated выполнит зависимые от него заготовки. В нашем случае это будет заготовка анимированного стиля.
 
-## Driving animations
+В результате этот воркет будет повторно выполнен, что приведет к обновлению стиля. Поскольку в `useAnimatedStyle` мы берем значение `offset`, умножаем его на `255` и сопоставляем с x-трансляцией вида, вид сразу же будет смещен в новое место, удаленное от `0` до `255` пикселей от начальной позиции вида.
 
-Animations in Reanimated are first-class citizens, and the library comes bundled with a number of utility methods that help you run and customize animations (refer to the section about [animations](animations) to learn about the APIs in Reanimated for controlling animations).
-One of the ways for animations to be launched is by starting an animated transition of a Shared Value.
-This can be done by wrapping the target value with one of the animation utility methods from reanimated library (e.g. [`withTiming`](../api/animations/withTiming) or [`withSpring`](../api/animations/withSpring)):
+Именно это вы и будете наблюдать:
+
+![Реактивность с помощью Shared Values](sv-immediate.gif)
+
+## Запуск анимаций
+
+Анимации в Reanimated являются первоклассными гражданами, и библиотека поставляется с рядом вспомогательных методов, которые помогают запускать и настраивать анимации (обратитесь к разделу [animations](animations.md), чтобы узнать об API в Reanimated для управления анимациями).
+Одним из способов запуска анимации является запуск анимированного перехода Shared Value.
+Это можно сделать, обернув целевое значение одним из методов анимации из библиотеки Reanimated (например, [`withTiming`](../api/animations/withTiming.md) или [`withSpring`](../api/animations/withSpring.md)):
 
 ```js
 import { withTiming } from 'react-native-reanimated';
@@ -146,67 +149,75 @@ import { withTiming } from 'react-native-reanimated';
 someSharedValue.value = withTiming(50);
 ```
 
-In the above code the `offset` Shared Value instead of being set to `50` immediately, will transition from the current value to `50` using time-based animation.
-Of course, launching animations this way can be done both from the UI and from the React Native JS thread.
-Below is a complete code example which is the modified version of the example from the previous section.
-Here, instead of updating the `offset` value immediately, we perform an animated transition with a timing curve.
+В приведенном выше коде общее значение `offset` вместо того, чтобы сразу установиться в `50`, будет переходить от текущего значения к `50` с помощью анимации, основанной на времени.
 
-```js {17}
-import Animated, { withSpring } from 'react-native-reanimated';
+Разумеется, запускать анимацию таким образом можно как из пользовательского интерфейса, так и из JS-потока React Native. Ниже приведен полный пример кода, который является модифицированной версией примера из предыдущего раздела.
+
+Здесь вместо немедленного обновления значения `offset` мы выполняем анимированный переход с помощью кривой времени.
+
+```js
+import Animated, {
+    withSpring,
+} from 'react-native-reanimated';
 
 function Box() {
-  const offset = useSharedValue(0);
+    const offset = useSharedValue(0);
 
-  const animatedStyles = useAnimatedStyle(() => {
-    return {
-      transform: [{ translateX: offset.value }],
-    };
-  });
+    const animatedStyles = useAnimatedStyle(() => {
+        return {
+            transform: [{ translateX: offset.value }],
+        };
+    });
 
-  return (
-    <>
-      <Animated.View style={[styles.box, animatedStyles]} />
-      <Button
-        onPress={() => {
-          offset.value = withSpring(Math.random() * 255);
-        }}
-        title="Move"
-      />
-    </>
-  );
+    return (
+        <>
+            <Animated.View
+                style={[styles.box, animatedStyles]}
+            />
+            <Button
+                onPress={() => {
+                    offset.value = withSpring(
+                        Math.random() * 255
+                    );
+                }}
+                title="Move"
+            />
+        </>
+    );
 }
 ```
 
-The only change we made in the above code compared to the example from the previous section, is that we wrapped `Math.random()` call that updates the `offset` with `withSpring` call.
-As a result, the updates to the view's translation will be smooth:
+Единственное изменение, которое мы сделали в приведенном коде по сравнению с примером из предыдущего раздела, - это обернули вызов `Math.random()`, обновляющий `offset`, вызовом `withSpring`.
 
-![](/docs/shared-values/sv-spring.gif)
+В результате обновление трансляции представления будет происходить плавно:
 
-If you want to learn how to customize animations or get notified when the animation is finished check the API of the animation method you want to use, e.g., [`withTiming`](../api/animations/withTiming) or [`withSpring`](../api/animations/withSpring).
+![Запуск анимаций](sv-spring.gif)
 
-### Animation progress
+Если вы хотите узнать, как настроить анимацию или получить уведомление о ее завершении, обратитесь к API метода анимации, который вы хотите использовать, например, [`withTiming`](../api/animations/withTiming) или [`withSpring`](../api/animations/withSpring).
 
-In order to retrieve the current state of the animated transition started on a Shared Value we can access the `.value` property of the Shared Value.
-After the Shared Value transition is started, the `.value` property will be in sync with the animation progress.
-That is, when the initial value is `0` and we start animated transition using `withTiming(50)` that will take 300ms, we should expect the reads of `.value` property to return a number from `0` to `50` that will correspond to the current position of the value as the animation progresses.
+### Прогресс анимации
 
-### Interrupting animations
+Для получения текущего состояния анимированного перехода, запущенного на Shared Value, мы можем обратиться к свойству `.value` Shared Value. После запуска перехода Shared Value свойство `.value` будет синхронизировано с прогрессом анимации.
 
-Thanks to the fact that Shared Values keep the state of their animated transition, we can make all animations fully interruptible.
-This means that you can make updates to the Shared Value even if it is currently running the animation without worrying that this will cause an unexpected and sudden animation glitch.
-Overwriting the value in such a case will result in the previous animation being interrupted.
-If the newly assigned value is a number (or anything static), that new value will be immediately assigned to the Shared Value, and the previously running animation will be cancelled.
-In case the newly assigned value is also an animation, the previously running animation will smoothly transition into a new one.
-Animation parameters such as velocity will transfer as well, which is particularly important in spring-based animations.
-This allows to achieve a really smooth transform from one animation into another.
-This behavior is demonstrated on the clip below where we just do more frequent taps on the button such that the new animation starts while the previous one is still running (there are no code changes compared to the previous example).
+То есть, если начальное значение равно `0` и мы запускаем анимированный переход с помощью `withTiming(50)`, который займет 300 мс, то следует ожидать, что чтение свойства `.value` вернет число от `0` до `50`, которое будет соответствовать текущему положению значения по мере выполнения анимации.
 
-![](/docs/shared-values/sv-interruption.gif)
+### Прерывание анимации
 
-### Cancelling animations
+Благодаря тому, что Shared Values сохраняют состояние своего анимированного перехода, мы можем сделать все анимации полностью прерываемыми.
 
-There are cases in which we want to stop the currently running animation without starting a new one.
-In reanimated, this can be done using the [`cancelAnimation`](../api/animations/cancelAnimation) method:
+Это означает, что можно вносить изменения в Shared Value, даже если в данный момент выполняется анимация, не опасаясь, что это приведет к неожиданному и внезапному сбою анимации. Перезапись значения в этом случае приведет к прерыванию предыдущей анимации.
+
+Если вновь присвоенное значение является числом (или чем-либо статическим), то это новое значение будет немедленно присвоено Shared Value, а ранее запущенная анимация будет отменена.
+
+Если же вновь присвоенное значение также является анимацией, то ранее запущенная анимация плавно перейдет в новую. При этом будут передаваться и такие параметры анимации, как скорость, что особенно важно для анимаций, основанных на пружинах.
+
+Это позволяет добиться действительно плавного перехода от одной анимации к другой. Это поведение демонстрируется в приведенном ниже ролике, где мы просто делаем более частые нажатия на кнопку, в результате чего новая анимация запускается в то время, когда предыдущая еще работает (никаких изменений в коде по сравнению с предыдущим примером нет).
+
+![Прерывание анимации](sv-interruption.gif)
+
+### Отмена анимации
+
+Бывают случаи, когда необходимо остановить текущую анимацию, не запуская новую. В reanimated это можно сделать с помощью метода [`cancelAnimation`](../api/animations/cancelAnimation.md):
 
 ```js
 import { cancelAnimation } from 'react-native-reanimated';
@@ -216,18 +227,24 @@ cancelAnimation(someSharedValue);
 
 Animations can be cancelled both from the UI and from React Native's JS thread.
 
-## Shared Values vs Animated.Value
+## Shared Values против Animated.Value
 
-In this section we present a short summary of the differences between Shared Values and Animated.Values.
-The goal of this comparison is not to point out weaknesses of one solution over the other, but to provide a condensed reference for people familiar with `Animated`.
-If you are confused about some aspects of Shared Values and expect them to work similarly to Animated Values please let us know and we will add that to the list.
+В этом разделе мы приводим краткое описание различий между Shared Values и Animated.Values.
 
-| What                         | Animated Value                                                                                                                               | Shared Value                                                                                                                                                                                                                                                                     |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Payload                      | Only numeric and string values are supported                                                                                                 | Any primitive or nested data structure (like objects, arrays, strings, numbers, booleans).                                                                                                                                                                                       |
-| Connecting with View's props | By passing `Animated.Value` directly as a prop                                                                                               | Shared Values cannot be directly hooked as View's props. You should use `useAnimatedStyle` or `useAnimatedProps` where you can access Shared Values and return them as selected styles/props or process them to calculate the styles.                                            |
-| Updating values              | Using `value.setValue` method (which is an async call when the value is using native driver)                                                 | By updating `.value` property. Updating `.value` is sync when running on the UI thread, or async when running on the React Native JS thread.                                                                                                                                     |
-| Reading values               | Register listener with `value.addListener` to get all animated value updates.                                                                | By reading `.value` property you can access the current value stored in the Shared Value (both from the UI and React Native JS thread).                                                                                                                                          |
-| Running animations           | Use `Animated.spring`, `Animated.timing` (or others), pass Animated Value as an argument, and run `.start()` method to launch the animation. | Update `.value` prop as usual while wrapping the target with one of the animation utility methods (e.g., `withTiming`).                                                                                                                                                          |
-| Stopping animations          | Hold the reference to the animation object returned by `Animated.timing` and similar, then call `stopAnimation()` method on it.              | Use `cancelAnimation` method and pass the Shared Value that runs the animation.                                                                                                                                                                                                  |
-| Interpolating                | Use `interpolate()` member method of Animated Value.                                                                                         | Use an `interpolate` method that takes a number and config similar to Animated's interpolate, then returns an interpolated number. This can be used along with `useDerivedValue` if you need a Shared Value that automatically tracks the interpolation of another Shared Value. |
+Цель этого сравнения - не указать на недостатки одного решения по сравнению с другим, а предоставить краткую справку для тех, кто знаком с `Animated`.
+
+Если вас смущают какие-то аспекты Shared Values и вы ожидаете, что они будут работать аналогично Animated Values, пожалуйста, сообщите нам об этом, и мы добавим это в список.
+
+| Действие                | Animated Value                                                                                                                                                  | Shared Value                                                                                                                                                                                                                                                                                                               |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Полезная нагрузка       | Поддерживаются только числовые и строковые значения                                                                                                             | Любая примитивная или вложенная структура данных (например, объекты, массивы, строки, числа, булевы).                                                                                                                                                                                                                      |
+| Связь с пропсами `View` | Передача `Animated.Value` непосредственно в качестве пропса                                                                                                     | Shared Values не могут быть напрямую подключены в качестве пропсов `View`. Вы должны использовать `useAnimatedStyle` или `useAnimatedProps`, где вы можете получить доступ к Shared Values и вернуть их как выбранные стили/пропсы или обработать их для вычисления стилей.                                                |
+| Обновление значений     | С помощью метода `value.setValue` (который является асинхронным вызовом, если значение использует родной драйвер)                                               | Путем обновления свойства `.value`. Обновление свойства `.value` происходит синхронно, если оно выполняется в потоке UI, или асинхронно, если оно выполняется в потоке React Native JS.                                                                                                                                    |
+| Чтение значений         | Зарегистрируйте слушателя с помощью `value.addListener`, чтобы получать все обновления анимированных значений.                                                  | С помощью чтения свойства `.value` можно получить доступ к текущему значению, хранящемуся в Shared Value (как из пользовательского интерфейса, так и из потока React Native JS).                                                                                                                                           |
+| Запуск анимации         | Для запуска анимации используйте `Animated.spring`, `Animated.timing` (или другие), передайте в качестве аргумента Animated Value и запустите метод `.start()`. | Обновляйте пропс `.value` как обычно, обернув цель одним из вспомогательных методов анимации (например, `withTiming`).                                                                                                                                                                                                     |
+| Остановка анимации      | Удерживайте ссылку на объект анимации, возвращаемый `Animated.timing` и подобными методами, а затем вызывайте для него метод `stopAnimation()`.                 | Используйте метод `cancelAnimation` и передайте ему общее значение, которое запускает анимацию.                                                                                                                                                                                                                            |
+| Интерполяция            | Используйте метод-член `interpolate()` для Animated Value.                                                                                                      | Используйте метод `interpolate`, который принимает число и конфигурируется аналогично методу Animated's interpolate, а затем возвращает интерполированное число. Это можно использовать вместе с `useDerivedValue`, если вам нужно общее значение, которое автоматически отслеживает интерполяцию другого общего значения. |
+
+## Ссылки
+
+-   [Shared Values](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/shared-values/)

@@ -1,71 +1,89 @@
 ---
-id: custom_events
-title: Custom Events
-sidebar_label: Custom Events
+description: Помимо событий жестов и прокрутки, Reanimated предоставляет низкоуровневый API для создания собственных обработчиков анимированных событий для пользовательских анимированных компонентов
 ---
 
-Apart from gestures and scroll events, Reanimated exposes a low-level API to create custom animated event handlers for custom animated components. With this API you can create handler hooks similar to the `useAnimatedGestureHandler` and `useAnimatedScrollHandler`.
+# Пользовательские события
 
-## Handling events from custom animated component
+Помимо событий жестов и прокрутки, Reanimated предоставляет низкоуровневый API для создания собственных обработчиков анимированных событий для пользовательских анимированных компонентов. С помощью этого API можно создавать хуки, аналогичные `useAnimatedGestureHandler` и `useAnimatedScrollHandler`.
 
-Let's say that you want to animate pagination dots based on a custom component which exposes its scroll value - in this example we will use the [pager](https://github.com/callstack/react-native-pager-view) component.
+## Обработка событий от пользовательского анимированного компонента
+
+Допустим, вы хотите анимировать точки пагинации на основе пользовательского компонента, который раскрывает свое значение прокрутки - в данном примере мы будем использовать компонент [pager](https://github.com/callstack/react-native-pager-view).
 
 ```js
-const AnimatedPagerView = Animated.createAnimatedComponent(PagerView);
+const AnimatedPagerView = Animated.createAnimatedComponent(
+    PagerView
+);
 
 const PagerExample = () => {
-  const scrollPosition = useSharedValue(0);
-  return (
-    <AnimatedPagerView initialPage={0} onPageScroll={scrollHandler}>
-      <View collapsable={false}>
-        <Text>{`Page ${1}`}</Text>
-      </View>
-      <View collapsable={false}>
-        <Text>{`Page ${2}`}</Text>
-      </View>
-    </AnimatedPagerView>
-  );
+    const scrollPosition = useSharedValue(0);
+    return (
+        <AnimatedPagerView
+            initialPage={0}
+            onPageScroll={scrollHandler}
+        >
+            <View collapsable={false}>
+                <Text>{`Page ${1}`}</Text>
+            </View>
+            <View collapsable={false}>
+                <Text>{`Page ${2}`}</Text>
+            </View>
+        </AnimatedPagerView>
+    );
 };
 ```
 
-Here, we create and animated pager with a scroll shared value, which will keep the pager's current scroll value.
+Здесь мы создаем анимированный пейджер с общим значением прокрутки, которое будет сохранять текущее значение прокрутки пейджера.
 
-Next, we create a custom handler hook to listen for native events from the pager component and process them inside a worklet.
+Далее мы создаем пользовательский хук обработчика для прослушивания собственных событий от компонента pager и их обработки внутри воркета.
 
 ```js
 const scrollHandler = useAnimatedPagerScrollHandler({
-  onPageScroll: (e) => {
-    'worklet';
-    scrollPosition.value = e.offset + e.position;
-  },
+    onPageScroll: (e) => {
+        'worklet';
+        scrollPosition.value = e.offset + e.position;
+    },
 });
 ```
 
-`useAnimatedPagerScrollHandler` is our custom hook - in the _onPageScroll_ worklet we have access to the pager's current page position and offset. Combined together they give us the scroll position, which we can use to animate components or compute by how much the pager's content is offset.
+`useAnimatedPagerScrollHandler` - это наш пользовательский хук - в ворклете `onPageScroll` мы получаем доступ к текущей позиции страницы и смещению пейджера. В совокупности они дают нам позицию прокрутки, которую мы можем использовать для анимирования компонентов или вычисления того, на сколько смещено содержимое пейджера.
 
-To implement our custom hook we will use two low-level methods - `useHandler` and `useEvent`
+Для реализации нашего пользовательского хука мы будем использовать два низкоуровневых метода - `useHandler` и `useEvent`.
 
 ```js
-function useAnimatedPagerScrollHandler(handlers, dependencies) {
-  const { context, doDependenciesDiffer } = useHandler(handlers, dependencies);
+function useAnimatedPagerScrollHandler(
+    handlers,
+    dependencies
+) {
+    const { context, doDependenciesDiffer } = useHandler(
+        handlers,
+        dependencies
+    );
 
-  return useEvent(
-    (event) => {
-      'worklet';
-      const { onPageScroll } = handlers;
+    return useEvent(
+        (event) => {
+            'worklet';
+            const { onPageScroll } = handlers;
 
-      if (onPageScroll && event.eventName.endsWith('onPageScroll')) {
-        onPageScroll(event, context);
-      }
-    },
-    ['onPageScroll'],
-    doDependenciesDiffer
-  );
+            if (
+                onPageScroll &&
+                event.eventName.endsWith('onPageScroll')
+            ) {
+                onPageScroll(event, context);
+            }
+        },
+        ['onPageScroll'],
+        doDependenciesDiffer
+    );
 }
 ```
 
-`useHandler` is responsible for providing a context object for our handler and information whether it should be rebuilt.
+`useHandler` отвечает за предоставление контекстного объекта для нашего обработчика и информации о том, нужно ли его перестраивать.
 
-`useEvent` is returning a worklet event handler, which passed to an animated component, will provide native events that can be handled on the UI thread
+`useEvent` возвращает обработчик события worklet, который, будучи переданным анимированному компоненту, обеспечит нативные события, которые могут быть обработаны в потоке UI.
 
-For a full example, checkout our Example App (look for _Custom Handler Example - Pager_)
+Для получения полного примера ознакомьтесь с нашим примером приложения (ищите _Custom Handler Example - Pager_)
+
+## Ссылки
+
+-   [Custom Events](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/custom_events/)

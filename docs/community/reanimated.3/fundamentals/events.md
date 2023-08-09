@@ -1,112 +1,113 @@
 ---
-id: events
-title: Events
-sidebar_label: Events
+description: Чтобы мобильные приложения казались пользователю более естественными, мы используем анимацию для сглаживания взаимодействия пользователя с пользовательским интерфейсом приложения
 ---
 
-In the real world nothing changes instantly–there is always something between the states. When we touch a book we don't expect it to open instantly on a certain page. To make mobile apps feel more natural to the user, we use animations to smoothen out user interactions with the app user interface.
+# События
 
-To show how event handling is done in Reanimated we are going to lead you step by step towards achieving the following result:
+В реальном мире ничего не меняется мгновенно - всегда есть что-то между состояниями. Когда мы прикасаемся к книге, мы не ожидаем, что она мгновенно откроется на определенной странице. Чтобы мобильные приложения казались пользователю более естественными, мы используем анимацию для сглаживания взаимодействия пользователя с пользовательским интерфейсом приложения.
 
-![](/docs/events/final.gif)
+Чтобы показать, как происходит обработка событий в Reanimated, мы шаг за шагом приведем вас к следующему результату:
 
-## Handling gesture events
+![Результат](final.gif)
 
-Reanimated integrates tightly with the [react-native-gesture-handler](https://docs.swmansion.com/react-native-gesture-handler/) package for the ability to define performant gesture-based interactions. We explain the library's APIs whenever we use bits of it in our examples, however, if you'd like to learn more about the gesture-handler outside of the context of reanimated, please visit the documentation website [here](https://docs.swmansion.com/react-native-gesture-handler/).
+## Обработка событий жестов
 
+Reanimated тесно интегрируется с пакетом [react-native-gesture-handler](https://docs.swmansion.com/react-native-gesture-handler/), позволяющим определять эффективные взаимодействия, основанные на жестах. Мы объясняем API библиотеки всякий раз, когда используем ее части в наших примерах, однако если вы хотите узнать больше о gesture-handler вне контекста reanimated, посетите сайт документации [здесь](https://docs.swmansion.com/react-native-gesture-handler/).
 
-For Android OS, be sure to wrap your app entry point with `<GestureHandlerRootView>` component from `react-native-gesture-handler` library to capture events properly.
+Для Android OS обязательно оберните точку входа в приложение компонентом `<GestureHandlerRootView>` из библиотеки `react-native-gesture-handler`, чтобы правильно перехватывать события.
 
 ```js
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function App() {
-  return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      {/* content */}
-    </GestureHandlerRootView>
-  );
+    return (
+        <GestureHandlerRootView style={{ flex: 1 }}>
+            {/* content */}
+        </GestureHandlerRootView>
+    );
 }
 ```
 
-Going back to the interaction example, we start by focusing on tap events only.
+Возвращаясь к примеру взаимодействия, начнем с того, что сосредоточимся только на событиях касания.
 
-![](/docs/events/touch-final.gif)
+![События касания](touch-final.gif)
 
 ```js
 const EventsExample = () => {
-  const pressed = useSharedValue(false);
-  return (
-    <TapGestureHandler onGestureEvent={eventHandler}>
-      <Animated.View style={[styles.ball]} />
-    </TapGestureHandler>
-  );
+    const pressed = useSharedValue(false);
+    return (
+        <TapGestureHandler onGestureEvent={eventHandler}>
+            <Animated.View style={[styles.ball]} />
+        </TapGestureHandler>
+    );
 };
 ```
 
-Here, we define a component with a shared value that tells us whether the view that we render is being pressed. We use the *TapGestureHandler* component from *react-native-gesture-handler* library to wrap the main View in order to tell the framework which of the rendered elements are interactive.
+Здесь мы определяем компонент с общим значением, которое сообщает нам, нажимают ли на отрисовываемый вид. Мы используем компонент `TapGestureHandler` из библиотеки `react-native-gesture-handler` для обертывания основного `View`, чтобы сообщить фреймворку, какие из отрисованных элементов являются интерактивными.
 
-Next, we add an event handler to it — it will react to notifications about tap events from *TapGestureHandler*. For defining event handlers, Reanimated provides a hook that is specifically designed to work with the gesture-handler package, it is called *useAnimatedGestureHandler*.
+Далее мы добавим к нему обработчик событий - он будет реагировать на уведомления о событиях касания от `TapGestureHandler`. Для определения обработчиков событий в Reanimated предусмотрен хук, специально предназначенный для работы с пакетом `gesture-handler`, он называется `useAnimatedGestureHandler`.
 
 ```js
 const eventHandler = useAnimatedGestureHandler({
-  onStart: (event, ctx) => {
-    pressed.value = true;
-  },
-  onEnd: (event, ctx) => {
-    pressed.value = false;
-  },
+    onStart: (event, ctx) => {
+        pressed.value = true;
+    },
+    onEnd: (event, ctx) => {
+        pressed.value = false;
+    },
 });
 ```
 
-This hook allows us for defining a number of worklets (e.g., onStart or onEnd), each of these will be used to process a different state in the gesture recognition process. In this example, we will use *onStart* worklet which is called when the gesture is started (we press the screen down), and *onEnd* that fires up when the gesture is ended (i.e., the finger is lifted from the screen). We use these two worklets to update shared value *pressed* accordingly (don't pay the attention to the arguments that are provided to the worklets, we will explain that later on).
+Этот хук позволяет определить несколько воркетов (например, `onStart` или `onEnd`), каждый из которых будет использоваться для обработки различных состояний в процессе распознавания жестов. В данном примере мы будем использовать заготовку `onStart`, которая вызывается при начале жеста (нажатии на экран вниз), и `onEnd`, которая запускается при завершении жеста (т.е. при отрыве пальца от экрана). С помощью этих двух обработчиков мы соответствующим образом обновляем разделяемое значение `pressed` (не обращайте внимания на аргументы, которые передаются обработчикам, об этом мы расскажем позже).
 
-To connect the defined event handler with the gesture handler component, we now pass it to *TapGestureHandler* as an *onGestureEvent* property:
+Чтобы связать определенный обработчик событий с компонентом обработчика жестов, мы передаем его в `TapGestureHandler` в качестве свойства `onGestureEvent`:
 
 ```js
 <TapGestureHandler onGestureEvent={eventHandler}>
 ```
 
-Now all we have to do is to use the *useAnimatedStyle* hook in order to map the pressed shared value state to the view's styles. When pressed is true the dot's color will turn from *blue* to *yellow* and it will get bigger. On false both of those parameters will get back to their previous values.
+Теперь осталось только использовать хук `useAnimatedStyle`, чтобы сопоставить состояние общего значения `pressed` со стилями представления. При истинном нажатии цвет точки изменится с _синего_ на _желтый_ и она станет больше. При значении `false` оба этих параметра вернутся к прежним значениям.
 
 ```js
 const uas = useAnimatedStyle(() => {
-  return {
-    backgroundColor: pressed.value ? '#FEEF86' : '#001972',
-    transform: [{ scale: pressed.value ? 1.2 : 1 }],
-  };
+    return {
+        backgroundColor: pressed.value
+            ? '#FEEF86'
+            : '#001972',
+        transform: [{ scale: pressed.value ? 1.2 : 1 }],
+    };
 });
 ```
 
-Also don't forget to pass *animated style* to the *animated view*:
+Также не забудьте передать _animated style_ в _animated view_:
 
 ```js
 <Animated.View style={[styles.ball, uas]} />
 ```
 
-After incorporating the changes described above here is what you will see on the screen:
+После внесения описанных выше изменений вот что вы увидите на экране:
 
-![](/docs/events/touch-raw.gif)
+![События касания](touch-raw.gif)
 
-Reanimated makes it very easy to animate between state changes. You can try adding *withSpring* or *withTiming* in *useAnimatedStyle* to make this interaction feel much more natural:
+В Reanimated очень легко создавать анимацию между изменениями состояния. Вы можете попробовать добавить `withSpring` или `withTiming` в `useAnimatedStyle`, чтобы сделать это взаимодействие более естественным:
 
 ```js
 {
-  scale: withSpring(pressed.value ? 1.2 : 1);
+    scale: withSpring(pressed.value ? 1.2 : 1);
 }
 ```
 
-![](/docs/events/touch-final.gif)
+![События касания](touch-final.gif)
 
-## Handling continuous gestures
+## Обработка непрерывных жестов
 
-![](/docs/events/final.gif)
+![Обработка непрерывных жестов](final.gif)
 
-In the previous example when we learned how to handle tap gestures, we only responded to events that indicated the start and the end of the gesture. This comes from the fact that tap is a discrete gesture, that is it triggers at a specific point in time when we know the gesture is recognized. If we are interested in handling a movement of a finger on the screen, we need to receive a continuous stream of touch events. For this purpose, *PanGestureHandler* from *react-native-gesture-handler* package can be used. *PanGestureHandler* not only reports down and up events (that we subscribed to with *onStart* and *onEnd* worklets), but also allows us to track the finger as you pan it around the screen. When the panning gesture is recognized it feeds a stream of touch events to *onActive* callback for the whole duration of the user interaction.
+В предыдущем примере, когда мы учились обрабатывать жесты касания, мы реагировали только на события, указывающие на начало и конец жеста. Это объясняется тем, что касание - дискретный жест, то есть он срабатывает в определенный момент времени, когда мы знаем, что жест распознан. Если же нас интересует обработка движения пальца по экрану, то нам необходимо получать непрерывный поток событий касания. Для этого можно использовать `PanGestureHandler` из пакета `react-native-gesture-handler`. `PanGestureHandler` не только сообщает о событиях "вниз" и "вверх" (на которые мы подписались с помощью ворклетов `onStart` и `onEnd`), но и позволяет отслеживать палец при его панорамировании по экрану. При распознавании жеста панорамирования в обратный вызов `onActive` подается поток событий касания в течение всего времени взаимодействия с пользователем.
 
-![](/docs/events/continous-gestures.png)
+![Обработка непрерывных жестов](continous-gestures.png)
 
-In order to keep track over the view movement, we define a pair of new shared values in which we are going to store the view coordinates:
+Для того чтобы отслеживать перемещение вида, мы определяем пару новых общих значений, в которых будем хранить координаты вида:
 
 ```js
 const startingPosition = 100;
@@ -114,53 +115,58 @@ const x = useSharedValue(startingPosition);
 const y = useSharedValue(startingPosition);
 ```
 
-Now, to keep the values defined above in sync with the gesture, we modify *useAnimatedGestureHandler* behavior.
+Теперь, чтобы синхронизировать определенные выше значения с жестом, мы модифицируем поведение `useAnimatedGestureHandler`.
 
 ```js
 const eventHandler = useAnimatedGestureHandler({
-  onStart: (event, ctx) => {
-    pressed.value = true;
-  },
-  onActive: (event, ctx) => {
-    x.value = startingPosition + event.translationX;
-    y.value = startingPosition + event.translationY;
-  },
-  onEnd: (event, ctx) => {
-    pressed.value = false;
-    x.value = withSpring(startingPosition);
-    y.value = withSpring(startingPosition);
-  },
+    onStart: (event, ctx) => {
+        pressed.value = true;
+    },
+    onActive: (event, ctx) => {
+        x.value = startingPosition + event.translationX;
+        y.value = startingPosition + event.translationY;
+    },
+    onEnd: (event, ctx) => {
+        pressed.value = false;
+        x.value = withSpring(startingPosition);
+        y.value = withSpring(startingPosition);
+    },
 });
 ```
 
-In the *onActive* method, we update coordinates using the event payload which is provided as the first argument. We use *translationX* and *translationY* that indicates the position of the finger relative to the place on the screen where the panning started. In *onEnd* call, when the user releases the finger, we animate the coordinates to the starting position.
+В методе `onActive` мы обновляем координаты, используя полезную нагрузку события, которая предоставляется в качестве первого аргумента. Мы используем `translationX` и `translationY`, которые указывают положение пальца относительно того места на экране, где началось панорамирование. В вызове `onEnd`, когда пользователь отпустит палец, мы анимируем координаты до начальной позиции.
 
-Don't forget to pass modified event handler to *PanGestureHandler*:
+Не забудьте передать модифицированный обработчик события `PanGestureHandler`:
 
 ```js
 <PanGestureHandler onGestureEvent={eventHandler}>
-  <Animated.View style={[styles.ball, uas]} />
+    <Animated.View style={[styles.ball, uas]} />
 </PanGestureHandler>
 ```
 
-The only thing left to do is to update *useAnimatedStyle* body such that x and y shared values are mapped to the view's transforms to position our view on the screen:
+Осталось только обновить тело `useAnimatedStyle` таким образом, чтобы общие значения `x` и `y` были привязаны к трансформациям представления для позиционирования нашего представления на экране:
 
 ```js
 const uas = useAnimatedStyle(() => {
-  return {
-    backgroundColor: pressed.value ? '#FEEF86' : '#001972',
-    transform: [{ translateX: x.value }, { translateY: y.value }],
-  };
+    return {
+        backgroundColor: pressed.value
+            ? '#FEEF86'
+            : '#001972',
+        transform: [
+            { translateX: x.value },
+            { translateY: y.value },
+        ],
+    };
 });
 ```
 
-## Using context
+## Использование контекста
 
-![](/docs/events/context-gesture.gif)
+![Использование контекста](context-gesture.gif)
 
-Let's now try to modify the above example to make the view stay in the place where we lift the finger up, then allow for it to be panned around from that place. This simple modification makes things a bit more trickier and the reason is that when the new gesture is started, the translation values it provides in the event payload are relative to the starting position of the gesture. As a result, we cannot just directly map the gesture translation to the view offset on the screen. One way to solve this is by making a temporary state where we can keep the starting offset of the view. For this purpose we can use the context argument that is provided to each of the gesture handler worklets. Context is just a Javascript object that is shared between all the callbacks. In other words, all methods defined as gesture handler callbacks receive the same instance of context object–you are free to store any data in it within the callback or read from the context directly.
+Теперь попробуем модифицировать приведенный выше пример так, чтобы вид оставался в том месте, где мы поднимаем палец вверх, а затем позволял панорамировать его из этого места. Эта простая модификация становится немного сложнее, и причина заключается в том, что при запуске нового жеста значения перевода, которые он предоставляет в полезной нагрузке события, относятся к начальной позиции жеста. В результате мы не можем просто напрямую сопоставить перевод жеста со смещением вида на экране. Одним из способов решения этой проблемы является создание временного состояния, в котором мы можем хранить начальное смещение вида. Для этого мы можем использовать аргумент context, который предоставляется каждому из обработчиков жестов. Контекст - это просто объект Javascript, который разделяется между всеми обратными вызовами. Другими словами, все методы, определенные как обратные вызовы обработчиков жестов, получают один и тот же экземпляр объекта context - вы можете хранить в нем любые данные внутри обратного вызова или читать из контекста напрямую.
 
-Here is how we can save the starting position in *onStart* callback using context:
+Вот как мы можем сохранить начальную позицию в обратном вызове `onStart`, используя контекст:
 
 ```js
 onStart: (event, ctx) => {
@@ -170,7 +176,7 @@ onStart: (event, ctx) => {
 },
 ```
 
-Then we can use it in *onActive* to compute the current position
+Затем мы можем использовать его в `onActive` для вычисления текущей позиции
 
 ```js
 onActive: (event, ctx) => {
@@ -179,14 +185,15 @@ onActive: (event, ctx) => {
 },
 ```
 
-As you can see context may be really handy sparing us declaring additional variables in our code thus making it more clear.
+Как видите, контекст может быть очень удобен, избавляя нас от объявления дополнительных переменных в коде и делая его более понятным.
 
-## Reanimated and react-native-gesture-handler
+## Reanimated и react-native-gesture-handler
 
-You have already met *TapGestureHandler* and *PanGestureHandler* but there are many more. For instance, you can listen for pinch gestures with *PinchGestureHandler*. It allows you to track the distance between two fingers and uses that information to scale or zoom your content. The full list of available gesture handlers can be found [here](https://docs.swmansion.com/react-native-gesture-handler/docs/gesture-handlers/basics/about-handlers#available-gesture-handlers).
+Вы уже познакомились с `TapGestureHandler` и `PanGestureHandler`, но существует множество других. Например, с помощью `PinchGestureHandler` можно прослушивать жесты щипка. Он позволяет отслеживать расстояние между двумя пальцами и использовать эту информацию для масштабирования или увеличения содержимого. Полный список доступных обработчиков жестов можно найти [здесь](https://docs.swmansion.com/react-native-gesture-handler/docs/gesture-handlers/basics/about-handlers#available-gesture-handlers).
 
-<div class="resp-container">
-<iframe class="resp-iframe"  gesture="media"  allow="encrypted-media" allowfullscreen src="https://www.youtube.com/embed/IdVnnIkNzGA">
+<iframe width="100%" height="400" gesture="media"  allow="encrypted-media" allowfullscreen src="https://www.youtube.com/embed/IdVnnIkNzGA">
 </iframe>
-</div>
-<div class="spacer"></div>
+
+## Ссылки
+
+-   [Events](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/events/)

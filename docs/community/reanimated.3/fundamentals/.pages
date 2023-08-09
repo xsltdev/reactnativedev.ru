@@ -8,6 +8,5 @@ nav:
     - events.md
     - custom_events.md
     - layout_animations.md
-    - architecture.md
     - web-support.md
     - troubleshooting.md
