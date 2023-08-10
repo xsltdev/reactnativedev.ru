@@ -1,0 +1,9 @@
+title: Основы
+nav:
+    - getting-started.md
+    - your-first-animation.md
+    - animating-styles-and-props.md
+    - customizing-animation.md
+    - applying-modifiers.md
+    - handling-gestures.md
+    - glossary.md
