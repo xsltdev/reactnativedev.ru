@@ -1,116 +1,315 @@
 ---
-sidebar_position: 5
+description: Другим способом настройки анимации в Reanimated является использование модификаторов анимации
 ---
 
-# Applying modifiers
+# Применение модификаторов
 
-Another way of [customizing animations](/docs/fundamentals/customizing-animation) in Reanimated is by using animation modifiers. Reanimated comes with three built-in modifiers: [`withRepeat`](/docs/animations/withRepeat), [`withSequence`](/docs/animations/withSequence), and [`withDelay`](/docs/animations/withDelay).
+Другим способом [настройки анимации](customizing-animation.md) в Reanimated является использование модификаторов анимации. Reanimated поставляется с тремя встроенными модификаторами: [`withRepeat`](../animations/withRepeat.md), [`withSequence`](../animations/withSequence.md) и [`withDelay`](../animations/withDelay.md).
 
-Let's build a simple shake animation which uses all the modifiers and learn them along the way. Let's go!
+Давайте построим простую анимацию тряски, в которой используются все модификаторы, и попутно изучим их. Поехали!
 
-## Starting point
+## Начальная точка
 
-In this example, we're going to make an animated box which will shake on a button press after a slight delay.
+В этом примере мы создадим анимированный бокс, который будет трястись при нажатии кнопки с небольшой задержкой.
 
-Let's start by having an `Animated.View` and a `Button` which moves the view to the right on press. To achieve this we can use `useAnimatedStyle` and `withTiming` function to smoothly animate our box `40px` to the right.
+Начнем с того, что у нас есть `Animated.View` и `Button`, которая перемещает вид вправо при нажатии. Для этого мы можем использовать `useAnimatedStyle` и функцию `withTiming`, чтобы плавно анимировать наш бокс на `40px` вправо.
 
-If this sounds new to you, no worries! Start by going through the basics in [Your First Animation](/docs/fundamentals/your-first-animation) and come back here when you're ready.
+Если для вас это звучит ново, не беспокойтесь! Начните с изучения основ в разделе [Your First Animation] (your-first-animation.md) и вернитесь сюда, когда будете готовы.
 
-import Timing from '@site/src/examples/ApplyingModifiers/Timing';
-import TimingSrc from '!!raw-loader!@site/src/examples/ApplyingModifiers/Timing';
+```js
+import Animated, {
+    useSharedValue,
+    withTiming,
+    useAnimatedStyle,
+} from 'react-native-reanimated';
+import { View, Button, StyleSheet } from 'react-native';
+import React from 'react';
 
-<CollapsibleCode showLines={[8, 32]} src={TimingSrc} />
+export default function App() {
+    const offset = useSharedValue(0);
 
-<InteractiveExample src={TimingSrc} component={<Timing />} />
+    const style = useAnimatedStyle(() => ({
+        transform: [{ translateX: offset.value }],
+    }));
 
-## Repeating an animation
+    const OFFSET = 40;
 
-To implement our desired shake animation we can use [`withRepeat`](/docs/animations/withRepeat) modifier. This modifier lets you repeat a provided animation.
+    const handlePress = () => {
+        offset.value = withTiming(OFFSET);
+    };
 
-```javascript
+    return (
+        <View style={styles.container}>
+            <Animated.View style={[styles.box, style]} />
+            <Button title="shake" onPress={handlePress} />
+        </View>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    box: {
+        width: 100,
+        height: 100,
+        margin: 50,
+        borderRadius: 15,
+        backgroundColor: '#b58df1',
+    },
+});
+```
+
+## Повторение анимации
+
+Для реализации желаемой анимации встряхивания мы можем использовать модификатор [`withRepeat`](../animations/withRepeat.md). Этот модификатор позволяет повторить заданную анимацию.
+
+```js
 import { withRepeat } from 'react-native-reanimated';
 
 function App() {
-  sv.value = withRepeat(withTiming(50), 5);
-  // ...
+    sv.value = withRepeat(withTiming(50), 5);
+    // ...
 }
 ```
 
-Pass a number to the second parameter of the function to make it repeat a given number of times. You can make it repeat forever by passing a non-positive value (eg. `0` or `-1`). You can make the animation go back and forth by passing `true` to the third (i.e. `reverse`) argument.
+Передайте число во второй параметр функции, чтобы она повторялась заданное количество раз. Можно сделать так, чтобы анимация повторялась вечно, передав неположительное значение (например, `0` или `-1`). Анимацию можно заставить повторяться вперед-назад, передав третьему аргументу `true` (т.е. `reverse`).
 
-To learn more about it you can check out the full [`withRepeat` API reference](/docs/animations/withRepeat).
+Подробнее об этом можно узнать из полного справочника [`withRepeat` API](../animations/withRepeat.md).
 
-Let's use this function in our example:
+Используем эту функцию в нашем примере:
 
-import Repeat from '@site/src/examples/ApplyingModifiers/Repeat';
-import RepeatSrc from '!!raw-loader!@site/src/examples/ApplyingModifiers/Repeat';
+```js
+import Animated, {
+    useSharedValue,
+    withTiming,
+    useAnimatedStyle,
+    withRepeat,
+} from 'react-native-reanimated';
+import { View, Button, StyleSheet } from 'react-native';
+import React from 'react';
 
-<CollapsibleCode showLines={[9, 29]} src={RepeatSrc} />
+export default function App() {
+    const offset = useSharedValue(0);
 
-When we run this code we can see that the box jiggles left to right between the set offset and a starting position. After the animation finishes the box doesn't come back to its initial place. It's not really how we imagined a shake animation but we'll get there in a second!
+    const style = useAnimatedStyle(() => ({
+        transform: [{ translateX: offset.value }],
+    }));
 
-<InteractiveExample src={RepeatSrc} component={<Repeat />} />
+    const OFFSET = 40;
 
-## Running animations in a sequence
+    const handlePress = () => {
+        offset.value = withRepeat(
+            withTiming(OFFSET),
+            5,
+            true
+        );
+    };
 
-One way to improve our animation is to start it with a left offset and reset it back to starting position after the animation ends. That's a perfect use case for the `withSequence` modifier.
+    return (
+        <View style={styles.container}>
+            <Animated.View style={[styles.box, style]} />
+            <Button title="shake" onPress={handlePress} />
+        </View>
+    );
+}
 
-```javascript
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    box: {
+        width: 100,
+        height: 100,
+        margin: 50,
+        borderRadius: 15,
+        backgroundColor: '#b58df1',
+    },
+});
+```
+
+Запустив этот код, мы видим, что коробка покачивается влево-вправо между заданным смещением и начальной позицией. После завершения анимации коробка не возвращается в исходное положение. Это не совсем то, как мы представляли себе анимацию тряски, но мы к этому еще вернемся!
+
+## Последовательный запуск анимации
+
+Один из способов улучшить нашу анимацию - запустить ее со смещением влево и вернуть в исходное положение после окончания анимации. Это идеальный вариант использования модификатора `withSequence`.
+
+```js
 import { withSequence } from 'react-native-reanimated';
 
 function App() {
-  sv.value = withSequence(withTiming(50), withTiming(0));
-  // ...
+    sv.value = withSequence(withTiming(50), withTiming(0));
+    // ...
 }
 ```
 
-This modifier lets you chain animations together. The next animation starts when the previous one ends. You use it by passing animations as arguments in the order you want them to run.
+Этот модификатор позволяет объединять анимации в цепочки. Следующая анимация запускается после завершения предыдущей. Его можно использовать, передавая анимации в качестве аргументов в том порядке, в котором вы хотите их запустить.
 
-To learn more about it you can check out the full [`withSequence` API reference](/docs/animations/withSequence).
+Подробнее об этом можно узнать из полного справочника [`withSequence` API](../animations/withSequence.md).
 
-Coming back to our example - we can utilize `withSequence` to improve our animation. First, we'll sway the box to the left which we'll make it to take half of the duration of one swing. Then, we'll shake the box 5 times and finish up the animation by bringing it to starting position also with half of the animation duration.
+Вернемся к нашему примеру - мы можем использовать `withSequence` для улучшения нашей анимации. Сначала мы качнем коробку влево, что займет половину времени одного качания. Затем встряхнем коробку 5 раз и завершим анимацию, вернув ее в исходное положение также за половину длительности анимации.
 
-import Sequence from '@site/src/examples/ApplyingModifiers/Sequence';
-import SequenceSrc from '!!raw-loader!@site/src/examples/ApplyingModifiers/Sequence';
+```js
+import Animated, {
+    useSharedValue,
+    withTiming,
+    Easing,
+    useAnimatedStyle,
+    withRepeat,
+    withSequence,
+} from 'react-native-reanimated';
+import { View, Button, StyleSheet } from 'react-native';
+import React from 'react';
 
-<CollapsibleCode showLines={[18, 32]} src={SequenceSrc} />
+export default function App() {
+    const offset = useSharedValue(0);
 
-<InteractiveExample src={SequenceSrc} component={<Sequence />} />
+    const style = useAnimatedStyle(() => ({
+        transform: [{ translateX: offset.value }],
+    }));
 
-## Starting the animation with delay
+    const OFFSET = 40;
+    const TIME = 250;
 
-As a cherry on top, we'll add a little bit of suspense by adding a slight delay before the animation begins. For this exact purpose, Reanimated comes with a `withDelay` modifier.
+    const handlePress = () => {
+        offset.value = withSequence(
+            // start from -OFFSET
+            withTiming(-OFFSET, { duration: TIME / 2 }),
+            // shake between -OFFSET and OFFSET 5 times
+            withRepeat(
+                withTiming(OFFSET, { duration: TIME }),
+                5,
+                true
+            ),
+            // go back to 0 at the end
+            withTiming(0, { duration: TIME / 2 })
+        );
+    };
 
-```javascript
+    return (
+        <View style={styles.container}>
+            <Animated.View style={[styles.box, style]} />
+            <Button title="shake" onPress={handlePress} />
+        </View>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    box: {
+        width: 100,
+        height: 100,
+        margin: 50,
+        borderRadius: 15,
+        backgroundColor: '#b58df1',
+    },
+});
+```
+
+## Запуск анимации с задержкой
+
+В качестве вишенки мы добавим немного напряженности, добавив небольшую задержку перед началом анимации. Именно для этого в Reanimated предусмотрен модификатор `withDelay`.
+
+```js
 import { withDelay } from 'react-native-reanimated';
 
 function App() {
-  sv.value = withDelay(500, withTiming(0));
-  // ...
+    sv.value = withDelay(500, withTiming(0));
+    // ...
 }
 ```
 
-This function as a first parameter takes the duration in milliseconds before the animation starts. The second parameter defines the animation to delay.
+Эта функция в качестве первого параметра принимает длительность в миллисекундах до начала анимации. Второй параметр задает задержку анимации.
 
-To learn more about it you can check out the full [`withDelay` API reference](/docs/animations/withDelay).
+Более подробно об этом можно узнать из полного справочника [`withDelay` API](../animations/withDelay.md).
 
-import DelaySrc from '!!raw-loader!@site/src/examples/ApplyingModifiers/Delay';
+```js
+import Animated, {
+    useSharedValue,
+    withTiming,
+    Easing,
+    useAnimatedStyle,
+    withRepeat,
+    withSequence,
+    withDelay,
+} from 'react-native-reanimated';
+import { View, Button, StyleSheet } from 'react-native';
+import React from 'react';
 
-<CollapsibleCode showLines={[19, 38]} src={DelaySrc} />
+export default function App() {
+    const offset = useSharedValue(0);
 
-import Delay from '@site/src/examples/ApplyingModifiers/Delay';
+    const style = useAnimatedStyle(() => ({
+        transform: [{ translateX: offset.value }],
+    }));
 
-<InteractiveExample src={DelaySrc} component={<Delay />} />
+    const OFFSET = 40;
+    const TIME = 250;
+    const DELAY = 400;
 
-## Summary
+    const handlePress = () => {
+        offset.value = withDelay(
+            DELAY,
+            withSequence(
+                // start from -OFFSET
+                withTiming(-OFFSET, { duration: TIME / 2 }),
+                // shake between -OFFSET and OFFSET 5 times
+                withRepeat(
+                    withTiming(OFFSET, { duration: TIME }),
+                    5,
+                    true
+                ),
+                // go back to 0 at the end
+                withTiming(0, { duration: TIME / 2 })
+            )
+        );
+    };
 
-In this section, we learned how to create complex animations by using animation modifiers. To sum up:
+    return (
+        <View style={styles.container}>
+            <Animated.View style={[styles.box, style]} />
+            <Button title="shake" onPress={handlePress} />
+        </View>
+    );
+}
 
-- Reanimated comes with three built-in animation modifiers - `withRepeat`, `withSequence`, and `withDelay`.
-- `withRepeat` lets you repeat an animation a given number of times or run it indefinitely.
-- `withSequence` lets you run animations in a sequence.
-- `withDelay` lets you start an animation with a delay.
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    box: {
+        width: 100,
+        height: 100,
+        margin: 50,
+        borderRadius: 15,
+        backgroundColor: '#b58df1',
+    },
+});
+```
 
-## What's next?
+## Резюме
 
-In the next section, we're going to learn about handling `Tap` and `Pan` gestures. Also, we'll get to know the `withDecay` animation function.
+В этом разделе мы научились создавать сложные анимации с помощью модификаторов анимации. Подведем итоги:
+
+-   Reanimated поставляется с тремя встроенными модификаторами анимации - `withRepeat`, `withSequence` и `withDelay`.
+-   `withRepeat` позволяет повторять анимацию заданное количество раз или запускать ее бесконечно.
+-   `withSequence` позволяет запускать анимацию последовательно.
+-   `withDelay` позволяет запускать анимацию с задержкой.
+
+## Что дальше?
+
+В следующем разделе мы узнаем о работе с жестами `Tap` и `Pan`. Также мы познакомимся с функцией анимации `withDecay`.
+
+## Ссылки
+
+-   [Applying modifiers](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/applying-modifiers/)

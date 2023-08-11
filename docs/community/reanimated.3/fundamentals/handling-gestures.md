@@ -1,123 +1,443 @@
 ---
-sidebar_position: 6
+description: В этом разделе мы научимся работать с жестами в Reanimated. Для этого Reanimated тесно интегрируется с React Native Gesture Handler
 ---
 
-# Handling gestures
+# Работа с жестами
 
-In this section, we'll learn how to handle gestures with Reanimated. To achieve this, Reanimated integrates tightly with [React Native Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler/docs/), another library created by Software Mansion.
+В этом разделе мы научимся работать с жестами в Reanimated. Для этого Reanimated тесно интегрируется с [React Native Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler/docs/), другой библиотекой, созданной Software Mansion.
 
-Gesture Handler comes with plentiful gestures like [`Pinch`](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/pinch-gesture) or [`Fling`](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/fling-gesture). Right now we'll start simple and get to know [`Tap`](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/tap-gesture) and [`Pan`](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/pan-gesture) gestures as well as how to use [`withDecay`](/docs/animations/withDecay) animation function.
+Gesture Handler поставляется с большим количеством жестов, таких как [`Pinch`](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/pinch-gesture) или [`Fling`](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/fling-gesture). Сейчас мы начнем с простого и познакомимся с жестами [`Tap`](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/tap-gesture) и [`Pan`](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/pan-gesture), а также с тем, как использовать функцию анимации [`withDecay`](/docs/animations/withDecay).
 
-Just make sure to go through the Gesture Handler [installation steps](https://docs.swmansion.com/react-native-gesture-handler/docs/installation) first and come back here to learn how to use it with Reanimated.
+Только не забудьте сначала просмотреть [шаги по установке](https://docs.swmansion.com/react-native-gesture-handler/docs/installation) обработчика жестов и вернуться сюда, чтобы узнать, как использовать его в Reanimated.
 
-## Handling tap gestures
+## Работа с жестами касания
 
-Let's start with the simplest gesture - tapping. Tap gesture detects fingers touching the screen for a short period of time. You can use them to implement custom buttons or pressable elements from scratch.
+Начнем с самого простого жеста - постукивания. Жест касания определяет прикосновение пальцев к экрану в течение короткого промежутка времени. С их помощью можно реализовать пользовательские кнопки или нажимаемые элементы с нуля.
 
-In this example, we'll create a circle which will grow and change color on touch.
+В данном примере мы создадим круг, который будет увеличиваться и менять цвет при касании.
 
-First, let's wrap our app with [`GestureHandlerRootView`](https://docs.swmansion.com/react-native-gesture-handler/docs/installation/#js). Make sure to keep the `GestureHandlerRootView` as close to the actual root view as possible. That'll ensure that our gestures will work as expected with each other.
+Сначала обернем наше приложение с помощью [`GestureHandlerRootView`](https://docs.swmansion.com/react-native-gesture-handler/docs/installation/#js). Убедитесь, что `GestureHandlerRootView` находится как можно ближе к реальному корневому виду. Это гарантирует, что наши жесты будут работать друг с другом как положено.
 
-```jsx
+```js
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 function App() {
-  return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      {/* rest of the app */}
-    </GestureHandlerRootView>
-  );
+    return (
+        <GestureHandlerRootView style={{ flex: 1 }}>
+            {/* rest of the app */}
+        </GestureHandlerRootView>
+    );
 }
 ```
 
-New tap gestures are defined with `Gesture.Tap()` in your component's body. You can define the behavior of the gesture by chaining methods like [`onBegin`](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/tap-gesture/#onbegincallback), [`onStart`](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/tap-gesture/#onstartcallback), [`onEnd`](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/tap-gesture/#onendcallback), or [`onFinalize`](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/tap-gesture/#onfinalizecallback) on the gesture. We'll use them to update a shared value just after the gesture begins and return to the initial value when the gesture finishes.
+Новые жесты касания определяются с помощью `Gesture.Tap()` в теле вашего компонента. Вы можете определить поведение жеста, наложив на него цепочку методов типа [`onBegin`](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/tap-gesture/#onbegincallback), [`onStart`](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/tap-gesture/#onstartcallback), [`onEnd`](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/tap-gesture/#onendcallback) или [`onFinalize`](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/tap-gesture/#onfinalizecallback). Мы будем использовать их для обновления общего значения сразу после начала жеста и возврата к исходному значению по его завершении.
 
-import TapGesture from '@site/src/examples/HandlingGestures/TapGesture';
-import TapGestureSrc from '!!raw-loader!@site/src/examples/HandlingGestures/TapGesture';
+```js
+import 'react-native-gesture-handler';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import Animated, {
+    useAnimatedStyle,
+    useSharedValue,
+    withTiming,
+} from 'react-native-reanimated';
+import {
+    Gesture,
+    GestureDetector,
+    GestureHandlerRootView,
+} from 'react-native-gesture-handler';
 
-<CollapsibleCode showLines={[16, 25]} src={TapGestureSrc} />
+export default function App() {
+    const pressed = useSharedValue(false);
 
-You can safely access the shared values because callbacks passed to gestures are automatically [workletized](/docs/fundamentals/glossary#to-workletize) for you.
+    const tap = Gesture.Tap()
+        .onBegin(() => {
+            pressed.value = true;
+        })
+        .onFinalize(() => {
+            pressed.value = false;
+        });
 
-We'd like our circle to change color from violet to yellow and smoothly scale by 20% on tap. Let's define that animation logic using `withTiming` in the `useAnimatedStyle`:
+    const animatedStyles = useAnimatedStyle(() => ({
+        backgroundColor: pressed.value
+            ? '#FFE04B'
+            : '#B58DF1',
+        transform: [
+            { scale: withTiming(pressed.value ? 1.2 : 1) },
+        ],
+    }));
 
-<CollapsibleCode showLines={[27, 30]} src={TapGestureSrc} />
+    return (
+        <GestureHandlerRootView style={styles.container}>
+            <View style={styles.container}>
+                <GestureDetector gesture={tap}>
+                    <Animated.View
+                        style={[
+                            styles.circle,
+                            animatedStyles,
+                        ]}
+                    />
+                </GestureDetector>
+            </View>
+        </GestureHandlerRootView>
+    );
+}
 
-You need to pass your defined gesture to the `gesture` prop of the [`GestureDetector`](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/gesture-detector) component. That component should wrap the view you'd like to handle gestures on. Also, remember to pass the defined `animatedStyles` to the view you want to animate like so:
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
+    },
+    circle: {
+        height: 120,
+        width: 120,
+        borderRadius: 500,
+    },
+});
+```
 
-<CollapsibleCode showLines={[32, 43]} src={TapGestureSrc} />
+Вы можете спокойно обращаться к общим значениям, поскольку обратные вызовы, передаваемые жестам, автоматически [workletized](glossary.md#to-workletize) для вас.
 
-And that's it! Pretty straightforward, isn't it? Let's see it in the full glory in an interactive example:
+Мы хотим, чтобы наш круг менял цвет с фиолетового на желтый и плавно масштабировался на 20% при касании. Определим логику анимации с помощью `withTiming` в `useAnimatedStyle`:
 
-<InteractiveExample
-  src={TapGestureSrc}
-  component={<TapGesture />}
-  label="Tap the circle"
-/>
+```js
+import 'react-native-gesture-handler';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import Animated, {
+    useAnimatedStyle,
+    useSharedValue,
+    withTiming,
+} from 'react-native-reanimated';
+import {
+    Gesture,
+    GestureDetector,
+    GestureHandlerRootView,
+} from 'react-native-gesture-handler';
 
-You can make the use of [composing gestures](https://docs.swmansion.com/react-native-gesture-handler/docs/gesture-composition/) to more complex behaviors. But what if we'd like to create something a bit more interesting?
+export default function App() {
+    const pressed = useSharedValue(false);
 
-## Handling pan gestures
+    const tap = Gesture.Tap()
+        .onBegin(() => {
+            pressed.value = true;
+        })
+        .onFinalize(() => {
+            pressed.value = false;
+        });
 
-Let's spice things a bit by making the circle draggable and have it bounce back to it's staring position when released. Let's also keep the color highlight and scale effect we've added in the previous example. Implementing this behavior it's not possible with just a simple tap gesture. We need to reach for a pan gesture instead.
+    const animatedStyles = useAnimatedStyle(() => ({
+        backgroundColor: pressed.value
+            ? '#FFE04B'
+            : '#B58DF1',
+        transform: [
+            { scale: withTiming(pressed.value ? 1.2 : 1) },
+        ],
+    }));
 
-Luckily, all the gestures share a similar API so implementing this is nearly as easy as renaming the `Tap` gesture to `Pan` and chaining an additional `onChange` method.
+    return (
+        <GestureHandlerRootView style={styles.container}>
+            <View style={styles.container}>
+                <GestureDetector gesture={tap}>
+                    <Animated.View
+                        style={[
+                            styles.circle,
+                            animatedStyles,
+                        ]}
+                    />
+                </GestureDetector>
+            </View>
+        </GestureHandlerRootView>
+    );
+}
 
-import PanGesture from '@site/src/examples/HandlingGestures/PanGesture';
-import PanGestureSrc from '!!raw-loader!@site/src/examples/HandlingGestures/PanGesture';
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
+    },
+    circle: {
+        height: 120,
+        width: 120,
+        borderRadius: 500,
+    },
+});
+```
 
-<CollapsibleCode showLines={[17, 33]} src={PanGestureSrc} />
+Определенный жест необходимо передать в пропсы `gesture` компонента [`GestureDetector`](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/gesture-detector). Этот компонент должен обернуть представление, для которого вы хотите обрабатывать жесты. Также не забудьте передать определенные `animatedStyles` в представление, которое вы хотите анимировать, следующим образом:
 
-The callback passed to `onChange` comes with some [event data](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/pan-gesture#event-data) that has a bunch of handy properties. One of them is `translationX` which indicates how much the object has moved on the X axis. We stored that in a shared value to move the circle accordingly. To make the circle come back to initial place all you have to do is to reset the `offset.value` in the `onFinalize` method. We can use `withSpring` or `withTiming` functions to make it come back with an animation.
+```js
+import 'react-native-gesture-handler';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import Animated, {
+    useAnimatedStyle,
+    useSharedValue,
+    withTiming,
+} from 'react-native-reanimated';
+import {
+    Gesture,
+    GestureDetector,
+    GestureHandlerRootView,
+} from 'react-native-gesture-handler';
 
-All that's left to do is to adjust the logic in `useAnimatedStyle` to handle the offset.
+export default function App() {
+    const pressed = useSharedValue(false);
 
-<CollapsibleCode showLines={[35, 43]} src={PanGestureSrc} />
+    const tap = Gesture.Tap()
+        .onBegin(() => {
+            pressed.value = true;
+        })
+        .onFinalize(() => {
+            pressed.value = false;
+        });
 
-You can play around with the example below and see how the circle changes and reacts to the gesture:
+    const animatedStyles = useAnimatedStyle(() => ({
+        backgroundColor: pressed.value
+            ? '#FFE04B'
+            : '#B58DF1',
+        transform: [
+            { scale: withTiming(pressed.value ? 1.2 : 1) },
+        ],
+    }));
 
-<InteractiveExample
-  src={PanGestureSrc}
-  component={<PanGesture />}
-  label="Grab and drag the circle"
-/>
+    return (
+        <GestureHandlerRootView style={styles.container}>
+            <View style={styles.container}>
+                <GestureDetector gesture={tap}>
+                    <Animated.View
+                        style={[
+                            styles.circle,
+                            animatedStyles,
+                        ]}
+                    />
+                </GestureDetector>
+            </View>
+        </GestureHandlerRootView>
+    );
+}
 
-## Using `withDecay`
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
+    },
+    circle: {
+        height: 120,
+        width: 120,
+        borderRadius: 500,
+    },
+});
+```
 
-Remember when some time ago we said that we'll come back to `withDecay`? Now this is the time!
+С помощью [композиционных жестов](https://docs.swmansion.com/react-native-gesture-handler/docs/gesture-composition/) можно реализовать более сложное поведение. Но что, если мы хотим создать что-то более интересное?
 
-`withDecay` lets you retain the velocity of the gesture and animate with some deceleration. That means when you release a grabbed object with some velocity you can slowly bring it to stop. Sounds complicated but it really isn't!
+## Обработка жестов панорамирования
 
-Simply pass the final velocity in `onFinalize` method to the `velocity` property of `withDecay` function and let Reanimated handle it for you. To retain the new position of an object update the change on the X axis in `onChange` method like so:
+Сделаем круг перетаскиваемым, а при отпускании он будет возвращаться в исходное положение. Сохраним также эффект выделения цветом и масштабирования, добавленный в предыдущем примере. Реализовать такое поведение простым жестом касания невозможно. Вместо этого нам необходимо использовать жест панорамирования.
 
-import DecayBasic from '@site/src/examples/DecayBasic';
-import DecayBasicSrc from '!!raw-loader!@site/src/examples/DecayBasic';
+К счастью, все жесты имеют схожий API, поэтому реализовать это практически просто: переименуйте жест `Tap` в `Pan` и добавьте в цепочку дополнительный метод `onChange`.
 
-<CollapsibleCode showLines={[23, 36]} src={DecayBasicSrc} />
+```js
+import 'react-native-gesture-handler';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import Animated, {
+    useAnimatedStyle,
+    useSharedValue,
+    withSpring,
+    withTiming,
+} from 'react-native-reanimated';
+import {
+    Gesture,
+    GestureDetector,
+    GestureHandlerRootView,
+} from 'react-native-gesture-handler';
 
-The rest of the code is just to make sure the square stays inside the screen.
+export default function App() {
+    const pressed = useSharedValue(false);
+    const offset = useSharedValue(0);
 
-Play around and see how the square decelerates when let go with some speed!
+    const pan = Gesture.Pan()
+        .onBegin(() => {
+            pressed.value = true;
+        })
+        .onChange((event) => {
+            offset.value = event.translationX;
+        })
+        .onFinalize(() => {
+            offset.value = withSpring(0);
+            pressed.value = false;
+        });
 
-<InteractiveExample
-  src={DecayBasicSrc}
-  component={<DecayBasic />}
-  label="Grab and release the square"
-/>
+    const animatedStyles = useAnimatedStyle(() => ({
+        transform: [
+            { translateX: offset.value },
+            { scale: withTiming(pressed.value ? 1.2 : 1) },
+        ],
+        backgroundColor: pressed.value
+            ? '#FFE04B'
+            : '#b58df1',
+    }));
 
-Make sure to check check the full [`withDecay` API reference](/docs/animations/withDecay) to get to know rest of the configuration options.
+    return (
+        <GestureHandlerRootView style={styles.container}>
+            <View style={styles.container}>
+                <GestureDetector gesture={pan}>
+                    <Animated.View
+                        style={[
+                            styles.circle,
+                            animatedStyles,
+                        ]}
+                    />
+                </GestureDetector>
+            </View>
+        </GestureHandlerRootView>
+    );
+}
 
-## Summary
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
+    },
+    circle: {
+        height: 120,
+        width: 120,
+        backgroundColor: '#b58df1',
+        borderRadius: 500,
+        cursor: 'grab',
+    },
+});
+```
 
-In this section, we went through basics of handling gestures with Reanimated and Gesture Handler. We learned about `Tap` and `Pan` gestures and `withDecay` function. To sum up:
+Обратный вызов, переданный в `onChange`, поставляется с некоторыми [данными события](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/pan-gesture#event-data), которые имеют кучу удобных свойств. Одно из них - `translationX`, которое показывает, насколько объект переместился по оси X. Мы сохранили это значение в общем виде, чтобы соответствующим образом переместить окружность. Чтобы вернуть окружность в исходное положение, достаточно сбросить значение `offset.value` в методе `onFinalize`. Мы можем использовать функции `withSpring` или `withTiming` для анимации возврата.
 
-- Reanimated integrates with a different package called React Native Gesture Handler to provide seamless interactions.
-- We create new gestures, such as `Gesture.Pan()` or `Gesture.Tap()`, and pass them to `GestureDetector`, which have to wrap the element we want to handle interactions on.
-- You can access and modify shared values inside gesture callbacks without any additional boilerplate.
-- `withDecay` lets you create decelerating animations based on velocity coming from a gesture.
+Осталось только настроить логику в `useAnimatedStyle` для работы со смещением.
 
-## What's next?
+```js
+import 'react-native-gesture-handler';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import Animated, {
+    useAnimatedStyle,
+    useSharedValue,
+    withSpring,
+    withTiming,
+} from 'react-native-reanimated';
+import {
+    Gesture,
+    GestureDetector,
+    GestureHandlerRootView,
+} from 'react-native-gesture-handler';
 
-In this article, we've barely scratched the surface of what's possible with gestures in Reanimated. Besides [Tap](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/tap-gesture) and [Pan](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/pan-gesture) gestures Gesture Handler comes with many more e.g. [Pinch](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/pinch-gesture) or [Fling](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/fling-gesture). We welcome you to dive into the [Quick start](https://docs.swmansion.com/react-native-gesture-handler/docs/quickstart) section of the React Native Gesture Handler documentation and explore all the possibilities that this library comes with.
+export default function App() {
+    const pressed = useSharedValue(false);
+    const offset = useSharedValue(0);
 
-In [the next section](/docs/fundamentals/customizing-animation), we'll learn more about animating colors.
+    const pan = Gesture.Pan()
+        .onBegin(() => {
+            pressed.value = true;
+        })
+        .onChange((event) => {
+            offset.value = event.translationX;
+        })
+        .onFinalize(() => {
+            offset.value = withSpring(0);
+            pressed.value = false;
+        });
+
+    const animatedStyles = useAnimatedStyle(() => ({
+        transform: [
+            { translateX: offset.value },
+            { scale: withTiming(pressed.value ? 1.2 : 1) },
+        ],
+        backgroundColor: pressed.value
+            ? '#FFE04B'
+            : '#b58df1',
+    }));
+
+    return (
+        <GestureHandlerRootView style={styles.container}>
+            <View style={styles.container}>
+                <GestureDetector gesture={pan}>
+                    <Animated.View
+                        style={[
+                            styles.circle,
+                            animatedStyles,
+                        ]}
+                    />
+                </GestureDetector>
+            </View>
+        </GestureHandlerRootView>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
+    },
+    circle: {
+        height: 120,
+        width: 120,
+        backgroundColor: '#b58df1',
+        borderRadius: 500,
+        cursor: 'grab',
+    },
+});
+```
+
+## Использование `withDecay`
+
+Помните, некоторое время назад мы говорили, что еще вернемся к `withDecay`? Сейчас самое время!
+
+`withDecay` позволяет сохранять скорость жеста и выполнять анимацию с некоторым замедлением. Это означает, что, отпустив захваченный объект с некоторой скоростью, можно медленно довести его до остановки. Звучит сложно, но на самом деле это не так!
+
+Просто передайте конечную скорость в методе `onFinalize` свойству `velocity` функции `withDecay` и позвольте Reanimated сделать это за вас. Для сохранения нового положения объекта обновите изменение по оси X в методе `onChange` следующим образом:
+
+```js
+const pan = Gesture.Pan()
+    .onChange((event) => {
+        offset.value += event.changeX;
+    })
+    .onFinalize((event) => {
+        offset.value = withDecay({
+            velocity: event.velocityX,
+            rubberBandEffect: true,
+            clamp: [
+                -(width.value / 2) + SIZE / 2,
+                width.value / 2 - SIZE / 2,
+            ],
+        });
+    });
+```
+
+Остальная часть кода нужна только для того, чтобы квадрат оставался внутри экрана.
+
+Обязательно ознакомьтесь с полным справочником [`withDecay` API reference](../animations/withDecay.md), чтобы получить представление об остальных параметрах настройки.
+
+## Резюме
+
+В этом разделе мы рассмотрели основы работы с жестами с помощью Reanimated и Gesture Handler. Мы узнали о жестах `Tap` и `Pan`, а также о функции `withDecay`. Подведем итоги:
+
+-   Reanimated интегрируется с другим пакетом под названием React Native Gesture Handler для обеспечения бесшовного взаимодействия.
+-   Мы создаем новые жесты, такие как `Gesture.Pan()` или `Gesture.Tap()`, и передаем их в `GestureDetector`, который должен обернуть элемент, с которым мы хотим осуществлять взаимодействие.
+-   Вы можете получать доступ к общим значениям и изменять их внутри обратных вызовов жестов без дополнительных шаблонов.
+-   Функция `withDecay` позволяет создавать замедляющуюся анимацию на основе скорости, поступающей от жеста.
+
+## Что дальше?
+
+В этой статье мы лишь поверхностно рассмотрели возможности использования жестов в Reanimated. Помимо жестов [Tap](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/tap-gesture) и [Pan](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/pan-gesture), обработчик жестов содержит множество других, например, [Pinch](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/pinch-gesture) или [Fling](https://docs.swmansion.com/react-native-gesture-handler/docs/api/gestures/fling-gesture). Мы приглашаем вас погрузиться в раздел [Quick start](https://docs.swmansion.com/react-native-gesture-handler/docs/quickstart) документации по React Native Gesture Handler и изучить все возможности, которые предоставляет эта библиотека.
+
+В [следующем разделе](customizing-animation.md) мы узнаем больше об анимации цветов.

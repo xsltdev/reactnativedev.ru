@@ -1,172 +1,182 @@
-# Glossary of terms
+---
+description: Глоссарий терминов
+---
 
-## Animated component
+# Глоссарий терминов
 
-Animated components are components which Reanimated can animate. Reanimated comes with just a handful of built-in components like `Animated.View`, `Animated.ScrollView`, or `Animated.ScrollView`.
+## Анимированный компонент {#animated-component}
 
-```jsx
+Анимированные компоненты - это компоненты, которые Reanimated может анимировать. Reanimated поставляется с небольшим количеством встроенных компонентов, таких как `Animated.View`, `Animated.ScrollView` или `Animated.ScrollView`.
+
+```js
 import Animated from 'react-native-reanimated';
 
 function App() {
-  return (
-    <Animated.View
-      style={{
-        width: 100,
-        height: 100,
-        backgroundColor: 'violet',
-      }}
-    />
-  );
+    return (
+        <Animated.View
+            style={{
+                width: 100,
+                height: 100,
+                backgroundColor: 'violet',
+            }}
+        />
+    );
 }
 ```
 
-For components which aren't a part of Reanimated, to make their props and styles animatable, you have to wrap them with [`createAnimatedComponent`](/docs/core/createAnimatedComponent):
+Для компонентов, не являющихся частью Reanimated, чтобы сделать их пропсы и стили анимируемыми, необходимо обернуть их с помощью [`createAnimatedComponent`](../core/createAnimatedComponent.md):
 
-```jsx
+```js
 import Animated from 'react-native-reanimated';
 import { Circle } from 'react-native-svg';
 
-const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+const AnimatedCircle = Animated.createAnimatedComponent(
+    Circle
+);
 ```
 
-## Shared value
+## Общие значения {#shared-value}
 
-Shared values are a driving factor of all your animations in Reanimated.
+Общие значения являются движущим фактором всех ваших анимаций в Reanimated.
 
-They are defined using `useSharedValue` hook:
+Они определяются с помощью хука `useSharedValue`:
 
-```javascript
+```js
 import { useSharedValue } from 'react-native-reanimated';
 ```
 
-and accessed and modified by their `.value` property:
+и доступ к ним и их изменение осуществляется через их свойство `.value`:
 
-```javascript {2,5}
+```js
 function App() {
-  const sv = useSharedValue(0);
+    const sv = useSharedValue(0);
 
-  const handlePress = () => {
-    sv.value += 10;
-  };
+    const handlePress = () => {
+        sv.value += 10;
+    };
 
-  // rest of your glamorous code ✨
+    // rest of your glamorous code ✨
 }
 ```
 
-It can be a value of any type. When used, the data stored in a shared value is automatically synchronized between the [JavaScript thread](/docs/fundamentals/glossary#javascript-thread) and the [UI thread](/docs/fundamentals/glossary#ui-thread).
+Это может быть значение любого типа. При использовании общие значения автоматически синхронизируются между [JavaScript-потоком](glossary.md#javascript-thread) и [UI-потоком](glossary.md#ui-thread).
 
-## Animatable value
+## Анимируемое значение {#animatable-value}
 
-An animatable value refers to a type of value that can be used for animations. These values include numbers, strings, and arrays of numbers.
+Анимируемое значение относится к типу значений, которые могут быть использованы для анимации. К таким значениям относятся числа, строки и массивы чисел.
 
-String values can be animated if they are in a specific format, such as `"10deg"`, `"21%"`, or even colors like `"#ffaabb"` or `"rgba(100, 200, 100, 0.7)"`.
+Строковые значения могут быть анимированы, если они имеют определенный формат, например `10deg`, `21%` или даже цвет, например `ffaabb` или `rgba(100, 200, 100, 0.7)`.
 
-## Animation function
+## Функция анимации {#animation-function}
 
-Animation functions are functions which let you create animations. They are building blocks that describe how your animations should behave.
+Анимационные функции - это функции, позволяющие создавать анимацию. Они представляют собой строительные блоки, описывающие поведение анимации.
 
-Reanimated comes with 3 built-in animation functions:
+Reanimated поставляется с 3 встроенными функциями анимации:
 
-- [`withSpring`](/docs/animations/withSpring) lets you create spring-based animation
-- [`withTiming`](/docs/animations/withTiming) lets you create an animation based on duration and [easing](https://easings.net/)
-- [`withDecay`](/docs/animations/withDecay) lets you create animations that mimic objects in motion that move with a given deceleration rate
+-   [`withSpring`](../animations/withSpring.md) позволяет создавать анимацию на основе пружин.
+-   [`withTiming`](../animations/withTiming.md) позволяет создать анимацию, основанную на длительности и [easing](https://easings.net/)
+-   [`withDecay`](../animations/withDecay.md) позволяет создавать анимацию, имитирующую движение объектов с заданной скоростью замедления.
 
-These functions can be combined with [animation modifiers](docs/fundamentals/glossary#animation-modifier) to create rich and complex animations.
+Эти функции можно комбинировать с [модификаторами анимации](glossary.md#animation-modifier) для создания насыщенных и сложных анимаций.
 
-## Animation modifier
+## Модификатор анимации {#animation-modifier}
 
-Animation modifiers are functions used to customize animations.
+Модификаторы анимации - это функции, используемые для настройки анимации.
 
-Reanimated comes with 3 built-in modifiers:
+Reanimated поставляется с 3 встроенными модификаторами:
 
-- [`withDelay`](/docs/animations/withDelay) lets you add a delay before the animation starts
-- [`withRepeat`](/docs/animations/withRepeat) lets you repeat an animation certain number of times
-- [`withSequence`](/docs/animations/withSequence) lets you chain animation one after the other
+-   [`withDelay`](../animations/withDelay.md) позволяет добавить задержку перед началом анимации
+-   [`withRepeat`](../animations/withRepeat.md) позволяет повторять анимацию определенное количество раз
+-   [`withSequence`](../animations/withSequence.md) позволяет выстраивать анимацию в цепочку друг за другом
 
-## Animation object
+## Объект анимации {#animation-object}
 
-An animation object is a value returned from [animation functions](/docs/fundamentals/glossary#animation-function) and [modifiers](/docs/fundamentals/glossary#animation-modifier) which holds the current state of the animation including its start and end conditions, as well as a `onFrame` function. These values allow to calculate the animation state for each frame.
+Объект анимации - это значение, возвращаемое из [функций анимации](glossary.md#animation-function) и [модификаторов](glossary.md#animation-modifier), которое содержит текущее состояние анимации, включая условия ее начала и окончания, а также функцию `onFrame`. Эти значения позволяют вычислить состояние анимации для каждого кадра.
 
-When you pass an animation object to a [shared value](docs/fundamentals/glossary#shared-value) it is automatically treated as an [animatable value](/docs/fundamentals/glossary#animatable-value).
+При передаче объекта анимации в [общее значение](glossary.md#shared-value) он автоматически рассматривается как [анимируемое значение](glossary.md#animatable-value).
 
-For example, consider this code:
+Например, рассмотрим следующий код:
 
-```javascript
+```js
 sv.value = withSpring(100);
 ```
 
-Even though, the `withSpring` returns an animation object the final result that is stored in a shared value is just a number.
+Несмотря на то, что `withSpring` возвращает объект анимации, конечный результат, хранящийся в общем значении, является просто числом.
 
-## Animations in inline styling
+## Анимации в инлайн-стилистике {#animations-in-inline-styling}
 
-Passing shared values directly to `style` property without the use of `useAnimatedStyle`.
+Передача общих значений непосредственно в свойство `style` без использования `useAnimatedStyle`.
 
-For example:
+Например:
 
-```jsx
+```js
 function App() {
-  const width = useSharedValue(100);
+    const width = useSharedValue(100);
 
-  return <Animated.View style={{ width }} />;
+    return <Animated.View style={{ width }} />;
 }
 ```
 
-## Worklet
+## Worklet {#worklet}
 
-Worklets are short-running JavaScript functions that can be run on the [UI thread](/docs/fundamentals/glossary#ui-thread). They can also be run on a JavaScript thread just as you would run a function in your code.
+Ворклеты - это короткие JavaScript-функции, которые могут выполняться в потоке [UI thread](glossary.md#ui-thread). Их также можно запускать в потоке JavaScript, как и функции в коде.
 
-Most of the time when working with Reanimated the code is automatically [workletized](/docs/fundamentals/glossary#to-workletize) and run on the UI thread by default.
+В большинстве случаев при работе с Reanimated код автоматически [workletized](glossary.md#to-workletize) и по умолчанию выполняется в потоке UI.
 
-```javascript
+```js
 const style = useAnimatedStyle(() => {
-  console.log('Running on the UI thread');
-  return { opacity: 0.5 };
+    console.log('Running on the UI thread');
+    return { opacity: 0.5 };
 });
 ```
 
-You can create your own worklets using the `"worklet";` directive at the top of a function.
+Вы можете создавать собственные worklet'ы, используя директиву `"worklet";` в верхней части функции.
 
-```javascript
+```js
 function myWorklet() {
-  'worklet';
-  console.log('Running on the UI thread');
+    'worklet';
+    console.log('Running on the UI thread');
 }
 ```
 
-[`runOnUI`](/docs/threading/runOnUI) lets you manually run worklets on the UI thread:
+[`runOnUI`](../threading/runOnUI.md) позволяет вручную запускать ворклеты в потоке UI:
 
-```javascript
+```js
 function myWorklet(greeting) {
-  'worklet';
-  console.log(`${greeting} from the UI thread`);
+    'worklet';
+    console.log(`${greeting} from the UI thread`);
 }
 
 function onPress() {
-  // highlight-next-line
-  runOnUI(myWorklet)('Howdy');
+    // highlight-next-line
+    runOnUI(myWorklet)('Howdy');
 }
 ```
 
-## to workletize
+## to workletize {#to-workletize}
 
-To convert a JavaScript function into a serializable object which can be copied and ran over on [UI thread](/docs/fundamentals/glossary#ui-thread).
+Преобразование JavaScript-функции в сериализуемый объект, который может быть скопирован и запущен на [UI thread](glossary.md#ui-thread).
 
-Functions marked with `"worklet";` directive are automatically picked up and workletized by the Reanimated Babel plugin.
+Функции, помеченные директивой `"worklet";`, автоматически подхватываются и обрабатываются плагином Reanimated Babel.
 
-## JavaScript thread
+## JavaScript-поток {#javascript-thread}
 
-JavaScript thread (or JS thread for short) is responsible for handling JavaScript code execution in the app.
+JavaScript-поток (или сокращенно JS-поток) отвечает за выполнение JavaScript-кода в приложении.
 
-This is the primary place where the React Native app code is executed.
+Это основное место, где выполняется код приложения React Native.
 
-## UI thread
+## UI thread {#ui-thread}
 
-UI thread is responsible for handling user interface updates. Also known as Main thread.
+Поток UI отвечает за обработку обновлений пользовательского интерфейса. Также известен как основной поток.
 
-You can learn more about it by reading the [Threading model](https://reactnative.dev/architecture/threading-model) article in the official React Native docs.
+Подробнее о нем можно узнать, прочитав статью [Threading model](../../../rn/threading-model.md) в официальной документации React Native.
 
-## Reanimated Babel plugin
+## Реанимированный плагин Babel {#reanimated-babel-plugin}
 
-The plugin performs automatic [workletization](/docs/fundamentals/glossary#to-workletize) of certain functions used with Reanimated to reduce the amount of boilerplate code.
+Плагин выполняет автоматическую [workletization](glossary.md#to-workletize) некоторых функций, используемых в Reanimated, чтобы уменьшить количество кодового кода.
 
-You can learn the details by reading the [Reanimated Babel plugin README](https://github.com/software-mansion/react-native-reanimated/blob/main/plugin/README.md).
+Подробности можно узнать, прочитав [Reanimated Babel plugin README](https://github.com/software-mansion/react-native-reanimated/blob/main/plugin/README.md).
+
+## Ссылки
+
+-   [Glossary of terms](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/glossary/)
