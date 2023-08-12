@@ -1,3 +1,8 @@
 title: Анимации
 nav:
-    - ...
+    - withTiming.md
+    - withSpring.md
+    - withDecay.md
+    - withSequence.md
+    - withRepeat.md
+    - withDelay.md
