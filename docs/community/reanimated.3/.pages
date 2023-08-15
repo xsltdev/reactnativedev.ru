@@ -3,9 +3,9 @@ nav:
     - fundamentals
     - animations
     - core
-#    - scroll
-#    - device
-#    - layout-animations
+    - scroll
+    - device
+    - layout-animations
 #    - shared-element-transitions
 #    - threading
 #    - utilities

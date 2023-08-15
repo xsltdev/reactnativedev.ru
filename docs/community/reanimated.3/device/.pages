@@ -1,0 +1,4 @@
+title: Устройство
+nav:
+    - useAnimatedKeyboard.md
+    - useAnimatedSensor.md

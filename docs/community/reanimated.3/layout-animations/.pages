@@ -1,0 +1,6 @@
+title: Анимация макета
+nav:
+    - entering-exiting-animations.md
+    - keyframe-animations.md
+    - layout-transitions.md
+    - custom-animations.md
