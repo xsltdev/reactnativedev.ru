@@ -1,12 +1,12 @@
 ---
-description: Entering/Exiting animations let you animate elements when they are added to or removed from the view hierarchy
+description: Анимация входа/выхода позволяет анимировать элементы при их добавлении в иерархию представления или удалении из нее
 ---
 
-# Entering/Exiting animations
+# Анимации входа/выхода
 
-Entering/Exiting animations let you animate elements when they are added to or removed from the view hierarchy.
+Анимации входа/выхода позволяют анимировать элементы при их добавлении и удалении из иерархии представления.
 
-Reanimated comes with a bunch of predefined animations you can customize. For more advanced use-cases, you can use [Keyframes](keyframe-animations.md) or create your own [custom entering/exiting animations](custom-animations.md).
+Reanimated поставляется с кучей предопределенных анимаций, которые можно настраивать. Для более сложных случаев можно использовать [Keyframes](keyframe-animations.md) или создавать собственные [пользовательские анимации входа/выхода](custom-animations.md).
 
 ## Fade
 
@@ -14,7 +14,7 @@ Reanimated comes with a bunch of predefined animations you can customize. For mo
 <source src="/community/reanimated.3/layout-animations/fade_light.mov" />
 </video>
 
-`FadeX` lets you create a fading animation.
+`FadeX` позволяет создать анимацию затухания.
 
 ```js
 import { FadeIn, FadeOut } from 'react-native-reanimated';
@@ -29,16 +29,14 @@ function App() {
 }
 ```
 
-Available fade animations:
+Доступные анимации затухания:
 
--   Entering: `FadeIn`, `FadeInRight`, `FadeInLeft`, `FadeInUp`, `FadeInDown`
--   Exiting: `FadeOut`, `FadeOutRight`, `FadeOutLeft`, `FadeOutUp`, `FadeOutDown`
+-   Вход: `FadeIn`, `FadeInRight`, `FadeInLeft`, `FadeInUp`, `FadeInDown`.
+-   Выход: `FadeOut`, `FadeOutRight`, `FadeOutLeft`, `FadeOutUp`, `FadeOutDown`.
 
-### Initial values
+Это начальные значения для каждой анимации, которые могут быть настроены с помощью модификатора `withInitialValues`.
 
-These are the initial values for each animation that can be customized with the `withInitialValues` modifier.
-
-| Name           | Config                                           |
+| Имя            | Конфигурация                                     |
 | -------------- | ------------------------------------------------ |
 | `FadeIn`       | `{opacity: 0}`                                   |
 | `FadeInDown`   | `{opacity: 0, transform: [{ translateY: 25 }]}`  |
@@ -51,26 +49,26 @@ These are the initial values for each animation that can be customized with the 
 | `FadeOutRight` | `{opacity: 1, transform: [{ translateX: 0 }]}`   |
 | `FadeOutUp`    | `{opacity: 1, transform: [{ translateY: 0 }]}`   |
 
-### Modifiers
+### Модификаторы
 
 #### Time-based
 
-Time-based modifiers relay on [`withTiming`](../animations/withTiming.md) function.
+Модификаторы, основанные на времени, ретранслируют функцию [`withTiming`](../animations/withTiming.md).
 
 ```js
 FadeOutLeft.duration(500).easing(Easing.ease);
 ```
 
--   `.duration(durationMs: number)` is the length of the animation (in milliseconds). Defaults to `300`.
--   `.easing(easingFunction: EasingFunction)` is an easing function which defines the animation curve. Defaults to `Easing.inOut(Easing.quad)`
+-   `.duration(durationMs: число)` - продолжительность анимации (в миллисекундах). По умолчанию равна `300`.
+-   `.easing(easingFunction: EasingFunction)` - функция easing, определяющая кривую анимации. По умолчанию `Easing.inOut(Easing.quad)`.
 
-:::note
-Time-based modifiers have no effect when `.springify()` is used.
-:::
+!!!note ""
+
+    Временные модификаторы не имеют эффекта при использовании `.springify()`.
 
 #### Spring-based
 
-Spring-based modifiers relay on [`withSpring`](../animations/withSpring.md) function.
+Модификаторы, основанные на пружинах, используют функцию [`withSpring`](../animations/withSpring.md).
 
 ```js
 FadeInUp.springify()
@@ -82,13 +80,13 @@ FadeInUp.springify()
     .restSpeedThreshold(5);
 ```
 
--   `.springify()` enables the spring-based animation configuration.
--   `.damping(value: number)` decides how quickly a spring stops moving. Higher damping means the spring will come to rest faster. Defaults to `10`.
--   `.mass(value: number)` is the weight of the spring. Reducing this value makes the animation faster. Defaults to `1`.
--   `.stiffness(value: number)` decides how bouncy the spring is. Defaults to `100`.
--   `.overshootClamping(value: boolean)` decides whether a spring can bounce over the designated position. Defaults to `false`.
--   `.restDisplacementThreshold(value: number)` is the displacement below which the spring will snap to the designated position without further oscillations. Defaults to `0.001`.
--   `.restSpeedThreshold(value: number)` is the speed in pixels per second from which the spring will snap to the designated position without further oscillations. Defaults to `2`.
+-   `.springify()` включает конфигурацию анимации на основе пружин.
+-   `.damping(value: number)` определяет, как быстро пружина прекращает движение. Большее значение демпфирования означает, что пружина будет быстрее приходить в состояние покоя. По умолчанию `10`.
+-   `.mass( value: number)` - это масса пружины. Уменьшение этого значения ускоряет анимацию. По умолчанию `1`.
+-   `.stiffness(value: number)` определяет, насколько пружина упруга. По умолчанию `100`.
+-   `.overshootClamping(value: boolean)` определяет, может ли пружина перескочить через заданное положение. По умолчанию `false`.
+-   `.restDisplacementThreshold( value: number)` - смещение, ниже которого пружина будет защелкиваться в заданном положении без дальнейших колебаний. По умолчанию `0.001`.
+-   `.restSpeedThreshold( value: number)` - скорость в пикселях в секунду, начиная с которой пружина будет защелкиваться в заданное положение без дальнейших колебаний. По умолчанию `2`.
 
 #### Common
 
@@ -103,10 +101,10 @@ FadeInDown.delay(500)
     });
 ```
 
--   `.delay(durationMs: number)` is the delay before the animation starts (in milliseconds). Defaults to `0`.
--   `.randomDelay()` randomizes the delay of the animation between `0` and the provided delay. Uses 1000 ms if delay wasn't provided.
--   `.withInitialValues(values: StyleProps)` allows to override the initial config of the animation.
--   `.withCallback(callback: (finished: boolean) => void)` is the callback that will fire after the animation ends. Sets `finished` to `true` when animation ends without interruptions, and `false` otherwise.
+-   `.delay(durationMs: number)` - задержка перед началом анимации (в миллисекундах). По умолчанию равна `0`.
+-   `.randomDelay()` рандомизирует задержку анимации между `0` и указанной задержкой. Используется 1000 мс, если задержка не была указана.
+-   `.withInitialValues(values: StyleProps)` позволяет переопределить начальную конфигурацию анимации.
+-   `.withCallback(callback: (finished: boolean) => void)` - обратный вызов, который будет выполнен после завершения анимации. Устанавливает значение `finished` в `true`, если анимация завершается без прерываний, и `false` в противном случае.
 
 ## Bounce
 
@@ -114,7 +112,7 @@ FadeInDown.delay(500)
 <source src="/community/reanimated.3/layout-animations/bounce_light.mov" />
 </video>
 
-`BounceX` lets you create a bouncing animation.
+`BounceX` позволяет создать анимацию прыжков.
 
 ```jsx
 import {
@@ -132,37 +130,14 @@ function App() {
 }
 ```
 
-Available bounce animations:
+Доступные анимации отскока:
 
-### Entering
+-   Ввод: `BounceIn`, `BounceInRight`, `BounceInLeft`, `BounceInUp`, `BounceInDown`.
+-   Выход: `BounceOut`, `BounceOutRight`, `BounceOutLeft`, `BounceOutUp`, `BounceOutDown`.
 
--   `BounceIn`
+Это начальные значения для каждой анимации, которые могут быть настроены с помощью модификатора `withInitialValues`.
 
--   `BounceInRight`
-
--   `BounceInLeft`
-
--   `BounceInUp`
-
--   `BounceInDown`
-
-### Exiting
-
--   `BounceOut`
-
--   `BounceOutRight`
-
--   `BounceOutLeft`
-
--   `BounceOutUp`
-
--   `BounceOutDown`
-
-### Initial values
-
-These are the initial values for each animation that can be customized with the `withInitialValues` modifier.
-
-| Name             | Config                                                |
+| Имя              | Конфигурация                                          |
 | ---------------- | ----------------------------------------------------- |
 | `BounceIn`       | `{transform: [{ scale: 0 }]}`                         |
 | `BounceInRight`  | `{transform: [{ translateX: values.windowWidth }]}`   |
@@ -175,7 +150,7 @@ These are the initial values for each animation that can be customized with the 
 | `BounceOutUp`    | `{transform: [{ translateY: 0 }]}`                    |
 | `BounceOutDown`  | `{transform: [{ translateY: 0 }]}`                    |
 
-### Modifiers
+### Модификаторы
 
 ```javascript
 BounceInDown.duration(500)
@@ -191,11 +166,11 @@ BounceInDown.duration(500)
     });
 ```
 
--   `.duration(durationMs: number)` is the length of the animation (in milliseconds). Defaults to `600`.
--   `.delay(durationMs: number)` is the delay before the animation starts (in milliseconds). Defaults to `0`.
--   `.randomDelay()` randomizes the delay of the animation between `0` and the provided delay. Uses 1000 ms if delay wasn't provided.
--   `.withInitialValues(values: StyleProps)` allows to override the initial config of the animation.
--   `.withCallback(callback: (finished: boolean) => void)` is the callback that will fire after the animation ends. Sets `finished` to `true` when animation ends without interruptions, and `false` otherwise.
+-   `.duration(durationMs: number)` - продолжительность анимации (в миллисекундах). По умолчанию равно `600`.
+-   `.delay(durationMs: number)` - задержка перед началом анимации (в миллисекундах). По умолчанию `0`.
+-   `.randomDelay()` рандомизирует задержку анимации между `0` и заданной задержкой. Используется 1000 мс, если задержка не была указана.
+-   `.withInitialValues(values: StyleProps)` позволяет переопределить начальную конфигурацию анимации.
+-   `.withCallback(callback: (finished: boolean) => void)` - обратный вызов, который будет выполнен после завершения анимации. Устанавливает значение `finished` в `true`, если анимация завершается без прерываний, и `false` в противном случае.
 
 ## Flip
 
@@ -203,7 +178,7 @@ BounceInDown.duration(500)
 <source src="/community/reanimated.3/layout-animations/flip_light.mov" />
 </video>
 
-`FlipX` lets you create animation based on rotation over specific axis.
+`FlipX` позволяет создавать анимацию, основанную на вращении по определенной оси.
 
 ```jsx
 import {
@@ -221,41 +196,14 @@ function App() {
 }
 ```
 
-Available flip animations:
+Доступные анимации переворачивания:
 
-### Entering
+-   Ввод: `FlipInEasyX`, `FlipInEasyY`, `FlipInXDown`, `FlipInXUp`, `FlipInYLeft`, `FlipInYRight`.
+-   Выход: `FlipOutEasyX`, `FlipOutEasyY`, `FlipOutXDown`, `FlipOutXUp`, `FlipOutYLeft`, `FlipOutYRight`.
 
--   `FlipInEasyX`
+Это начальные значения для каждой анимации, которые могут быть настроены с помощью модификатора `withInitialValues`.
 
--   `FlipInEasyY`
-
--   `FlipInXDown`
-
--   `FlipInXUp`
-
--   `FlipInYLeft`
-
--   `FlipInYRight`
-
-### Exiting
-
--   `FlipOutEasyX`
-
--   `FlipOutEasyY`
-
--   `FlipOutXDown`
-
--   `FlipOutXUp`
-
--   `FlipOutYLeft`
-
--   `FlipOutYRight`
-
-### Initial values
-
-These are the initial values for each animation that can be customized with the `withInitialValues` modifier.
-
-| Name            | Config                                                                                                   |
+| Имя             | Конфигурация                                                                                             |
 | --------------- | -------------------------------------------------------------------------------------------------------- |
 | `FlipInEasyX`   | `{transform: [{ perspective: 500 }, { rotateX: '90deg' }]}`                                              |
 | `FlipInEasyY`   | `{transform: [{ perspective: 500 }, { rotateY: '90deg' }]}`                                              |
@@ -270,26 +218,26 @@ These are the initial values for each animation that can be customized with the 
 | `FlipOutYLeft`  | `{transform: [{ perspective: 500 }, { rotateY: '0deg' }, { translateX: 0 }]}`                            |
 | `FlipOutYRight` | `{transform: [{ perspective: 500 }, { rotateY: '0deg' }, { translateX: 0 }]}`                            |
 
-### Modifiers
+### Модификаторы
 
 #### Time-based
 
-Time-based modifiers relay on [`withTiming`](../animations/withTiming.md) function.
+Модификаторы, основанные на времени, ретранслируют функцию [`withTiming`](../animations/withTiming.md).
 
 ```javascript
 FlipOutYLeft.duration(500).easing(Easing.ease);
 ```
 
--   `.duration(durationMs: number)` is the length of the animation (in milliseconds). Defaults to `300`.
--   `.easing(easingFunction: EasingFunction)` is an easing function which defines the animation curve. Defaults to `Easing.inOut(Easing.quad)`
+-   `.duration(durationMs: number)` - продолжительность анимации (в миллисекундах). По умолчанию равна `300`.
+-   `.easing(easingFunction: EasingFunction)` - функция easing, определяющая кривую анимации. По умолчанию `Easing.inOut(Easing.quad)`.
 
-:::note
-Time-based modifiers have no effect when `.springify()` is used.
-:::
+!!!note ""
+
+    Временные модификаторы не имеют эффекта при использовании `.springify()`.
 
 #### Spring-based
 
-Spring-based modifiers relay on [`withSpring`](../animations/withSpring.md) function.
+Модификаторы, основанные на пружинах, используют функцию [`withSpring`](../animations/withSpring.md).
 
 ```javascript
 FlipInXUp.springify()
@@ -301,13 +249,13 @@ FlipInXUp.springify()
     .restSpeedThreshold(5);
 ```
 
--   `.springify()` enables the spring-based animation configuration.
--   `.damping(value: number)` decides how quickly a spring stops moving. Higher damping means the spring will come to rest faster. Defaults to `10`.
--   `.mass(value: number)` is the weight of the spring. Reducing this value makes the animation faster. Defaults to `1`.
--   `.stiffness(value: number)` decides how bouncy the spring is. Defaults to `100`.
--   `.overshootClamping(value: boolean)` decides whether a spring can bounce over the designated position. Defaults to `false`.
--   `.restDisplacementThreshold(value: number)` is the displacement below which the spring will snap to the designated position without further oscillations. Defaults to `0.001`.
--   `.restSpeedThreshold(value: number)` is the speed in pixels per second from which the spring will snap to the designated position without further oscillations. Defaults to `2`.
+-   `.springify()` включает конфигурацию анимации на основе пружин.
+-   `.damping(value: number)` определяет, как быстро пружина прекращает движение. Большее значение демпфирования означает, что пружина будет быстрее приходить в состояние покоя. По умолчанию `10`.
+-   `.mass( value: number)` - это масса пружины. Уменьшение этого значения ускоряет анимацию. По умолчанию `1`.
+-   `.stiffness(value: number)` определяет, насколько пружина упруга. По умолчанию `100`.
+-   `.overshootClamping(value: boolean)` определяет, может ли пружина перескочить через заданное положение. По умолчанию `false`.
+-   `.restDisplacementThreshold( value: number)` - смещение, ниже которого пружина будет защелкиваться в заданном положении без дальнейших колебаний. По умолчанию `0.001`.
+-   `.restSpeedThreshold( value: number)` - скорость в пикселях в секунду, начиная с которой пружина будет защелкиваться в заданное положение без дальнейших колебаний. По умолчанию `2`.
 
 #### Common
 
@@ -327,10 +275,10 @@ FlipInEasyY.delay(500)
     });
 ```
 
--   `.delay(durationMs: number)` is the delay before the animation starts (in milliseconds). Defaults to `0`.
--   `.randomDelay()` randomizes the delay of the animation between `0` and the provided delay. Uses 1000 ms if delay wasn't provided.
--   `.withInitialValues(values: StyleProps)` allows to override the initial config of the animation.
--   `.withCallback(callback: (finished: boolean) => void)` is the callback that will fire after the animation ends. Sets `finished` to `true` when animation ends without interruptions, and `false` otherwise.
+-   `.delay(durationMs: number)` - задержка перед началом анимации (в миллисекундах). По умолчанию равна `0`.
+-   `.randomDelay()` рандомизирует задержку анимации между `0` и указанной задержкой. Используется 1000 мс, если задержка не была указана.
+-   `.withInitialValues(values: StyleProps)` позволяет переопределить начальную конфигурацию анимации.
+-   `.withCallback(callback: (finished: boolean) => void)` - обратный вызов, который будет выполнен после завершения анимации. Устанавливает значение `finished` в `true`, если анимация завершается без прерываний, и `false` в противном случае.
 
 ## LightSpeed
 
@@ -338,7 +286,7 @@ FlipInEasyY.delay(500)
 <source src="/community/reanimated.3/layout-animations/lightspeed_light.mov" />
 </video>
 
-`LightSpeedX` lets you create an animation of a horizontally moving object with a change of opacity and skew.
+`LightSpeedX` позволяет создать анимацию горизонтально движущегося объекта с изменением непрозрачности и перекоса.
 
 ```jsx
 import {
@@ -356,51 +304,40 @@ function App() {
 }
 ```
 
-Available lightspeed animations:
+Доступные анимации скорости света:
 
-### Entering
+-   Вход: `LightSpeedInRight`, `LightSpeedInLeft`.
+-   Выход: `LightSpeedOutRight`, `LightSpeedOutLeft`.
 
--   `LightSpeedInRight`
+Это начальные значения для каждой анимации, которые могут быть настроены с помощью модификатора `withInitialValues`.
 
--   `LightSpeedInLeft`
-
-### Exiting
-
--   `LightSpeedOutRight`
-
--   `LightSpeedOutLeft`
-
-### Initial values
-
-These are the initial values for each animation that can be customized with the `withInitialValues` modifier.
-
-| Name                 | Config                                                                               |
+| Имя                  | Конфигурация                                                                         |
 | -------------------- | ------------------------------------------------------------------------------------ |
 | `LightSpeedInLeft`   | `{opacity: 0, transform: [{ translateX: -values.windowWidth }, { skewX: '45deg' }]}` |
 | `LightSpeedInRight`  | `{opacity: 0, transform: [{ translateX: values.windowWidth }, { skewX: '-45deg' }]}` |
 | `LightSpeedOutLeft`  | `{opacity: 1, transform: [{ translateX: 0 }, { skewX: '0deg' }]}`                    |
 | `LightSpeedOutRight` | `{opacity: 1, transform: [{ translateX: 0 }, { skewX: '0deg' }]}`                    |
 
-### Modifiers
+### Модификаторы
 
-#### Time-based <Optional/>
+#### Time-based
 
-Time-based modifiers relay on [`withTiming`](/docs/animations/withTiming) function.
+Модификаторы, основанные на времени, ретранслируют функцию [`withTiming`](../animations/withTiming.md).
 
 ```javascript
 LightSpeedOutLeft.duration(500).easing(Easing.ease);
 ```
 
--   `.duration(durationMs: number)` is the length of the animation (in milliseconds). Defaults to `300`.
--   `.easing(easingFunction: EasingFunction)` is an easing function which defines the animation curve. Defaults to `Easing.inOut(Easing.quad)`
+-   `.duration(durationMs: number)` - продолжительность анимации (в миллисекундах). По умолчанию равна `300`.
+-   `.easing(easingFunction: EasingFunction)` - функция easing, определяющая кривую анимации. По умолчанию `Easing.inOut(Easing.quad)`.
 
-:::note
-Time-based modifiers have no effect when `.springify()` is used.
-:::
+!!!note ""
 
-#### Spring-based <Optional/>
+    Временные модификаторы не имеют эффекта при использовании `.springify()`.
 
-Spring-based modifiers relay on [`withSpring`](/docs/animations/withSpring) function.
+#### Spring-based
+
+Модификаторы, основанные на пружинах, используют функцию [`withSpring`](../animations/withSpring.md).
 
 ```javascript
 LightSpeedInLeft.springify()
@@ -412,15 +349,15 @@ LightSpeedInLeft.springify()
     .restSpeedThreshold(5);
 ```
 
--   `.springify()` enables the spring-based animation configuration.
--   `.damping(value: number)` decides how quickly a spring stops moving. Higher damping means the spring will come to rest faster. Defaults to `10`.
--   `.mass(value: number)` is the weight of the spring. Reducing this value makes the animation faster. Defaults to `1`.
--   `.stiffness(value: number)` decides how bouncy the spring is. Defaults to `100`.
--   `.overshootClamping(value: boolean)` decides whether a spring can bounce over the designated position. Defaults to `false`.
--   `.restDisplacementThreshold(value: number)` is the displacement below which the spring will snap to the designated position without further oscillations. Defaults to `0.001`.
--   `.restSpeedThreshold(value: number)` is the speed in pixels per second from which the spring will snap to the designated position without further oscillations. Defaults to `2`.
+-   `.springify()` включает конфигурацию анимации на основе пружин.
+-   `.damping(value: number)` определяет, как быстро пружина прекращает движение. Большее значение демпфирования означает, что пружина будет быстрее приходить в состояние покоя. По умолчанию `10`.
+-   `.mass( value: number)` - это масса пружины. Уменьшение этого значения ускоряет анимацию. По умолчанию `1`.
+-   `.stiffness(value: number)` определяет, насколько пружина упруга. По умолчанию `100`.
+-   `.overshootClamping(value: boolean)` определяет, может ли пружина перескочить через заданное положение. По умолчанию `false`.
+-   `.restDisplacementThreshold( value: number)` - смещение, ниже которого пружина будет защелкиваться в заданном положении без дальнейших колебаний. По умолчанию `0.001`.
+-   `.restSpeedThreshold( value: number)` - скорость в пикселях в секунду, начиная с которой пружина будет защелкиваться в заданное положение без дальнейших колебаний. По умолчанию `2`.
 
-#### Common <Optional/>
+#### Common
 
 ```javascript
 LightSpeedInRight.delay(500)
@@ -438,25 +375,18 @@ LightSpeedInRight.delay(500)
     });
 ```
 
--   `.delay(durationMs: number)` is the delay before the animation starts (in milliseconds). Defaults to `0`.
--   `.randomDelay()` randomizes the delay of the animation between `0` and the provided delay. Uses 1000 ms if delay wasn't provided.
--   `.withInitialValues(values: StyleProps)` allows to override the initial config of the animation.
--   `.withCallback(callback: (finished: boolean) => void)` is the callback that will fire after the animation ends. Sets `finished` to `true` when animation ends without interruptions, and `false` otherwise.
+-   `.delay(durationMs: number)` - задержка перед началом анимации (в миллисекундах). По умолчанию равна `0`.
+-   `.randomDelay()` рандомизирует задержку анимации между `0` и указанной задержкой. Используется 1000 мс, если задержка не была указана.
+-   `.withInitialValues(values: StyleProps)` позволяет переопределить начальную конфигурацию анимации.
+-   `.withCallback(callback: (finished: boolean) => void)` - обратный вызов, который будет выполнен после завершения анимации. Устанавливает значение `finished` в `true`, если анимация завершается без прерываний, и `false` в противном случае.
 
 ## Pinwheel
 
-<Row>
+<video playsInline autoPlay muted loop>
+<source src="/community/reanimated.3/layout-animations/pinwheel_light.mov" />
+</video>
 
-<ThemedVideo
-sources={{
-    light: '/recordings/layout-animations/pinwheel_light.mov',
-    dark: '/recordings/layout-animations/pinwheel_dark.mov',
-  }}
-/>
-
-<div style={{flexGrow: 1}}>
-
-`PinwheelX` lets you create an animation based on rotation, scale, and opacity.
+`PinwheelX` позволяет создавать анимацию на основе вращения, масштаба и непрозрачности.
 
 ```jsx
 import {
@@ -474,65 +404,38 @@ function App() {
 }
 ```
 
-</div>
+Доступные анимации колес:
 
-</Row>
+-   Ввод: `PinwheelIn`
+-   Выход: `PinwheelOut`.
 
-Available pinwheel animations:
+Это начальные значения для каждой анимации, которые могут быть настроены с помощью модификатора `withInitialValues`.
 
-<Grid>
-<div>
-
-### Entering
-
-<div style={{ margin: 16 }} />
-
--   `PinwheelIn`
-
-</div>
-<div>
-
-### Exiting
-
-<div style={{ margin: 16 }} />
-
--   `PinwheelOut`
-
-</div>
-</Grid>
-
-<details>
-<summary>Initial values</summary>
-
-These are the initial values for each animation that can be customized with the `withInitialValues` modifier.
-
-| Name          | Config                                                   |
+| Имя           | Конфигурация                                             |
 | ------------- | -------------------------------------------------------- |
 | `PinwheelIn`  | `{opacity: 0, transform: [{ scale: 0 }, {rotate: '5'}]}` |
 | `PinwheelOut` | `{opacity: 1, transform: [{ scale: 1 }, {rotate: '0'}]}` |
 
-</details>
+### Модификаторы
 
-### Modifiers
+#### Time-based
 
-#### Time-based <Optional/>
-
-Time-based modifiers relay on [`withTiming`](/docs/animations/withTiming) function.
+Модификаторы, основанные на времени, ретранслируют функцию [`withTiming`](../animations/withTiming.md).
 
 ```javascript
 PinwheelOut.duration(500).easing(Easing.ease);
 ```
 
--   `.duration(durationMs: number)` is the length of the animation (in milliseconds). Defaults to `300`.
--   `.easing(easingFunction: EasingFunction)` is an easing function which defines the animation curve. Defaults to `Easing.inOut(Easing.quad)`
+-   `.duration(durationMs: number)` - продолжительность анимации (в миллисекундах). По умолчанию равна `300`.
+-   `.easing(easingFunction: EasingFunction)` - функция easing, определяющая кривую анимации. По умолчанию `Easing.inOut(Easing.quad)`.
 
-:::note
-Time-based modifiers have no effect when `.springify()` is used.
-:::
+!!!note ""
 
-#### Spring-based <Optional/>
+    Временные модификаторы не имеют эффекта при использовании `.springify()`.
 
-Spring-based modifiers relay on [`withSpring`](/docs/animations/withSpring) function.
+#### Spring-based
+
+Модификаторы, основанные на пружинах, ретранслируют функцию [`withSpring`](../animations/withSpring.md).
 
 ```javascript
 PinwheelIn.springify()
@@ -544,15 +447,15 @@ PinwheelIn.springify()
     .restSpeedThreshold(5);
 ```
 
--   `.springify()` enables the spring-based animation configuration.
--   `.damping(value: number)` decides how quickly a spring stops moving. Higher damping means the spring will come to rest faster. Defaults to `10`.
--   `.mass(value: number)` is the weight of the spring. Reducing this value makes the animation faster. Defaults to `1`.
--   `.stiffness(value: number)` decides how bouncy the spring is. Defaults to `100`.
--   `.overshootClamping(value: boolean)` decides whether a spring can bounce over the designated position. Defaults to `false`.
--   `.restDisplacementThreshold(value: number)` is the displacement below which the spring will snap to the designated position without further oscillations. Defaults to `0.001`.
--   `.restSpeedThreshold(value: number)` is the speed in pixels per second from which the spring will snap to the designated position without further oscillations. Defaults to `2`.
+-   `.springify()` включает конфигурацию анимации на основе пружин.
+-   `.damping(value: number)` определяет, как быстро пружина прекращает движение. Большее значение демпфирования означает, что пружина будет быстрее приходить в состояние покоя. По умолчанию `10`.
+-   `.mass( value: number)` - это масса пружины. Уменьшение этого значения ускоряет анимацию. По умолчанию `1`.
+-   `.stiffness(value: number)` определяет, насколько пружина упруга. По умолчанию `100`.
+-   `.overshootClamping(value: boolean)` определяет, может ли пружина перескочить через заданное положение. По умолчанию `false`.
+-   `.restDisplacementThreshold( value: number)` - смещение, ниже которого пружина будет защелкиваться в заданном положении без дальнейших колебаний. По умолчанию `0.001`.
+-   `.restSpeedThreshold( value: number)` - скорость в пикселях в секунду, начиная с которой пружина будет защелкиваться в заданное положение без дальнейших колебаний. По умолчанию `2`.
 
-#### Common <Optional/>
+#### Common
 
 ```javascript
 PinwheelIn.delay(500)
@@ -567,25 +470,18 @@ PinwheelIn.delay(500)
     });
 ```
 
--   `.delay(durationMs: number)` is the delay before the animation starts (in milliseconds). Defaults to `0`.
--   `.randomDelay()` randomizes the delay of the animation between `0` and the provided delay. Uses 1000 ms if delay wasn't provided.
--   `.withInitialValues(values: StyleProps)` allows to override the initial config of the animation.
--   `.withCallback(callback: (finished: boolean) => void)` is the callback that will fire after the animation ends. Sets `finished` to `true` when animation ends without interruptions, and `false` otherwise.
+-   `.delay(durationMs: number)` - задержка перед началом анимации (в миллисекундах). По умолчанию равна `0`.
+-   `.randomDelay()` рандомизирует задержку анимации между `0` и указанной задержкой. Используется 1000 мс, если задержка не была указана.
+-   `.withInitialValues(values: StyleProps)` позволяет переопределить начальную конфигурацию анимации.
+-   `.withCallback(callback: (finished: boolean) => void)` - обратный вызов, который будет выполнен после завершения анимации. Устанавливает значение `finished` в `true`, если анимация завершается без прерываний, и `false` в противном случае.
 
 ## Roll
 
-<Row>
+<video playsInline autoPlay muted loop>
+<source src="/community/reanimated.3/layout-animations/roll_light.mov" />
+</video>
 
-<ThemedVideo
-sources={{
-    light: '/recordings/layout-animations/roll_light.mov',
-    dark: '/recordings/layout-animations/roll_dark.mov',
-  }}
-/>
-
-<div style={{flexGrow: 1}}>
-
-`RollX` lets you create an animation of a horizontally moving object with a rotation.
+`RollX` позволяет создать анимацию горизонтально движущегося объекта с вращением.
 
 ```jsx
 import {
@@ -603,71 +499,40 @@ function App() {
 }
 ```
 
-</div>
+Доступные анимации роликов:
 
-</Row>
+-   Вход: `RollInRight`, `RollInLeft`.
+-   Выход: `RollOutRight`, `RollOutLeft`.
 
-Available roll animations:
+Это начальные значения для каждой анимации, которые могут быть настроены с помощью модификатора `withInitialValues`.
 
-<Grid>
-<div>
-
-### Entering
-
-<div style={{ margin: 16 }} />
-
--   `RollInRight`
-
--   `RollInLeft`
-
-</div>
-<div>
-
-### Exiting
-
-<div style={{ margin: 16 }} />
-
--   `RollOutRight`
-
--   `RollOutLeft`
-
-</div>
-</Grid>
-
-<details>
-<summary>Initial values</summary>
-
-These are the initial values for each animation that can be customized with the `withInitialValues` modifier.
-
-| Name           | Config                                                                      |
+| Имя            | Конфигурация                                                                |
 | -------------- | --------------------------------------------------------------------------- |
 | `RollInLeft`   | `{transform: [{ translateX: -values.windowWidth }, { rotate: '-180deg' }]}` |
 | `RollInRight`  | `{transform: [{ translateX: values.windowWidth }, { rotate: '180deg' }]}`   |
 | `RollOutLeft`  | `{transform: [{ translateX: 0 }, { rotate: '0deg' }]}`                      |
 | `RollOutRight` | `{transform: [{ translateX: 0 }, { rotate: '0deg' }]}`                      |
 
-</details>
+### Модификаторы
 
-### Modifiers
+#### Time-based
 
-#### Time-based <Optional/>
-
-Time-based modifiers relay on [`withTiming`](/docs/animations/withTiming) function.
+Модификаторы, основанные на времени, ретранслируют функцию [`withTiming`](../animations/withTiming.md).
 
 ```javascript
 RollOutLeft.duration(500).easing(Easing.ease);
 ```
 
--   `.duration(durationMs: number)` is the length of the animation (in milliseconds). Defaults to `300`.
--   `.easing(easingFunction: EasingFunction)` is an easing function which defines the animation curve. Defaults to `Easing.inOut(Easing.quad)`
+-   `.duration(durationMs: number)` - продолжительность анимации (в миллисекундах). По умолчанию равна `300`.
+-   `.easing(easingFunction: EasingFunction)` - функция easing, определяющая кривую анимации. По умолчанию `Easing.inOut(Easing.quad)`.
 
-:::note
-Time-based modifiers have no effect when `.springify()` is used.
-:::
+!!!note ""
 
-#### Spring-based <Optional/>
+    Временные модификаторы не имеют эффекта при использовании `.springify()`.
 
-Spring-based modifiers relay on [`withSpring`](/docs/animations/withSpring) function.
+#### Spring-based
+
+Модификаторы, основанные на пружинах, ретранслируют функцию [`withSpring`](../animations/withSpring.md).
 
 ```javascript
 RollInLeft.springify()
@@ -679,15 +544,15 @@ RollInLeft.springify()
     .restSpeedThreshold(5);
 ```
 
--   `.springify()` enables the spring-based animation configuration.
--   `.damping(value: number)` decides how quickly a spring stops moving. Higher damping means the spring will come to rest faster. Defaults to `10`.
--   `.mass(value: number)` is the weight of the spring. Reducing this value makes the animation faster. Defaults to `1`.
--   `.stiffness(value: number)` decides how bouncy the spring is. Defaults to `100`.
--   `.overshootClamping(value: boolean)` decides whether a spring can bounce over the designated position. Defaults to `false`.
--   `.restDisplacementThreshold(value: number)` is the displacement below which the spring will snap to the designated position without further oscillations. Defaults to `0.001`.
--   `.restSpeedThreshold(value: number)` is the speed in pixels per second from which the spring will snap to the designated position without further oscillations. Defaults to `2`.
+-   `.springify()` включает конфигурацию анимации на основе пружин.
+-   `.damping(value: number)` определяет, как быстро пружина прекращает движение. Большее значение демпфирования означает, что пружина будет быстрее приходить в состояние покоя. По умолчанию `10`.
+-   `.mass( value: number)` - это масса пружины. Уменьшение этого значения ускоряет анимацию. По умолчанию `1`.
+-   `.stiffness(value: number)` определяет, насколько пружина упруга. По умолчанию `100`.
+-   `.overshootClamping(value: boolean)` определяет, может ли пружина перескочить через заданное положение. По умолчанию `false`.
+-   `.restDisplacementThreshold( value: number)` - смещение, ниже которого пружина будет защелкиваться в заданном положении без дальнейших колебаний. По умолчанию `0.001`.
+-   `.restSpeedThreshold( value: number)` - скорость в пикселях в секунду, начиная с которой пружина будет защелкиваться в заданное положение без дальнейших колебаний. По умолчанию `2`.
 
-#### Common <Optional/>
+#### Common
 
 ```javascript
 RollInRight.delay(500)
@@ -705,25 +570,18 @@ RollInRight.delay(500)
     });
 ```
 
--   `.delay(durationMs: number)` is the delay before the animation starts (in milliseconds). Defaults to `0`.
--   `.randomDelay()` randomizes the delay of the animation between `0` and the provided delay. Uses 1000 ms if delay wasn't provided.
--   `.withInitialValues(values: StyleProps)` allows to override the initial config of the animation.
--   `.withCallback(callback: (finished: boolean) => void)` is the callback that will fire after the animation ends. Sets `finished` to `true` when animation ends without interruptions, and `false` otherwise.
+-   `.delay(durationMs: number)` - задержка перед началом анимации (в миллисекундах). По умолчанию равна `0`.
+-   `.randomDelay()` рандомизирует задержку анимации между `0` и указанной задержкой. Используется 1000 мс, если задержка не была указана.
+-   `.withInitialValues(values: StyleProps)` позволяет переопределить начальную конфигурацию анимации.
+-   `.withCallback(callback: (finished: boolean) => void)` - обратный вызов, который будет выполнен после завершения анимации. Устанавливает значение `finished` в `true`, если анимация завершается без прерываний, и `false` в противном случае.
 
 ## Rotate
 
-<Row>
+<video playsInline autoPlay muted loop>
+<source src="/community/reanimated.3/layout-animations/rotate_light.mov" />
+</video>
 
-<ThemedVideo
-sources={{
-    light: '/recordings/layout-animations/rotate_light.mov',
-    dark: '/recordings/layout-animations/rotate_dark.mov',
-  }}
-/>
-
-<div style={{flexGrow: 1}}>
-
-`RotateX` lets you create a rotation animation.
+`RotateX` позволяет создать анимацию вращения.
 
 ```jsx
 import {
@@ -741,51 +599,14 @@ function App() {
 }
 ```
 
-</div>
+Доступные анимации поворота:
 
-</Row>
+-   Ввод: `RotateInDownLeft`, `RotateInDownRight`, `RotateInUpLeft`, `RotateInUpRight`.
+-   Выход: `RotateOutDownLeft`, `RotateOutDownRight`, `RotateOutUpLeft`, `RotateOutUpRight`.
 
-Available rotate animations:
+Это начальные значения для каждой анимации, которые могут быть настроены с помощью модификатора `withInitialValues`.
 
-<Grid>
-<div>
-
-### Entering
-
-<div style={{ margin: 16 }} />
-
--   `RotateInDownLeft`
-
--   `RotateInDownRight`
-
--   `RotateInUpLeft`
-
--   `RotateInUpRight`
-
-</div>
-<div>
-
-### Exiting
-
-<div style={{ margin: 16 }} />
-
--   `RotateOutDownLeft`
-
--   `RotateOutDownRight`
-
--   `RotateOutUpLeft`
-
--   `RotateOutUpRight`
-
-</div>
-</Grid>
-
-<details>
-<summary>Initial values</summary>
-
-These are the initial values for each animation that can be customized with the `withInitialValues` modifier.
-
-| Name                 | Config                                                                                                                                                                                     |
+| Имя                  | Конфигурация                                                                                                                                                                               |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `RotateInDownLeft`   | `{opacity: 0, transform: [{ rotate: '-90deg' }, { translateX: values.targetWidth / 2 - values.targetHeight / 2 }, { translateY: -(values.targetWidth / 2 - values.targetHeight / 2) }]}`   |
 | `RotateInDownRight`  | `{opacity: 0, transform: [{ rotate: '90deg' }, { translateX: -(values.targetWidth / 2 - values.targetHeight / 2) }, { translateY: -(values.targetWidth / 2 - values.targetHeight / 2) }]}` |
@@ -796,28 +617,26 @@ These are the initial values for each animation that can be customized with the 
 | `RotateOutUpLeft`    | `{opacity: 1, transform: [{ rotate: '0deg' }, { translateX: 0 }, { translateY: 0 }]}`                                                                                                      |
 | `RotateOutUpRight`   | `{opacity: 1, transform: [{ rotate: '0deg' }, { translateX: 0 }, { translateY: 0 }]}`                                                                                                      |
 
-</details>
+### Модификаторы
 
-### Modifiers
+#### Time-based
 
-#### Time-based <Optional/>
-
-Time-based modifiers relay on [`withTiming`](/docs/animations/withTiming) function.
+Модификаторы, основанные на времени, ретранслируют функцию [`withTiming`](../animations/withTiming.md).
 
 ```javascript
 RotateOutDownRight.duration(500).easing(Easing.ease);
 ```
 
--   `.duration(durationMs: number)` is the length of the animation (in milliseconds). Defaults to `300`.
--   `.easing(easingFunction: EasingFunction)` is an easing function which defines the animation curve. Defaults to `Easing.inOut(Easing.quad)`
+-   `.duration(durationMs: number)` - продолжительность анимации (в миллисекундах). По умолчанию равна `300`.
+-   `.easing(easingFunction: EasingFunction)` - функция easing, определяющая кривую анимации. По умолчанию `Easing.inOut(Easing.quad)`.
 
-:::note
-Time-based modifiers have no effect when `.springify()` is used.
-:::
+!!!note ""
 
-#### Spring-based <Optional/>
+    Временные модификаторы не имеют эффекта при использовании `.springify()`.
 
-Spring-based modifiers relay on [`withSpring`](/docs/animations/withSpring) function.
+#### Spring-based
+
+Модификаторы, основанные на пружинах, ретранслируют функцию [`withSpring`](../animations/withSpring.md).
 
 ```javascript
 RotateInUpLeft.springify()
@@ -829,15 +648,15 @@ RotateInUpLeft.springify()
     .restSpeedThreshold(5);
 ```
 
--   `.springify()` enables the spring-based animation configuration.
--   `.damping(value: number)` decides how quickly a spring stops moving. Higher damping means the spring will come to rest faster. Defaults to `10`.
--   `.mass(value: number)` is the weight of the spring. Reducing this value makes the animation faster. Defaults to `1`.
--   `.stiffness(value: number)` decides how bouncy the spring is. Defaults to `100`.
--   `.overshootClamping(value: boolean)` decides whether a spring can bounce over the designated position. Defaults to `false`.
--   `.restDisplacementThreshold(value: number)` is the displacement below which the spring will snap to the designated position without further oscillations. Defaults to `0.001`.
--   `.restSpeedThreshold(value: number)` is the speed in pixels per second from which the spring will snap to the designated position without further oscillations. Defaults to `2`.
+-   `.springify()` включает конфигурацию анимации на основе пружин.
+-   `.damping(value: number)` определяет, как быстро пружина прекращает движение. Большее значение демпфирования означает, что пружина будет быстрее приходить в состояние покоя. По умолчанию `10`.
+-   `.mass( value: number)` - это масса пружины. Уменьшение этого значения ускоряет анимацию. По умолчанию `1`.
+-   `.stiffness(value: number)` определяет, насколько пружина упруга. По умолчанию `100`.
+-   `.overshootClamping(value: boolean)` определяет, может ли пружина перескочить через заданное положение. По умолчанию `false`.
+-   `.restDisplacementThreshold( value: number)` - смещение, ниже которого пружина будет защелкиваться в заданном положении без дальнейших колебаний. По умолчанию `0.001`.
+-   `.restSpeedThreshold( value: number)` - скорость в пикселях в секунду, начиная с которой пружина будет защелкиваться в заданное положение без дальнейших колебаний. По умолчанию `2`.
 
-#### Common <Optional/>
+#### Common
 
 ```javascript
 RotateInDownLeft.delay(500)
@@ -856,23 +675,16 @@ RotateInDownLeft.delay(500)
     });
 ```
 
--   `.delay(durationMs: number)` is the delay before the animation starts (in milliseconds). Defaults to `0`.
--   `.randomDelay()` randomizes the delay of the animation between `0` and the provided delay. Uses 1000 ms if delay wasn't provided.
--   `.withInitialValues(values: StyleProps)` allows to override the initial config of the animation.
--   `.withCallback(callback: (finished: boolean) => void)` is the callback that will fire after the animation ends. Sets `finished` to `true` when animation ends without interruptions, and `false` otherwise.
+-   `.delay(durationMs: number)` - задержка перед началом анимации (в миллисекундах). По умолчанию равна `0`.
+-   `.randomDelay()` рандомизирует задержку анимации между `0` и указанной задержкой. Используется 1000 мс, если задержка не была указана.
+-   `.withInitialValues(values: StyleProps)` позволяет переопределить начальную конфигурацию анимации.
+-   `.withCallback(callback: (finished: boolean) => void)` - обратный вызов, который будет выполнен после завершения анимации. Устанавливает значение `finished` в `true`, если анимация завершается без прерываний, и `false` в противном случае.
 
 ## Slide
 
-<Row>
-
-<ThemedVideo
-sources={{
-    light: '/recordings/layout-animations/slide_light.mov',
-    dark: '/recordings/layout-animations/slide_dark.mov',
-  }}
-/>
-
-<div style={{flexGrow: 1}}>
+<video playsInline autoPlay muted loop>
+<source src="/community/reanimated.3/layout-animations/slide_light.mov" />
+</video>
 
 `SlideX` lets you create an animation of horizontal or vertical moving object.
 
@@ -892,18 +704,9 @@ function App() {
 }
 ```
 
-</div>
-
-</Row>
-
 Available slide animations:
 
-<Grid>
-<div>
-
 ### Entering
-
-<div style={{ margin: 16 }} />
 
 -   `SlideInRight`
 
@@ -913,12 +716,7 @@ Available slide animations:
 
 -   `SlideInDown`
 
-</div>
-<div>
-
 ### Exiting
-
-<div style={{ margin: 16 }} />
 
 -   `SlideOutRight`
 
@@ -927,12 +725,6 @@ Available slide animations:
 -   `SlideOutUp`
 
 -   `SlideOutDown`
-
-</div>
-</Grid>
-
-<details>
-<summary>Initial values</summary>
 
 These are the initial values for each animation that can be customized with the `withInitialValues` modifier.
 
@@ -947,11 +739,9 @@ These are the initial values for each animation that can be customized with the 
 | `SlideOutRight` | `{originX: values.currentOriginX}`                      |
 | `SlideOutUp`    | `{originY: values.currentOriginY}`                      |
 
-</details>
-
 ### Modifiers
 
-#### Time-based <Optional/>
+#### Time-based
 
 Time-based modifiers relay on [`withTiming`](/docs/animations/withTiming) function.
 
@@ -966,7 +756,7 @@ SlideOutLeft.duration(500).easing(Easing.ease);
 Time-based modifiers have no effect when `.springify()` is used.
 :::
 
-#### Spring-based <Optional/>
+#### Spring-based
 
 Spring-based modifiers relay on [`withSpring`](/docs/animations/withSpring) function.
 
@@ -988,7 +778,7 @@ SlideInUp.springify()
 -   `.restDisplacementThreshold(value: number)` is the displacement below which the spring will snap to the designated position without further oscillations. Defaults to `0.001`.
 -   `.restSpeedThreshold(value: number)` is the speed in pixels per second from which the spring will snap to the designated position without further oscillations. Defaults to `2`.
 
-#### Common <Optional/>
+#### Common
 
 ```javascript
 SlideInDown.delay(500)
@@ -1008,16 +798,9 @@ SlideInDown.delay(500)
 
 ## Stretch
 
-<Row>
-
-<ThemedVideo
-sources={{
-    light: '/recordings/layout-animations/stretch_light.mov',
-    dark: '/recordings/layout-animations/stretch_dark.mov',
-  }}
-/>
-
-<div style={{flexGrow: 1}}>
+<video playsInline autoPlay muted loop>
+<source src="/community/reanimated.3/layout-animations/stretch_light.mov" />
+</video>
 
 `StretchX` lets you create an animation based on scaling in X or Y axis.
 
@@ -1037,40 +820,19 @@ function App() {
 }
 ```
 
-</div>
-
-</Row>
-
 Available stretch animations:
 
-<Grid>
-
-<div>
-
 ### Entering
-
-<div style={{ margin: 16 }} />
 
 -   `StretchInX`
 
 -   `StretchInY`
 
-</div>
-<div>
-
 ### Exiting
-
-<div style={{ margin: 16 }} />
 
 -   `StretchOutX`
 
 -   `StretchOutY`
-
-</div>
-</Grid>
-
-<details>
-<summary>Initial values</summary>
 
 These are the initial values for each animation that can be customized with the `withInitialValues` modifier.
 
@@ -1081,13 +843,11 @@ These are the initial values for each animation that can be customized with the 
 | `StretchOutX` | `{transform: [{ scaleX: 1 }]}` |
 | `StretchOutY` | `{transform: [{ scaleY: 1 }]}` |
 
-</details>
-
 ### Modifiers
 
-#### Time-based <Optional/>
+#### Time-based
 
-Time-based modifiers relay on [`withTiming`](/docs/animations/withTiming) function.
+Time-based modifiers relay on [`withTiming`](../animations/withTiming.md) function.
 
 ```javascript
 StretchOutX.duration(500).easing(Easing.ease);
@@ -1100,9 +860,9 @@ StretchOutX.duration(500).easing(Easing.ease);
 Time-based modifiers have no effect when `.springify()` is used.
 :::
 
-#### Spring-based <Optional/>
+#### Spring-based
 
-Spring-based modifiers relay on [`withSpring`](/docs/animations/withSpring) function.
+Spring-based modifiers relay on [`withSpring`](../animations/withSpring.md) function.
 
 ```javascript
 StretchInX.springify()
@@ -1122,7 +882,7 @@ StretchInX.springify()
 -   `.restDisplacementThreshold(value: number)` is the displacement below which the spring will snap to the designated position without further oscillations. Defaults to `0.001`.
 -   `.restSpeedThreshold(value: number)` is the speed in pixels per second from which the spring will snap to the designated position without further oscillations. Defaults to `2`.
 
-#### Common <Optional/>
+#### Common
 
 ```javascript
 StretchInY.delay(500)
@@ -1142,16 +902,9 @@ StretchInY.delay(500)
 
 ## Zoom
 
-<Row>
-
-<ThemedVideo
-sources={{
-    light: '/recordings/layout-animations/zoom_light.mov',
-    dark: '/recordings/layout-animations/zoom_dark.mov',
-  }}
-/>
-
-<div style={{flexGrow: 1}}>
+<video playsInline autoPlay muted loop>
+<source src="/community/reanimated.3/layout-animations/zoom_light.mov" />
+</video>
 
 `ZoomX` lets you create an animation based on scale.
 
@@ -1168,18 +921,9 @@ function App() {
 }
 ```
 
-</div>
-
-</Row>
-
 Available zoom animations:
 
-<Grid>
-<div>
-
 ### Entering
-
-<div style={{ margin: 16 }} />
 
 -   `ZoomIn`
 
@@ -1197,12 +941,7 @@ Available zoom animations:
 
 -   `ZoomInUp`
 
-</div>
-<div>
-
 ### Exiting
-
-<div style={{ margin: 16 }} />
 
 -   `ZoomOut`
 
@@ -1219,12 +958,6 @@ Available zoom animations:
 -   `ZoomOutRotate`
 
 -   `ZoomOutUp`
-
-</div>
-</Grid>
-
-<details>
-<summary>Initial values</summary>
 
 These are the initial values for each animation that can be customized with the `withInitialValues` modifier.
 
@@ -1247,13 +980,11 @@ These are the initial values for each animation that can be customized with the 
 | `ZoomOutRotate`   | `{transform: [{ scale: 1 }, { rotate: '0' }]}`                      |
 | `ZoomOutUp`       | `{transform: [{ translateY: 0 }, { scale: 1 }]}`                    |
 
-</details>
-
 ### Modifiers
 
-#### Time-based <Optional/>
+#### Time-based
 
-Time-based modifiers relay on [`withTiming`](/docs/animations/withTiming) function.
+Time-based modifiers relay on [`withTiming`](../animations/withTiming.md) function.
 
 ```javascript
 ZoomOutLeft.duration(500).easing(Easing.ease);
@@ -1266,9 +997,9 @@ ZoomOutLeft.duration(500).easing(Easing.ease);
 Time-based modifiers have no effect when `.springify()` is used.
 :::
 
-#### Spring-based <Optional/>
+#### Spring-based
 
-Spring-based modifiers relay on [`withSpring`](/docs/animations/withSpring) function.
+Spring-based modifiers relay on [`withSpring`](../animations/withSpring.md) function.
 
 ```javascript
 ZoomInRotate.springify()
@@ -1288,7 +1019,7 @@ ZoomInRotate.springify()
 -   `.restDisplacementThreshold(value: number)` is the displacement below which the spring will snap to the designated position without further oscillations. Defaults to `0.001`.
 -   `.restSpeedThreshold(value: number)` is the speed in pixels per second from which the spring will snap to the designated position without further oscillations. Defaults to `2`.
 
-#### Common <Optional/>
+#### Common
 
 ```javascript
 ZoomIn.delay(500)
@@ -1308,10 +1039,6 @@ ZoomIn.delay(500)
 
 ## Platform compatibility
 
-<div className="compatibility">
-
 | Android | iOS | Web |
 | ------- | --- | --- |
 | ✅      | ✅  | ❌  |
-
-</div>
