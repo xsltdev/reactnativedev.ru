@@ -36,7 +36,7 @@ hide:
 
     [:octicons-arrow-right-24: React Navigation](community/react-navigation.6/getting-started.md) <small>6.x</small>
 
-    :octicons-arrow-right-24: Reanimated <small>3.x</small>
+    [:octicons-arrow-right-24: Reanimated](./community/reanimated.3/fundamentals/getting-started.md) <small>3.x</small>
 
 -   :material-tools:{ .lg .middle } **Инструменты**
 
