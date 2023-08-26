@@ -6,7 +6,7 @@ nav:
     - scroll
     - device
     - layout-animations
-#    - shared-element-transitions
-#    - threading
-#    - utilities
-#    - advanced
+    - shared-element-transitions.md
+    - threading
+    - utilities
+    - advanced

@@ -1,192 +1,200 @@
 ---
-sidebar_position: 3
+description: В документе рассказывается о том, как можно анимировать все изменения макета для конкретного представления, просто добавив к нему одно свойство
 ---
 
-# Layout transitions
+# Переходы между макетами
 
-:::info
-This page was ported from an old version of the documentation.
+!!!info ""
 
-As we're rewriting the documentation some of the pages might be a little outdated.
-:::
+    Эта страница была перенесена из старой версии документации.
 
-The document explains how can you animate all layout changes for a specific view just by adding a single property to the view.
-To be precise how to animate positions and dimensions of components. What's important it will all happen entirely on UI thread without any communication through the bridge. There are plenty of ways in which you can animated layout changes however in contrast to entering and exiting animations they are not so regular. We've prepared a few predefined layout transitions, however if you want to create more custom and complex transition you can create your own.
+    В процессе переписывания документации некоторые страницы могут быть немного устаревшими.
 
-## How to use predefined layout transition?
+В документе рассказывается о том, как можно анимировать все изменения макета для конкретного представления, просто добавив к нему одно свойство.
 
-### 1. Import chosen transition
+Точнее, как анимировать позиции и размеры компонентов. Важно, что все это будет происходить полностью в потоке UI без какой-либо связи через мост. Существует множество способов анимации изменения макета, но в отличие от анимации входа и выхода они не так регулярны. Мы подготовили несколько предопределенных переходов макета, однако если вы хотите создать более сложный и индивидуальный переход, вы можете создать свой собственный.
+
+## Как использовать предопределенные переходы макета?
+
+### 1. Импортируйте выбранный переход
 
 ```js
-// Transition is just an example and should be replaced by real animation. For Instance Layout
+// Transition is just an example and should be replaced
+// by real animation. For Instance Layout
 import { Transition } from 'react-native-reanimated';
 ```
 
-### 2. Choose Animated Component which layout you want to animate
+### 2. Выберите Animated Component (Анимированный компонент), какой макет вы хотите анимировать
 
 ```js
-    // AnimatedComponent - component created by createAnimatedComponent or imported from Reanimated
-    <AnimatedComponent layout={Transition} >
+// AnimatedComponent - component created by
+// createAnimatedComponent or imported from Reanimated
+<AnimatedComponent layout={Transition} >
 ```
 
-### 3. Customize the animation
+### 3. Настройка анимации
 
-Different type of layout transitions can be customized differently. For the complete list of option please refer to the paragraph specific to the particular animation type.
+Различные типы переходов макета могут быть настроены по-разному. Полный список возможностей приведен в параграфе, посвященном конкретному типу анимации.
 
 ```js
-    <AnimatedComponent layout={Transition.duration(3000).otherModifier()} >
+<AnimatedComponent layout={Transition.duration(3000).otherModifier()} >
 ```
 
-## Predefined Transitions
+## Предопределенные переходы
 
-Below we listed all of the currently available predefined layout transitions. Each transition contains all of its modifiers and a video presenting what it looks like when applied to a waterfall grid.
+Ниже мы перечислили все имеющиеся на данный момент предопределенные переходы макета. Каждый переход содержит все его модификаторы и видеоролик, демонстрирующий, как он выглядит при применении к сетке водопада.
 
-If you cannot find an transition that suits you then you can create a custom one. If you think that the animation should be here, please open an issue or create a pull request.
+Если вы не нашли подходящего перехода, то можете создать собственный. Если вы считаете, что анимация должна быть здесь, пожалуйста, откройте проблему или создайте запрос на исправление.
 
-### Layout
+### Макет
 
-Linear transition, animates both position and dimension in the same way.
+Линейный переход, одинаково анимирует и положение, и размеры.
 
-#### Modifiers
+Модификаторы:
 
-- `duration` (in ms) default: 300
-- `delay` (in ms) default: 0
-- `easing` same easing worklet as with `withTiming`
-- `springify` change animation to spring
-- `damping ` default: 10
-- `mass` default: 1
-- `stiffness` default: 100
-- `overshootClamping` default: false
-- `restDisplacementThreshold` default: 0.001
-- `restSpeedThreshold` default: 0.001
-- `withCallback` callback that will fire after the exit animation ends
-- `randomDelay` randomize delay of the animation between 0 and provided delay ( or 1000ms if delay not provided )
+-   `duration` (в мс) по умолчанию: 300
+-   `delay` (в мс) по умолчанию: 0
+-   `easing` - тот же рабочий элемент easing, что и в `withTiming`.
+-   `springify` изменить анимацию на пружинную
+-   `damping` по умолчанию: 10
+-   `mass` по умолчанию: 1
+-   `stiffness` по умолчанию: 100
+-   `overshootClamping` по умолчанию: false
+-   `restDisplacementThreshold` по умолчанию: 0.001
+-   `restSpeedThreshold` по умолчанию: 0.001
+-   `withCallback` обратный вызов, который сработает после окончания анимации выхода
+-   `randomDelay` рандомизирует задержку анимации между 0 и указанной задержкой (или 1000 мс, если задержка не указана)
 
-#### Example
+Пример:
 
 <video
   src="https://user-images.githubusercontent.com/48885911/134476174-f7e2f5d6-4247-4f7e-8b84-7f41fca988b9.mov"
   controls="controls"
   muted="muted"
-  height="600"
+  height="300"
 />
 
-### Sequenced Transition
+### Последовательный переход
 
-Sequenced transition, animates firstly x-position and width, then later y-position and height.
+Последовательный переход, анимирует сначала x-позицию и ширину, затем y-позицию и высоту.
 
-#### Modifiers
+Модификаторы:
 
-- `duration` (in ms) default: 300
-- `delay` (in ms) default: 0
-- `withCallback` callback that will fire after the exit animation ends
-- `randomDelay` randomize delay of the animation between 0 and provided delay ( or 1000ms if delay not provided )
-- `reverse` reverse order of the animation ( first animates y-dimension and height)
+-   `duration` (в мс) по умолчанию: 300
+-   `delay` (в мс) по умолчанию: 0
+-   `withCallback` обратный вызов, который сработает после окончания анимации выхода
+-   `randomDelay` рандомизирует задержку анимации между 0 и заданной задержкой (или 1000 мс, если задержка не задана)
+-   `reverse` обратный порядок анимации (сначала анимируется измерение y и высота)
 
-#### Example
+Пример:
 
 <video
   src="https://user-images.githubusercontent.com/48885911/134477204-168feed8-1846-4d43-8158-cdb16db180e2.mov"
   controls="controls"
   muted="muted"
-  height="600"
+  height="400"
 />
 
-### Fading Transition
+### Затухающий переход
 
-Fading transition, animates the opacity of component, so it will disappear with previous position and dimensions and appear with new ones.
+Затухающий переход, анимирующий непрозрачность компонента, в результате чего он исчезает при прежнем положении и размерах и появляется при новых.
 
-#### Modifiers
+Модификаторы:
 
-- `duration` (in ms) default: 300
-- `delay` (in ms) default: 0
-- `withCallback` callback that will fire after the exit animation ends
-- `randomDelay` randomize delay of the animation between 0 and provided delay ( or 1000ms if delay not provided )
+-   `duration` (в мс) по умолчанию: 300
+-   `delay` (в мс) по умолчанию: 0
+-   `withCallback` обратный вызов, который сработает после окончания анимации выхода
+-   `randomDelay` рандомизирует задержку анимации между 0 и указанной задержкой (или 1000 мс, если задержка не указана).
 
-#### Example
-
-{" "}
+Пример:
 
 <video
   src="https://user-images.githubusercontent.com/48885911/134477879-e697aa03-b94d-4a65-b076-5ec3800310e3.mov"
   controls="controls"
   muted="muted"
-  height="600"
+  height="400"
 />
 
-### Jumping Transition
+### Прыгающий переход
 
-Jumping transition, component "jumps" to the new position.
+Прыгающий переход, компонент "перепрыгивает" в новую позицию.
 
-#### Modifiers
+Модификаторы:
 
-- `duration` (in ms) default: 300
-- `delay` (in ms) default: 0
-- `withCallback` callback that will fire after the exit animation ends
-- `randomDelay` randomize delay of the animation between 0 and provided delay ( or 1000ms if delay not provided )
+-   `duration` (в мс) по умолчанию: 300
+-   `delay` (в мс) по умолчанию: 0
+-   `withCallback` обратный вызов, который сработает после окончания анимации выхода
+-   `randomDelay` рандомизирует задержку анимации между 0 и указанной задержкой (или 1000 мс, если задержка не указана).
 
-#### Example
+Пример:
 
 <video
   src="https://user-images.githubusercontent.com/48885911/134478585-71c601ae-137f-44e4-a58f-4bb6b60f6bdf.mov"
   controls="controls"
   muted="muted"
-  height="600"
+  height="400"
 />
 
-### Curved Transition
+### Изогнутый переход
 
-Curved transition, enables to animate each position and dimension with different easing which makes components animation curved.
+Криволинейный переход позволяет анимировать каждую позицию и измерение с различным смягчением, что делает анимацию компонентов криволинейной.
 
-#### Modifiers
+Модификаторы:
 
-- `duration` (in ms) default: 300
-- `delay` (in ms) default: 0
-- `withCallback` callback that will fire after the exit animation ends
-- `randomDelay` randomize delay of the animation between 0 and provided delay ( or 1000ms if delay not provided )
-- `easingX` provides Easing for x-position ( default: `Easing.in(Easing.ease)`)
-- `easingY` provides Easing for y-position ( default: `Easing.out(Easing.ease)`)
-- `easingWidth` provides Easing for width ( default: `Easing.in(Easing.exp)`)
-- `easingHeight` provides Easing for height ( default: `Easing.out(Easing.exp)`)
+-   `duration` (в мс) по умолчанию: 300
+-   `delay` (в мс) по умолчанию: 0
+-   `withCallback` обратный вызов, который сработает после завершения анимации выхода
+-   `randomDelay` рандомизирует задержку анимации между 0 и указанной задержкой (или 1000 мс, если задержка не указана)
+-   `easingX` обеспечивает Easing для x-позиции (по умолчанию: `Easing.in(Easing.ease)`)
+-   `easingY` обеспечивает Easing для y-позиции (по умолчанию: `Easing.out(Easing.ease)`)
+-   `easingWidth` обеспечивает Easing для ширины (по умолчанию: `Easing.in(Easing.exp)`)
+-   `easingHeight` обеспечивает Easing для высоты (по умолчанию: `Easing.out(Easing.exp)`)
 
-#### Example
+Пример:
 
 <video
   src="https://user-images.githubusercontent.com/48885911/134479266-5c7342f5-7453-4389-a6c5-5070e3673822.mov"
   controls="controls"
   muted="muted"
-  height="600"
+  height="400"
 />
 
-### Entry/Exit Transition
+### Переход входа/выхода
 
-Entry/Exit transition, lets you specify different animations for exiting from the current position and different animations for entering the new position with new dimensions. You can use all available predefined entering/entering animation or create your own one. Its duration equals the duration sum of entering and exiting. Also, be aware that you cannot use spring animations as entering or exiting as they don't have a fixed duration.
+Переход вход/выход позволяет задать различные анимации для выхода из текущей позиции и различные анимации для входа в новую позицию с новыми размерами. Вы можете использовать все имеющиеся предопределенные анимации входа/выхода или создать свою собственную. Ее длительность равна сумме длительностей входа и выхода. Также следует иметь в виду, что в качестве анимации входа и выхода нельзя использовать анимацию пружины, так как она не имеет фиксированной длительности.
 
-#### Modifiers
+Модификаторы:
 
-- `delay` (in ms) default: 0
-- `withCallback` callback that will fire after the exit animation ends
-- `randomDelay` randomize delay of the animation between 0 and provided delay ( or 1000ms if delay not provided )
-- `entering` animation that will be used for component entering ( default: `FadeIn`)
-- `exiting` animation that will be used for component exiting ( default: `FadeOut`)
+-   `delay` (в мс) по умолчанию: 0
+-   `withCallback` обратный вызов, который сработает после окончания анимации выхода
+-   `randomDelay` рандомизирует задержку анимации между 0 и указанной задержкой (или 1000 мс, если задержка не указана)
+-   `entering` анимация, которая будет использоваться для входа в компонент (по умолчанию: `FadeIn`)
+-   `exiting` анимация, которая будет использоваться для выхода компонента (по умолчанию: `FadeOut`)
 
-#### Combine Transition
+**Комбинированный переход**
 
-To make usage of that transition simplier we have prepared function `combineTransition` that will make your code look cleaner and shorter.
+Для упрощения использования перехода мы подготовили функцию `combineTransition`, которая сделает ваш код чище и короче.
 
-##### Usage
+Использование:
 
 ```js
 // you can change ExitingAnimation and EnteringAnimation for any predefined animation you would like
 // you can apply modifier (i.ex. delay()) on the object that this function returns
-combineTransition(ExitingAnimation, EnteringAnimation).modifier();
+combineTransition(
+    ExitingAnimation,
+    EnteringAnimation
+).modifier();
 ```
 
-#### Example
+Пример:
 
 <video
   src="https://user-images.githubusercontent.com/48885911/134480769-4be2c194-4392-483f-a9db-f48bac5e546c.mov"
   controls="controls"
   muted="muted"
-  height="600"
+  height="400"
 />
+
+## Ссылки
+
+-   [Layout transitions](https://docs.swmansion.com/react-native-reanimated/docs/layout-animations/layout-transitions)
