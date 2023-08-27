@@ -347,7 +347,7 @@ const styles = StyleSheet.create({
 
 ## Замечания
 
--   Обратный вызов, переданный во втором аргументе, автоматически [workletized](/docs/fundamentals/glossary#to-workletize) и запускается на [UI thread](/docs/fundamentals/glossary#ui-thread).
+-   Обратный вызов, переданный во втором аргументе, автоматически [workletized](../fundamentals/glossary.md#to-workletize) и запускается на [UI thread](../fundamentals/glossary.md#ui-thread).
 
 ## Совместимость с платформами
 

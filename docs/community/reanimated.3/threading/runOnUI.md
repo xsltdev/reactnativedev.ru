@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
 
 ## Замечания
 
--   При реализации анимации следует сначала обратиться к более общим решениям, таким как [`useDerivedValue`](../core/useDerivedValue.md), [`useAnimatedReaction`](../advanced/useAnimatedReaction.mdx) или выполнение кода в обратных вызовах жестов, и использовать `runOnUI` только после того, как вы попробовали другие методы.
+-   При реализации анимации следует сначала обратиться к более общим решениям, таким как [`useDerivedValue`](../core/useDerivedValue.md), [`useAnimatedReaction`](../advanced/useAnimatedReaction.md) или выполнение кода в обратных вызовах жестов, и использовать `runOnUI` только после того, как вы попробовали другие методы.
 
 -   Распространенной ошибкой является выполнение функции внутри runOnUI следующим образом: ~~`runOnUI(myWorklet(10))()`~~. Здесь правильным будет `runOnUI(myWorklet)(10)`.
 

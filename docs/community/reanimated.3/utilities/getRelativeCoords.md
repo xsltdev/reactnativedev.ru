@@ -1,57 +1,67 @@
 ---
-sidebar_position: 3
+description: Определяет местоположение на экране относительно заданного представления
 ---
 
 # getRelativeCoords
 
-:::info
-This page was ported from an old version of the documentation.
+!!!info ""
 
-As we're rewriting the documentation some of the pages might be a little outdated.
-:::
+    Эта страница была перенесена из старой версии документации.
 
-Determines the location on the screen, relative to the given view. It might be useful when there are only absolute coordinates available and you need coordinates relative to the parent.
+    В процессе переписывания документации некоторые страницы могут быть немного устаревшими.
 
-### Arguments
+Определяет местоположение на экране относительно заданного представления. Это может быть полезно, когда доступны только абсолютные координаты, а нужны координаты относительно родителя.
 
-#### animatedRef
+## Аргументы
 
-The product of [`useAnimatedRef`](/docs/core/useAnimatedRef) is Reanimated's extension of a standard React ref (delivers the view tag on the UI thread). This ref should be passed as a prop to the view relative to which we want to know coordinates.
+### animatedRef
 
-#### x
+Продукт [`useAnimatedRef`](../core/useAnimatedRef.md) - это расширение Reanimated стандартного React `ref` (доставляет тег `view` в потоке UI). Этот `ref` должен быть передан в качестве свойства представлению, относительно которого мы хотим узнать координаты.
 
-Absolute `x` coordinate.
+### x
 
-#### y
+Абсолютная координата `x`.
 
-Absolute `y` coordinate
+### y
 
-### Returns
+Абсолютная координата `y`
 
-Object which contains relative coordinates
+## Возвращает
 
-- `x`
-- `y`
+Объект, содержащий относительные координаты
 
-### Example
+-   `x`
+-   `y`
+
+## Пример
 
 ```js
 const Comp = () => {
-  const aref = useAnimatedRef();
-  // ...
+    const aref = useAnimatedRef();
+    // ...
 
-  const gestureHandler = useAnimatedGestureHandler({
-    onEnd: (event) => {
-      getRelativeCoords(aref, event.absoluteX, event.absoluteY);
-    },
-  });
+    const gestureHandler = useAnimatedGestureHandler({
+        onEnd: (event) => {
+            getRelativeCoords(
+                aref,
+                event.absoluteX,
+                event.absoluteY
+            );
+        },
+    });
 
-  return (
-    <View ref={aref}>
-      <PanGestureHandler onGestureEvent={gestureHandler}>
-        <Animated.View style={[styles.box]} />
-      </PanGestureHandler>
-    </View>
-  );
+    return (
+        <View ref={aref}>
+            <PanGestureHandler
+                onGestureEvent={gestureHandler}
+            >
+                <Animated.View style={[styles.box]} />
+            </PanGestureHandler>
+        </View>
+    );
 };
 ```
+
+## Ссылки
+
+-   [getRelativeCoords](https://docs.swmansion.com/react-native-reanimated/docs/utilities/getRelativeCoords)
