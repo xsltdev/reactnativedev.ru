@@ -21,7 +21,7 @@ description: StyleSheet — это абстракция, аналогичная 
 static compose(style1: Object, style2: Object): Object | Object[];
 ```
 
-Объединяет два стиля таким образом, что `style2` отменяет все стили в `style1`. Если один из стилей является ложным, возвращается другой без выделения массива, что экономит выделение и сохраняет равенство ссылок при проверке `PureComponent`.
+Объединяет два стиля таким образом, что `style2` переопределяет все стили в `style1`. Если один из стилей является ложным, возвращается другой без выделения массива, что экономит выделение и сохраняет равенство ссылок при проверке `PureComponent`.
 
 <div data-snack-id="@bndby/stylesheet-compose" data-snack-platform="web" data-snack-preview="true" data-snack-theme="light" style="overflow:hidden;background:#F9F9F9;border:1px solid var(--color-border);border-radius:4px;height:505px;width:100%"></div>
 
