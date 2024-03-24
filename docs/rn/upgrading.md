@@ -115,7 +115,7 @@ git add . # Stage all the current files
 git commit -m "Upgrade react-native" # Save the current files in a commit
 ```
 
-After you finish upgrading you may remove the `.git` directory.
+После завершения обновления вы можете удалить каталог `.git`.
 
 #### Я сделал все изменения, но мое приложение по-прежнему использует старую версию.
 
