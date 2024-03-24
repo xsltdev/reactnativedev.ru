@@ -102,15 +102,19 @@ React Native не поставляется в комплекте с каким-�
 
 Библиотека для нативного OAuth — это [react-native-app-auth](https://github.com/FormidableLabs/react-native-app-auth). React-native-app-auth — это SDK для взаимодействия с провайдерами OAuth2. Она содержит встроенные библиотеки [AppAuth-iOS](https://github.com/openid/AppAuth-iOS) и [AppAuth-Android](https://github.com/openid/AppAuth-Android) и может поддерживать PKCE.
 
-!!!warning ""
+!!!warning "Identity Provider"
 
     React-native-app-auth может поддерживать PKCE, только если ваш Identity Provider поддерживает его.
 
-!!!warning ""
+    **Identity Provider** - это авторизация, которую вы часто видете в приложениях и на сайтах. Например: "Войти с помощью Google", "Войти с помощью Twitter", "Войти с помощью facebook" и тд.
 
-    Identity Provider - это авторизация, которую вы часто видете в приложениях и на сайтах. Например: "Войти с помощью Google", "Войти с помощью Twitter", "Войти с помощью facebook" и тд.
+=== "OAuth2 с PKCE (рус)"
 
-![OAuth2 с PKCE](diagram_pkce.svg)
+	![OAuth2 с PKCE](diagram_pkce_ru.jpg)
+
+=== "OAuth2 с PKCE (eng)"
+
+	![OAuth2 с PKCE](diagram_pkce.svg)
 
 ## Сетевая безопасность
 
