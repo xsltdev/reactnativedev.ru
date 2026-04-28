@@ -60,6 +60,3 @@ hide:
     [![PWA](pwa.svg){: class="nolightbox" style="height:16px;width:16px;vertical-align:middle;"} PWA](https://pwadev.ru/) &nbsp;&nbsp;&nbsp;
     [![Node.js](nodejs.svg){: class="nolightbox" style="height:16px;width:16px;vertical-align:middle;"} Node.js](https://nodejsdev.ru/) &nbsp;&nbsp;&nbsp;
     [![XSLT](xslt.svg){: class="nolightbox" style="height:16px;width:16px;vertical-align:middle;"} XSLT](https://xsltdev.ru/) &nbsp;&nbsp;&nbsp;
-
-<!-- https://github.com/software-mansion/react-native-reanimated -->
-<!-- https://github.com/react-native-community/hooks -->
