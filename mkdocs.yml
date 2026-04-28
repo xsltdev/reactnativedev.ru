@@ -39,6 +39,7 @@ theme:
         - navigation.top
         - navigation.footer
         - navigation.indexes
+        - navigation.path
         - content.action.edit
         - content.code.copy
     favicon: rn.svg
@@ -56,6 +57,9 @@ extra:
         - icon: fontawesome/brands/linkedin
           link: https://www.linkedin.com/in/bndby/
           name: LinkedIn
+    analytics:
+        provider: google
+        property: G-TR222BW9CH
 
 markdown_extensions:
     - admonition
